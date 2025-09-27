@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Chapitre 1 : Introduction à l&#39;Event Storming et DDD | DDD Journey</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprendre les problèmes des modèles anémiques et découvrir l&#39;Event Storming comme solution de conception collaborative">
+    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
+    <meta name="author" content="Colin Wilson - Lotus Labs" />
+    <meta name="email" content="support@aigis.uk" />
+    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="Version" content="v0.1.0" />
+    
+    <link rel="icon" href="http://localhost:1313/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="http://localhost:1313/site.webmanifest">
+<meta property="og:title" content="Chapitre 1 : Introduction à l&#39;Event Storming et DDD" />
+<meta property="og:description" content="Comprendre les problèmes des modèles anémiques et découvrir l&#39;Event Storming comme solution de conception collaborative" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/" /><meta property="og:image" content="http://localhost:1313/opengraph/card-base-2_hu_cfc44d2feec295d3.png"/><meta property="article:section" content="fr" />
+<meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/opengraph/card-base-2_hu_cfc44d2feec295d3.png"/>
+<meta name="twitter:title" content="Chapitre 1 : Introduction à l&#39;Event Storming et DDD"/>
+<meta name="twitter:description" content="Comprendre les problèmes des modèles anémiques et découvrir l&#39;Event Storming comme solution de conception collaborative"/>
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Journey" href="/index.xml" />
+    
+    
+    
+            
+                <script type="text/javascript" src="http://localhost:1313/docs/js/flexsearch.bundle.js"></script>
+            
+        
+    
+    
+
+    <link rel="stylesheet" href="/docs/scss/style.css" crossorigin="anonymous">
+    
+    
+    </head>
+<body>
+        <div class="content">
+            <div class="page-wrapper toggled">
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href='/' aria-label="HomePage" alt="HomePage">
+            
+                <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+            
+        </a>
+    </div>
+    <div class="sidebar-content" style="height: calc(100% - 131px);">
+        <ul class="sidebar-menu">
+            
+                
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon current active">
+                            <button class="btn">
+                                Chapitres de Documentation
+                            </button>
+                            <div class="sidebar-submenu d-block">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon current active">
+                                                <button class="btn">
+                                                    Chapitres Fondamentaux
+                                                </button>
+                                                <div class="sidebar-submenu d-block">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class="current no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction à l&#39;Event Storming et DDD</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-02-atelier-event-storming/">Chapitre 2 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-03-complexite-accidentelle-essentielle/">Chapitre 3 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-03-1-granularite-choix-architecturaux/">Chapitre 3.1 : Granularité des Choix Architecturaux</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-04-modeles-riches-vs-anemiques/">Chapitre 4 : Modèles Riches vs Modèles Anémiques</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-05-architecture-evenementielle/">Chapitre 5 : Architecture Événementielle (Optionnel)</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-06-repositories-persistance/">Chapitre 6 : Repositories et Persistance</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Chapitres Optionnels
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Chapitres de Stockage
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class="sidebar-dropdown nested no-icon ">
+                                                                    <button class="btn">
+                                                                        Stockage SQL
+                                                                    </button>
+                                                                    <div class="sidebar-submenu ">
+                                                                        <ul>
+                                                                            
+                                                                                
+                                                                                
+                                                                                    <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/stockage/sql/chapitre-12-stockage-sql-classique/">Chapitre 12 : Stockage SQL - Approche Classique</a></li>
+                                                                                
+                                                                            
+                                                                        </ul>
+                                                                    </div>
+                                                                </li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Chapitres Techniques
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Chapitres Avancés
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Annexes
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/annexes/organisation-dossiers/">Organisation des dossiers en DDD</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/fr/navigation-interactive/">
+                                
+                                Navigation Interactive - Livre dont vous êtes le héros
+                            </a>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Commencer votre safari DDD
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Concepts de base
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/fr/concepts/">
+                                
+                                Concepts DDD
+                            </a>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/fr/implementation/">
+                                
+                                Implémentation
+                            </a>
+                        </li>
+                    
+                
+            
+        </ul>
+        
+    </div>
+    
+        <ul class="sidebar-footer list-unstyled mb-0">
+            
+        </ul>
+    
+</nav>
+
+                    <main class="page-content bg-transparent">
+                        
+<div id="top-header" class="top-header d-print-none">
+    <div class="header-bar d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+                <div class="small">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+                <div class="big">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+            </a>
+            <button id="close-sidebar" class="btn btn-icon btn-soft">
+                <span class="material-icons size-20 menu-icon align-middle">menu</span>
+            </button>
+            
+            
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
+            </div>
+
+        <div class="d-flex align-items-center">
+            <ul class="list-unstyled mb-0">
+                
+            </ul>
+            
+        </div>
+    </div>
+    
+    
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
+    
+    
+</div>
+
+
+                            <div class="container-fluid">
+                                <div class="layout-spacing">
+                                    
+                                        <div class="d-md-flex justify-content-between align-items-center"><nav aria-label="breadcrumb" class="d-inline-block pb-2 mt-1 mt-sm-0">
+    <ul id="breadcrumbs" class="breadcrumb bg-transparent mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+        
+            
+                <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/fr/">
+                        <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
+                    </a>
+                    <meta itemprop="position" content='1' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/fr/chapitres/">
+                        <span itemprop="name">Chapitres de Documentation</span>
+                    </a>
+                    <meta itemprop="position" content='2' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/fr/chapitres/fondamentaux/">
+                        <span itemprop="name">Chapitres Fondamentaux</span>
+                    </a>
+                    <meta itemprop="position" content='3' />
+                </li>
+            
+        
+            <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name">Chapitre 1 : Introduction à l&#39;Event Storming et DDD</span>
+                <meta itemprop="position" content='4' />
+            </li>
+        
+    </ul>
+</nav></div>
+                                    
+                                    <div class="row flex-xl-nowrap">
+                                        
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
+    <div class="fw-bold text-uppercase mb-2">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a></li>
+    <li><a href="#-le-problème-des-modèles-anémiques">🚨 Le Problème des Modèles Anémiques</a>
+      <ul>
+        <li><a href="#quest-ce-quun-modèle-anémique-">Qu&rsquo;est-ce qu&rsquo;un Modèle Anémique ?</a></li>
+        <li><a href="#pourquoi-cest-problématique-">Pourquoi c&rsquo;est Problématique ?</a></li>
+        <li><a href="#exemple-concret--gestion-des-paiements">Exemple Concret : Gestion des Paiements</a></li>
+      </ul>
+    </li>
+    <li><a href="#-la-solution--domain-driven-design">🎯 La Solution : Domain-Driven Design</a>
+      <ul>
+        <li><a href="#principe-fondamental">Principe Fondamental</a></li>
+        <li><a href="#avantages-du-ddd">Avantages du DDD</a></li>
+      </ul>
+    </li>
+    <li><a href="#-levent-storming--une-méthode-de-conception-collaborative">🎪 L&rsquo;Event Storming : Une Méthode de Conception Collaborative</a>
+      <ul>
+        <li><a href="#quest-ce-que-levent-storming-">Qu&rsquo;est-ce que l&rsquo;Event Storming ?</a></li>
+        <li><a href="#les-7-étapes-de-levent-storming">Les 7 Étapes de l&rsquo;Event Storming</a></li>
+        <li><a href="#exemple-devent-storming--système-de-paiement">Exemple d&rsquo;Event Storming : Système de Paiement</a></li>
+      </ul>
+    </li>
+    <li><a href="#-architecture-résultante">🏗️ Architecture Résultante</a>
+      <ul>
+        <li><a href="#structure-par-bounded-context">Structure par Bounded Context</a></li>
+        <li><a href="#intégration-avec-api-platform">Intégration avec API Platform</a></li>
+      </ul>
+    </li>
+    <li><a href="#-votre-prochaine-étape">🎯 Votre Prochaine Étape</a>
+      <ul>
+        <li><a href="#-option-a--je-veux-apprendre-la-méthode-event-storming">🟢 Option A : Je veux apprendre la méthode Event Storming</a></li>
+        <li><a href="#-option-b--je-veux-comprendre-la-complexité-architecturale">🟡 Option B : Je veux comprendre la complexité architecturale</a></li>
+        <li><a href="#-option-c--je-veux-voir-des-exemples-concrets-de-modèles">🔴 Option C : Je veux voir des exemples concrets de modèles</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </toc></div>
+                                        
+                                        
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
+                                            <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
+                                                Table of Contents
+                                            </button>
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a></li>
+    <li><a href="#-le-problème-des-modèles-anémiques">🚨 Le Problème des Modèles Anémiques</a>
+      <ul>
+        <li><a href="#quest-ce-quun-modèle-anémique-">Qu&rsquo;est-ce qu&rsquo;un Modèle Anémique ?</a></li>
+        <li><a href="#pourquoi-cest-problématique-">Pourquoi c&rsquo;est Problématique ?</a></li>
+        <li><a href="#exemple-concret--gestion-des-paiements">Exemple Concret : Gestion des Paiements</a></li>
+      </ul>
+    </li>
+    <li><a href="#-la-solution--domain-driven-design">🎯 La Solution : Domain-Driven Design</a>
+      <ul>
+        <li><a href="#principe-fondamental">Principe Fondamental</a></li>
+        <li><a href="#avantages-du-ddd">Avantages du DDD</a></li>
+      </ul>
+    </li>
+    <li><a href="#-levent-storming--une-méthode-de-conception-collaborative">🎪 L&rsquo;Event Storming : Une Méthode de Conception Collaborative</a>
+      <ul>
+        <li><a href="#quest-ce-que-levent-storming-">Qu&rsquo;est-ce que l&rsquo;Event Storming ?</a></li>
+        <li><a href="#les-7-étapes-de-levent-storming">Les 7 Étapes de l&rsquo;Event Storming</a></li>
+        <li><a href="#exemple-devent-storming--système-de-paiement">Exemple d&rsquo;Event Storming : Système de Paiement</a></li>
+      </ul>
+    </li>
+    <li><a href="#-architecture-résultante">🏗️ Architecture Résultante</a>
+      <ul>
+        <li><a href="#structure-par-bounded-context">Structure par Bounded Context</a></li>
+        <li><a href="#intégration-avec-api-platform">Intégration avec API Platform</a></li>
+      </ul>
+    </li>
+    <li><a href="#-votre-prochaine-étape">🎯 Votre Prochaine Étape</a>
+      <ul>
+        <li><a href="#-option-a--je-veux-apprendre-la-méthode-event-storming">🟢 Option A : Je veux apprendre la méthode Event Storming</a></li>
+        <li><a href="#-option-b--je-veux-comprendre-la-complexité-architecturale">🟡 Option B : Je veux comprendre la complexité architecturale</a></li>
+        <li><a href="#-option-c--je-veux-voir-des-exemples-concrets-de-modèles">🔴 Option C : Je veux voir des exemples concrets de modèles</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
+                                            <div class="mb-0 d-flex">
+                                                
+                                                <h1 class="content-title mb-0">
+                                                    Chapitre 1 : Introduction à l&#39;Event Storming et DDD
+                                                    
+                                                </h1>
+                                            </div>
+                                            
+                                            <div id="content" class="main-content" >
+                                                
+    
+    <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
+        <h1 id="chapitre-1--introduction-à-levent-storming-et-ddd">Chapitre 1 : Introduction à l&rsquo;Event Storming et DDD <a href="#chapitre-1--introduction-%c3%a0-levent-storming-et-ddd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><h2 id="-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre <a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ce chapitre pose les fondations de notre approche en expliquant :</p>
+<ul>
+<li>Pourquoi les modèles anémiques et le CRUD posent problème</li>
+<li>Comment l&rsquo;Event Storming résout ces problèmes</li>
+<li>Pourquoi le Domain-Driven Design est la solution</li>
+</ul>
+<h2 id="-le-problème-des-modèles-anémiques">🚨 Le Problème des Modèles Anémiques <a href="#-le-probl%c3%a8me-des-mod%c3%a8les-an%c3%a9miques" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="quest-ce-quun-modèle-anémique-">Qu&rsquo;est-ce qu&rsquo;un Modèle Anémique ? <a href="#quest-ce-quun-mod%c3%a8le-an%c3%a9mique-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Un modèle anémique est un modèle de données qui ne contient que des propriétés (getters/setters) sans logique métier. Toute la logique est déplacée dans des services externes.</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ❌ Modèle Anémique - Exemple typique
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $email,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $firstName,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $lastName,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">bool</span> $isActive <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Seulement des getters/setters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getId</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getEmail</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">email</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setEmail</span>(<span style="color:#a6e22e">string</span> $email)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> { $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">email</span> <span style="color:#f92672">=</span> $email; }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... autres getters/setters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<h3 id="pourquoi-cest-problématique-">Pourquoi c&rsquo;est Problématique ? <a href="#pourquoi-cest-probl%c3%a9matique-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ol>
+<li><strong>Perte de l&rsquo;Intention Métier</strong> : Le code ne reflète plus les règles métier</li>
+<li><strong>Violation du Principe DRY</strong> : La logique est dupliquée dans les services</li>
+<li><strong>Difficile à Tester</strong> : Les règles métier sont éparpillées</li>
+<li><strong>Évolution Complexe</strong> : Changer une règle métier nécessite de modifier plusieurs endroits</li>
+</ol>
+<h3 id="exemple-concret--gestion-des-paiements">Exemple Concret : Gestion des Paiements <a href="#exemple-concret--gestion-des-paiements" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ❌ Approche Anémique
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentService</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processPayment</span>(<span style="color:#a6e22e">Payment</span> $payment, <span style="color:#a6e22e">float</span> $amount)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Logique métier dans le service
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> ($amount <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InvalidArgumentException</span>(<span style="color:#e6db74">&#39;Amount must be positive&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStatus</span>() <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;pending&#39;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InvalidStateException</span>(<span style="color:#e6db74">&#39;Payment already processed&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($amount <span style="color:#f92672">&gt;</span> $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getMaxAmount</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BusinessRuleException</span>(<span style="color:#e6db74">&#39;Amount exceeds maximum&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Plus de logique métier...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setStatus</span>(<span style="color:#e6db74">&#39;processed&#39;</span>);
+</span></span><span style="display:flex;"><span>        $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setProcessedAt</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DateTime</span>());
+</span></span><span style="display:flex;"><span>        $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAmount</span>($amount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-la-solution--domain-driven-design">🎯 La Solution : Domain-Driven Design <a href="#-la-solution--domain-driven-design" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="principe-fondamental">Principe Fondamental <a href="#principe-fondamental" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le DDD place la logique métier au cœur du modèle, dans les entités et objets de valeur.</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Modèle Riche - Approche DDD
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Payment</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">PaymentId</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Money</span> $amount,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">PaymentStatus</span> $status,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#f92672">?</span><span style="color:#a6e22e">DateTime</span> $processedAt <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">PaymentId</span> $id, <span style="color:#a6e22e">Money</span> $amount)<span style="color:#f92672">:</span> <span style="color:#a6e22e">self</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($amount<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isNegative</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InvalidAmountException</span>(<span style="color:#e6db74">&#39;Payment amount cannot be negative&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">self</span>($id, $amount, <span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PENDING</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">process</span>(<span style="color:#a6e22e">Money</span> $amount)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">canBeProcessed</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PaymentCannotBeProcessedException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($amount<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isGreaterThan</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getMaxAllowedAmount</span>())) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AmountExceedsMaximumException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span> <span style="color:#f92672">=</span> $amount;
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PROCESSED</span>;
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">processedAt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DateTime</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">canBeProcessed</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PENDING</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getMaxAllowedAmount</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">Money</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Logique métier pour calculer le montant maximum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">multiply</span>(<span style="color:#ae81ff">1.1</span>); <span style="color:#75715e">// 10% de marge
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="avantages-du-ddd">Avantages du DDD <a href="#avantages-du-ddd" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ol>
+<li><strong>Intention Métier Préservée</strong> : Le code reflète les règles métier</li>
+<li><strong>Cohérence</strong> : Les règles sont centralisées dans le modèle</li>
+<li><strong>Testabilité</strong> : Facile de tester les règles métier</li>
+<li><strong>Évolutivité</strong> : Changer une règle ne nécessite qu&rsquo;une modification</li>
+</ol>
+<h2 id="-levent-storming--une-méthode-de-conception-collaborative">🎪 L&rsquo;Event Storming : Une Méthode de Conception Collaborative <a href="#-levent-storming--une-m%c3%a9thode-de-conception-collaborative" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="quest-ce-que-levent-storming-">Qu&rsquo;est-ce que l&rsquo;Event Storming ? <a href="#quest-ce-que-levent-storming-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>L&rsquo;Event Storming est une méthode de conception collaborative qui permet de :</p>
+<ul>
+<li>Découvrir le domaine métier</li>
+<li>Identifier les événements métier</li>
+<li>Modéliser les processus</li>
+<li>Concevoir l&rsquo;architecture</li>
+</ul>
+<h3 id="les-7-étapes-de-levent-storming">Les 7 Étapes de l&rsquo;Event Storming <a href="#les-7-%c3%a9tapes-de-levent-storming" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ol>
+<li><strong>Identifier les Événements</strong> : Qu&rsquo;est-ce qui se passe dans le domaine ?</li>
+<li><strong>Identifier les Acteurs</strong> : Qui déclenche ces événements ?</li>
+<li><strong>Identifier les Commandes</strong> : Quelles actions déclenchent les événements ?</li>
+<li><strong>Identifier les Agrégats</strong> : Quelles entités sont concernées ?</li>
+<li><strong>Identifier les Systèmes Externes</strong> : Quelles intégrations sont nécessaires ?</li>
+<li><strong>Identifier les Vues de Lecture</strong> : Quelles données sont nécessaires pour l&rsquo;affichage ?</li>
+<li><strong>Concevoir l&rsquo;Architecture</strong> : Comment organiser le code ?</li>
+</ol>
+<h3 id="exemple-devent-storming--système-de-paiement">Exemple d&rsquo;Event Storming : Système de Paiement <a href="#exemple-devent-storming--syst%c3%a8me-de-paiement" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <pre tabindex="0"><code>Événements (Post-its Orange) :
+- PaymentRequested
+- PaymentProcessed
+- PaymentFailed
+- PaymentRefunded
+
+Acteurs (Post-its Jaunes) :
+- Customer
+- PaymentGateway
+- Admin
+
+Commandes (Post-its Bleus) :
+- ProcessPayment
+- RefundPayment
+- CancelPayment
+
+Agrégats (Post-its Jaunes avec bordure) :
+- Payment
+- Customer
+- Order</code></pre>
+<h2 id="-architecture-résultante">🏗️ Architecture Résultante <a href="#-architecture-r%c3%a9sultante" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="structure-par-bounded-context">Structure par Bounded Context <a href="#structure-par-bounded-context" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <pre tabindex="0"><code>src/
+├── Accounting/           # Contexte Comptabilité
+│   ├── Domain/
+│   │   ├── Payment/      # Agrégat Payment
+│   │   └── Subscription/ # Agrégat Subscription
+│   ├── Application/      # Services applicatifs
+│   └── Infrastructure/   # Implémentations techniques
+├── Authentication/       # Contexte Authentification
+│   ├── Domain/
+│   │   └── User/         # Agrégat User
+│   ├── Application/
+│   └── Infrastructure/
+└── Cloud/               # Contexte Cloud
+    ├── Domain/
+    ├── Application/
+    └── Infrastructure/</code></pre>
+<h3 id="intégration-avec-api-platform">Intégration avec API Platform <a href="#int%c3%a9gration-avec-api-platform" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// Exemple d&#39;intégration API Platform
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#[ApiResource]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentCommand</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">PaymentId</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">Money</span> $amount,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">PaymentMethod</span> $method
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[ApiResource]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentQuery</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">PaymentId</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">Money</span> $amount,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">PaymentStatus</span> $status,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">DateTime</span> $createdAt
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-votre-prochaine-étape">🎯 Votre Prochaine Étape <a href="#-votre-prochaine-%c3%a9tape" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Maintenant que vous comprenez les concepts de base, quel est votre contexte ?</p>
+<h3 id="-option-a--je-veux-apprendre-la-méthode-event-storming">🟢 Option A : Je veux apprendre la méthode Event Storming <a href="#-option-a--je-veux-apprendre-la-m%c3%a9thode-event-storming" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez maîtriser la technique de conception collaborative</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Équipe de 3-8 personnes</li>
+<li>Besoin de conception collaborative</li>
+<li>Projet complexe à modéliser</li>
+<li>Temps disponible pour un atelier</li>
+</ul>
+<p><strong>Temps estimé</strong> : 30-45 minutes</p>
+<p>→ <strong>Aller au Chapitre 2</strong> (L&rsquo;Atelier Event Storming - Guide Pratique)</p>
+<hr>
+<h3 id="-option-b--je-veux-comprendre-la-complexité-architecturale">🟡 Option B : Je veux comprendre la complexité architecturale <a href="#-option-b--je-veux-comprendre-la-complexit%c3%a9-architecturale" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez savoir quand utiliser quels patterns</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Équipe expérimentée</li>
+<li>Besoin de choisir une architecture</li>
+<li>Projet avec contraintes techniques</li>
+<li>Décision architecturale à prendre</li>
+</ul>
+<p><strong>Temps estimé</strong> : 20-30 minutes</p>
+<p>→ <strong>Aller au Chapitre 3</strong> (Complexité Accidentelle vs Essentielle)</p>
+<hr>
+<h3 id="-option-c--je-veux-voir-des-exemples-concrets-de-modèles">🔴 Option C : Je veux voir des exemples concrets de modèles <a href="#-option-c--je-veux-voir-des-exemples-concrets-de-mod%c3%a8les" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez comprendre la différence entre modèles riches et anémiques</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Développeur avec expérience</li>
+<li>Besoin d&rsquo;exemples pratiques</li>
+<li>Compréhension des patterns de code</li>
+<li>Implémentation à faire</li>
+</ul>
+<p><strong>Temps estimé</strong> : 25-35 minutes</p>
+<p>→ <strong>Aller au Chapitre 4</strong> (Modèles Riches vs Modèles Anémiques)</p>
+<hr>
+<p><strong>💡 Conseil</strong> : Si vous n&rsquo;êtes pas sûr, choisissez l&rsquo;option A pour apprendre la méthode Event Storming, puis continuez avec les autres chapitres dans l&rsquo;ordre.</p>
+<p><strong>🔄 Alternative</strong> : Si vous voulez tout voir dans l&rsquo;ordre, commencez par le Chapitre 2.</p>
+
+    </div>
+
+    
+
+    
+                                            </div>
+                                            <div><hr class="doc-hr">
+<div id="doc-nav" class="d-print-none">
+
+	<div class="row flex-xl-nowrap flex-row-reverse">
+	<div class="col-sm-6 pt-2 doc-prev">
+		<a class="ms-auto" href="/fr/annexes/organisation-dossiers/">
+			<div class="card h-100 my-1 text-end">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Organisation des dossiers en DDD <i class="material-icons align-middle">navigate_next</i></p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	</div>
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</main>
+            </div>
+        </div>
+
+        
+        
+        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        
+        
+
+        
+        
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+    <script src="/docs/js/bootstrap.js" defer></script>
+
+
+    <script type="text/javascript" src="http://localhost:1313/docs/js/bundle.js" defer></script>
+
+        
+
+        
+        <script type="module">
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script>
+        
+    </body>
+</html>

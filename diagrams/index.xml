@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Diagrammes et Visualisations on DDD Journey</title><link>https://example.org/diagrams/</link><description>Recent content in Diagrammes et Visualisations on DDD Journey</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/diagrams/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://example.org/diagrams/architecture-generale/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/diagrams/architecture-generale/</guid><description>&lt;h1 id="architecture-générale-du-projet-hive"&gt;Architecture Générale du Projet Hive&lt;/h1&gt;
+&lt;h2 id="vue-densemble-de-larchitecture"&gt;Vue d&amp;rsquo;ensemble de l&amp;rsquo;Architecture&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;Frontend Layer&amp;#34;
+ PWA[PWA React Admin]
+ API_CLIENT[API Client]
+ end
+ 
+ subgraph &amp;#34;API Platform Layer&amp;#34;
+ API_GATEWAY[API Gateway]
+ AUTH[Authentication]
+ AUTHZ[Authorization]
+ end
+ 
+ subgraph &amp;#34;Domain Layer&amp;#34;
+ subgraph &amp;#34;Authentication Domain&amp;#34;
+ USER[User]
+ ORG[Organization]
+ ROLE[Role]
+ end
+ 
+ subgraph &amp;#34;Payment Domain&amp;#34;
+ PAYMENT[Payment]
+ SUBSCRIPTION[Subscription]
+ BILLING[Billing]
+ end
+ 
+ subgraph &amp;#34;Integration Domain&amp;#34;
+ INTEGRATION[Integration]
+ WORKFLOW[Workflow]
+ CONNECTOR[Connector]
+ end
+ 
+ subgraph &amp;#34;Monitoring Domain&amp;#34;
+ METRICS[Metrics]
+ ALERT[Alert]
+ HEALTH[Health Check]
+ end
+ end
+ 
+ subgraph &amp;#34;Infrastructure Layer&amp;#34;
+ subgraph &amp;#34;Repositories&amp;#34;
+ SQL_REPO[SQL Repository]
+ API_REPO[API Repository]
+ ES_REPO[ElasticSearch Repository]
+ MONGO_REPO[MongoDB Repository]
+ MEMORY_REPO[In-Memory Repository]
+ end
+ 
+ subgraph &amp;#34;External Services&amp;#34;
+ KEYCLOAK[Keycloak]
+ EXTERNAL_API[External APIs]
+ DATABASE[(Database)]
+ ELASTICSEARCH[(ElasticSearch)]
+ MONGODB[(MongoDB)]
+ end
+ end
+ 
+ subgraph &amp;#34;Cross-Cutting Concerns&amp;#34;
+ EVENT_BUS[Event Bus]
+ LOGGING[Logging]
+ METRICS_COLLECTOR[Metrics Collector]
+ AUDIT[Audit]
+ end
+ 
+ PWA --&amp;gt; API_CLIENT
+ API_CLIENT --&amp;gt; API_GATEWAY
+ API_GATEWAY --&amp;gt; AUTH
+ API_GATEWAY --&amp;gt; AUTHZ
+ 
+ AUTH --&amp;gt; USER
+ AUTHZ --&amp;gt; ROLE
+ 
+ API_GATEWAY --&amp;gt; PAYMENT
+ API_GATEWAY --&amp;gt; INTEGRATION
+ API_GATEWAY --&amp;gt; METRICS
+ 
+ PAYMENT --&amp;gt; SQL_REPO
+ INTEGRATION --&amp;gt; API_REPO
+ METRICS --&amp;gt; ES_REPO
+ 
+ SQL_REPO --&amp;gt; DATABASE
+ API_REPO --&amp;gt; EXTERNAL_API
+ ES_REPO --&amp;gt; ELASTICSEARCH
+ MONGO_REPO --&amp;gt; MONGODB
+ 
+ EVENT_BUS --&amp;gt; LOGGING
+ EVENT_BUS --&amp;gt; METRICS_COLLECTOR
+ EVENT_BUS --&amp;gt; AUDIT
+ 
+ style PWA fill:#e1f5fe
+ style API_GATEWAY fill:#fff3e0
+ style PAYMENT fill:#e8f5e8
+ style INTEGRATION fill:#fff8e1
+ style METRICS fill:#f3e5f5
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="architecture-cqrs-avec-event-sourcing"&gt;Architecture CQRS avec Event Sourcing&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;Command Side&amp;#34;
+ COMMAND[Command]
+ COMMAND_HANDLER[Command Handler]
+ AGGREGATE[Aggregate]
+ EVENT_STORE[Event Store]
+ end
+ 
+ subgraph &amp;#34;Query Side&amp;#34;
+ QUERY[Query]
+ QUERY_HANDLER[Query Handler]
+ READ_MODEL[Read Model]
+ PROJECTION[Projection]
+ end
+ 
+ subgraph &amp;#34;Event Bus&amp;#34;
+ EVENT_BUS[Event Bus]
+ EVENT_HANDLER[Event Handler]
+ end
+ 
+ COMMAND --&amp;gt; COMMAND_HANDLER
+ COMMAND_HANDLER --&amp;gt; AGGREGATE
+ AGGREGATE --&amp;gt; EVENT_STORE
+ AGGREGATE --&amp;gt; EVENT_BUS
+ 
+ EVENT_BUS --&amp;gt; EVENT_HANDLER
+ EVENT_HANDLER --&amp;gt; PROJECTION
+ PROJECTION --&amp;gt; READ_MODEL
+ 
+ QUERY --&amp;gt; QUERY_HANDLER
+ QUERY_HANDLER --&amp;gt; READ_MODEL
+ 
+ style COMMAND fill:#ffeb3b
+ style QUERY fill:#4caf50
+ style EVENT_BUS fill:#ff9800
+ style AGGREGATE fill:#e91e63
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="architecture-des-repositories"&gt;Architecture des Repositories&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;Repository Interfaces&amp;#34;
+ CMD_REPO[Command Repository]
+ QUERY_REPO[Query Repository]
+ end
+ 
+ subgraph &amp;#34;Repository Implementations&amp;#34;
+ SQL_CMD[SQL Command Repository]
+ SQL_QUERY[SQL Query Repository]
+ API_CMD[API Command Repository]
+ API_QUERY[API Query Repository]
+ ES_CMD[ElasticSearch Command Repository]
+ ES_QUERY[ElasticSearch Query Repository]
+ MONGO_CMD[MongoDB Command Repository]
+ MONGO_QUERY[MongoDB Query Repository]
+ MEMORY_CMD[In-Memory Command Repository]
+ MEMORY_QUERY[In-Memory Query Repository]
+ end
+ 
+ subgraph &amp;#34;Data Sources&amp;#34;
+ DATABASE[(SQL Database)]
+ EXTERNAL_API[External APIs]
+ ELASTICSEARCH[(ElasticSearch)]
+ MONGODB[(MongoDB)]
+ MEMORY[(In-Memory)]
+ end
+ 
+ CMD_REPO --&amp;gt; SQL_CMD
+ CMD_REPO --&amp;gt; API_CMD
+ CMD_REPO --&amp;gt; ES_CMD
+ CMD_REPO --&amp;gt; MONGO_CMD
+ CMD_REPO --&amp;gt; MEMORY_CMD
+ 
+ QUERY_REPO --&amp;gt; SQL_QUERY
+ QUERY_REPO --&amp;gt; API_QUERY
+ QUERY_REPO --&amp;gt; ES_QUERY
+ QUERY_REPO --&amp;gt; MONGO_QUERY
+ QUERY_REPO --&amp;gt; MEMORY_QUERY
+ 
+ SQL_CMD --&amp;gt; DATABASE
+ SQL_QUERY --&amp;gt; DATABASE
+ API_CMD --&amp;gt; EXTERNAL_API
+ API_QUERY --&amp;gt; EXTERNAL_API
+ ES_CMD --&amp;gt; ELASTICSEARCH
+ ES_QUERY --&amp;gt; ELASTICSEARCH
+ MONGO_CMD --&amp;gt; MONGODB
+ MONGO_QUERY --&amp;gt; MONGODB
+ MEMORY_CMD --&amp;gt; MEMORY
+ MEMORY_QUERY --&amp;gt; MEMORY
+ 
+ style CMD_REPO fill:#ff5722
+ style QUERY_REPO fill:#4caf50
+ style DATABASE fill:#2196f3
+ style EXTERNAL_API fill:#ff9800
+ style ELASTICSEARCH fill:#9c27b0
+ style MONGODB fill:#4caf50
+ style MEMORY fill:#607d8b
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="flux-de-données-avec-event-sourcing"&gt;Flux de Données avec Event Sourcing&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;sequenceDiagram
+ participant Client
+ participant API
+ participant CommandHandler
+ participant Aggregate
+ participant EventStore
+ participant EventBus
+ participant Projection
+ participant ReadModel
+ participant QueryHandler
+ 
+ Client-&amp;gt;&amp;gt;API: POST /api/payments
+ API-&amp;gt;&amp;gt;CommandHandler: CreatePaymentCommand
+ CommandHandler-&amp;gt;&amp;gt;Aggregate: createPayment()
+ Aggregate-&amp;gt;&amp;gt;EventStore: save(PaymentCreated)
+ Aggregate-&amp;gt;&amp;gt;EventBus: publish(PaymentCreated)
+ EventBus-&amp;gt;&amp;gt;Projection: handle(PaymentCreated)
+ Projection-&amp;gt;&amp;gt;ReadModel: update()
+ CommandHandler-&amp;gt;&amp;gt;API: PaymentCreated
+ API-&amp;gt;&amp;gt;Client: 201 Created
+ 
+ Client-&amp;gt;&amp;gt;API: GET /api/payments
+ API-&amp;gt;&amp;gt;QueryHandler: GetPaymentsQuery
+ QueryHandler-&amp;gt;&amp;gt;ReadModel: findPayments()
+ ReadModel-&amp;gt;&amp;gt;QueryHandler: Payment[]
+ QueryHandler-&amp;gt;&amp;gt;API: Payment[]
+ API-&amp;gt;&amp;gt;Client: 200 OK
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="architecture-de-sécurité"&gt;Architecture de Sécurité&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;Frontend Security&amp;#34;
+ TOKEN[JWT Token]
+ REFRESH[Refresh Token]
+ STORAGE[Local Storage]
+ end
+ 
+ subgraph &amp;#34;API Security&amp;#34;
+ MIDDLEWARE[Security Middleware]
+ AUTH_SERVICE[Authentication Service]
+ AUTHZ_SERVICE[Authorization Service]
+ VOTER[Voter]
+ end
+ 
+ subgraph &amp;#34;External Security&amp;#34;
+ KEYCLOAK[Keycloak]
+ RBAC[RBAC]
+ ABAC[ABAC]
+ end
+ 
+ subgraph &amp;#34;Audit &amp;amp; Monitoring&amp;#34;
+ AUDIT_LOG[Audit Log]
+ SECURITY_METRICS[Security Metrics]
+ ALERT[Security Alert]
+ end
+ 
+ TOKEN --&amp;gt; MIDDLEWARE
+ REFRESH --&amp;gt; AUTH_SERVICE
+ STORAGE --&amp;gt; TOKEN
+ 
+ MIDDLEWARE --&amp;gt; AUTH_SERVICE
+ MIDDLEWARE --&amp;gt; AUTHZ_SERVICE
+ AUTHZ_SERVICE --&amp;gt; VOTER
+ 
+ AUTH_SERVICE --&amp;gt; KEYCLOAK
+ AUTHZ_SERVICE --&amp;gt; RBAC
+ AUTHZ_SERVICE --&amp;gt; ABAC
+ 
+ MIDDLEWARE --&amp;gt; AUDIT_LOG
+ AUTH_SERVICE --&amp;gt; SECURITY_METRICS
+ AUTHZ_SERVICE --&amp;gt; ALERT
+ 
+ style TOKEN fill:#ffeb3b
+ style MIDDLEWARE fill:#ff5722
+ style KEYCLOAK fill:#2196f3
+ style AUDIT_LOG fill:#9c27b0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="architecture-frontend"&gt;Architecture Frontend&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;UI Components&amp;#34;
+ PAGES[Pages]
+ COMPONENTS[Components]
+ FORMS[Forms]
+ LISTS[Lists]
+ end
+ 
+ subgraph &amp;#34;State Management&amp;#34;
+ REDUX[Redux Store]
+ SLICES[Slices]
+ ACTIONS[Actions]
+ SELECTORS[Selectors]
+ end
+ 
+ subgraph &amp;#34;API Layer&amp;#34;
+ API_CLIENT[API Client]
+ SERVICES[Services]
+ HOOKS[Custom Hooks]
+ end
+ 
+ subgraph &amp;#34;Routing &amp;amp; Navigation&amp;#34;
+ ROUTER[React Router]
+ GUARDS[Route Guards]
+ NAVIGATION[Navigation]
+ end
+ 
+ subgraph &amp;#34;External Dependencies&amp;#34;
+ BACKEND[Backend API]
+ KEYCLOAK[Keycloak]
+ EXTERNAL[External APIs]
+ end
+ 
+ PAGES --&amp;gt; COMPONENTS
+ COMPONENTS --&amp;gt; FORMS
+ COMPONENTS --&amp;gt; LISTS
+ 
+ PAGES --&amp;gt; REDUX
+ COMPONENTS --&amp;gt; SELECTORS
+ FORMS --&amp;gt; ACTIONS
+ LISTS --&amp;gt; ACTIONS
+ 
+ REDUX --&amp;gt; SLICES
+ SLICES --&amp;gt; ACTIONS
+ SLICES --&amp;gt; SELECTORS
+ 
+ ACTIONS --&amp;gt; API_CLIENT
+ SELECTORS --&amp;gt; SERVICES
+ HOOKS --&amp;gt; API_CLIENT
+ 
+ API_CLIENT --&amp;gt; SERVICES
+ SERVICES --&amp;gt; HOOKS
+ 
+ ROUTER --&amp;gt; GUARDS
+ GUARDS --&amp;gt; NAVIGATION
+ NAVIGATION --&amp;gt; PAGES
+ 
+ API_CLIENT --&amp;gt; BACKEND
+ API_CLIENT --&amp;gt; KEYCLOAK
+ SERVICES --&amp;gt; EXTERNAL
+ 
+ style PAGES fill:#e1f5fe
+ style REDUX fill:#fff3e0
+ style API_CLIENT fill:#e8f5e8
+ style ROUTER fill:#fff8e1
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title/><link>https://example.org/diagrams/event-storming-process/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/diagrams/event-storming-process/</guid><description>&lt;h1 id="processus-event-storming"&gt;Processus Event Storming&lt;/h1&gt;
+&lt;h2 id="atelier-event-storming---étapes"&gt;Atelier Event Storming - Étapes&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TD
+ A[Préparation] --&amp;gt; B[Session 1: Découverte]
+ B --&amp;gt; C[Session 2: Affinage]
+ C --&amp;gt; D[Session 3: Architecture]
+ D --&amp;gt; E[Documentation]
+ 
+ subgraph &amp;#34;Préparation&amp;#34;
+ A1[Inviter les participants]
+ A2[Préparer le matériel]
+ A3[Définir les objectifs]
+ end
+ 
+ subgraph &amp;#34;Session 1: Découverte&amp;#34;
+ B1[Identifier les événements métier]
+ B2[Identifier les commandes]
+ B3[Identifier les acteurs]
+ B4[Identifier les règles métier]
+ end
+ 
+ subgraph &amp;#34;Session 2: Affinement&amp;#34;
+ C1[Grouper les événements]
+ C2[Définir les agrégats]
+ C3[Identifier les bounded contexts]
+ C4[Valider les règles métier]
+ end
+ 
+ subgraph &amp;#34;Session 3: Architecture&amp;#34;
+ D1[Définir l&amp;#39;architecture]
+ D2[Identifier les intégrations]
+ D3[Planifier l&amp;#39;implémentation]
+ D4[Prioriser les fonctionnalités]
+ end
+ 
+ subgraph &amp;#34;Documentation&amp;#34;
+ E1[Créer les diagrammes]
+ E2[Rédiger les spécifications]
+ E3[Partager les résultats]
+ E4[Planifier les prochaines étapes]
+ end
+ 
+ A --&amp;gt; A1
+ A --&amp;gt; A2
+ A --&amp;gt; A3
+ 
+ B --&amp;gt; B1
+ B --&amp;gt; B2
+ B --&amp;gt; B3
+ B --&amp;gt; B4
+ 
+ C --&amp;gt; C1
+ C --&amp;gt; C2
+ C --&amp;gt; C3
+ C --&amp;gt; C4
+ 
+ D --&amp;gt; D1
+ D --&amp;gt; D2
+ D --&amp;gt; D3
+ D --&amp;gt; D4
+ 
+ E --&amp;gt; E1
+ E --&amp;gt; E2
+ E --&amp;gt; E3
+ E --&amp;gt; E4
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="exemple-devent-storming---système-de-paiement"&gt;Exemple d&amp;rsquo;Event Storming - Système de Paiement&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;Acteurs&amp;#34;
+ CUSTOMER[Customer]
+ MERCHANT[Merchant]
+ PAYMENT_GATEWAY[Payment Gateway]
+ ADMIN[Admin]
+ end
+ 
+ subgraph &amp;#34;Commandes&amp;#34;
+ CREATE_PAYMENT[Create Payment]
+ PROCESS_PAYMENT[Process Payment]
+ REFUND_PAYMENT[Refund Payment]
+ CANCEL_PAYMENT[Cancel Payment]
+ end
+ 
+ subgraph &amp;#34;Événements&amp;#34;
+ PAYMENT_CREATED[Payment Created]
+ PAYMENT_PROCESSED[Payment Processed]
+ PAYMENT_FAILED[Payment Failed]
+ PAYMENT_REFUNDED[Payment Refunded]
+ PAYMENT_CANCELLED[Payment Cancelled]
+ end
+ 
+ subgraph &amp;#34;Règles Métier&amp;#34;
+ VALIDATE_AMOUNT[Amount &amp;gt; 0]
+ VALIDATE_CURRENCY[Valid Currency]
+ CHECK_BALANCE[Sufficient Balance]
+ VERIFY_MERCHANT[Merchant Verified]
+ end
+ 
+ CUSTOMER --&amp;gt; CREATE_PAYMENT
+ MERCHANT --&amp;gt; PROCESS_PAYMENT
+ ADMIN --&amp;gt; REFUND_PAYMENT
+ CUSTOMER --&amp;gt; CANCEL_PAYMENT
+ 
+ CREATE_PAYMENT --&amp;gt; PAYMENT_CREATED
+ PROCESS_PAYMENT --&amp;gt; PAYMENT_PROCESSED
+ PROCESS_PAYMENT --&amp;gt; PAYMENT_FAILED
+ REFUND_PAYMENT --&amp;gt; PAYMENT_REFUNDED
+ CANCEL_PAYMENT --&amp;gt; PAYMENT_CANCELLED
+ 
+ VALIDATE_AMOUNT --&amp;gt; CREATE_PAYMENT
+ VALIDATE_CURRENCY --&amp;gt; CREATE_PAYMENT
+ CHECK_BALANCE --&amp;gt; PROCESS_PAYMENT
+ VERIFY_MERCHANT --&amp;gt; PROCESS_PAYMENT
+ 
+ style CUSTOMER fill:#e1f5fe
+ style MERCHANT fill:#e8f5e8
+ style PAYMENT_GATEWAY fill:#fff3e0
+ style ADMIN fill:#f3e5f5
+ style CREATE_PAYMENT fill:#ffeb3b
+ style PAYMENT_CREATED fill:#4caf50
+ style VALIDATE_AMOUNT fill:#ff9800
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="bounded-contexts---système-hive"&gt;Bounded Contexts - Système Hive&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;Authentication Context&amp;#34;
+ AUTH_USER[User]
+ AUTH_ROLE[Role]
+ AUTH_PERMISSION[Permission]
+ AUTH_SESSION[Session]
+ end
+ 
+ subgraph &amp;#34;Payment Context&amp;#34;
+ PAYMENT[Payment]
+ SUBSCRIPTION[Subscription]
+ BILLING[Billing]
+ INVOICE[Invoice]
+ end
+ 
+ subgraph &amp;#34;Integration Context&amp;#34;
+ INTEGRATION[Integration]
+ WORKFLOW[Workflow]
+ CONNECTOR[Connector]
+ MAPPING[Mapping]
+ end
+ 
+ subgraph &amp;#34;Monitoring Context&amp;#34;
+ METRICS[Metrics]
+ ALERT[Alert]
+ LOG[Log]
+ HEALTH[Health Check]
+ end
+ 
+ subgraph &amp;#34;Organization Context&amp;#34;
+ ORG[Organization]
+ TEAM[Team]
+ PROJECT[Project]
+ SETTINGS[Settings]
+ end
+ 
+ AUTH_USER -.-&amp;gt; PAYMENT
+ AUTH_USER -.-&amp;gt; INTEGRATION
+ AUTH_USER -.-&amp;gt; METRICS
+ AUTH_USER -.-&amp;gt; ORG
+ 
+ PAYMENT -.-&amp;gt; INTEGRATION
+ INTEGRATION -.-&amp;gt; METRICS
+ ORG -.-&amp;gt; PAYMENT
+ ORG -.-&amp;gt; INTEGRATION
+ 
+ style AUTH_USER fill:#e1f5fe
+ style PAYMENT fill:#e8f5e8
+ style INTEGRATION fill:#fff3e0
+ style METRICS fill:#f3e5f5
+ style ORG fill:#fff8e1
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="flux-dévénements---création-de-paiement"&gt;Flux d&amp;rsquo;Événements - Création de Paiement&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;sequenceDiagram
+ participant C as Customer
+ participant API as API Gateway
+ participant CH as Command Handler
+ participant A as Payment Aggregate
+ participant ES as Event Store
+ participant EB as Event Bus
+ participant P as Projection
+ participant RM as Read Model
+ participant QH as Query Handler
+ 
+ C-&amp;gt;&amp;gt;API: POST /api/payments
+ API-&amp;gt;&amp;gt;CH: CreatePaymentCommand
+ CH-&amp;gt;&amp;gt;A: createPayment(amount, currency, customer)
+ 
+ A-&amp;gt;&amp;gt;A: validateAmount()
+ A-&amp;gt;&amp;gt;A: validateCurrency()
+ A-&amp;gt;&amp;gt;A: validateCustomer()
+ 
+ A-&amp;gt;&amp;gt;ES: save(PaymentCreated)
+ A-&amp;gt;&amp;gt;EB: publish(PaymentCreated)
+ 
+ EB-&amp;gt;&amp;gt;P: handle(PaymentCreated)
+ P-&amp;gt;&amp;gt;RM: updatePaymentList()
+ 
+ A-&amp;gt;&amp;gt;CH: PaymentCreated
+ CH-&amp;gt;&amp;gt;API: PaymentCreated
+ API-&amp;gt;&amp;gt;C: 201 Created
+ 
+ Note over C,RM: Query pour récupérer la liste
+ C-&amp;gt;&amp;gt;API: GET /api/payments
+ API-&amp;gt;&amp;gt;QH: GetPaymentsQuery
+ QH-&amp;gt;&amp;gt;RM: findPayments()
+ RM-&amp;gt;&amp;gt;QH: Payment[]
+ QH-&amp;gt;&amp;gt;API: Payment[]
+ API-&amp;gt;&amp;gt;C: 200 OK
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="impact-mapping---système-de-paiement"&gt;Impact Mapping - Système de Paiement&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;Objectif Business&amp;#34;
+ OBJ[Augmenter les revenus de 20%]
+ end
+ 
+ subgraph &amp;#34;Acteurs&amp;#34;
+ CUSTOMER[Customer]
+ MERCHANT[Merchant]
+ SUPPORT[Support Team]
+ DEV[Development Team]
+ end
+ 
+ subgraph &amp;#34;Impacts&amp;#34;
+ CUSTOMER_IMPACT[Paiement plus rapide]
+ MERCHANT_IMPACT[Moins de frais]
+ SUPPORT_IMPACT[Moins de tickets]
+ DEV_IMPACT[Développement plus rapide]
+ end
+ 
+ subgraph &amp;#34;Livrables&amp;#34;
+ PAYMENT_API[API de Paiement]
+ DASHBOARD[Dashboard]
+ DOCUMENTATION[Documentation]
+ MONITORING[Monitoring]
+ end
+ 
+ OBJ --&amp;gt; CUSTOMER_IMPACT
+ OBJ --&amp;gt; MERCHANT_IMPACT
+ OBJ --&amp;gt; SUPPORT_IMPACT
+ OBJ --&amp;gt; DEV_IMPACT
+ 
+ CUSTOMER_IMPACT --&amp;gt; PAYMENT_API
+ MERCHANT_IMPACT --&amp;gt; DASHBOARD
+ SUPPORT_IMPACT --&amp;gt; DOCUMENTATION
+ DEV_IMPACT --&amp;gt; MONITORING
+ 
+ CUSTOMER --&amp;gt; CUSTOMER_IMPACT
+ MERCHANT --&amp;gt; MERCHANT_IMPACT
+ SUPPORT --&amp;gt; SUPPORT_IMPACT
+ DEV --&amp;gt; DEV_IMPACT
+ 
+ style OBJ fill:#ff5722
+ style CUSTOMER fill:#e1f5fe
+ style MERCHANT fill:#e8f5e8
+ style SUPPORT fill:#fff3e0
+ style DEV fill:#f3e5f5
+ style PAYMENT_API fill:#4caf50
+ style DASHBOARD fill:#ff9800
+ style DOCUMENTATION fill:#9c27b0
+ style MONITORING fill:#607d8b
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="example-mapping---création-de-paiement"&gt;Example Mapping - Création de Paiement&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
+ subgraph &amp;#34;Règle Métier&amp;#34;
+ RULE[Un paiement doit avoir un montant positif]
+ end
+ 
+ subgraph &amp;#34;Exemples&amp;#34;
+ EX1[✅ Montant: 100.00€ → Paiement créé]
+ EX2[❌ Montant: -50.00€ → Erreur de validation]
+ EX3[❌ Montant: 0.00€ → Erreur de validation]
+ EX4[❌ Montant: null → Erreur de validation]
+ end
+ 
+ subgraph &amp;#34;Questions&amp;#34;
+ Q1[Que se passe-t-il si le montant est trop élevé?]
+ Q2[Que se passe-t-il si la devise n&amp;#39;est pas supportée?]
+ Q3[Que se passe-t-il si le client n&amp;#39;existe pas?]
+ end
+ 
+ subgraph &amp;#34;Tests d&amp;#39;Acceptation&amp;#34;
+ T1[Given: Montant valide&amp;lt;br/&amp;gt;When: Créer le paiement&amp;lt;br/&amp;gt;Then: Paiement créé avec succès]
+ T2[Given: Montant négatif&amp;lt;br/&amp;gt;When: Créer le paiement&amp;lt;br/&amp;gt;Then: Erreur de validation]
+ T3[Given: Montant zéro&amp;lt;br/&amp;gt;When: Créer le paiement&amp;lt;br/&amp;gt;Then: Erreur de validation]
+ T4[Given: Montant null&amp;lt;br/&amp;gt;When: Créer le paiement&amp;lt;br/&amp;gt;Then: Erreur de validation]
+ end
+ 
+ RULE --&amp;gt; EX1
+ RULE --&amp;gt; EX2
+ RULE --&amp;gt; EX3
+ RULE --&amp;gt; EX4
+ 
+ RULE --&amp;gt; Q1
+ RULE --&amp;gt; Q2
+ RULE --&amp;gt; Q3
+ 
+ EX1 --&amp;gt; T1
+ EX2 --&amp;gt; T2
+ EX3 --&amp;gt; T3
+ EX4 --&amp;gt; T4
+ 
+ style RULE fill:#ff5722
+ style EX1 fill:#4caf50
+ style EX2 fill:#f44336
+ style EX3 fill:#f44336
+ style EX4 fill:#f44336
+ style Q1 fill:#ff9800
+ style Q2 fill:#ff9800
+ style Q3 fill:#ff9800
+ style T1 fill:#e8f5e8
+ style T2 fill:#ffebee
+ style T3 fill:#ffebee
+ style T4 fill:#ffebee
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>

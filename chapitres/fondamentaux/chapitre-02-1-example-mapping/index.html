@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Chapitre 2.1 : L&#39;Example Mapping - Détailer les Règles Métier | DDD Journey</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guide complet de l&#39;Example Mapping pour explorer les règles métier complexes découvertes lors de l&#39;Event Storming">
+    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
+    <meta name="author" content="Colin Wilson - Lotus Labs" />
+    <meta name="email" content="support@aigis.uk" />
+    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="Version" content="v0.1.0" />
+    
+    <link rel="icon" href="http://localhost:1313/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="http://localhost:1313/site.webmanifest">
+<meta property="og:title" content="Chapitre 2.1 : L&#39;Example Mapping - Détailer les Règles Métier" />
+<meta property="og:description" content="Guide complet de l&#39;Example Mapping pour explorer les règles métier complexes découvertes lors de l&#39;Event Storming" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/chapitres/fondamentaux/chapitre-02-1-example-mapping/" /><meta property="og:image" content="http://localhost:1313/opengraph/card-base-2_hu_d1b99a8c2b93e2ae.png"/><meta property="article:section" content="chapitres" />
+<meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/opengraph/card-base-2_hu_d1b99a8c2b93e2ae.png"/>
+<meta name="twitter:title" content="Chapitre 2.1 : L&#39;Example Mapping - Détailer les Règles Métier"/>
+<meta name="twitter:description" content="Guide complet de l&#39;Example Mapping pour explorer les règles métier complexes découvertes lors de l&#39;Event Storming"/>
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Journey" href="/index.xml" />
+    
+    
+    
+            
+                <script type="text/javascript" src="http://localhost:1313/docs/js/flexsearch.bundle.js"></script>
+            
+        
+    
+    
+
+    <link rel="stylesheet" href="/docs/scss/style.css" crossorigin="anonymous">
+    
+    
+    </head>
+<body>
+        <div class="content">
+            <div class="page-wrapper toggled">
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href='/' aria-label="HomePage" alt="HomePage">
+            
+                <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+            
+        </a>
+    </div>
+    <div class="sidebar-content" style="height: calc(100% - 131px);">
+        <ul class="sidebar-menu">
+            
+                
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon current active">
+                            <button class="btn">
+                                Chapitres Fondamentaux
+                            </button>
+                            <div class="sidebar-submenu d-block">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">Chapitre 2 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="current no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-02-1-example-mapping/">Chapitre 2.1 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-02-impact-mapping/">Chapitre 2.2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-03-complexite-accidentelle-essentielle/">Chapitre 3 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-03-1-granularite-choix-architecturaux/">Chapitre 3.1 : Granularité des Choix Architecturaux</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-04-modeles-riches-vs-anemiques/">Chapitre 4 : Modèles Riches vs Modèles Anémiques</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-05-architecture-evenementielle/">Chapitre 5 : Architecture Événementielle (Optionnel)</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-06-repositories-persistance/">Chapitre 6 : Repositories et Persistance</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Optionnels
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-07-event-sourcing/">Chapitre 7 : Event Sourcing - La Source de Vérité</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-08-architecture-cqs/">Chapitre 8 : Architecture CQS - Command Query Separation</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-09-architecture-cqrs/">Chapitre 9 : Architecture CQRS avec API Platform</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-10-cqrs-event-sourcing-combines/">Chapitre 10 : CQRS &#43; Event Sourcing Combinés</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-11-projections-event-sourcing/">Chapitre 11 : Projections Event Sourcing</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres de Stockage
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage SQL
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-12-stockage-sql-classique/">Chapitre 12 : Stockage SQL - Approche Classique</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/chapitres/techniques/">
+                                
+                                Chapitres Techniques
+                            </a>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/chapitres/avances/">
+                                
+                                Chapitres Avancés
+                            </a>
+                        </li>
+                    
+                
+            
+        </ul>
+        
+    </div>
+    
+        <ul class="sidebar-footer list-unstyled mb-0">
+            
+        </ul>
+    
+</nav>
+
+                    <main class="page-content bg-transparent">
+                        
+<div id="top-header" class="top-header d-print-none">
+    <div class="header-bar d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+                <div class="small">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+                <div class="big">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+            </a>
+            <button id="close-sidebar" class="btn btn-icon btn-soft">
+                <span class="material-icons size-20 menu-icon align-middle">menu</span>
+            </button>
+            
+            
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
+            </div>
+
+        <div class="d-flex align-items-center">
+            <ul class="list-unstyled mb-0">
+                
+            </ul>
+            
+        </div>
+    </div>
+    
+    
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
+    
+    
+</div>
+
+
+                            <div class="container-fluid">
+                                <div class="layout-spacing">
+                                    
+                                        <div class="d-md-flex justify-content-between align-items-center"><nav aria-label="breadcrumb" class="d-inline-block pb-2 mt-1 mt-sm-0">
+    <ul id="breadcrumbs" class="breadcrumb bg-transparent mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+        
+            
+                <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/">
+                        <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
+                    </a>
+                    <meta itemprop="position" content='1' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/fondamentaux/">
+                        <span itemprop="name">Chapitres Fondamentaux</span>
+                    </a>
+                    <meta itemprop="position" content='2' />
+                </li>
+            
+        
+            <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name">Chapitre 2.1 : L&#39;Example Mapping - Détailer les Règles Métier</span>
+                <meta itemprop="position" content='3' />
+            </li>
+        
+    </ul>
+</nav></div>
+                                    
+                                    <div class="row flex-xl-nowrap">
+                                        
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
+    <div class="fw-bold text-uppercase mb-2">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a></li>
+    <li><a href="#quest-ce-que-lexample-mapping-">Qu&rsquo;est-ce que l&rsquo;Example Mapping ?</a>
+      <ul>
+        <li><a href="#définition">Définition</a></li>
+        <li><a href="#relation-avec-levent-storming">Relation avec l&rsquo;Event Storming</a></li>
+        <li><a href="#quand-utiliser-lexample-mapping-">Quand Utiliser l&rsquo;Example Mapping ?</a></li>
+      </ul>
+    </li>
+    <li><a href="#les-4-types-de-cartes">Les 4 Types de Cartes</a>
+      <ul>
+        <li><a href="#-cartes-jaunes--règles-métier">🟡 Cartes Jaunes : Règles Métier</a></li>
+        <li><a href="#-cartes-vertes--exemples">🟢 Cartes Vertes : Exemples</a></li>
+        <li><a href="#-cartes-rouges--questions">🔴 Cartes Rouges : Questions</a></li>
+        <li><a href="#-cartes-bleues--scénarios">🔵 Cartes Bleues : Scénarios</a></li>
+      </ul>
+    </li>
+    <li><a href="#guide-pratique-de-latelier">Guide Pratique de l&rsquo;Atelier</a>
+      <ul>
+        <li><a href="#préparation-de-latelier">Préparation de l&rsquo;Atelier</a></li>
+        <li><a href="#déroulement-de-latelier">Déroulement de l&rsquo;Atelier</a></li>
+        <li><a href="#exemple-complet--système-de-réservation">Exemple Complet : Système de Réservation</a></li>
+      </ul>
+    </li>
+    <li><a href="#transformation-en-tests-dacceptation">Transformation en Tests d&rsquo;Acceptation</a>
+      <ul>
+        <li><a href="#principe">Principe</a></li>
+        <li><a href="#exemple-de-transformation">Exemple de Transformation</a></li>
+        <li><a href="#organisation-des-tests">Organisation des Tests</a></li>
+      </ul>
+    </li>
+    <li><a href="#bonnes-pratiques">Bonnes Pratiques</a>
+      <ul>
+        <li><a href="#-à-faire">✅ À Faire</a></li>
+        <li><a href="#-à-éviter">❌ À Éviter</a></li>
+      </ul>
+    </li>
+    <li><a href="#intégration-avec-levent-storming">Intégration avec l&rsquo;Event Storming</a>
+      <ul>
+        <li><a href="#workflow-complet">Workflow Complet</a></li>
+        <li><a href="#exemple-de-workflow">Exemple de Workflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#-votre-prochaine-étape">🎯 Votre Prochaine Étape</a>
+      <ul>
+        <li><a href="#-option-a--je-veux-comprendre-la-complexité-architecturale">🟢 Option A : Je veux comprendre la complexité architecturale</a></li>
+        <li><a href="#-option-b--je-veux-voir-des-exemples-concrets-de-modèles">🟡 Option B : Je veux voir des exemples concrets de modèles</a></li>
+        <li><a href="#-option-c--je-veux-comprendre-larchitecture-événementielle">🔴 Option C : Je veux comprendre l&rsquo;architecture événementielle</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </toc></div>
+                                        
+                                        
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
+                                            <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
+                                                Table of Contents
+                                            </button>
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a></li>
+    <li><a href="#quest-ce-que-lexample-mapping-">Qu&rsquo;est-ce que l&rsquo;Example Mapping ?</a>
+      <ul>
+        <li><a href="#définition">Définition</a></li>
+        <li><a href="#relation-avec-levent-storming">Relation avec l&rsquo;Event Storming</a></li>
+        <li><a href="#quand-utiliser-lexample-mapping-">Quand Utiliser l&rsquo;Example Mapping ?</a></li>
+      </ul>
+    </li>
+    <li><a href="#les-4-types-de-cartes">Les 4 Types de Cartes</a>
+      <ul>
+        <li><a href="#-cartes-jaunes--règles-métier">🟡 Cartes Jaunes : Règles Métier</a></li>
+        <li><a href="#-cartes-vertes--exemples">🟢 Cartes Vertes : Exemples</a></li>
+        <li><a href="#-cartes-rouges--questions">🔴 Cartes Rouges : Questions</a></li>
+        <li><a href="#-cartes-bleues--scénarios">🔵 Cartes Bleues : Scénarios</a></li>
+      </ul>
+    </li>
+    <li><a href="#guide-pratique-de-latelier">Guide Pratique de l&rsquo;Atelier</a>
+      <ul>
+        <li><a href="#préparation-de-latelier">Préparation de l&rsquo;Atelier</a></li>
+        <li><a href="#déroulement-de-latelier">Déroulement de l&rsquo;Atelier</a></li>
+        <li><a href="#exemple-complet--système-de-réservation">Exemple Complet : Système de Réservation</a></li>
+      </ul>
+    </li>
+    <li><a href="#transformation-en-tests-dacceptation">Transformation en Tests d&rsquo;Acceptation</a>
+      <ul>
+        <li><a href="#principe">Principe</a></li>
+        <li><a href="#exemple-de-transformation">Exemple de Transformation</a></li>
+        <li><a href="#organisation-des-tests">Organisation des Tests</a></li>
+      </ul>
+    </li>
+    <li><a href="#bonnes-pratiques">Bonnes Pratiques</a>
+      <ul>
+        <li><a href="#-à-faire">✅ À Faire</a></li>
+        <li><a href="#-à-éviter">❌ À Éviter</a></li>
+      </ul>
+    </li>
+    <li><a href="#intégration-avec-levent-storming">Intégration avec l&rsquo;Event Storming</a>
+      <ul>
+        <li><a href="#workflow-complet">Workflow Complet</a></li>
+        <li><a href="#exemple-de-workflow">Exemple de Workflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#-votre-prochaine-étape">🎯 Votre Prochaine Étape</a>
+      <ul>
+        <li><a href="#-option-a--je-veux-comprendre-la-complexité-architecturale">🟢 Option A : Je veux comprendre la complexité architecturale</a></li>
+        <li><a href="#-option-b--je-veux-voir-des-exemples-concrets-de-modèles">🟡 Option B : Je veux voir des exemples concrets de modèles</a></li>
+        <li><a href="#-option-c--je-veux-comprendre-larchitecture-événementielle">🔴 Option C : Je veux comprendre l&rsquo;architecture événementielle</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
+                                            <div class="mb-0 d-flex">
+                                                
+                                                <h1 class="content-title mb-0">
+                                                    Chapitre 2.1 : L&#39;Example Mapping - Détailer les Règles Métier
+                                                    
+                                                </h1>
+                                            </div>
+                                            
+                                            <div id="content" class="main-content" >
+                                                
+    
+    <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
+        <h2 id="-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre <a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ce chapitre vous donne une méthodologie complète pour utiliser l&rsquo;Example Mapping après l&rsquo;Event Storming. Vous apprendrez :</p>
+<ul>
+<li>Comment organiser un atelier d&rsquo;Example Mapping</li>
+<li>Les 4 types de cartes et leur utilisation</li>
+<li>Comment transformer les exemples en tests d&rsquo;acceptation</li>
+<li>Les bonnes pratiques pour éviter l&rsquo;over-engineering</li>
+</ul>
+<h2 id="quest-ce-que-lexample-mapping-">Qu&rsquo;est-ce que l&rsquo;Example Mapping ? <a href="#quest-ce-que-lexample-mapping-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="définition">Définition <a href="#d%c3%a9finition" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>L&rsquo;Example Mapping est une technique de conception collaborative créée par Matt Wynne qui permet d&rsquo;explorer les règles métier complexes à travers des exemples concrets. Elle utilise des cartes colorées pour structurer la discussion et révéler les cas limites.</p>
+<h3 id="relation-avec-levent-storming">Relation avec l&rsquo;Event Storming <a href="#relation-avec-levent-storming" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>L&rsquo;Example Mapping est le complément naturel de l&rsquo;Event Storming :</p>
+<ul>
+<li><strong>Event Storming</strong> : Découvre les événements et les processus métier</li>
+<li><strong>Example Mapping</strong> : Détaille les règles qui gouvernent ces événements</li>
+</ul>
+<h3 id="quand-utiliser-lexample-mapping-">Quand Utiliser l&rsquo;Example Mapping ? <a href="#quand-utiliser-lexample-mapping-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="-utilisez-lexample-mapping-si-">✅ Utilisez l&rsquo;Example Mapping si : <a href="#-utilisez-lexample-mapping-si-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Vous avez identifié des événements complexes lors de l&rsquo;Event Storming</li>
+<li>Les règles métier ne sont pas claires</li>
+<li>Il y a des cas limites ou des exceptions</li>
+<li>L&rsquo;équipe a des questions sur le comportement attendu</li>
+</ul>
+<h4 id="-évitez-lexample-mapping-si-">❌ Évitez l&rsquo;Example Mapping si : <a href="#-%c3%a9vitez-lexample-mapping-si-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Les règles métier sont triviales</li>
+<li>L&rsquo;équipe est déjà alignée sur le comportement</li>
+<li>Vous n&rsquo;avez pas d&rsquo;expert métier disponible</li>
+<li>Le temps est très limité</li>
+</ul>
+<h2 id="les-4-types-de-cartes">Les 4 Types de Cartes <a href="#les-4-types-de-cartes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="-cartes-jaunes--règles-métier">🟡 Cartes Jaunes : Règles Métier <a href="#-cartes-jaunes--r%c3%a8gles-m%c3%a9tier" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Les règles qui gouvernent le comportement du système. Elles doivent être :</p>
+<ul>
+<li><strong>Spécifiques</strong> : Pas de règles vagues</li>
+<li><strong>Testables</strong> : On doit pouvoir les vérifier</li>
+<li><strong>Métier</strong> : Pas de règles techniques</li>
+</ul>
+<h4 id="exemples-de-bonnes-règles">Exemples de Bonnes Règles <a href="#exemples-de-bonnes-r%c3%a8gles" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>✅ Un paiement ne peut être traité que s&#39;il est en statut &#34;pending&#34;
+✅ Le montant doit être positif
+✅ Un utilisateur ne peut pas emprunter plus que sa limite de crédit
+✅ Une commande expirée ne peut plus être modifiée</code></pre>
+<h4 id="exemples-de-mauvaises-règles">Exemples de Mauvaises Règles <a href="#exemples-de-mauvaises-r%c3%a8gles" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>❌ Le système doit être performant
+❌ L&#39;interface doit être intuitive
+❌ Les données doivent être sécurisées
+❌ Le code doit être maintenable</code></pre>
+<h3 id="-cartes-vertes--exemples">🟢 Cartes Vertes : Exemples <a href="#-cartes-vertes--exemples" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Les exemples concrets qui illustrent les règles. Ils doivent être :</p>
+<ul>
+<li><strong>Concrets</strong> : Avec des valeurs réelles</li>
+<li><strong>Complets</strong> : Avec le contexte nécessaire</li>
+<li><strong>Testables</strong> : On doit pouvoir les automatiser</li>
+</ul>
+<h4 id="format-dun-bon-exemple">Format d&rsquo;un Bon Exemple <a href="#format-dun-bon-exemple" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🟢 EXEMPLE : [Contexte] → [Action] → [Résultat attendu]
+
+Exemples :
+🟢 EXEMPLE : Paiement de 100€ avec compte ayant une limite de 500€
+   → Résultat : Paiement traité avec succès
+
+🟢 EXEMPLE : Paiement de -50€
+   → Résultat : Erreur &#34;Montant invalide&#34;
+
+🟢 EXEMPLE : Tentative de traiter un paiement déjà traité
+   → Résultat : Erreur &#34;Paiement déjà traité&#34;</code></pre>
+<h3 id="-cartes-rouges--questions">🔴 Cartes Rouges : Questions <a href="#-cartes-rouges--questions" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Les questions qui émergent lors de l&rsquo;exploration. Elles révèlent :</p>
+<ul>
+<li>Les zones d&rsquo;incertitude</li>
+<li>Les cas limites non couverts</li>
+<li>Les dépendances externes</li>
+<li>Les contraintes techniques</li>
+</ul>
+<h4 id="exemples-de-questions-pertinentes">Exemples de Questions Pertinentes <a href="#exemples-de-questions-pertinentes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🔴 QUESTION : Que se passe-t-il si le compte est suspendu ?
+🔴 QUESTION : Y a-t-il une limite de temps pour traiter un paiement ?
+🔴 QUESTION : Peut-on traiter un paiement partiellement ?
+🔴 QUESTION : Que se passe-t-il si la connexion réseau échoue ?</code></pre>
+<h3 id="-cartes-bleues--scénarios">🔵 Cartes Bleues : Scénarios <a href="#-cartes-bleues--sc%c3%a9narios" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Les scénarios d&rsquo;utilisation complets qui montrent le flux end-to-end.</p>
+<h4 id="format-dun-bon-scénario">Format d&rsquo;un Bon Scénario <a href="#format-dun-bon-sc%c3%a9nario" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🔵 SCÉNARIO : [Titre du scénario]
+   1. [Étape 1]
+   2. [Étape 2]
+   3. [Étape 3]
+   ...
+   → [Résultat final]
+
+Exemple :
+🔵 SCÉNARIO : Processus complet de paiement
+   1. Client initie un paiement de 100€
+   2. Système valide le montant
+   3. Système vérifie la limite du compte (500€)
+   4. Système traite le paiement
+   5. Système envoie une confirmation
+   6. Client reçoit un email de confirmation
+   → Résultat : Paiement traité avec succès</code></pre>
+<h2 id="guide-pratique-de-latelier">Guide Pratique de l&rsquo;Atelier <a href="#guide-pratique-de-latelier" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="préparation-de-latelier">Préparation de l&rsquo;Atelier <a href="#pr%c3%a9paration-de-latelier" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-choisir-la-fonctionnalité">1. <strong>Choisir la Fonctionnalité</strong> <a href="#1-choisir-la-fonctionnalit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Sélectionnez une fonctionnalité découverte lors de l&rsquo;Event Storming qui :</p>
+<ul>
+<li>A des règles métier complexes</li>
+<li>Génère des questions dans l&rsquo;équipe</li>
+<li>Est critique pour le business</li>
+<li>A des cas limites identifiés</li>
+</ul>
+<h4 id="2-composer-l">2. <strong>Composer l&rsquo;Équipe</strong> <a href="#2-composer-l" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li><strong>1 Expert Métier</strong> : Connaît les règles business</li>
+<li><strong>1-2 Développeurs</strong> : Comprendront l&rsquo;implémentation</li>
+<li><strong>1 Testeur</strong> : Pensera aux cas limites</li>
+<li><strong>1 Facilitateur</strong> : Animer l&rsquo;atelier</li>
+</ul>
+<h4 id="3-préparer-le-matériel">3. <strong>Préparer le Matériel</strong> <a href="#3-pr%c3%a9parer-le-mat%c3%a9riel" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Cartes colorées (jaunes, vertes, rouges, bleues)</li>
+<li>Post-its</li>
+<li>Marqueurs</li>
+<li>Table ou mur pour organiser les cartes</li>
+</ul>
+<h3 id="déroulement-de-latelier">Déroulement de l&rsquo;Atelier <a href="#d%c3%a9roulement-de-latelier" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="phase-1--identifier-les-règles-15-20-min">Phase 1 : Identifier les Règles (15-20 min) <a href="#phase-1--identifier-les-r%c3%a8gles-15-20-min" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ol>
+<li><strong>L&rsquo;expert métier</strong> explique la fonctionnalité</li>
+<li><strong>L&rsquo;équipe</strong> identifie les règles métier</li>
+<li><strong>Chaque règle</strong> est écrite sur une carte jaune</li>
+<li><strong>Le facilitateur</strong> organise les cartes sur la table</li>
+</ol>
+<h4 id="phase-2--créer-les-exemples-20-25-min">Phase 2 : Créer les Exemples (20-25 min) <a href="#phase-2--cr%c3%a9er-les-exemples-20-25-min" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ol>
+<li><strong>Pour chaque règle</strong>, l&rsquo;équipe crée des exemples</li>
+<li><strong>Chaque exemple</strong> est écrit sur une carte verte</li>
+<li><strong>Les exemples</strong> sont placés sous leur règle</li>
+<li><strong>L&rsquo;équipe</strong> valide que les exemples couvrent tous les cas</li>
+</ol>
+<h4 id="phase-3--poser-les-questions-10-15-min">Phase 3 : Poser les Questions (10-15 min) <a href="#phase-3--poser-les-questions-10-15-min" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ol>
+<li><strong>L&rsquo;équipe</strong> identifie les zones d&rsquo;incertitude</li>
+<li><strong>Chaque question</strong> est écrite sur une carte rouge</li>
+<li><strong>Les questions</strong> sont placées à côté des règles concernées</li>
+<li><strong>L&rsquo;expert métier</strong> répond aux questions possibles</li>
+</ol>
+<h4 id="phase-4--créer-les-scénarios-10-15-min">Phase 4 : Créer les Scénarios (10-15 min) <a href="#phase-4--cr%c3%a9er-les-sc%c3%a9narios-10-15-min" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ol>
+<li><strong>L&rsquo;équipe</strong> identifie les scénarios principaux</li>
+<li><strong>Chaque scénario</strong> est écrit sur une carte bleue</li>
+<li><strong>Les scénarios</strong> sont placés en bas de la table</li>
+<li><strong>L&rsquo;équipe</strong> valide la cohérence des scénarios</li>
+</ol>
+<h3 id="exemple-complet--système-de-réservation">Exemple Complet : Système de Réservation <a href="#exemple-complet--syst%c3%a8me-de-r%c3%a9servation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="règles-métier-identifiées">Règles Métier Identifiées <a href="#r%c3%a8gles-m%c3%a9tier-identifi%c3%a9es" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🟡 RÈGLE : Une réservation ne peut être créée que si la chambre est disponible
+🟡 RÈGLE : Une réservation doit avoir une date d&#39;arrivée et de départ
+🟡 RÈGLE : La date de départ doit être après la date d&#39;arrivée
+🟡 RÈGLE : Une réservation ne peut pas dépasser 30 jours
+🟡 RÈGLE : Une réservation annulée ne peut plus être modifiée
+🟡 RÈGLE : Un client ne peut avoir qu&#39;une seule réservation active par chambre</code></pre>
+<h4 id="exemples-concrets">Exemples Concrets <a href="#exemples-concrets" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🟢 EXEMPLE : Réservation du 15/01 au 20/01 pour une chambre disponible
+   → Résultat : Réservation créée avec succès
+
+🟢 EXEMPLE : Réservation du 20/01 au 15/01 (dates inversées)
+   → Résultat : Erreur &#34;Date de départ doit être après la date d&#39;arrivée&#34;
+
+🟢 EXEMPLE : Réservation du 15/01 au 20/02 (plus de 30 jours)
+   → Résultat : Erreur &#34;Réservation ne peut pas dépasser 30 jours&#34;
+
+🟢 EXEMPLE : Tentative de créer une réservation pour une chambre déjà occupée
+   → Résultat : Erreur &#34;Chambre non disponible&#34;
+
+🟢 EXEMPLE : Tentative de modifier une réservation annulée
+   → Résultat : Erreur &#34;Réservation annulée ne peut plus être modifiée&#34;</code></pre>
+<h4 id="questions-émergentes">Questions Émergentes <a href="#questions-%c3%a9mergentes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🔴 QUESTION : Que se passe-t-il si deux clients réservent la même chambre simultanément ?
+🔴 QUESTION : Y a-t-il une période de grâce pour annuler une réservation ?
+🔴 QUESTION : Peut-on déplacer une réservation vers une autre chambre ?
+🔴 QUESTION : Que se passe-t-il si le client ne se présente pas ?</code></pre>
+<h4 id="scénarios-complets">Scénarios Complets <a href="#sc%c3%a9narios-complets" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🔵 SCÉNARIO : Réservation standard
+   1. Client consulte les disponibilités
+   2. Client sélectionne une chambre libre
+   3. Client saisit les dates (15/01 au 20/01)
+   4. Système valide les dates
+   5. Système vérifie la disponibilité
+   6. Système crée la réservation
+   7. Client reçoit une confirmation
+   → Résultat : Réservation créée avec succès
+
+🔵 SCÉNARIO : Annulation de réservation
+   1. Client consulte ses réservations
+   2. Client sélectionne une réservation active
+   3. Client clique sur &#34;Annuler&#34;
+   4. Système vérifie que la réservation peut être annulée
+   5. Système marque la réservation comme annulée
+   6. Système libère la chambre
+   7. Client reçoit une confirmation d&#39;annulation
+   → Résultat : Réservation annulée avec succès</code></pre>
+<h2 id="transformation-en-tests-dacceptation">Transformation en Tests d&rsquo;Acceptation <a href="#transformation-en-tests-dacceptation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="principe">Principe <a href="#principe" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Chaque exemple de l&rsquo;Example Mapping doit devenir un test d&rsquo;acceptation. Cela garantit que :</p>
+<ul>
+<li>Les règles métier sont implémentées correctement</li>
+<li>Les cas limites sont couverts</li>
+<li>L&rsquo;évolution ne casse pas les règles existantes</li>
+</ul>
+<h3 id="exemple-de-transformation">Exemple de Transformation <a href="#exemple-de-transformation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="exemple-mapping--test-dacceptation">Exemple Mapping → Test d&rsquo;Acceptation <a href="#exemple-mapping--test-dacceptation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// 🟢 EXEMPLE : Paiement de 100€ avec compte ayant une limite de 500€
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//   → Résultat : Paiement traité avec succès
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">/** @test */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">it_processes_a_valid_payment</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Given
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $payment <span style="color:#f92672">=</span> <span style="color:#a6e22e">Payment</span><span style="color:#f92672">::</span><span style="color:#a6e22e">create</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">PaymentId</span><span style="color:#f92672">::</span><span style="color:#a6e22e">generate</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Money</span><span style="color:#f92672">::</span><span style="color:#a6e22e">euros</span>(<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    $account <span style="color:#f92672">=</span> <span style="color:#a6e22e">Account</span><span style="color:#f92672">::</span><span style="color:#a6e22e">withLimit</span>(<span style="color:#a6e22e">Money</span><span style="color:#f92672">::</span><span style="color:#a6e22e">euros</span>(<span style="color:#ae81ff">500</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// When
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">process</span>($account);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Then
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertEquals</span>(<span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PROCESSED</span>, $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStatus</span>());
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertNotNull</span>($payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getProcessedAt</span>());
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h4 id="exemple-mapping--test-derreur">Exemple Mapping → Test d&rsquo;Erreur <a href="#exemple-mapping--test-derreur" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// 🟢 EXEMPLE : Paiement de -50€
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//   → Résultat : Erreur &#34;Montant invalide&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">/** @test */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">it_rejects_negative_amount</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Given &amp; When &amp; Then
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">expectException</span>(<span style="color:#a6e22e">InvalidAmountException</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">expectExceptionMessage</span>(<span style="color:#e6db74">&#39;Montant invalide&#39;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Payment</span><span style="color:#f92672">::</span><span style="color:#a6e22e">create</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">PaymentId</span><span style="color:#f92672">::</span><span style="color:#a6e22e">generate</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Money</span><span style="color:#f92672">::</span><span style="color:#a6e22e">euros</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="organisation-des-tests">Organisation des Tests <a href="#organisation-des-tests" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="structure-par-fonctionnalité">Structure par Fonctionnalité <a href="#structure-par-fonctionnalit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>tests/
+├── Payment/
+│   ├── PaymentCreationTest.php
+│   ├── PaymentProcessingTest.php
+│   └── PaymentCancellationTest.php
+├── Reservation/
+│   ├── ReservationCreationTest.php
+│   ├── ReservationModificationTest.php
+│   └── ReservationCancellationTest.php</code></pre>
+<h4 id="structure-par-règle">Structure par Règle <a href="#structure-par-r%c3%a8gle" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentProcessingTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">/** @test */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">it_processes_valid_payments</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Tests des exemples positifs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">/** @test */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">it_rejects_invalid_amounts</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Tests des exemples d&#39;erreur
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">/** @test */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">it_handles_edge_cases</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Tests des cas limites
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="bonnes-pratiques">Bonnes Pratiques <a href="#bonnes-pratiques" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="-à-faire">✅ À Faire <a href="#-%c3%a0-faire" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-rester-focus-sur-le-métier">1. <strong>Rester Focus sur le Métier</strong> <a href="#1-rester-focus-sur-le-m%c3%a9tier" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Concentrez-vous sur les règles business</li>
+<li>Évitez les détails techniques</li>
+<li>Gardez les exemples simples</li>
+</ul>
+<h4 id="2-limiter-le-temps">2. <strong>Limiter le Temps</strong> <a href="#2-limiter-le-temps" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>30-45 minutes maximum par fonctionnalité</li>
+<li>Arrêtez-vous quand vous avez assez d&rsquo;exemples</li>
+<li>Évitez l&rsquo;over-engineering</li>
+</ul>
+<h4 id="3-valider-avec-l">3. <strong>Valider avec l&rsquo;Expert Métier</strong> <a href="#3-valider-avec-l" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Chaque règle doit être validée</li>
+<li>Chaque exemple doit être réaliste</li>
+<li>Les questions doivent être résolues</li>
+</ul>
+<h4 id="4-documenter-les-décisions">4. <strong>Documenter les Décisions</strong> <a href="#4-documenter-les-d%c3%a9cisions" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Notez les réponses aux questions</li>
+<li>Documentez les cas limites</li>
+<li>Gardez une trace des scénarios</li>
+</ul>
+<h3 id="-à-éviter">❌ À Éviter <a href="#-%c3%a0-%c3%a9viter" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-trop-de-détails-techniques">1. <strong>Trop de Détails Techniques</strong> <a href="#1-trop-de-d%c3%a9tails-techniques" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>❌ RÈGLE : Le système doit utiliser une base de données PostgreSQL
+❌ RÈGLE : L&#39;API doit retourner un JSON
+❌ RÈGLE : Le code doit être en PHP 8.1</code></pre>
+<h4 id="2-exemples-trop-complexes">2. <strong>Exemples Trop Complexes</strong> <a href="#2-exemples-trop-complexes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>❌ EXEMPLE : Paiement de 100€ avec compte ayant une limite de 500€, 
+   créé le 15/01/2024 à 14:30, avec un taux de change de 1.05, 
+   en utilisant une carte Visa, avec un code de sécurité 123, 
+   depuis un navigateur Chrome sur Windows 11</code></pre>
+<h4 id="3-questions-sans-réponse">3. <strong>Questions Sans Réponse</strong> <a href="#3-questions-sans-r%c3%a9ponse" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>❌ QUESTION : Que se passe-t-il si l&#39;univers s&#39;effondre ?
+❌ QUESTION : Comment gérer les cas impossibles ?
+❌ QUESTION : Que faire si tout échoue ?</code></pre>
+<h2 id="intégration-avec-levent-storming">Intégration avec l&rsquo;Event Storming <a href="#int%c3%a9gration-avec-levent-storming" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="workflow-complet">Workflow Complet <a href="#workflow-complet" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-event-storming-2-4-heures">1. <strong>Event Storming</strong> (2-4 heures) <a href="#1-event-storming-2-4-heures" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Découvrir les événements métier</li>
+<li>Identifier les processus</li>
+<li>Définir les bounded contexts</li>
+</ul>
+<h4 id="2-example-mapping-30-45-min-par-fonctionnalité">2. <strong>Example Mapping</strong> (30-45 min par fonctionnalité) <a href="#2-example-mapping-30-45-min-par-fonctionnalit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Détailer les règles complexes</li>
+<li>Créer des exemples concrets</li>
+<li>Identifier les cas limites</li>
+</ul>
+<h4 id="3-implémentation-1-2-semaines">3. <strong>Implémentation</strong> (1-2 semaines) <a href="#3-impl%c3%a9mentation-1-2-semaines" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Transformer les exemples en tests</li>
+<li>Implémenter les règles métier</li>
+<li>Valider avec les tests</li>
+</ul>
+<h3 id="exemple-de-workflow">Exemple de Workflow <a href="#exemple-de-workflow" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <pre tabindex="0"><code>Event Storming → &#34;PaymentRequested&#34; identifié
+     ↓
+Example Mapping → Règles de validation du paiement
+     ↓
+Tests d&#39;Acceptation → Validation automatique
+     ↓
+Implémentation → Code métier robuste</code></pre>
+<h2 id="-votre-prochaine-étape">🎯 Votre Prochaine Étape <a href="#-votre-prochaine-%c3%a9tape" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Maintenant que vous maîtrisez l&rsquo;Example Mapping, quel est votre contexte ?</p>
+<h3 id="-option-a--je-veux-comprendre-la-complexité-architecturale">🟢 Option A : Je veux comprendre la complexité architecturale <a href="#-option-a--je-veux-comprendre-la-complexit%c3%a9-architecturale" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez savoir quand utiliser quels patterns</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Équipe expérimentée</li>
+<li>Besoin de choisir une architecture</li>
+<li>Projet avec contraintes techniques</li>
+<li>Décision architecturale à prendre</li>
+</ul>
+<p><strong>Temps estimé</strong> : 20-30 minutes</p>
+<p>→ <strong><a href="/chapitres/fondamentaux/chapitre-03-complexite-accidentelle-essentielle/">Aller au Chapitre 3</a></strong> (Complexité Accidentelle vs Essentielle)</p>
+<hr>
+<h3 id="-option-b--je-veux-voir-des-exemples-concrets-de-modèles">🟡 Option B : Je veux voir des exemples concrets de modèles <a href="#-option-b--je-veux-voir-des-exemples-concrets-de-mod%c3%a8les" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez comprendre la différence entre modèles riches et anémiques</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Développeur avec expérience</li>
+<li>Besoin d&rsquo;exemples pratiques</li>
+<li>Compréhension des patterns de code</li>
+<li>Implémentation à faire</li>
+</ul>
+<p><strong>Temps estimé</strong> : 25-35 minutes</p>
+<p>→ <strong><a href="/chapitres/fondamentaux/chapitre-04-modeles-riches-vs-anemiques/">Aller au Chapitre 4</a></strong> (Modèles Riches vs Modèles Anémiques)</p>
+<hr>
+<h3 id="-option-c--je-veux-comprendre-larchitecture-événementielle">🔴 Option C : Je veux comprendre l&rsquo;architecture événementielle <a href="#-option-c--je-veux-comprendre-larchitecture-%c3%a9v%c3%a9nementielle" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez explorer les patterns d&rsquo;événements</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Système avec intégrations multiples</li>
+<li>Besoin de découplage</li>
+<li>Architecture distribuée</li>
+<li>Équipe expérimentée</li>
+</ul>
+<p><strong>Temps estimé</strong> : 30-40 minutes</p>
+<p>→ <strong><a href="/chapitres/fondamentaux/chapitre-05-architecture-evenementielle/">Aller au Chapitre 5</a></strong> (Architecture Événementielle)</p>
+<hr>
+<p><strong>💡 Conseil</strong> : Si vous n&rsquo;êtes pas sûr, choisissez l&rsquo;option A pour comprendre la complexité architecturale avant de passer aux modèles.</p>
+<p><strong>🔄 Alternative</strong> : Si vous voulez tout voir dans l&rsquo;ordre, continuez avec le <a href="/chapitres/fondamentaux/chapitre-03-complexite-accidentelle-essentielle/">Chapitre 3</a>.</p>
+
+    </div>
+
+    
+
+    
+                                            </div>
+                                            <div><hr class="doc-hr">
+<div id="doc-nav" class="d-print-none">
+
+	<div class="row flex-xl-nowrap ">
+	<div class="col-sm-6 pt-2 doc-next">
+		<a href="/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">
+			<div class="card h-100 my-1">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Chapitre 2 : L&#39;Atelier Event Storming - Guide Pratique</p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	<div class="col-sm-6 pt-2 doc-prev">
+		<a class="ms-auto" href="/chapitres/fondamentaux/chapitre-02-impact-mapping/">
+			<div class="card h-100 my-1 text-end">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Chapitre 2.2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business <i class="material-icons align-middle">navigate_next</i></p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	</div>
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</main>
+            </div>
+        </div>
+
+        
+        
+        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        
+        
+
+        
+        
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+    <script src="/docs/js/bootstrap.js" defer></script>
+
+
+    <script type="text/javascript" src="http://localhost:1313/docs/js/bundle.js" defer></script>
+
+        
+
+        
+        <script type="module">
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script>
+        
+    </body>
+</html>

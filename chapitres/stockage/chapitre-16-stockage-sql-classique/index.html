@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Chapitre 16 : Stockage SQL - Approche Classique | DDD Journey</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Maîtriser le stockage SQL classique avec Doctrine et API Platform">
+    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
+    <meta name="author" content="Colin Wilson - Lotus Labs" />
+    <meta name="email" content="support@aigis.uk" />
+    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="Version" content="v0.1.0" />
+    
+    <link rel="icon" href="http://localhost:1313/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="http://localhost:1313/site.webmanifest">
+<meta property="og:title" content="Chapitre 16 : Stockage SQL - Approche Classique" />
+<meta property="og:description" content="Maîtriser le stockage SQL classique avec Doctrine et API Platform" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/chapitres/stockage/chapitre-16-stockage-sql-classique/" /><meta property="og:image" content="http://localhost:1313/opengraph/card-base-2_hu_6196aa2db8e4cb2b.png"/><meta property="article:section" content="chapitres" />
+<meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/opengraph/card-base-2_hu_6196aa2db8e4cb2b.png"/>
+<meta name="twitter:title" content="Chapitre 16 : Stockage SQL - Approche Classique"/>
+<meta name="twitter:description" content="Maîtriser le stockage SQL classique avec Doctrine et API Platform"/>
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Journey" href="/index.xml" />
+    
+    
+    
+            
+                <script type="text/javascript" src="http://localhost:1313/docs/js/flexsearch.bundle.js"></script>
+            
+        
+    
+    
+
+    <link rel="stylesheet" href="/docs/scss/style.css" crossorigin="anonymous">
+    
+    
+    </head>
+<body>
+        <div class="content">
+            <div class="page-wrapper toggled">
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href='/' aria-label="HomePage" alt="HomePage">
+            
+                <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+            
+        </a>
+    </div>
+    <div class="sidebar-content" style="height: calc(100% - 131px);">
+        <ul class="sidebar-menu">
+            
+                
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Fondamentaux
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-02-impact-mapping/">Chapitre 2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">Chapitre 3 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-04-example-mapping/">Chapitre 4 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-05-complexite-accidentelle-essentielle/">Chapitre 5 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-06-granularite-choix-architecturaux/">Chapitre 6 : Granularité des Choix Architecturaux</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-07-modeles-riches-vs-anemiques/">Chapitre 7 : Modèles Riches vs Modèles Anémiques</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/">Chapitre 8 : Architecture Événementielle</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-09-repositories-persistance/">Chapitre 9 : Repositories et Persistance</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Optionnels
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-10-event-sourcing/">Chapitre 10 : Event Sourcing - La Source de Vérité</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-11-architecture-cqs/">Chapitre 11 : Architecture CQS - Command Query Separation</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-12-architecture-cqrs/">Chapitre 12 : Architecture CQRS avec API Platform</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-13-cqrs-event-sourcing-combines/">Chapitre 13 : CQRS &#43; Event Sourcing Combinés</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-14-projections-event-sourcing/">Chapitre 14 : Projections Event Sourcing</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon current active">
+                            <button class="btn">
+                                Chapitres de Stockage
+                            </button>
+                            <div class="sidebar-submenu d-block">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage SQL
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-12-stockage-sql-classique/">Chapitre 12 : Stockage SQL - Approche Classique</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/chapitre-15-choix-type-stockage/">Chapitre 15 : Choix du Type de Stockage</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="current no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/chapitre-16-stockage-sql-classique/">Chapitre 16 : Stockage SQL - Approche Classique</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/chapitre-17-stockage-sql-cqs/">Chapitre 17 : Stockage SQL - Approche CQS</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/chapitre-18-stockage-sql-cqrs/">Chapitre 18 : Stockage SQL - Approche CQRS</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/chapitre-19-stockage-sql-event-sourcing/">Chapitre 19 : Stockage SQL - Event Sourcing Seul</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/chapitre-20-stockage-sql-event-sourcing-cqs/">Chapitre 20 : Stockage SQL - Event Sourcing &#43; CQS</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/chapitre-21-stockage-sql-event-sourcing-cqrs/">Chapitre 21 : Stockage SQL - Event Sourcing &#43; CQRS</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-22-stockage-api-classique/">Chapitre 22 : Stockage API - Approche Classique</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-23-stockage-api-cqs/">Chapitre 23 : Stockage API - Approche CQS</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-24-stockage-api-cqrs/">Chapitre 24 : Stockage API - Approche CQRS</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-25-stockage-api-event-sourcing/">Chapitre 25 : Stockage API - Event Sourcing Seul</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-26-stockage-api-event-sourcing-cqs/">Chapitre 26 : Stockage API - Event Sourcing &#43; CQS</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/">Chapitre 27 : Stockage API - Event Sourcing &#43; CQRS</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/mongodb/chapitre-28-stockage-mongodb-classique/">Chapitre 28 : Stockage MongoDB - Approche Classique</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Techniques
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/techniques/chapitre-20-gestion-donnees-validation/">Chapitre 20 : Gestion des Données et Validation</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/techniques/chapitre-21-pagination-performance/">Chapitre 21 : Pagination et Performance</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/techniques/chapitre-22-gestion-erreurs-observabilite/">Chapitre 22 : Gestion d&#39;Erreurs et Observabilité</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/techniques/chapitre-23-tests-qualite/">Chapitre 23 : Tests et Qualité</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Avancés
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/avances/chapitre-24-securite-autorisation/">Chapitre 24 : Sécurité et Autorisation - Protéger votre API Platform</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/avances/chapitre-25-frontend-integration/">Chapitre 25 : Frontend et Intégration - Connecter votre Interface Utilisateur</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+            
+        </ul>
+        
+    </div>
+    
+        <ul class="sidebar-footer list-unstyled mb-0">
+            
+        </ul>
+    
+</nav>
+
+                    <main class="page-content bg-transparent">
+                        
+<div id="top-header" class="top-header d-print-none">
+    <div class="header-bar d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+                <div class="small">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+                <div class="big">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+            </a>
+            <button id="close-sidebar" class="btn btn-icon btn-soft">
+                <span class="material-icons size-20 menu-icon align-middle">menu</span>
+            </button>
+            
+            
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
+            </div>
+
+        <div class="d-flex align-items-center">
+            <ul class="list-unstyled mb-0">
+                
+            </ul>
+            
+        </div>
+    </div>
+    
+    
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
+    
+    
+</div>
+
+
+                            <div class="container-fluid">
+                                <div class="layout-spacing">
+                                    
+                                        <div class="d-md-flex justify-content-between align-items-center"><nav aria-label="breadcrumb" class="d-inline-block pb-2 mt-1 mt-sm-0">
+    <ul id="breadcrumbs" class="breadcrumb bg-transparent mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+        
+            
+                <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/">
+                        <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
+                    </a>
+                    <meta itemprop="position" content='1' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/stockage/">
+                        <span itemprop="name">Chapitres de Stockage</span>
+                    </a>
+                    <meta itemprop="position" content='2' />
+                </li>
+            
+        
+            <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name">Chapitre 16 : Stockage SQL - Approche Classique</span>
+                <meta itemprop="position" content='3' />
+            </li>
+        
+    </ul>
+</nav></div>
+                                    
+                                    <div class="row flex-xl-nowrap">
+                                        
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
+    <div class="fw-bold text-uppercase mb-2">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a>
+      <ul>
+        <li><a href="#mon-problème--comment-stocker-des-données-de-façon-simple-et-efficace-">Mon Problème : Comment Stocker des Données de Façon Simple et Efficace ?</a></li>
+        <li><a href="#stockage-sql-classique--mon-guide-pratique">Stockage SQL Classique : Mon Guide Pratique</a></li>
+      </ul>
+    </li>
+    <li><a href="#quest-ce-que-le-stockage-sql-classique-">Qu&rsquo;est-ce que le Stockage SQL Classique ?</a>
+      <ul>
+        <li><a href="#le-concept-fondamental">Le Concept Fondamental</a></li>
+        <li><a href="#les-4-piliers-du-stockage-sql-classique">Les 4 Piliers du Stockage SQL Classique</a></li>
+      </ul>
+    </li>
+    <li><a href="#comment-implémenter-le-stockage-sql-classique">Comment Implémenter le Stockage SQL Classique</a>
+      <ul>
+        <li><a href="#1-créer-les-entités">1. <strong>Créer les Entités</strong></a></li>
+        <li><a href="#2-créer-les-repositories">2. <strong>Créer les Repositories</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-avantages-du-stockage-sql-classique">Les Avantages du Stockage SQL Classique</a>
+      <ul>
+        <li><a href="#1-simplicité">1. <strong>Simplicité</strong></a></li>
+        <li><a href="#2-performance">2. <strong>Performance</strong></a></li>
+        <li><a href="#3-évolutivité">3. <strong>Évolutivité</strong></a></li>
+        <li><a href="#4-intégration">4. <strong>Intégration</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-inconvénients-du-stockage-sql-classique">Les Inconvénients du Stockage SQL Classique</a>
+      <ul>
+        <li><a href="#1-limitations-de-performance">1. <strong>Limitations de Performance</strong></a></li>
+        <li><a href="#2-cohérence-des-données">2. <strong>Cohérence des Données</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-pièges-à-éviter">Les Pièges à Éviter</a>
+      <ul>
+        <li><a href="#1-entités-trop-complexes">1. <strong>Entités Trop Complexes</strong></a></li>
+        <li><a href="#2-requêtes-n1">2. <strong>Requêtes N+1</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-implémentation-concrète-dans-le-projet-hive">🏗️ Implémentation Concrète dans le Projet Hive</a>
+      <ul>
+        <li><a href="#stockage-sql-classique-appliqué-à-hive">Stockage SQL Classique Appliqué à Hive</a></li>
+        <li><a href="#références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </toc></div>
+                                        
+                                        
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
+                                            <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
+                                                Table of Contents
+                                            </button>
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a>
+      <ul>
+        <li><a href="#mon-problème--comment-stocker-des-données-de-façon-simple-et-efficace-">Mon Problème : Comment Stocker des Données de Façon Simple et Efficace ?</a></li>
+        <li><a href="#stockage-sql-classique--mon-guide-pratique">Stockage SQL Classique : Mon Guide Pratique</a></li>
+      </ul>
+    </li>
+    <li><a href="#quest-ce-que-le-stockage-sql-classique-">Qu&rsquo;est-ce que le Stockage SQL Classique ?</a>
+      <ul>
+        <li><a href="#le-concept-fondamental">Le Concept Fondamental</a></li>
+        <li><a href="#les-4-piliers-du-stockage-sql-classique">Les 4 Piliers du Stockage SQL Classique</a></li>
+      </ul>
+    </li>
+    <li><a href="#comment-implémenter-le-stockage-sql-classique">Comment Implémenter le Stockage SQL Classique</a>
+      <ul>
+        <li><a href="#1-créer-les-entités">1. <strong>Créer les Entités</strong></a></li>
+        <li><a href="#2-créer-les-repositories">2. <strong>Créer les Repositories</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-avantages-du-stockage-sql-classique">Les Avantages du Stockage SQL Classique</a>
+      <ul>
+        <li><a href="#1-simplicité">1. <strong>Simplicité</strong></a></li>
+        <li><a href="#2-performance">2. <strong>Performance</strong></a></li>
+        <li><a href="#3-évolutivité">3. <strong>Évolutivité</strong></a></li>
+        <li><a href="#4-intégration">4. <strong>Intégration</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-inconvénients-du-stockage-sql-classique">Les Inconvénients du Stockage SQL Classique</a>
+      <ul>
+        <li><a href="#1-limitations-de-performance">1. <strong>Limitations de Performance</strong></a></li>
+        <li><a href="#2-cohérence-des-données">2. <strong>Cohérence des Données</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-pièges-à-éviter">Les Pièges à Éviter</a>
+      <ul>
+        <li><a href="#1-entités-trop-complexes">1. <strong>Entités Trop Complexes</strong></a></li>
+        <li><a href="#2-requêtes-n1">2. <strong>Requêtes N+1</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-implémentation-concrète-dans-le-projet-hive">🏗️ Implémentation Concrète dans le Projet Hive</a>
+      <ul>
+        <li><a href="#stockage-sql-classique-appliqué-à-hive">Stockage SQL Classique Appliqué à Hive</a></li>
+        <li><a href="#références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
+                                            <div class="mb-0 d-flex">
+                                                
+                                                <h1 class="content-title mb-0">
+                                                    Chapitre 16 : Stockage SQL - Approche Classique
+                                                    
+                                                </h1>
+                                            </div>
+                                            
+                                            <div id="content" class="main-content" >
+                                                
+    
+    <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
+        <h2 id="-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre <a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="mon-problème--comment-stocker-des-données-de-façon-simple-et-efficace-">Mon Problème : Comment Stocker des Données de Façon Simple et Efficace ? <a href="#mon-probl%c3%a8me--comment-stocker-des-donn%c3%a9es-de-fa%c3%a7on-simple-et-efficace-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Voici ce qui s&rsquo;est passé avec Gyroscops</strong> : J&rsquo;avais besoin de stocker des données de base de données de façon simple. Pas de complexité, pas de CQRS, pas d&rsquo;Event Sourcing. Juste une approche classique qui fonctionne bien.</p>
+<p><strong>Mais attendez&hellip;</strong> Comment structurer les entités ? Comment gérer les relations ? Comment optimiser les requêtes ? Comment intégrer avec API Platform ?</p>
+<p><strong>Soudain, je réalisais que l&rsquo;approche classique était parfaite !</strong> Il me fallait une méthode simple et efficace.</p>
+<h3 id="stockage-sql-classique--mon-guide-pratique">Stockage SQL Classique : Mon Guide Pratique <a href="#stockage-sql-classique--mon-guide-pratique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le stockage SQL classique m&rsquo;a permis de :</p>
+<ul>
+<li><strong>Développer</strong> rapidement</li>
+<li><strong>Maintenir</strong> facilement</li>
+<li><strong>Comprendre</strong> simplement</li>
+<li><strong>Évoluer</strong> progressivement</li>
+</ul>
+<h2 id="quest-ce-que-le-stockage-sql-classique-">Qu&rsquo;est-ce que le Stockage SQL Classique ? <a href="#quest-ce-que-le-stockage-sql-classique-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="le-concept-fondamental">Le Concept Fondamental <a href="#le-concept-fondamental" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le stockage SQL classique consiste à utiliser une base de données relationnelle avec des entités Doctrine classiques. <strong>L&rsquo;idée</strong> : Une entité = une table, avec des relations simples et des requêtes directes.</p>
+<p><strong>Avec Gyroscops, voici comment j&rsquo;ai structuré le stockage SQL classique</strong> :</p>
+<h3 id="les-4-piliers-du-stockage-sql-classique">Les 4 Piliers du Stockage SQL Classique <a href="#les-4-piliers-du-stockage-sql-classique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-entités-doctrine---modèles-de-données-simples">1. <strong>Entités Doctrine</strong> - Modèles de données simples <a href="#1-entit%c3%a9s-doctrine---mod%c3%a8les-de-donn%c3%a9es-simples" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p><strong>Voici comment j&rsquo;ai implémenté les entités avec Gyroscops</strong> :</p>
+<p><strong>Entités Basiques</strong> :</p>
+<ul>
+<li>Propriétés publiques ou privées avec getters/setters</li>
+<li>Annotations Doctrine</li>
+<li>Relations simples</li>
+<li>Pas de logique métier complexe</li>
+</ul>
+<p><strong>Exemples</strong> :</p>
+<ul>
+<li><code>Payment</code> (entité principale)</li>
+<li><code>User</code> (entité utilisateur)</li>
+<li><code>Organization</code> (entité organisation)</li>
+</ul>
+<h4 id="2-repositories-doctrine---accès-aux-données">2. <strong>Repositories Doctrine</strong> - Accès aux données <a href="#2-repositories-doctrine---acc%c3%a8s-aux-donn%c3%a9es" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p><strong>Voici comment j&rsquo;ai implémenté les repositories avec Gyroscops</strong> :</p>
+<p><strong>Repositories Simples</strong> :</p>
+<ul>
+<li>Méthodes de base (find, findAll, save, delete)</li>
+<li>Requêtes personnalisées</li>
+<li>Pagination simple</li>
+<li>Pas de complexité CQRS</li>
+</ul>
+<h4 id="3-api-platform---exposition-des-données">3. <strong>API Platform</strong> - Exposition des données <a href="#3-api-platform---exposition-des-donn%c3%a9es" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p><strong>Voici comment j&rsquo;ai intégré API Platform avec Gyroscops</strong> :</p>
+<p><strong>Ressources API</strong> :</p>
+<ul>
+<li>Entités exposées directement</li>
+<li>Opérations CRUD automatiques</li>
+<li>Filtres et pagination</li>
+<li>Documentation automatique</li>
+</ul>
+<h4 id="4-migrations---évolution-du-schéma">4. <strong>Migrations</strong> - Évolution du schéma <a href="#4-migrations---%c3%a9volution-du-sch%c3%a9ma" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p><strong>Voici comment j&rsquo;ai géré les migrations avec Gyroscops</strong> :</p>
+<p><strong>Migrations Doctrine</strong> :</p>
+<ul>
+<li>Évolution du schéma</li>
+<li>Données de test</li>
+<li>Rollback possible</li>
+<li>Versioning des changements</li>
+</ul>
+<h2 id="comment-implémenter-le-stockage-sql-classique">Comment Implémenter le Stockage SQL Classique <a href="#comment-impl%c3%a9menter-le-stockage-sql-classique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-créer-les-entités">1. <strong>Créer les Entités</strong> <a href="#1-cr%c3%a9er-les-entit%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : J&rsquo;ai créé les entités :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Entité Payment Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#[Entity]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#[Table(name: &#39;payments&#39;)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#[ApiResource(
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">operations</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Get</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">GetCollection</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Post</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Put</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Delete</span>()
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>)]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Payment</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Id]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">#[Column(type: &#39;uuid&#39;)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">#[GeneratedValue(strategy: &#39;NONE&#39;)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">string</span> $id;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Column(type: &#39;uuid&#39;)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">string</span> $organizationId;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Column(type: &#39;string&#39;, length: 255)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">string</span> $customerName;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Column(type: &#39;string&#39;, length: 255)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">string</span> $customerEmail;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Column(type: &#39;decimal&#39;, precision: 10, scale: 2)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">string</span> $amount;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Column(type: &#39;string&#39;, length: 3)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">string</span> $currency;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Column(type: &#39;string&#39;, length: 50)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">string</span> $status;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Column(type: &#39;datetime_immutable&#39;)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">\DateTimeImmutable</span> $createdAt;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Column(type: &#39;uuid&#39;)]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">string</span> $createdBy;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Uuid</span><span style="color:#f92672">::</span><span style="color:#a6e22e">uuid4</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createdAt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">\DateTimeImmutable</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Getters et setters...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<p><strong>Résultat</strong> : Entité simple et claire.</p>
+<h3 id="2-créer-les-repositories">2. <strong>Créer les Repositories</strong> <a href="#2-cr%c3%a9er-les-repositories" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : J&rsquo;ai créé les repositories :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Repository Payment Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentRepository</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">ServiceEntityRepository</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(<span style="color:#a6e22e">ManagerRegistry</span> $registry)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">parent</span><span style="color:#f92672">::</span><span style="color:#a6e22e">__construct</span>($registry, <span style="color:#a6e22e">Payment</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">save</span>(<span style="color:#a6e22e">Payment</span> $payment)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEntityManager</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">persist</span>($payment);
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEntityManager</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findByOrganization</span>(<span style="color:#a6e22e">string</span> $organizationId)<span style="color:#f92672">:</span> <span style="color:#66d9ef">array</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createQueryBuilder</span>(<span style="color:#e6db74">&#39;p&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">andWhere</span>(<span style="color:#e6db74">&#39;p.organizationId = :organizationId&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setParameter</span>(<span style="color:#e6db74">&#39;organizationId&#39;</span>, $organizationId)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">orderBy</span>(<span style="color:#e6db74">&#39;p.createdAt&#39;</span>, <span style="color:#e6db74">&#39;DESC&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getQuery</span>()
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getResult</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">countByOrganization</span>(<span style="color:#a6e22e">string</span> $organizationId)<span style="color:#f92672">:</span> <span style="color:#a6e22e">int</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createQueryBuilder</span>(<span style="color:#e6db74">&#39;p&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">select</span>(<span style="color:#e6db74">&#39;COUNT(p.id)&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">andWhere</span>(<span style="color:#e6db74">&#39;p.organizationId = :organizationId&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setParameter</span>(<span style="color:#e6db74">&#39;organizationId&#39;</span>, $organizationId)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getQuery</span>()
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getSingleScalarResult</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Résultat</strong> : Repository simple et efficace.</p>
+<h2 id="les-avantages-du-stockage-sql-classique">Les Avantages du Stockage SQL Classique <a href="#les-avantages-du-stockage-sql-classique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-simplicité">1. <strong>Simplicité</strong> <a href="#1-simplicit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL classique m&rsquo;a donné de la simplicité :</p>
+<ul>
+<li>Code simple et compréhensible</li>
+<li>Pas de complexité inutile</li>
+<li>Développement rapide</li>
+<li>Maintenance facile</li>
+</ul>
+<p><strong>Résultat</strong> : Développement et maintenance simplifiés.</p>
+<h3 id="2-performance">2. <strong>Performance</strong> <a href="#2-performance" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL classique m&rsquo;a donné de bonnes performances :</p>
+<ul>
+<li>Requêtes optimisées</li>
+<li>Indexation efficace</li>
+<li>Cache Doctrine</li>
+<li>Performance prévisible</li>
+</ul>
+<p><strong>Résultat</strong> : Performances satisfaisantes.</p>
+<h3 id="3-évolutivité">3. <strong>Évolutivité</strong> <a href="#3-%c3%a9volutivit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL classique m&rsquo;a permis d&rsquo;évoluer :</p>
+<ul>
+<li>Ajout de nouvelles entités</li>
+<li>Modification du schéma</li>
+<li>Migration des données</li>
+<li>Évolution progressive</li>
+</ul>
+<p><strong>Résultat</strong> : Évolution facilitée.</p>
+<h3 id="4-intégration">4. <strong>Intégration</strong> <a href="#4-int%c3%a9gration" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL classique s&rsquo;intègre bien :</p>
+<ul>
+<li>API Platform automatique</li>
+<li>Documentation générée</li>
+<li>Tests simplifiés</li>
+<li>Outils standard</li>
+</ul>
+<p><strong>Résultat</strong> : Intégration facilitée.</p>
+<h2 id="les-inconvénients-du-stockage-sql-classique">Les Inconvénients du Stockage SQL Classique <a href="#les-inconv%c3%a9nients-du-stockage-sql-classique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-limitations-de-performance">1. <strong>Limitations de Performance</strong> <a href="#1-limitations-de-performance" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL classique a des limitations :</p>
+<ul>
+<li>Requêtes complexes lentes</li>
+<li>Jointures coûteuses</li>
+<li>Scaling vertical limité</li>
+<li>Performance non optimale</li>
+</ul>
+<p><strong>Résultat</strong> : Performance limitée pour des cas complexes.</p>
+<h3 id="2-cohérence-des-données">2. <strong>Cohérence des Données</strong> <a href="#2-coh%c3%a9rence-des-donn%c3%a9es" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL classique peut avoir des problèmes de cohérence :</p>
+<ul>
+<li>Pas d&rsquo;audit trail</li>
+<li>Pas d&rsquo;historique des changements</li>
+<li>Debugging difficile</li>
+<li>Traçabilité limitée</li>
+</ul>
+<p><strong>Résultat</strong> : Cohérence des données limitée.</p>
+<h2 id="les-pièges-à-éviter">Les Pièges à Éviter <a href="#les-pi%c3%a8ges-%c3%a0-%c3%a9viter" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-entités-trop-complexes">1. <strong>Entités Trop Complexes</strong> <a href="#1-entit%c3%a9s-trop-complexes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>❌ Mauvais</strong> : Entités avec trop de logique métier
+<strong>✅ Bon</strong> : Entités simples avec getters/setters</p>
+<p><strong>Pourquoi c&rsquo;est important ?</strong> Les entités complexes sont difficiles à maintenir.</p>
+<h3 id="2-requêtes-n1">2. <strong>Requêtes N+1</strong> <a href="#2-requ%c3%aates-n1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>❌ Mauvais</strong> : Requêtes dans des boucles
+<strong>✅ Bon</strong> : Eager loading ou requêtes optimisées</p>
+<p><strong>Pourquoi c&rsquo;est crucial ?</strong> Les requêtes N+1 tuent les performances.</p>
+<h2 id="-implémentation-concrète-dans-le-projet-hive">🏗️ Implémentation Concrète dans le Projet Hive <a href="#-impl%c3%a9mentation-concr%c3%a8te-dans-le-projet-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="stockage-sql-classique-appliqué-à-hive">Stockage SQL Classique Appliqué à Hive <a href="#stockage-sql-classique-appliqu%c3%a9-%c3%a0-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le projet Hive applique concrètement les principes du stockage SQL classique à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :</p>
+<h4 id="configuration-doctrine-hive">Configuration Doctrine Hive <a href="#configuration-doctrine-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Configuration Doctrine Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiveDoctrineConfiguration</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">configureDoctrine</span>(<span style="color:#a6e22e">ContainerBuilder</span> $container)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration des entités
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setParameter</span>(<span style="color:#e6db74">&#39;doctrine.dbal.connections.default.url&#39;</span>, $_ENV[<span style="color:#e6db74">&#39;DATABASE_URL&#39;</span>]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration des repositories
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">PaymentRepository</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAutowired</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setPublic</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration des services
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">PaymentService</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAutowired</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setPublic</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive <a href="#r%c3%a9f%c3%a9rences-aux-adr-du-projet-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Ce chapitre s&rsquo;appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :</p>
+<ul>
+<li><strong>HIVE012</strong> : Database Repositories - Repositories de base de données</li>
+<li><strong>HIVE016</strong> : Database Migrations - Migrations de base de données</li>
+<li><strong>HIVE033</strong> : Hydrator Implementation Patterns - Patterns d&rsquo;hydratation</li>
+<li><strong>HIVE040</strong> : Enhanced Models with Property Access Patterns - Modèles enrichis</li>
+</ul>
+
+
+<div class="chapter-navigation">
+  <h2 class="chapter-nav-title">🎯 Votre Prochaine Étape</h2>
+  <p class="chapter-nav-subtitle">Maintenant que vous comprenez les concepts de base et que j'ai partagé mon expérience avec Gyroscops, quel est votre contexte ?</p>
+  
+  <div class="chapter-options">
+    
+  {
+
+<div class="chapter-option" data-color="green">
+  <div class="chapter-option-header">
+    <div class="chapter-option-letter">A</div>
+    <div>
+      <h3 class="chapter-option-title">Je veux comprendre le stockage SQL CQS</h3>
+      <p class="chapter-option-subtitle">Vous voulez voir une approche avec séparation des commandes et requêtes</p>
+    </div>
+  </div>
+  
+  <div class="chapter-option-content">
+    <div class="chapter-option-criteria">
+      <h4 class="chapter-option-criteria-title">Critères :</h4>
+      <ul class="chapter-option-criteria-list">
+        
+          <li>Équipe expérimentée</li>
+        
+          <li>Besoin d&#39;optimiser les performances</li>
+        
+          <li>Séparation des responsabilités importante</li>
+        
+          <li>Évolutivité importante</li>
+        
+      </ul>
+    </div>
+    
+    <div class="chapter-option-footer">
+      <span class="chapter-option-time">Temps estimé : 25-35 minutes</span>
+      <a href="/chapitres/stockage/chapitre-51-stockage-sql-cqs/" class="chapter-option-link">
+        Aller au Chapitre 16 - Stockage SQL - Approche CQS
+      </a>
+    </div>
+  </div>
+</div>
+}}
+  
+  {
+
+<div class="chapter-option" data-color="yellow">
+  <div class="chapter-option-header">
+    <div class="chapter-option-letter">B</div>
+    <div>
+      <h3 class="chapter-option-title">Je veux comprendre le stockage SQL CQRS</h3>
+      <p class="chapter-option-subtitle">Vous voulez voir une approche avec séparation complète des modèles</p>
+    </div>
+  </div>
+  
+  <div class="chapter-option-content">
+    <div class="chapter-option-criteria">
+      <h4 class="chapter-option-criteria-title">Critères :</h4>
+      <ul class="chapter-option-criteria-list">
+        
+          <li>Équipe très expérimentée</li>
+        
+          <li>Besoin de performance maximale</li>
+        
+          <li>Complexité élevée acceptable</li>
+        
+          <li>Scalabilité critique</li>
+        
+      </ul>
+    </div>
+    
+    <div class="chapter-option-footer">
+      <span class="chapter-option-time">Temps estimé : 30-45 minutes</span>
+      <a href="/chapitres/stockage/chapitre-51-stockage-sql-cqrs/" class="chapter-option-link">
+        Aller au Chapitre 17 - Stockage SQL - Approche CQRS
+      </a>
+    </div>
+  </div>
+</div>
+}}
+  
+  {
+
+<div class="chapter-option" data-color="red">
+  <div class="chapter-option-header">
+    <div class="chapter-option-letter">C</div>
+    <div>
+      <h3 class="chapter-option-title">Je veux comprendre le stockage API</h3>
+      <p class="chapter-option-subtitle">Vous voulez voir comment intégrer des APIs externes</p>
+    </div>
+  </div>
+  
+  <div class="chapter-option-content">
+    <div class="chapter-option-criteria">
+      <h4 class="chapter-option-criteria-title">Critères :</h4>
+      <ul class="chapter-option-criteria-list">
+        
+          <li>Équipe expérimentée</li>
+        
+          <li>Besoin d&#39;intégrer des services externes</li>
+        
+          <li>Données distribuées</li>
+        
+          <li>Intégrations multiples</li>
+        
+      </ul>
+    </div>
+    
+    <div class="chapter-option-footer">
+      <span class="chapter-option-time">Temps estimé : 25-35 minutes</span>
+      <a href="/chapitres/stockage/chapitre-51-stockage-api-classique/" class="chapter-option-link">
+        Aller au Chapitre 18 - Stockage API - Approche Classique
+      </a>
+    </div>
+  </div>
+</div>
+}}
+  
+
+  </div>
+</div>
+
+<style>
+.chapter-navigation {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  border-left: 4px solid #3b82f6;
+}
+
+.chapter-nav-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.chapter-nav-subtitle {
+  margin: 0 0 1.5rem 0;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.chapter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chapter-option {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+}
+
+.chapter-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--option-color, #6b7280);
+  border-radius: 0 2px 2px 0;
+}
+
+.chapter-option-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.chapter-option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--option-color, #6b7280);
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.chapter-option-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.chapter-option-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-style: italic;
+  margin: 0.25rem 0 0 0;
+  line-height: 1.4;
+}
+
+.chapter-option-content {
+  margin-left: 2.75rem;
+}
+
+.chapter-option-criteria {
+  margin-bottom: 0.75rem;
+}
+
+.chapter-option-criteria-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+}
+
+.chapter-option-criteria-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chapter-option-criteria-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.chapter-option-criteria-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.chapter-option-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.chapter-option-time {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.chapter-option-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--option-color, #6b7280);
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.chapter-option-link:hover {
+  background: var(--option-color-dark, #4b5563);
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.chapter-option-link:visited {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.chapter-option-link:focus {
+  color: white !important;
+  text-decoration: none !important;
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.chapter-option-link:active {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.chapter-option-link::after {
+  content: '→';
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+  color: white !important;
+}
+
+.chapter-option-link:hover::after {
+  transform: translateX(2px);
+  color: white !important;
+}
+
+ 
+.chapter-navigation a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+ 
+.chapter-option[data-color="green"] {
+  --option-color: #10b981;
+  --option-color-dark: #059669;
+}
+
+.chapter-option[data-color="yellow"] {
+  --option-color: #f59e0b;
+  --option-color-dark: #d97706;
+}
+
+.chapter-option[data-color="red"] {
+  --option-color: #ef4444;
+  --option-color-dark: #dc2626;
+}
+
+.chapter-option[data-color="blue"] {
+  --option-color: #3b82f6;
+  --option-color-dark: #2563eb;
+}
+
+.chapter-option[data-color="purple"] {
+  --option-color: #8b5cf6;
+  --option-color-dark: #7c3aed;
+}
+
+.chapter-option[data-color="orange"] {
+  --option-color: #f97316;
+  --option-color-dark: #ea580c;
+}
+
+.chapter-option[data-color="teal"] {
+  --option-color: #14b8a6;
+  --option-color-dark: #0d9488;
+}
+
+.chapter-option[data-color="indigo"] {
+  --option-color: #6366f1;
+  --option-color-dark: #4f46e5;
+}
+
+.chapter-option[data-color="pink"] {
+  --option-color: #ec4899;
+  --option-color-dark: #db2777;
+}
+
+.chapter-option[data-color="cyan"] {
+  --option-color: #06b6d4;
+  --option-color-dark: #0891b2;
+}
+
+ 
+@media (max-width: 768px) {
+  .chapter-navigation {
+    padding: 1rem;
+  }
+  
+  .chapter-option {
+    padding: 1rem;
+  }
+  
+  .chapter-option-content {
+    margin-left: 2.5rem;
+  }
+  
+  .chapter-option-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .chapter-option-link {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+</style>
+
+
+    </div>
+
+    
+
+    
+                                            </div>
+                                            <div><hr class="doc-hr">
+<div id="doc-nav" class="d-print-none">
+
+	<div class="row flex-xl-nowrap ">
+	<div class="col-sm-6 pt-2 doc-next">
+		<a href="/chapitres/stockage/chapitre-15-choix-type-stockage/">
+			<div class="card h-100 my-1">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Chapitre 15 : Choix du Type de Stockage</p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	<div class="col-sm-6 pt-2 doc-prev">
+		<a class="ms-auto" href="/chapitres/stockage/chapitre-17-stockage-sql-cqs/">
+			<div class="card h-100 my-1 text-end">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Chapitre 17 : Stockage SQL - Approche CQS <i class="material-icons align-middle">navigate_next</i></p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	</div>
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</main>
+            </div>
+        </div>
+
+        
+        
+        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        
+        
+
+        
+        
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+    <script src="/docs/js/bootstrap.js" defer></script>
+
+
+    <script type="text/javascript" src="http://localhost:1313/docs/js/bundle.js" defer></script>
+
+        
+
+        
+        <script type="module">
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script>
+        
+    </body>
+</html>

@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS | DDD Journey</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Maîtriser le stockage SQL avec Event Sourcing et Command Query Separation pour des performances optimisées">
+    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
+    <meta name="author" content="Colin Wilson - Lotus Labs" />
+    <meta name="email" content="support@aigis.uk" />
+    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="Version" content="v0.1.0" />
+    
+    <link rel="icon" href="http://localhost:1313/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="http://localhost:1313/site.webmanifest">
+<meta property="og:title" content="Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS" />
+<meta property="og:description" content="Maîtriser le stockage SQL avec Event Sourcing et Command Query Separation pour des performances optimisées" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/" /><meta property="og:image" content="http://localhost:1313/opengraph/card-base-2_hu_11bf6f0ef08487d1.png"/><meta property="article:section" content="chapitres" />
+<meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/opengraph/card-base-2_hu_11bf6f0ef08487d1.png"/>
+<meta name="twitter:title" content="Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS"/>
+<meta name="twitter:description" content="Maîtriser le stockage SQL avec Event Sourcing et Command Query Separation pour des performances optimisées"/>
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Journey" href="/index.xml" />
+    
+    
+    
+            
+                <script type="text/javascript" src="http://localhost:1313/docs/js/flexsearch.bundle.js"></script>
+            
+        
+    
+    
+
+    <link rel="stylesheet" href="/docs/scss/style.css" crossorigin="anonymous">
+    
+    
+    </head>
+<body>
+        <div class="content">
+            <div class="page-wrapper toggled">
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href='/' aria-label="HomePage" alt="HomePage">
+            
+                <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+            
+        </a>
+    </div>
+    <div class="sidebar-content" style="height: calc(100% - 131px);">
+        <ul class="sidebar-menu">
+            
+                
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Fondamentaux
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-02-impact-mapping/">Chapitre 2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">Chapitre 3 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-04-example-mapping/">Chapitre 4 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-05-complexite-accidentelle-essentielle/">Chapitre 5 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-06-granularite-choix-architecturaux/">Chapitre 6 : Granularité des Choix Architecturaux</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-07-modeles-riches-vs-anemiques/">Chapitre 7 : Modèles Riches vs Modèles Anémiques</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/">Chapitre 8 : Architecture Événementielle</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-09-repositories-persistance/">Chapitre 9 : Repositories et Persistance</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-10-choix-type-stockage/">Chapitre 15 : Choix du Type de Stockage</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Optionnels
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-13-architecture-cqrs/">Chapitre 15 : Architecture CQRS avec API Platform</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-12-architecture-cqs/">Chapitre 15 : Architecture CQS - Command Query Separation</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-11-event-sourcing/">Chapitre 15 : Event Sourcing - La Source de Vérité</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-14-cqrs-event-sourcing-combines/">Chapitre 15 : CQRS &#43; Event Sourcing Combinés</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-15-projections-event-sourcing/">Chapitre 15 : Projections Event Sourcing</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon current active">
+                            <button class="btn">
+                                Chapitres de Stockage
+                            </button>
+                            <div class="sidebar-submenu d-block">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon current active">
+                                                <button class="btn">
+                                                    Stockage SQL
+                                                </button>
+                                                <div class="sidebar-submenu d-block">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-16-stockage-sql-classique/">Chapitre 16 : Stockage SQL - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-17-stockage-sql-cqs/">Chapitre 17 : Stockage SQL - Approche CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-18-stockage-sql-cqrs/">Chapitre 18 : Stockage SQL - Approche CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-19-stockage-sql-event-sourcing/">Chapitre 19 : Stockage SQL - Event Sourcing Seul</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class="current no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/">Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-21-stockage-sql-event-sourcing-cqrs/">Chapitre 59 : Stockage SQL - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage API
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-26-stockage-api-event-sourcing-cqs/">Chapitre 26 : Stockage API - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/">Chapitre 27 : Stockage API - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-22-stockage-api-classique/">Chapitre 60 : Stockage API - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-23-stockage-api-cqs/">Chapitre 61 : Stockage API - Approche CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-24-stockage-api-cqrs/">Chapitre 62 : Stockage API - Approche CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/api/chapitre-25-stockage-api-event-sourcing/">Chapitre 63 : Stockage API - Event Sourcing Seul</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage MongoDB
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/mongodb/chapitre-28-stockage-mongodb-classique/">Chapitre 28 : Stockage MongoDB - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/mongodb/chapitre-29-stockage-mongodb-cqs/">Chapitre 29 : Stockage MongoDB - Approche CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/mongodb/chapitre-30-stockage-mongodb-cqrs/">Chapitre 30 : Stockage MongoDB - Approche CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/mongodb/chapitre-31-stockage-mongodb-event-sourcing/">Chapitre 31 : Stockage MongoDB - Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/mongodb/chapitre-32-stockage-mongodb-event-sourcing-cqs/">Stockage MongoDB - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/">Stockage MongoDB - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage ElasticSearch
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/elasticsearch/chapitre-34-stockage-elasticsearch-classique/">Stockage ElasticSearch - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/elasticsearch/chapitre-35-stockage-elasticsearch-cqs/">Stockage ElasticSearch - CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/elasticsearch/chapitre-36-stockage-elasticsearch-cqrs/">Stockage ElasticSearch - CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/elasticsearch/chapitre-37-stockage-elasticsearch-event-sourcing/">Stockage ElasticSearch - Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/elasticsearch/chapitre-38-stockage-elasticsearch-event-sourcing-cqs/">Stockage ElasticSearch - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/elasticsearch/chapitre-39-stockage-elasticsearch-event-sourcing-cqrs/">Stockage ElasticSearch - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage In-Memory
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/in-memory/chapitre-40-stockage-in-memory-classique/">Stockage In-Memory - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/in-memory/chapitre-41-stockage-in-memory-cqs/">Stockage In-Memory - CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/in-memory/chapitre-42-stockage-in-memory-cqrs/">Stockage In-Memory - CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/in-memory/chapitre-43-stockage-in-memory-event-sourcing/">Stockage In-Memory - Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/in-memory/chapitre-44-stockage-in-memory-event-sourcing-cqs/">Stockage In-Memory - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/in-memory/chapitre-45-stockage-in-memory-event-sourcing-cqrs/">Stockage In-Memory - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage Composite piloté par Temporal
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/temporal/chapitre-46-stockage-temporal-classique/">Stockage Temporal - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/temporal/chapitre-47-stockage-temporal-cqs/">Stockage Temporal - CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/temporal/chapitre-48-stockage-temporal-cqrs/">Stockage Temporal - CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/temporal/chapitre-49-stockage-temporal-event-sourcing/">Stockage Temporal - Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/temporal/chapitre-50-stockage-temporal-event-sourcing-cqs/">Stockage Temporal - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/temporal/chapitre-51-stockage-temporal-event-sourcing-cqrs/">Stockage Temporal - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage Multi-sources
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/multi-sources/chapitre-52-stockage-multi-sources-classique/">Stockage Multi-sources - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/multi-sources/chapitre-53-stockage-multi-sources-cqs/">Stockage Multi-sources - CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/multi-sources/chapitre-54-stockage-multi-sources-cqrs/">Stockage Multi-sources - CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Techniques
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/techniques/chapitre-58-gestion-donnees-validation/">Chapitre 58 : Gestion des Données et Validation</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/techniques/chapitre-59-pagination-performance/">Chapitre 59 : Pagination et Performance</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/techniques/chapitre-60-gestion-erreurs-observabilite/">Chapitre 60 : Gestion d&#39;Erreurs et Observabilité</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/techniques/chapitre-61-tests-qualite/">Chapitre 61 : Tests et Qualité</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Avancés
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/avances/chapitre-62-securite-autorisation/">Chapitre 62 : Sécurité et Autorisation - Protéger votre API Platform</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/avances/chapitre-63-frontend-integration/">Chapitre 63 : Frontend et Intégration - Connecter votre Interface Utilisateur</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+            
+        </ul>
+        
+    </div>
+    
+        <ul class="sidebar-footer list-unstyled mb-0">
+            
+        </ul>
+    
+</nav>
+
+                    <main class="page-content bg-transparent">
+                        
+<div id="top-header" class="top-header d-print-none">
+    <div class="header-bar d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+                <div class="small">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+                <div class="big">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+            </a>
+            <button id="close-sidebar" class="btn btn-icon btn-soft">
+                <span class="material-icons size-20 menu-icon align-middle">menu</span>
+            </button>
+            
+            
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
+            </div>
+
+        <div class="d-flex align-items-center">
+            <ul class="list-unstyled mb-0">
+                
+            </ul>
+            
+        </div>
+    </div>
+    
+    
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
+    
+    
+</div>
+
+
+                            <div class="container-fluid">
+                                <div class="layout-spacing">
+                                    
+                                        <div class="d-md-flex justify-content-between align-items-center"><nav aria-label="breadcrumb" class="d-inline-block pb-2 mt-1 mt-sm-0">
+    <ul id="breadcrumbs" class="breadcrumb bg-transparent mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+        
+            
+                <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/">
+                        <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
+                    </a>
+                    <meta itemprop="position" content='1' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/stockage/">
+                        <span itemprop="name">Chapitres de Stockage</span>
+                    </a>
+                    <meta itemprop="position" content='2' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/stockage/sql/">
+                        <span itemprop="name">Stockage SQL</span>
+                    </a>
+                    <meta itemprop="position" content='3' />
+                </li>
+            
+        
+            <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name">Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS</span>
+                <meta itemprop="position" content='4' />
+            </li>
+        
+    </ul>
+</nav></div>
+                                    
+                                    <div class="row flex-xl-nowrap">
+                                        
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
+    <div class="fw-bold text-uppercase mb-2">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a>
+      <ul>
+        <li><a href="#mon-problème--comment-optimiser-les-performances-avec-event-sourcing-">Mon Problème : Comment Optimiser les Performances avec Event Sourcing ?</a></li>
+        <li><a href="#stockage-sql-event-sourcing--cqs--mon-guide-pratique">Stockage SQL Event Sourcing + CQS : Mon Guide Pratique</a></li>
+      </ul>
+    </li>
+    <li><a href="#quest-ce-que-le-stockage-sql-event-sourcing--cqs-">Qu&rsquo;est-ce que le Stockage SQL Event Sourcing + CQS ?</a>
+      <ul>
+        <li><a href="#le-concept-fondamental">Le Concept Fondamental</a></li>
+        <li><a href="#les-4-piliers-du-stockage-sql-event-sourcing--cqs">Les 4 Piliers du Stockage SQL Event Sourcing + CQS</a></li>
+      </ul>
+    </li>
+    <li><a href="#comment-implémenter-le-stockage-sql-event-sourcing--cqs">Comment Implémenter le Stockage SQL Event Sourcing + CQS</a>
+      <ul>
+        <li><a href="#1-créer-l">1. <strong>Créer l’Event Store (Command Side)</strong></a></li>
+        <li><a href="#2-créer-les-command-handlers">2. <strong>Créer les Command Handlers</strong></a></li>
+        <li><a href="#3-créer-les-query-models">3. <strong>Créer les Query Models</strong></a></li>
+        <li><a href="#4-créer-les-query-handlers">4. <strong>Créer les Query Handlers</strong></a></li>
+        <li><a href="#5-créer-les-projections-asynchrones">5. <strong>Créer les Projections Asynchrones</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-avantages-du-stockage-sql-event-sourcing--cqs">Les Avantages du Stockage SQL Event Sourcing + CQS</a>
+      <ul>
+        <li><a href="#1-performance-optimisée">1. <strong>Performance Optimisée</strong></a></li>
+        <li><a href="#2-audit-trail-complet">2. <strong>Audit Trail Complet</strong></a></li>
+        <li><a href="#3-séparation-des-responsabilités">3. <strong>Séparation des Responsabilités</strong></a></li>
+        <li><a href="#4-évolutivité">4. <strong>Évolutivité</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-inconvénients-du-stockage-sql-event-sourcing--cqs">Les Inconvénients du Stockage SQL Event Sourcing + CQS</a>
+      <ul>
+        <li><a href="#1-complexité-technique">1. <strong>Complexité Technique</strong></a></li>
+        <li><a href="#2-cohérence-éventuelle">2. <strong>Cohérence Éventuelle</strong></a></li>
+        <li><a href="#3-gestion-du-cache">3. <strong>Gestion du Cache</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-pièges-à-éviter">Les Pièges à Éviter</a>
+      <ul>
+        <li><a href="#1-projections-synchrones">1. <strong>Projections Synchrones</strong></a></li>
+        <li><a href="#2-cache-non-invalidé">2. <strong>Cache Non Invalidé</strong></a></li>
+        <li><a href="#3-requêtes-complexes-dans-les-projections">3. <strong>Requêtes Complexes dans les Projections</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-implémentation-concrète-dans-le-projet-hive">🏗️ Implémentation Concrète dans le Projet Hive</a>
+      <ul>
+        <li><a href="#stockage-sql-event-sourcing--cqs-appliqué-à-hive">Stockage SQL Event Sourcing + CQS Appliqué à Hive</a></li>
+        <li><a href="#références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </toc></div>
+                                        
+                                        
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
+                                            <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
+                                                Table of Contents
+                                            </button>
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a>
+      <ul>
+        <li><a href="#mon-problème--comment-optimiser-les-performances-avec-event-sourcing-">Mon Problème : Comment Optimiser les Performances avec Event Sourcing ?</a></li>
+        <li><a href="#stockage-sql-event-sourcing--cqs--mon-guide-pratique">Stockage SQL Event Sourcing + CQS : Mon Guide Pratique</a></li>
+      </ul>
+    </li>
+    <li><a href="#quest-ce-que-le-stockage-sql-event-sourcing--cqs-">Qu&rsquo;est-ce que le Stockage SQL Event Sourcing + CQS ?</a>
+      <ul>
+        <li><a href="#le-concept-fondamental">Le Concept Fondamental</a></li>
+        <li><a href="#les-4-piliers-du-stockage-sql-event-sourcing--cqs">Les 4 Piliers du Stockage SQL Event Sourcing + CQS</a></li>
+      </ul>
+    </li>
+    <li><a href="#comment-implémenter-le-stockage-sql-event-sourcing--cqs">Comment Implémenter le Stockage SQL Event Sourcing + CQS</a>
+      <ul>
+        <li><a href="#1-créer-l">1. <strong>Créer l’Event Store (Command Side)</strong></a></li>
+        <li><a href="#2-créer-les-command-handlers">2. <strong>Créer les Command Handlers</strong></a></li>
+        <li><a href="#3-créer-les-query-models">3. <strong>Créer les Query Models</strong></a></li>
+        <li><a href="#4-créer-les-query-handlers">4. <strong>Créer les Query Handlers</strong></a></li>
+        <li><a href="#5-créer-les-projections-asynchrones">5. <strong>Créer les Projections Asynchrones</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-avantages-du-stockage-sql-event-sourcing--cqs">Les Avantages du Stockage SQL Event Sourcing + CQS</a>
+      <ul>
+        <li><a href="#1-performance-optimisée">1. <strong>Performance Optimisée</strong></a></li>
+        <li><a href="#2-audit-trail-complet">2. <strong>Audit Trail Complet</strong></a></li>
+        <li><a href="#3-séparation-des-responsabilités">3. <strong>Séparation des Responsabilités</strong></a></li>
+        <li><a href="#4-évolutivité">4. <strong>Évolutivité</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-inconvénients-du-stockage-sql-event-sourcing--cqs">Les Inconvénients du Stockage SQL Event Sourcing + CQS</a>
+      <ul>
+        <li><a href="#1-complexité-technique">1. <strong>Complexité Technique</strong></a></li>
+        <li><a href="#2-cohérence-éventuelle">2. <strong>Cohérence Éventuelle</strong></a></li>
+        <li><a href="#3-gestion-du-cache">3. <strong>Gestion du Cache</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#les-pièges-à-éviter">Les Pièges à Éviter</a>
+      <ul>
+        <li><a href="#1-projections-synchrones">1. <strong>Projections Synchrones</strong></a></li>
+        <li><a href="#2-cache-non-invalidé">2. <strong>Cache Non Invalidé</strong></a></li>
+        <li><a href="#3-requêtes-complexes-dans-les-projections">3. <strong>Requêtes Complexes dans les Projections</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-implémentation-concrète-dans-le-projet-hive">🏗️ Implémentation Concrète dans le Projet Hive</a>
+      <ul>
+        <li><a href="#stockage-sql-event-sourcing--cqs-appliqué-à-hive">Stockage SQL Event Sourcing + CQS Appliqué à Hive</a></li>
+        <li><a href="#références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
+                                            <div class="mb-0 d-flex">
+                                                
+                                                <h1 class="content-title mb-0">
+                                                    Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS
+                                                    
+                                                        <span class="badge bg-default fs-6 mb-1 align-middle">DRAFT</span>
+                                                    
+                                                </h1>
+                                            </div>
+                                            
+                                            <div id="content" class="main-content" >
+                                                
+    
+    <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
+        <h2 id="-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre <a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="mon-problème--comment-optimiser-les-performances-avec-event-sourcing-">Mon Problème : Comment Optimiser les Performances avec Event Sourcing ? <a href="#mon-probl%c3%a8me--comment-optimiser-les-performances-avec-event-sourcing-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Voici ce qui s&rsquo;est passé avec Gyroscops</strong> : J&rsquo;avais implémenté l&rsquo;Event Sourcing pour l&rsquo;audit trail, mais les performances de lecture étaient dégradées. J&rsquo;avais besoin d&rsquo;optimiser les lectures tout en gardant l&rsquo;Event Sourcing pour l&rsquo;écriture.</p>
+<p><strong>Mais attendez&hellip;</strong> Comment séparer les commandes et les requêtes ? Comment optimiser les projections ? Comment gérer la cohérence ? Comment intégrer avec API Platform ?</p>
+<p><strong>Soudain, je réalisais que CQS + Event Sourcing était parfait !</strong> Il me fallait une méthode pour optimiser les performances tout en gardant l&rsquo;audit trail.</p>
+<h3 id="stockage-sql-event-sourcing--cqs--mon-guide-pratique">Stockage SQL Event Sourcing + CQS : Mon Guide Pratique <a href="#stockage-sql-event-sourcing--cqs--mon-guide-pratique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le stockage SQL Event Sourcing + CQS m&rsquo;a permis de :</p>
+<ul>
+<li><strong>Optimiser</strong> les performances de lecture</li>
+<li><strong>Conserver</strong> l&rsquo;audit trail complet</li>
+<li><strong>Séparer</strong> les responsabilités</li>
+<li><strong>Équilibrer</strong> complexité et performance</li>
+</ul>
+<h2 id="quest-ce-que-le-stockage-sql-event-sourcing--cqs-">Qu&rsquo;est-ce que le Stockage SQL Event Sourcing + CQS ? <a href="#quest-ce-que-le-stockage-sql-event-sourcing--cqs-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="le-concept-fondamental">Le Concept Fondamental <a href="#le-concept-fondamental" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le stockage SQL Event Sourcing + CQS combine l&rsquo;Event Sourcing pour l&rsquo;écriture avec la Command Query Separation pour optimiser les lectures. <strong>L&rsquo;idée</strong> : Écriture via Event Sourcing, lecture via projections optimisées.</p>
+<p><strong>Avec Gyroscops, voici comment j&rsquo;ai structuré le stockage SQL Event Sourcing + CQS</strong> :</p>
+<h3 id="les-4-piliers-du-stockage-sql-event-sourcing--cqs">Les 4 Piliers du Stockage SQL Event Sourcing + CQS <a href="#les-4-piliers-du-stockage-sql-event-sourcing--cqs" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-event-store---source-de-vérité-pour-lécriture">1. <strong>Event Store</strong> - Source de vérité pour l&rsquo;écriture <a href="#1-event-store---source-de-v%c3%a9rit%c3%a9-pour-l%c3%a9criture" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p><strong>Voici comment j&rsquo;ai implémenté l&rsquo;Event Store avec Gyroscops</strong> :</p>
+<p><strong>Fonctionnalités</strong> :</p>
+<ul>
+<li>Stockage des événements</li>
+<li>Reconstruction des agrégats</li>
+<li>Gestion des versions</li>
+<li>Optimistic locking</li>
+</ul>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Audit trail complet</li>
+<li>Intégrité des données</li>
+<li>Évolutivité des vues</li>
+<li>Debugging facilité</li>
+</ul>
+<h4 id="2-command-side---gestion-des-écritures">2. <strong>Command Side</strong> - Gestion des écritures <a href="#2-command-side---gestion-des-%c3%a9critures" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p><strong>Voici comment j&rsquo;ai implémenté le Command Side avec Gyroscops</strong> :</p>
+<p><strong>Composants</strong> :</p>
+<ul>
+<li>Agrégats Event Sourcing</li>
+<li>Command Handlers</li>
+<li>Event Store</li>
+<li>Event Bus</li>
+</ul>
+<p><strong>Exemples</strong> :</p>
+<ul>
+<li><code>CreatePaymentCommand</code></li>
+<li><code>ProcessPaymentCommand</code></li>
+<li><code>RefundPaymentCommand</code></li>
+</ul>
+<h4 id="3-query-side---optimisation-des-lectures">3. <strong>Query Side</strong> - Optimisation des lectures <a href="#3-query-side---optimisation-des-lectures" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p><strong>Voici comment j&rsquo;ai implémenté le Query Side avec Gyroscops</strong> :</p>
+<p><strong>Composants</strong> :</p>
+<ul>
+<li>Projections optimisées</li>
+<li>Query Models</li>
+<li>Query Handlers</li>
+<li>Cache intelligent</li>
+</ul>
+<p><strong>Exemples</strong> :</p>
+<ul>
+<li><code>PaymentQueryModel</code></li>
+<li><code>PaymentListQueryModel</code></li>
+<li><code>PaymentAnalyticsQueryModel</code></li>
+</ul>
+<h4 id="4-projections---synchronisation-des-vues">4. <strong>Projections</strong> - Synchronisation des vues <a href="#4-projections---synchronisation-des-vues" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p><strong>Voici comment j&rsquo;ai implémenté les projections avec Gyroscops</strong> :</p>
+<p><strong>Types de Projections</strong> :</p>
+<ul>
+<li>Projections de lecture (pour l&rsquo;API)</li>
+<li>Projections d&rsquo;audit (pour le debugging)</li>
+<li>Projections d&rsquo;analytics (pour les rapports)</li>
+</ul>
+<p><strong>Synchronisation</strong> :</p>
+<ul>
+<li>Asynchrone via Event Bus</li>
+<li>Cohérence éventuelle</li>
+<li>Gestion des erreurs</li>
+<li>Reprocessing possible</li>
+</ul>
+<h2 id="comment-implémenter-le-stockage-sql-event-sourcing--cqs">Comment Implémenter le Stockage SQL Event Sourcing + CQS <a href="#comment-impl%c3%a9menter-le-stockage-sql-event-sourcing--cqs" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-créer-l">1. <strong>Créer l&rsquo;Event Store (Command Side)</strong> <a href="#1-cr%c3%a9er-l" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : J&rsquo;ai créé l&rsquo;Event Store :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Event Store Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SqlEventStore</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">EventStoreInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Connection</span> $connection,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">EventSerializer</span> $serializer
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">string</span> $aggregateId, <span style="color:#66d9ef">array</span> $events, <span style="color:#a6e22e">int</span> $expectedVersion)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">beginTransaction</span>();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Vérifier la version attendue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            $currentVersion <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCurrentVersion</span>($aggregateId);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ($currentVersion <span style="color:#f92672">!==</span> $expectedVersion) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ConcurrencyException</span>(<span style="color:#e6db74">&#39;Version mismatch&#39;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Insérer les événements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">foreach</span> ($events <span style="color:#66d9ef">as</span> $event) {
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">insertEvent</span>($aggregateId, $event, $currentVersion <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>                $currentVersion<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">commit</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">\Exception</span> $e) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">rollback</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> $e;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getEvents</span>(<span style="color:#a6e22e">string</span> $aggregateId, <span style="color:#a6e22e">int</span> $fromVersion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">array</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SELECT event_type, event_data, event_metadata, version, created_at 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                FROM event_store 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                WHERE aggregate_id = ? AND version &gt; ? 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                ORDER BY version ASC&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([$aggregateId, $fromVersion]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $events <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ($row <span style="color:#f92672">=</span> $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fetch</span>()) {
+</span></span><span style="display:flex;"><span>            $events[] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">serializer</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">deserialize</span>(
+</span></span><span style="display:flex;"><span>                $row[<span style="color:#e6db74">&#39;event_type&#39;</span>],
+</span></span><span style="display:flex;"><span>                $row[<span style="color:#e6db74">&#39;event_data&#39;</span>],
+</span></span><span style="display:flex;"><span>                $row[<span style="color:#e6db74">&#39;event_metadata&#39;</span>]
+</span></span><span style="display:flex;"><span>            );
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $events;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">insertEvent</span>(<span style="color:#a6e22e">string</span> $aggregateId, <span style="color:#a6e22e">DomainEvent</span> $event, <span style="color:#a6e22e">int</span> $version)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;INSERT INTO event_store (event_id, aggregate_id, event_type, event_data, event_metadata, version) 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                VALUES (?, ?, ?, ?, ?, ?)&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Uuid</span><span style="color:#f92672">::</span><span style="color:#a6e22e">uuid4</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">toString</span>(),
+</span></span><span style="display:flex;"><span>            $aggregateId,
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">json_encode</span>($event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">toArray</span>()),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">json_encode</span>($event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getMetadata</span>()),
+</span></span><span style="display:flex;"><span>            $version
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Résultat</strong> : Event Store robuste pour l&rsquo;écriture.</p>
+<h3 id="2-créer-les-command-handlers">2. <strong>Créer les Command Handlers</strong> <a href="#2-cr%c3%a9er-les-command-handlers" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : J&rsquo;ai créé les Command Handlers :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Command Handler Payment Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentCommandHandler</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">EventStoreInterface</span> $eventStore,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">EventBusInterface</span> $eventBus
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleCreatePayment</span>(<span style="color:#a6e22e">CreatePaymentCommand</span> $command)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Reconstruire l&#39;agrégat depuis les événements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $events <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">eventStore</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEvents</span>($command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>());
+</span></span><span style="display:flex;"><span>        $aggregate <span style="color:#f92672">=</span> <span style="color:#a6e22e">PaymentAggregate</span><span style="color:#f92672">::</span><span style="color:#a6e22e">fromEvents</span>($events);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Exécuter la commande
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">initiate</span>(
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>(),
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOrganizationId</span>(),
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCustomerName</span>(),
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCustomerEmail</span>(),
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getAmount</span>(),
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCurrency</span>(),
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCreatedBy</span>()
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Sauvegarder les événements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">eventStore</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">append</span>(
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>(),
+</span></span><span style="display:flex;"><span>            $aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getUncommittedEvents</span>(),
+</span></span><span style="display:flex;"><span>            $aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getVersion</span>() <span style="color:#f92672">-</span> <span style="color:#a6e22e">count</span>($aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getUncommittedEvents</span>())
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Publier les événements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">foreach</span> ($aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getUncommittedEvents</span>() <span style="color:#66d9ef">as</span> $event) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">eventBus</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">publish</span>($event);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">markEventsAsCommitted</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleProcessPayment</span>(<span style="color:#a6e22e">ProcessPaymentCommand</span> $command)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Reconstruire l&#39;agrégat depuis les événements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $events <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">eventStore</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEvents</span>($command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>());
+</span></span><span style="display:flex;"><span>        $aggregate <span style="color:#f92672">=</span> <span style="color:#a6e22e">PaymentAggregate</span><span style="color:#f92672">::</span><span style="color:#a6e22e">fromEvents</span>($events);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Exécuter la commande
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">process</span>($command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getProcessedBy</span>());
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Sauvegarder les événements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">eventStore</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">append</span>(
+</span></span><span style="display:flex;"><span>            $command<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>(),
+</span></span><span style="display:flex;"><span>            $aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getUncommittedEvents</span>(),
+</span></span><span style="display:flex;"><span>            $aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getVersion</span>() <span style="color:#f92672">-</span> <span style="color:#a6e22e">count</span>($aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getUncommittedEvents</span>())
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Publier les événements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">foreach</span> ($aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getUncommittedEvents</span>() <span style="color:#66d9ef">as</span> $event) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">eventBus</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">publish</span>($event);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $aggregate<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">markEventsAsCommitted</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Résultat</strong> : Command Handlers pour l&rsquo;écriture.</p>
+<h3 id="3-créer-les-query-models">3. <strong>Créer les Query Models</strong> <a href="#3-cr%c3%a9er-les-query-models" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : J&rsquo;ai créé les Query Models :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Query Model Payment Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentQueryModel</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">string</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">string</span> $organizationId,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">string</span> $customerName,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">string</span> $customerEmail,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">string</span> $amount,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">string</span> $currency,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">string</span> $status,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">\DateTimeImmutable</span> $createdAt,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">string</span> $createdBy,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#f92672">?</span><span style="color:#a6e22e">\DateTimeImmutable</span> $updatedAt <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#f92672">?</span><span style="color:#a6e22e">string</span> $updatedBy <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#f92672">?</span><span style="color:#a6e22e">string</span> $failureReason <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">readonly</span> <span style="color:#f92672">?</span><span style="color:#a6e22e">string</span> $refundReason <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fromArray</span>(<span style="color:#66d9ef">array</span> $data)<span style="color:#f92672">:</span> <span style="color:#a6e22e">self</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">self</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;id&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">organizationId</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;organization_id&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">customerName</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;customer_name&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">customerEmail</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;customer_email&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">amount</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;amount&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">currency</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;currency&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;status&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">createdAt</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">\DateTimeImmutable</span>($data[<span style="color:#e6db74">&#39;created_at&#39;</span>]),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">createdBy</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;created_by&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">updatedAt</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;updated_at&#39;</span>] <span style="color:#f92672">?</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">\DateTimeImmutable</span>($data[<span style="color:#e6db74">&#39;updated_at&#39;</span>]) <span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">updatedBy</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;updated_by&#39;</span>] <span style="color:#f92672">??</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">failureReason</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;failure_reason&#39;</span>] <span style="color:#f92672">??</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">refundReason</span><span style="color:#f92672">:</span> $data[<span style="color:#e6db74">&#39;refund_reason&#39;</span>] <span style="color:#f92672">??</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toArray</span>()<span style="color:#f92672">:</span> <span style="color:#66d9ef">array</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;id&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;organizationId&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">organizationId</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;customerName&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">customerName</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;customerEmail&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">customerEmail</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;amount&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;currency&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">currency</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;status&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;createdAt&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createdAt</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#39;Y-m-d H:i:s&#39;</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;createdBy&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createdBy</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;updatedAt&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">updatedAt</span><span style="color:#f92672">?-&gt;</span><span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#39;Y-m-d H:i:s&#39;</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;updatedBy&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">updatedBy</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;failureReason&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">failureReason</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;refundReason&#39;</span> <span style="color:#f92672">=&gt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">refundReason</span>
+</span></span><span style="display:flex;"><span>        ];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Résultat</strong> : Query Models optimisés pour la lecture.</p>
+<h3 id="4-créer-les-query-handlers">4. <strong>Créer les Query Handlers</strong> <a href="#4-cr%c3%a9er-les-query-handlers" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : J&rsquo;ai créé les Query Handlers :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Query Handler Payment Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentQueryHandler</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Connection</span> $connection,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">CacheInterface</span> $cache
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleGetPayment</span>(<span style="color:#a6e22e">GetPaymentQuery</span> $query)<span style="color:#f92672">:</span> <span style="color:#f92672">?</span><span style="color:#a6e22e">PaymentQueryModel</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $cacheKey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;payment_</span><span style="color:#e6db74">{</span>$query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Vérifier le cache
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> ($cached <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>($cacheKey)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">PaymentQueryModel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">fromArray</span>($cached);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Requête à la base de données
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SELECT id, organization_id, customer_name, customer_email, amount, currency, status, 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                       created_at, created_by, updated_at, updated_by, failure_reason, refund_reason
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                FROM payment_projections 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                WHERE id = ?&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([$query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>()]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $data <span style="color:#f92672">=</span> $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fetch</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$data) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $payment <span style="color:#f92672">=</span> <span style="color:#a6e22e">PaymentQueryModel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">fromArray</span>($data);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Mettre en cache
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">set</span>($cacheKey, $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">toArray</span>(), <span style="color:#ae81ff">3600</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $payment;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleGetPaymentsByOrganization</span>(<span style="color:#a6e22e">GetPaymentsByOrganizationQuery</span> $query)<span style="color:#f92672">:</span> <span style="color:#66d9ef">array</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $cacheKey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;payments_org_</span><span style="color:#e6db74">{</span>$query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOrganizationId</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>$query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPage</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>$query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getLimit</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Vérifier le cache
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> ($cached <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>($cacheKey)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">array_map</span>([<span style="color:#a6e22e">PaymentQueryModel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>, <span style="color:#e6db74">&#39;fromArray&#39;</span>], $cached);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Requête à la base de données
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SELECT id, organization_id, customer_name, customer_email, amount, currency, status, 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                       created_at, created_by, updated_at, updated_by, failure_reason, refund_reason
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                FROM payment_projections 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                WHERE organization_id = ? 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                ORDER BY created_at DESC 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                LIMIT ? OFFSET ?&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([
+</span></span><span style="display:flex;"><span>            $query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOrganizationId</span>(),
+</span></span><span style="display:flex;"><span>            $query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getLimit</span>(),
+</span></span><span style="display:flex;"><span>            ($query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPage</span>() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> $query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getLimit</span>()
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $payments <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ($data <span style="color:#f92672">=</span> $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fetch</span>()) {
+</span></span><span style="display:flex;"><span>            $payments[] <span style="color:#f92672">=</span> <span style="color:#a6e22e">PaymentQueryModel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">fromArray</span>($data);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Mettre en cache
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">set</span>($cacheKey, <span style="color:#a6e22e">array_map</span>(<span style="color:#a6e22e">fn</span>($p) <span style="color:#f92672">=&gt;</span> $p<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">toArray</span>(), $payments), <span style="color:#ae81ff">1800</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $payments;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleGetPaymentAnalytics</span>(<span style="color:#a6e22e">GetPaymentAnalyticsQuery</span> $query)<span style="color:#f92672">:</span> <span style="color:#a6e22e">PaymentAnalyticsQueryModel</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $cacheKey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;payment_analytics_</span><span style="color:#e6db74">{</span>$query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOrganizationId</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>$query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStartDate</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>$query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEndDate</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Vérifier le cache
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> ($cached <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>($cacheKey)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">PaymentAnalyticsQueryModel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">fromArray</span>($cached);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Requête analytique
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;SELECT 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    COUNT(*) as total_payments,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    SUM(CASE WHEN status = &#34;processed&#34; THEN 1 ELSE 0 END) as successful_payments,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    SUM(CASE WHEN status = &#34;failed&#34; THEN 1 ELSE 0 END) as failed_payments,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    SUM(CASE WHEN status = &#34;refunded&#34; THEN 1 ELSE 0 END) as refunded_payments,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    SUM(CASE WHEN status = &#34;processed&#34; THEN CAST(amount AS DECIMAL(10,2)) ELSE 0 END) as total_amount,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    AVG(CASE WHEN status = &#34;processed&#34; THEN CAST(amount AS DECIMAL(10,2)) ELSE NULL END) as average_amount
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                FROM payment_projections 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                WHERE organization_id = ? 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                AND created_at BETWEEN ? AND ?&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([
+</span></span><span style="display:flex;"><span>            $query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOrganizationId</span>(),
+</span></span><span style="display:flex;"><span>            $query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStartDate</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#39;Y-m-d H:i:s&#39;</span>),
+</span></span><span style="display:flex;"><span>            $query<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEndDate</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#39;Y-m-d H:i:s&#39;</span>)
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $data <span style="color:#f92672">=</span> $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fetch</span>();
+</span></span><span style="display:flex;"><span>        $analytics <span style="color:#f92672">=</span> <span style="color:#a6e22e">PaymentAnalyticsQueryModel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">fromArray</span>($data);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Mettre en cache
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">set</span>($cacheKey, $analytics<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">toArray</span>(), <span style="color:#ae81ff">3600</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $analytics;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Résultat</strong> : Query Handlers optimisés avec cache.</p>
+<h3 id="5-créer-les-projections-asynchrones">5. <strong>Créer les Projections Asynchrones</strong> <a href="#5-cr%c3%a9er-les-projections-asynchrones" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : J&rsquo;ai créé les projections asynchrones :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Projection Payment Asynchrone Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentProjectionHandler</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Connection</span> $connection,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">CacheInterface</span> $cache
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handle</span>(<span style="color:#a6e22e">DomainEvent</span> $event)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> ($event<span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">PaymentInitiated</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handlePaymentInitiated</span>($event);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">PaymentProcessed</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handlePaymentProcessed</span>($event);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">PaymentFailed</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handlePaymentFailed</span>($event);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">PaymentRefunded</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handlePaymentRefunded</span>($event);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Invalider le cache
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">invalidateCache</span>($event);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handlePaymentInitiated</span>(<span style="color:#a6e22e">PaymentInitiated</span> $event)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;INSERT INTO payment_projections (id, organization_id, customer_name, customer_email, amount, currency, status, created_at, created_by) 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOrganizationId</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCustomerName</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCustomerEmail</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getAmount</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCurrency</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;initiated&#39;</span>,
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOccurredAt</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#39;Y-m-d H:i:s&#39;</span>),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCreatedBy</span>()
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handlePaymentProcessed</span>(<span style="color:#a6e22e">PaymentProcessed</span> $event)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UPDATE payment_projections SET status = ?, updated_at = ?, updated_by = ? WHERE id = ?&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;processed&#39;</span>,
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOccurredAt</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#39;Y-m-d H:i:s&#39;</span>),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getProcessedBy</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>()
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handlePaymentFailed</span>(<span style="color:#a6e22e">PaymentFailed</span> $event)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UPDATE payment_projections SET status = ?, failure_reason = ?, updated_at = ?, updated_by = ? WHERE id = ?&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;failed&#39;</span>,
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getReason</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOccurredAt</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#39;Y-m-d H:i:s&#39;</span>),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getFailedBy</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>()
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handlePaymentRefunded</span>(<span style="color:#a6e22e">PaymentRefunded</span> $event)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UPDATE payment_projections SET status = ?, refund_reason = ?, updated_at = ?, updated_by = ? WHERE id = ?&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $stmt <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connection</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">prepare</span>($sql);
+</span></span><span style="display:flex;"><span>        $stmt<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>([
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;refunded&#39;</span>,
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getReason</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOccurredAt</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#39;Y-m-d H:i:s&#39;</span>),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getRefundedBy</span>(),
+</span></span><span style="display:flex;"><span>            $event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getPaymentId</span>()
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">invalidateCache</span>(<span style="color:#a6e22e">DomainEvent</span> $event)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Invalider les caches liés à cet événement
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">delete</span>(<span style="color:#e6db74">&#34;payment_</span><span style="color:#e6db74">{</span>$event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getAggregateId</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">delete</span>(<span style="color:#e6db74">&#34;payments_org_</span><span style="color:#e6db74">{</span>$event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOrganizationId</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">_*&#34;</span>);
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">delete</span>(<span style="color:#e6db74">&#34;payment_analytics_</span><span style="color:#e6db74">{</span>$event<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getOrganizationId</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">_*&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Résultat</strong> : Projections asynchrones avec invalidation de cache.</p>
+<h2 id="les-avantages-du-stockage-sql-event-sourcing--cqs">Les Avantages du Stockage SQL Event Sourcing + CQS <a href="#les-avantages-du-stockage-sql-event-sourcing--cqs" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-performance-optimisée">1. <strong>Performance Optimisée</strong> <a href="#1-performance-optimis%c3%a9e" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL Event Sourcing + CQS m&rsquo;a donné des performances optimisées :</p>
+<ul>
+<li>Lectures via projections optimisées</li>
+<li>Cache intelligent</li>
+<li>Requêtes spécialisées</li>
+<li>Performance prévisible</li>
+</ul>
+<p><strong>Résultat</strong> : Performances de lecture excellentes.</p>
+<h3 id="2-audit-trail-complet">2. <strong>Audit Trail Complet</strong> <a href="#2-audit-trail-complet" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL Event Sourcing + CQS m&rsquo;a conservé l&rsquo;audit trail :</p>
+<ul>
+<li>Historique complet des changements</li>
+<li>Reconstruction possible</li>
+<li>Debugging facilité</li>
+<li>Traçabilité totale</li>
+</ul>
+<p><strong>Résultat</strong> : Audit trail parfait conservé.</p>
+<h3 id="3-séparation-des-responsabilités">3. <strong>Séparation des Responsabilités</strong> <a href="#3-s%c3%a9paration-des-responsabilit%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL Event Sourcing + CQS m&rsquo;a séparé les responsabilités :</p>
+<ul>
+<li>Command Side pour l&rsquo;écriture</li>
+<li>Query Side pour la lecture</li>
+<li>Optimisations indépendantes</li>
+<li>Maintenance facilitée</li>
+</ul>
+<p><strong>Résultat</strong> : Architecture claire et maintenable.</p>
+<h3 id="4-évolutivité">4. <strong>Évolutivité</strong> <a href="#4-%c3%a9volutivit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL Event Sourcing + CQS m&rsquo;a permis d&rsquo;évoluer :</p>
+<ul>
+<li>Nouvelles projections sans impact</li>
+<li>Optimisations ciblées</li>
+<li>Évolution indépendante</li>
+<li>Flexibilité maximale</li>
+</ul>
+<p><strong>Résultat</strong> : Évolutivité excellente.</p>
+<h2 id="les-inconvénients-du-stockage-sql-event-sourcing--cqs">Les Inconvénients du Stockage SQL Event Sourcing + CQS <a href="#les-inconv%c3%a9nients-du-stockage-sql-event-sourcing--cqs" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-complexité-technique">1. <strong>Complexité Technique</strong> <a href="#1-complexit%c3%a9-technique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL Event Sourcing + CQS a ajouté de la complexité :</p>
+<ul>
+<li>Courbe d&rsquo;apprentissage importante</li>
+<li>Plus de composants à maintenir</li>
+<li>Concepts avancés</li>
+<li>Debugging plus complexe</li>
+</ul>
+<p><strong>Résultat</strong> : Complexité technique élevée.</p>
+<h3 id="2-cohérence-éventuelle">2. <strong>Cohérence Éventuelle</strong> <a href="#2-coh%c3%a9rence-%c3%a9ventuelle" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL Event Sourcing + CQS peut avoir des problèmes de cohérence :</p>
+<ul>
+<li>Projections asynchrones</li>
+<li>Délai de synchronisation</li>
+<li>Incohérence temporaire</li>
+<li>Gestion des erreurs complexe</li>
+</ul>
+<p><strong>Résultat</strong> : Cohérence éventuelle à gérer.</p>
+<h3 id="3-gestion-du-cache">3. <strong>Gestion du Cache</strong> <a href="#3-gestion-du-cache" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Avec Gyroscops</strong> : Le stockage SQL Event Sourcing + CQS nécessite une gestion du cache :</p>
+<ul>
+<li>Invalidation complexe</li>
+<li>Synchronisation des caches</li>
+<li>Gestion des erreurs</li>
+<li>Performance du cache</li>
+</ul>
+<p><strong>Résultat</strong> : Gestion du cache complexe.</p>
+<h2 id="les-pièges-à-éviter">Les Pièges à Éviter <a href="#les-pi%c3%a8ges-%c3%a0-%c3%a9viter" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-projections-synchrones">1. <strong>Projections Synchrones</strong> <a href="#1-projections-synchrones" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>❌ Mauvais</strong> : Projections mises à jour de façon synchrone
+<strong>✅ Bon</strong> : Projections asynchrones avec Event Bus</p>
+<p><strong>Pourquoi c&rsquo;est important ?</strong> Les projections synchrones tuent les performances.</p>
+<h3 id="2-cache-non-invalidé">2. <strong>Cache Non Invalidé</strong> <a href="#2-cache-non-invalid%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>❌ Mauvais</strong> : Cache qui n&rsquo;est jamais invalidé
+<strong>✅ Bon</strong> : Invalidation intelligente du cache</p>
+<p><strong>Pourquoi c&rsquo;est crucial ?</strong> Le cache obsolète donne de mauvaises données.</p>
+<h3 id="3-requêtes-complexes-dans-les-projections">3. <strong>Requêtes Complexes dans les Projections</strong> <a href="#3-requ%c3%aates-complexes-dans-les-projections" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>❌ Mauvais</strong> : Requêtes complexes dans les projections
+<strong>✅ Bon</strong> : Projections simples et optimisées</p>
+<p><strong>Pourquoi c&rsquo;est essentiel ?</strong> Les projections complexes ralentissent le système.</p>
+<h2 id="-implémentation-concrète-dans-le-projet-hive">🏗️ Implémentation Concrète dans le Projet Hive <a href="#-impl%c3%a9mentation-concr%c3%a8te-dans-le-projet-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="stockage-sql-event-sourcing--cqs-appliqué-à-hive">Stockage SQL Event Sourcing + CQS Appliqué à Hive <a href="#stockage-sql-event-sourcing--cqs-appliqu%c3%a9-%c3%a0-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le projet Hive applique concrètement les principes du stockage SQL Event Sourcing + CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :</p>
+<h4 id="configuration-event-sourcing--cqs-hive">Configuration Event Sourcing + CQS Hive <a href="#configuration-event-sourcing--cqs-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Configuration Event Sourcing + CQS Hive (Projet Hive)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiveEventSourcingCQSConfiguration</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">configureEventSourcingCQS</span>(<span style="color:#a6e22e">ContainerBuilder</span> $container)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration de l&#39;Event Store
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">SqlEventStore</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAutowired</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setPublic</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration des Command Handlers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">PaymentCommandHandler</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAutowired</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setPublic</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration des Query Handlers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">PaymentQueryHandler</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAutowired</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setPublic</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration des projections
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">PaymentProjectionHandler</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAutowired</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setPublic</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration de l&#39;Event Bus
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">EventBus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAutowired</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setPublic</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Configuration du cache
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">CacheInterface</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setFactory</span>([<span style="color:#a6e22e">RedisAdapter</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>, <span style="color:#e6db74">&#39;createConnection&#39;</span>])
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAutowired</span>(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setPublic</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive <a href="#r%c3%a9f%c3%a9rences-aux-adr-du-projet-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Ce chapitre s&rsquo;appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :</p>
+<ul>
+<li><strong>HIVE008</strong> : Event Collaboration - Collaboration par événements</li>
+<li><strong>HIVE009</strong> : Message Buses - Bus de messages</li>
+<li><strong>HIVE010</strong> : Repositories - Repositories de base</li>
+<li><strong>HIVE011</strong> : Command Query Separation - Séparation des commandes et requêtes</li>
+<li><strong>HIVE012</strong> : Database Repositories - Repositories de base de données</li>
+<li><strong>HIVE014</strong> : Projections Event Sourcing - Projections Event Sourcing</li>
+</ul>
+
+
+<div class="chapter-navigation">
+  <h2 class="chapter-nav-title">🎯 Votre Prochaine Étape</h2>
+  <p class="chapter-nav-subtitle">Maintenant que vous comprenez les concepts de base et que j'ai partagé mon expérience avec Gyroscops, quel est votre contexte ?</p>
+  
+  <div class="chapter-options">
+    
+  {
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+<div class="chapter-option" data-color="green" >
+  <div class="chapter-option-header">
+    <div class="chapter-option-letter">A</div>
+    <div>
+      <h3 class="chapter-option-title">Je veux comprendre le stockage SQL Event Sourcing &#43; CQRS</h3>
+      <p class="chapter-option-subtitle">Vous voulez voir une approche Event Sourcing avec séparation complète des modèles</p>
+    </div>
+  </div>
+  
+  <div class="chapter-option-content">
+    
+    <div class="chapter-option-criteria">
+      <h4 class="chapter-option-criteria-title">Critères d'adoption :</h4>
+      <ul class="chapter-option-criteria-list">
+        
+        <li>Équipe très expérimentée</li>
+        
+        <li>Besoin de performance maximale</li>
+        
+        <li>Event Sourcing déjà en place</li>
+        
+        <li>Complexité élevée acceptable</li>
+        
+      </ul>
+    </div>
+    
+    
+    <div class="chapter-option-footer">
+      <span class="chapter-option-time">⏱️ 35-50 minutes</span>
+      
+      
+        
+        <span class="chapter-option-link chapter-option-link-disabled">
+          Stockage SQL - Event Sourcing &#43; CQRS
+          <span class="coming-soon-indicator">🚧</span>
+        </span>
+      
+    </div>
+  </div>
+</div>
+
+<style>
+ 
+.chapter-option-link-disabled {
+  background: #9ca3af !important;
+  color: #6b7280 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.chapter-option-link-disabled:hover {
+  background: #9ca3af !important;
+  color: #6b7280 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.chapter-option-link-disabled::after {
+  display: none !important;
+}
+
+ 
+.chapter-option[data-draft="true"] {
+  opacity: 0.8;
+  border-style: dashed;
+  border-color: #d1d5db;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-letter {
+  background: #9ca3af;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-title {
+  color: #6b7280;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-subtitle {
+  color: #9ca3af;
+}
+
+ 
+.draft-indicator,
+.coming-soon-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+}
+
+ 
+.chapter-option[data-draft="true"] {
+  animation: draft-pulse 2s ease-in-out infinite;
+}
+
+@keyframes draft-pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+</style>}}
+  
+  {
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+<div class="chapter-option" data-color="yellow" >
+  <div class="chapter-option-header">
+    <div class="chapter-option-letter">B</div>
+    <div>
+      <h3 class="chapter-option-title">Je veux comprendre le stockage API</h3>
+      <p class="chapter-option-subtitle">Vous voulez voir comment intégrer des APIs externes</p>
+    </div>
+  </div>
+  
+  <div class="chapter-option-content">
+    
+    <div class="chapter-option-criteria">
+      <h4 class="chapter-option-criteria-title">Critères d'adoption :</h4>
+      <ul class="chapter-option-criteria-list">
+        
+        <li>Équipe expérimentée</li>
+        
+        <li>Besoin d&#39;intégrer des services externes</li>
+        
+        <li>Données distribuées</li>
+        
+        <li>Intégrations multiples</li>
+        
+      </ul>
+    </div>
+    
+    
+    <div class="chapter-option-footer">
+      <span class="chapter-option-time">⏱️ 25-35 minutes</span>
+      
+      
+        
+        <span class="chapter-option-link chapter-option-link-disabled">
+          Stockage API - Approche Classique
+          <span class="coming-soon-indicator">🚧</span>
+        </span>
+      
+    </div>
+  </div>
+</div>
+
+<style>
+ 
+.chapter-option-link-disabled {
+  background: #9ca3af !important;
+  color: #6b7280 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.chapter-option-link-disabled:hover {
+  background: #9ca3af !important;
+  color: #6b7280 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.chapter-option-link-disabled::after {
+  display: none !important;
+}
+
+ 
+.chapter-option[data-draft="true"] {
+  opacity: 0.8;
+  border-style: dashed;
+  border-color: #d1d5db;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-letter {
+  background: #9ca3af;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-title {
+  color: #6b7280;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-subtitle {
+  color: #9ca3af;
+}
+
+ 
+.draft-indicator,
+.coming-soon-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+}
+
+ 
+.chapter-option[data-draft="true"] {
+  animation: draft-pulse 2s ease-in-out infinite;
+}
+
+@keyframes draft-pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+</style>}}
+  
+  {
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+<div class="chapter-option" data-color="red" >
+  <div class="chapter-option-header">
+    <div class="chapter-option-letter">C</div>
+    <div>
+      <h3 class="chapter-option-title">Je veux comprendre le stockage ElasticSearch</h3>
+      <p class="chapter-option-subtitle">Vous voulez voir comment optimiser la recherche</p>
+    </div>
+  </div>
+  
+  <div class="chapter-option-content">
+    
+    <div class="chapter-option-criteria">
+      <h4 class="chapter-option-criteria-title">Critères d'adoption :</h4>
+      <ul class="chapter-option-criteria-list">
+        
+        <li>Équipe expérimentée</li>
+        
+        <li>Besoin de recherche avancée</li>
+        
+        <li>Analytics importantes</li>
+        
+        <li>Performance de recherche critique</li>
+        
+      </ul>
+    </div>
+    
+    
+    <div class="chapter-option-footer">
+      <span class="chapter-option-time">⏱️ 30-40 minutes</span>
+      
+      
+        
+        <span class="chapter-option-link chapter-option-link-disabled">
+          Stockage ElasticSearch - Approche Classique
+          <span class="coming-soon-indicator">🚧</span>
+        </span>
+      
+    </div>
+  </div>
+</div>
+
+<style>
+ 
+.chapter-option-link-disabled {
+  background: #9ca3af !important;
+  color: #6b7280 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.chapter-option-link-disabled:hover {
+  background: #9ca3af !important;
+  color: #6b7280 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.chapter-option-link-disabled::after {
+  display: none !important;
+}
+
+ 
+.chapter-option[data-draft="true"] {
+  opacity: 0.8;
+  border-style: dashed;
+  border-color: #d1d5db;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-letter {
+  background: #9ca3af;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-title {
+  color: #6b7280;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-subtitle {
+  color: #9ca3af;
+}
+
+ 
+.draft-indicator,
+.coming-soon-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+}
+
+ 
+.chapter-option[data-draft="true"] {
+  animation: draft-pulse 2s ease-in-out infinite;
+}
+
+@keyframes draft-pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+</style>}}
+  
+
+  </div>
+</div>
+
+<style>
+.chapter-navigation {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  border-left: 4px solid #3b82f6;
+}
+
+.chapter-nav-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.chapter-nav-subtitle {
+  margin: 0 0 1.5rem 0;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.chapter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+ 
+.chapter-option {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+}
+
+.chapter-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--option-color, #6b7280);
+  border-radius: 0 2px 2px 0;
+}
+
+.chapter-option-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.chapter-option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--option-color, #6b7280);
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.chapter-option-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.chapter-option-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-style: italic;
+  margin: 0.25rem 0 0 0;
+  line-height: 1.4;
+}
+
+.chapter-option-content {
+  margin-left: 2.75rem;
+}
+
+.chapter-option-criteria {
+  margin-bottom: 0.75rem;
+}
+
+.chapter-option-criteria-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+}
+
+.chapter-option-criteria-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chapter-option-criteria-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.chapter-option-criteria-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.chapter-option-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.chapter-option-time {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.chapter-option-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--option-color, #6b7280);
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.chapter-option-link:hover {
+  background: var(--option-color-dark, #4b5563);
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.chapter-option-link:visited {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.chapter-option-link:focus {
+  color: white !important;
+  text-decoration: none !important;
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.chapter-option-link:active {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.chapter-option-link::after {
+  content: '→';
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+  color: white !important;
+}
+
+.chapter-option-link:hover::after {
+  transform: translateX(2px);
+  color: white !important;
+}
+
+ 
+.chapter-navigation a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+ 
+.chapter-option[data-color="green"] {
+  --option-color: #10b981;
+  --option-color-dark: #059669;
+}
+
+.chapter-option[data-color="yellow"] {
+  --option-color: #f59e0b;
+  --option-color-dark: #d97706;
+}
+
+.chapter-option[data-color="red"] {
+  --option-color: #ef4444;
+  --option-color-dark: #dc2626;
+}
+
+.chapter-option[data-color="blue"] {
+  --option-color: #3b82f6;
+  --option-color-dark: #2563eb;
+}
+
+.chapter-option[data-color="purple"] {
+  --option-color: #8b5cf6;
+  --option-color-dark: #7c3aed;
+}
+
+.chapter-option[data-color="orange"] {
+  --option-color: #f97316;
+  --option-color-dark: #ea580c;
+}
+
+.chapter-option[data-color="teal"] {
+  --option-color: #14b8a6;
+  --option-color-dark: #0d9488;
+}
+
+.chapter-option[data-color="indigo"] {
+  --option-color: #6366f1;
+  --option-color-dark: #4f46e5;
+}
+
+.chapter-option[data-color="pink"] {
+  --option-color: #ec4899;
+  --option-color-dark: #db2777;
+}
+
+.chapter-option[data-color="cyan"] {
+  --option-color: #06b6d4;
+  --option-color-dark: #0891b2;
+}
+
+ 
+@media (max-width: 768px) {
+  .chapter-navigation {
+    padding: 1rem;
+  }
+  
+  .chapter-option {
+    padding: 1rem;
+  }
+  
+  .chapter-option-content {
+    margin-left: 2.5rem;
+  }
+  
+  .chapter-option-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .chapter-option-link {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+</style>
+
+
+    </div>
+
+    
+
+    
+                                            </div>
+                                            <div><hr class="doc-hr">
+<div id="doc-nav" class="d-print-none">
+
+	<div class="row flex-xl-nowrap ">
+	<div class="col-sm-6 pt-2 doc-next">
+		<a href="/chapitres/techniques/chapitre-58-gestion-donnees-validation/">
+			<div class="card h-100 my-1">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Chapitre 58 : Gestion des Données et Validation</p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	<div class="col-sm-6 pt-2 doc-prev">
+		<a class="ms-auto" href="/chapitres/techniques/chapitre-59-pagination-performance/">
+			<div class="card h-100 my-1 text-end">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Chapitre 59 : Pagination et Performance <i class="material-icons align-middle">navigate_next</i></p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	</div>
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        
+                        © 2025 DDD Journey. Tous droits réservés.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="row mt-3 pt-3 border-top">
+            <div class="col-12">
+                <div class="text-center">
+                    <h6 class="text-muted mb-2">Nos Sponsors</h6>
+                    <p class="text-muted small mb-2">Merci à nos partenaires qui soutiennent cette initiative</p>
+                    <div class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                        
+                        <div class="sponsor-item">
+                            <a href="https://kiboko.fr" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <span class="badge bg-light text-dark border px-2 py-1 small">Kiboko</span>
+                            </a>
+                        </div>
+                        
+                        <div class="sponsor-item">
+                            <a href="https://gyroscops.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <span class="badge bg-light text-dark border px-2 py-1 small">Gyroscops</span>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+</main>
+            </div>
+        </div>
+
+        
+        
+        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        
+        
+
+        
+        
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+    <script src="/docs/js/bootstrap.js" defer></script>
+
+
+    <script type="text/javascript" src="http://localhost:1313/docs/js/bundle.js" defer></script>
+
+        
+
+        
+        <script type="module">
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script>
+        
+    </body>
+</html>

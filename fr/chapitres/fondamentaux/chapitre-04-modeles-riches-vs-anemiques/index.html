@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Chapitre 4 : Modèles Riches vs Modèles Anémiques | DDD Journey</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comparaison détaillée avec exemples de code pour comprendre la différence entre modèles riches et anémiques">
+    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
+    <meta name="author" content="Colin Wilson - Lotus Labs" />
+    <meta name="email" content="support@aigis.uk" />
+    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="Version" content="v0.1.0" />
+    
+    <link rel="icon" href="http://localhost:1313/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="http://localhost:1313/site.webmanifest">
+<meta property="og:title" content="Chapitre 4 : Modèles Riches vs Modèles Anémiques" />
+<meta property="og:description" content="Comparaison détaillée avec exemples de code pour comprendre la différence entre modèles riches et anémiques" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-04-modeles-riches-vs-anemiques/" /><meta property="og:image" content="http://localhost:1313/opengraph/card-base-2_hu_86bf4bdd27cb1d5.png"/><meta property="article:section" content="fr" />
+<meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/opengraph/card-base-2_hu_86bf4bdd27cb1d5.png"/>
+<meta name="twitter:title" content="Chapitre 4 : Modèles Riches vs Modèles Anémiques"/>
+<meta name="twitter:description" content="Comparaison détaillée avec exemples de code pour comprendre la différence entre modèles riches et anémiques"/>
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Journey" href="/index.xml" />
+    
+    
+    
+            
+                <script type="text/javascript" src="http://localhost:1313/docs/js/flexsearch.bundle.js"></script>
+            
+        
+    
+    
+
+    <link rel="stylesheet" href="/docs/scss/style.css" crossorigin="anonymous">
+    
+    
+    </head>
+<body>
+        <div class="content">
+            <div class="page-wrapper toggled">
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href='/' aria-label="HomePage" alt="HomePage">
+            
+                <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+            
+        </a>
+    </div>
+    <div class="sidebar-content" style="height: calc(100% - 131px);">
+        <ul class="sidebar-menu">
+            
+                
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon current active">
+                            <button class="btn">
+                                Chapitres de Documentation
+                            </button>
+                            <div class="sidebar-submenu d-block">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon current active">
+                                                <button class="btn">
+                                                    Chapitres Fondamentaux
+                                                </button>
+                                                <div class="sidebar-submenu d-block">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction à l&#39;Event Storming et DDD</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-02-atelier-event-storming/">Chapitre 2 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-03-complexite-accidentelle-essentielle/">Chapitre 3 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-03-1-granularite-choix-architecturaux/">Chapitre 3.1 : Granularité des Choix Architecturaux</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class="current no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-04-modeles-riches-vs-anemiques/">Chapitre 4 : Modèles Riches vs Modèles Anémiques</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-05-architecture-evenementielle/">Chapitre 5 : Architecture Événementielle (Optionnel)</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/fondamentaux/chapitre-06-repositories-persistance/">Chapitre 6 : Repositories et Persistance</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Chapitres Optionnels
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Chapitres de Stockage
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class="sidebar-dropdown nested no-icon ">
+                                                                    <button class="btn">
+                                                                        Stockage SQL
+                                                                    </button>
+                                                                    <div class="sidebar-submenu ">
+                                                                        <ul>
+                                                                            
+                                                                                
+                                                                                
+                                                                                    <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/chapitres/stockage/sql/chapitre-12-stockage-sql-classique/">Chapitre 12 : Stockage SQL - Approche Classique</a></li>
+                                                                                
+                                                                            
+                                                                        </ul>
+                                                                    </div>
+                                                                </li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Chapitres Techniques
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Chapitres Avancés
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Annexes
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/fr/annexes/organisation-dossiers/">Organisation des dossiers en DDD</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/fr/navigation-interactive/">
+                                
+                                Navigation Interactive - Livre dont vous êtes le héros
+                            </a>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Commencer votre safari DDD
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Concepts de base
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/fr/concepts/">
+                                
+                                Concepts DDD
+                            </a>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/fr/implementation/">
+                                
+                                Implémentation
+                            </a>
+                        </li>
+                    
+                
+            
+        </ul>
+        
+    </div>
+    
+        <ul class="sidebar-footer list-unstyled mb-0">
+            
+        </ul>
+    
+</nav>
+
+                    <main class="page-content bg-transparent">
+                        
+<div id="top-header" class="top-header d-print-none">
+    <div class="header-bar d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+                <div class="small">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+                <div class="big">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+            </a>
+            <button id="close-sidebar" class="btn btn-icon btn-soft">
+                <span class="material-icons size-20 menu-icon align-middle">menu</span>
+            </button>
+            
+            
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
+            </div>
+
+        <div class="d-flex align-items-center">
+            <ul class="list-unstyled mb-0">
+                
+            </ul>
+            
+        </div>
+    </div>
+    
+    
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
+    
+    
+</div>
+
+
+                            <div class="container-fluid">
+                                <div class="layout-spacing">
+                                    
+                                        <div class="d-md-flex justify-content-between align-items-center"><nav aria-label="breadcrumb" class="d-inline-block pb-2 mt-1 mt-sm-0">
+    <ul id="breadcrumbs" class="breadcrumb bg-transparent mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+        
+            
+                <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/fr/">
+                        <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
+                    </a>
+                    <meta itemprop="position" content='1' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/fr/chapitres/">
+                        <span itemprop="name">Chapitres de Documentation</span>
+                    </a>
+                    <meta itemprop="position" content='2' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/fr/chapitres/fondamentaux/">
+                        <span itemprop="name">Chapitres Fondamentaux</span>
+                    </a>
+                    <meta itemprop="position" content='3' />
+                </li>
+            
+        
+            <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name">Chapitre 4 : Modèles Riches vs Modèles Anémiques</span>
+                <meta itemprop="position" content='4' />
+            </li>
+        
+    </ul>
+</nav></div>
+                                    
+                                    <div class="row flex-xl-nowrap">
+                                        
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
+    <div class="fw-bold text-uppercase mb-2">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a></li>
+    <li><a href="#-le-problème-des-modèles-anémiques">🚨 Le Problème des Modèles Anémiques</a>
+      <ul>
+        <li><a href="#quest-ce-quun-modèle-anémique-">Qu&rsquo;est-ce qu&rsquo;un Modèle Anémique ?</a></li>
+        <li><a href="#pourquoi-cest-problématique-">Pourquoi c&rsquo;est Problématique ?</a></li>
+        <li><a href="#exemple-concret--gestion-des-paiements">Exemple Concret : Gestion des Paiements</a></li>
+      </ul>
+    </li>
+    <li><a href="#-la-solution--modèles-riches">✅ La Solution : Modèles Riches</a>
+      <ul>
+        <li><a href="#principe-fondamental">Principe Fondamental</a></li>
+        <li><a href="#avantages-du-modèle-riche">Avantages du Modèle Riche</a></li>
+      </ul>
+    </li>
+    <li><a href="#-patterns-de-modèles-riches">🏗️ Patterns de Modèles Riches</a>
+      <ul>
+        <li><a href="#1-constructeurs-privés-avec-méthodes-statiques">1. Constructeurs Privés avec Méthodes Statiques</a></li>
+        <li><a href="#2-objets-de-valeur-pour-les-propriétés-complexes">2. Objets de Valeur pour les Propriétés Complexes</a></li>
+        <li><a href="#3-énumérations-pour-les-états">3. Énumérations pour les États</a></li>
+        <li><a href="#4-méthodes-métier-expressives">4. Méthodes Métier Expressives</a></li>
+      </ul>
+    </li>
+    <li><a href="#-transformation-dun-modèle-anémique">🔄 Transformation d&rsquo;un Modèle Anémique</a>
+      <ul>
+        <li><a href="#avant--modèle-anémique">Avant : Modèle Anémique</a></li>
+        <li><a href="#après--modèle-riche">Après : Modèle Riche</a></li>
+      </ul>
+    </li>
+    <li><a href="#-tests-des-modèles-riches">🧪 Tests des Modèles Riches</a>
+      <ul>
+        <li><a href="#tests-unitaires-simplifiés">Tests Unitaires Simplifiés</a></li>
+      </ul>
+    </li>
+    <li><a href="#-votre-prochaine-étape">🎯 Votre Prochaine Étape</a>
+      <ul>
+        <li><a href="#-option-a--application-simple-équipe-junior-développement-rapide">🟢 Option A : Application simple, équipe junior, développement rapide</a></li>
+        <li><a href="#-option-b--système-avec-intégrations-besoin-de-découplage">🟡 Option B : Système avec intégrations, besoin de découplage</a></li>
+        <li><a href="#-option-c--je-veux-dabord-voir-les-options-de-stockage">🔴 Option C : Je veux d&rsquo;abord voir les options de stockage</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </toc></div>
+                                        
+                                        
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
+                                            <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
+                                                Table of Contents
+                                            </button>
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a></li>
+    <li><a href="#-le-problème-des-modèles-anémiques">🚨 Le Problème des Modèles Anémiques</a>
+      <ul>
+        <li><a href="#quest-ce-quun-modèle-anémique-">Qu&rsquo;est-ce qu&rsquo;un Modèle Anémique ?</a></li>
+        <li><a href="#pourquoi-cest-problématique-">Pourquoi c&rsquo;est Problématique ?</a></li>
+        <li><a href="#exemple-concret--gestion-des-paiements">Exemple Concret : Gestion des Paiements</a></li>
+      </ul>
+    </li>
+    <li><a href="#-la-solution--modèles-riches">✅ La Solution : Modèles Riches</a>
+      <ul>
+        <li><a href="#principe-fondamental">Principe Fondamental</a></li>
+        <li><a href="#avantages-du-modèle-riche">Avantages du Modèle Riche</a></li>
+      </ul>
+    </li>
+    <li><a href="#-patterns-de-modèles-riches">🏗️ Patterns de Modèles Riches</a>
+      <ul>
+        <li><a href="#1-constructeurs-privés-avec-méthodes-statiques">1. Constructeurs Privés avec Méthodes Statiques</a></li>
+        <li><a href="#2-objets-de-valeur-pour-les-propriétés-complexes">2. Objets de Valeur pour les Propriétés Complexes</a></li>
+        <li><a href="#3-énumérations-pour-les-états">3. Énumérations pour les États</a></li>
+        <li><a href="#4-méthodes-métier-expressives">4. Méthodes Métier Expressives</a></li>
+      </ul>
+    </li>
+    <li><a href="#-transformation-dun-modèle-anémique">🔄 Transformation d&rsquo;un Modèle Anémique</a>
+      <ul>
+        <li><a href="#avant--modèle-anémique">Avant : Modèle Anémique</a></li>
+        <li><a href="#après--modèle-riche">Après : Modèle Riche</a></li>
+      </ul>
+    </li>
+    <li><a href="#-tests-des-modèles-riches">🧪 Tests des Modèles Riches</a>
+      <ul>
+        <li><a href="#tests-unitaires-simplifiés">Tests Unitaires Simplifiés</a></li>
+      </ul>
+    </li>
+    <li><a href="#-votre-prochaine-étape">🎯 Votre Prochaine Étape</a>
+      <ul>
+        <li><a href="#-option-a--application-simple-équipe-junior-développement-rapide">🟢 Option A : Application simple, équipe junior, développement rapide</a></li>
+        <li><a href="#-option-b--système-avec-intégrations-besoin-de-découplage">🟡 Option B : Système avec intégrations, besoin de découplage</a></li>
+        <li><a href="#-option-c--je-veux-dabord-voir-les-options-de-stockage">🔴 Option C : Je veux d&rsquo;abord voir les options de stockage</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
+                                            <div class="mb-0 d-flex">
+                                                
+                                                <h1 class="content-title mb-0">
+                                                    Chapitre 4 : Modèles Riches vs Modèles Anémiques
+                                                    
+                                                </h1>
+                                            </div>
+                                            
+                                            <div id="content" class="main-content" >
+                                                
+    
+    <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
+        <h1 id="chapitre-4--modèles-riches-vs-modèles-anémiques">Chapitre 4 : Modèles Riches vs Modèles Anémiques <a href="#chapitre-4--mod%c3%a8les-riches-vs-mod%c3%a8les-an%c3%a9miques" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><h2 id="-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre <a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ce chapitre vous montre concrètement la différence entre modèles riches et anémiques avec des exemples de code du projet Hive. Vous apprendrez :</p>
+<ul>
+<li>Comment identifier un modèle anémique</li>
+<li>Comment transformer un modèle anémique en modèle riche</li>
+<li>Les patterns de modèles riches</li>
+<li>La conservation de l&rsquo;intention métier</li>
+</ul>
+<h2 id="-le-problème-des-modèles-anémiques">🚨 Le Problème des Modèles Anémiques <a href="#-le-probl%c3%a8me-des-mod%c3%a8les-an%c3%a9miques" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="quest-ce-quun-modèle-anémique-">Qu&rsquo;est-ce qu&rsquo;un Modèle Anémique ? <a href="#quest-ce-quun-mod%c3%a8le-an%c3%a9mique-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Un modèle anémique est un modèle de données qui ne contient que des propriétés (getters/setters) sans logique métier. Toute la logique est déplacée dans des services externes.</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ❌ Modèle Anémique - Exemple typique
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $email,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $firstName,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $lastName,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">bool</span> $isActive <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Seulement des getters/setters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getId</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getEmail</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">email</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setEmail</span>(<span style="color:#a6e22e">string</span> $email)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> { $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">email</span> <span style="color:#f92672">=</span> $email; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getFirstName</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">firstName</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setFirstName</span>(<span style="color:#a6e22e">string</span> $firstName)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> { $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> $firstName; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getLastName</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">lastName</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setLastName</span>(<span style="color:#a6e22e">string</span> $lastName)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> { $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> $lastName; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isActive</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isActive</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setIsActive</span>(<span style="color:#a6e22e">bool</span> $isActive)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> { $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isActive</span> <span style="color:#f92672">=</span> $isActive; }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="pourquoi-cest-problématique-">Pourquoi c&rsquo;est Problématique ? <a href="#pourquoi-cest-probl%c3%a9matique-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ol>
+<li><strong>Perte de l&rsquo;Intention Métier</strong> : Le code ne reflète plus les règles métier</li>
+<li><strong>Violation du Principe DRY</strong> : La logique est dupliquée dans les services</li>
+<li><strong>Difficile à Tester</strong> : Les règles métier sont éparpillées</li>
+<li><strong>Évolution Complexe</strong> : Changer une règle métier nécessite de modifier plusieurs endroits</li>
+</ol>
+<h3 id="exemple-concret--gestion-des-paiements">Exemple Concret : Gestion des Paiements <a href="#exemple-concret--gestion-des-paiements" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ❌ Approche Anémique
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentService</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processPayment</span>(<span style="color:#a6e22e">Payment</span> $payment, <span style="color:#a6e22e">float</span> $amount)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Logique métier dans le service
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> ($amount <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InvalidArgumentException</span>(<span style="color:#e6db74">&#39;Amount must be positive&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStatus</span>() <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;pending&#39;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InvalidStateException</span>(<span style="color:#e6db74">&#39;Payment already processed&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($amount <span style="color:#f92672">&gt;</span> $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getMaxAmount</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BusinessRuleException</span>(<span style="color:#e6db74">&#39;Amount exceeds maximum&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Plus de logique métier...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setStatus</span>(<span style="color:#e6db74">&#39;processed&#39;</span>);
+</span></span><span style="display:flex;"><span>        $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setProcessedAt</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DateTime</span>());
+</span></span><span style="display:flex;"><span>        $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setAmount</span>($amount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-la-solution--modèles-riches">✅ La Solution : Modèles Riches <a href="#-la-solution--mod%c3%a8les-riches" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="principe-fondamental">Principe Fondamental <a href="#principe-fondamental" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le DDD place la logique métier au cœur du modèle, dans les entités et objets de valeur.</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Modèle Riche - Approche DDD
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Payment</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">PaymentId</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Money</span> $amount,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">PaymentStatus</span> $status,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#f92672">?</span><span style="color:#a6e22e">DateTime</span> $processedAt <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">PaymentId</span> $id, <span style="color:#a6e22e">Money</span> $amount)<span style="color:#f92672">:</span> <span style="color:#a6e22e">self</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($amount<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isNegative</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InvalidAmountException</span>(<span style="color:#e6db74">&#39;Payment amount cannot be negative&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">self</span>($id, $amount, <span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PENDING</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">process</span>(<span style="color:#a6e22e">Money</span> $amount)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">canBeProcessed</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PaymentCannotBeProcessedException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($amount<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isGreaterThan</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getMaxAllowedAmount</span>())) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AmountExceedsMaximumException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span> <span style="color:#f92672">=</span> $amount;
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PROCESSED</span>;
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">processedAt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DateTime</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">canBeProcessed</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PENDING</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getMaxAllowedAmount</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">Money</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Logique métier pour calculer le montant maximum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">multiply</span>(<span style="color:#ae81ff">1.1</span>); <span style="color:#75715e">// 10% de marge
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="avantages-du-modèle-riche">Avantages du Modèle Riche <a href="#avantages-du-mod%c3%a8le-riche" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ol>
+<li><strong>Intention Métier Préservée</strong> : Le code reflète les règles métier</li>
+<li><strong>Cohérence</strong> : Les règles sont centralisées dans le modèle</li>
+<li><strong>Testabilité</strong> : Facile de tester les règles métier</li>
+<li><strong>Évolutivité</strong> : Changer une règle ne nécessite qu&rsquo;une modification</li>
+</ol>
+<h2 id="-patterns-de-modèles-riches">🏗️ Patterns de Modèles Riches <a href="#-patterns-de-mod%c3%a8les-riches" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-constructeurs-privés-avec-méthodes-statiques">1. Constructeurs Privés avec Méthodes Statiques <a href="#1-constructeurs-priv%c3%a9s-avec-m%c3%a9thodes-statiques" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">UserId</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Email</span> $email,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">UserName</span> $name,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">UserStatus</span> $status
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">UserId</span> $id, <span style="color:#a6e22e">Email</span> $email, <span style="color:#a6e22e">UserName</span> $name)<span style="color:#f92672">:</span> <span style="color:#a6e22e">self</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">self</span>($id, $email, $name, <span style="color:#a6e22e">UserStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">ACTIVE</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fromExisting</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">UserId</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Email</span> $email,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">UserName</span> $name,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">UserStatus</span> $status
+</span></span><span style="display:flex;"><span>    )<span style="color:#f92672">:</span> <span style="color:#a6e22e">self</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">self</span>($id, $email, $name, $status);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="2-objets-de-valeur-pour-les-propriétés-complexes">2. Objets de Valeur pour les Propriétés Complexes <a href="#2-objets-de-valeur-pour-les-propri%c3%a9t%c3%a9s-complexes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Money</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">float</span> $amount,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Currency</span> $currency
+</span></span><span style="display:flex;"><span>    ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($amount <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InvalidArgumentException</span>(<span style="color:#e6db74">&#39;Amount cannot be negative&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">Money</span> $other)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Money</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">currency</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">equals</span>($other<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">currency</span>)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">CurrencyMismatchException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Money</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span> <span style="color:#f92672">+</span> $other<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">currency</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">multiply</span>(<span style="color:#a6e22e">float</span> $factor)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Money</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Money</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span> <span style="color:#f92672">*</span> $factor, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">currency</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isGreaterThan</span>(<span style="color:#a6e22e">Money</span> $other)<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">currency</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">equals</span>($other<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">currency</span>)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">CurrencyMismatchException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span> <span style="color:#f92672">&gt;</span> $other<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">amount</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="3-énumérations-pour-les-états">3. Énumérations pour les États <a href="#3-%c3%a9num%c3%a9rations-pour-les-%c3%a9tats" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">enum</span> <span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">PENDING</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pending&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">PROCESSED</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;processed&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">FAILED</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;failed&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">REFUNDED</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;refunded&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">canTransitionTo</span>(<span style="color:#a6e22e">PaymentStatus</span> $newStatus)<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">match</span> ($this) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PENDING</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">in_array</span>($newStatus, [<span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PROCESSED</span>, <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">FAILED</span>]),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PROCESSED</span> <span style="color:#f92672">=&gt;</span> $newStatus <span style="color:#f92672">===</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">REFUNDED</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">FAILED</span> <span style="color:#f92672">=&gt;</span> $newStatus <span style="color:#f92672">===</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PENDING</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">REFUNDED</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="4-méthodes-métier-expressives">4. Méthodes Métier Expressives <a href="#4-m%c3%a9thodes-m%c3%a9tier-expressives" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Subscription</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">renew</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">canBeRenewed</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SubscriptionCannotBeRenewedException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">SubscriptionStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">ACTIVE</span>;
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">renewedAt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DateTime</span>();
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">expiresAt</span> <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">calculateNewExpirationDate</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">cancel</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">canBeCancelled</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SubscriptionCannotBeCancelledException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">SubscriptionStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">CANCELLED</span>;
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">cancelledAt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DateTime</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">canBeRenewed</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">SubscriptionStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">EXPIRED</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&amp;&amp;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isNotInGracePeriod</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">canBeCancelled</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">SubscriptionStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">ACTIVE</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isInGracePeriod</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-transformation-dun-modèle-anémique">🔄 Transformation d&rsquo;un Modèle Anémique <a href="#-transformation-dun-mod%c3%a8le-an%c3%a9mique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="avant--modèle-anémique">Avant : Modèle Anémique <a href="#avant--mod%c3%a8le-an%c3%a9mique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ❌ Modèle Anémique
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Order</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $customerId,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">array</span> $items,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">float</span> $total,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $status
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Getters et setters uniquement
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getId</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">id</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getCustomerId</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">customerId</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getItems</span>()<span style="color:#f92672">:</span> <span style="color:#66d9ef">array</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">items</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setItems</span>(<span style="color:#66d9ef">array</span> $items)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> { $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">items</span> <span style="color:#f92672">=</span> $items; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTotal</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">float</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">total</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setTotal</span>(<span style="color:#a6e22e">float</span> $total)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> { $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">total</span> <span style="color:#f92672">=</span> $total; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getStatus</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> { <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setStatus</span>(<span style="color:#a6e22e">string</span> $status)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> { $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> $status; }
+</span></span><span style="display:flex;"><span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Logique métier dans le service
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OrderService</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addItem</span>(<span style="color:#a6e22e">Order</span> $order, <span style="color:#a6e22e">string</span> $itemId, <span style="color:#a6e22e">int</span> $quantity, <span style="color:#a6e22e">float</span> $price)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $order<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getItems</span>()[] <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;id&#39;</span> <span style="color:#f92672">=&gt;</span> $itemId, <span style="color:#e6db74">&#39;quantity&#39;</span> <span style="color:#f92672">=&gt;</span> $quantity, <span style="color:#e6db74">&#39;price&#39;</span> <span style="color:#f92672">=&gt;</span> $price];
+</span></span><span style="display:flex;"><span>        $order<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setTotal</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">calculateTotal</span>($order<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getItems</span>()));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">confirm</span>(<span style="color:#a6e22e">Order</span> $order)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($order<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStatus</span>() <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;draft&#39;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InvalidStateException</span>(<span style="color:#e6db74">&#39;Order cannot be confirmed&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        $order<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setStatus</span>(<span style="color:#e6db74">&#39;confirmed&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="après--modèle-riche">Après : Modèle Riche <a href="#apr%c3%a8s--mod%c3%a8le-riche" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Modèle Riche
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Order</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">OrderId</span> $id,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">CustomerId</span> $customerId,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">OrderItems</span> $items,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Money</span> $total,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">OrderStatus</span> $status
+</span></span><span style="display:flex;"><span>    ) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">OrderId</span> $id, <span style="color:#a6e22e">CustomerId</span> $customerId)<span style="color:#f92672">:</span> <span style="color:#a6e22e">self</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">self</span>(
+</span></span><span style="display:flex;"><span>            $id,
+</span></span><span style="display:flex;"><span>            $customerId,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">OrderItems</span><span style="color:#f92672">::</span><span style="color:#a6e22e">empty</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Money</span><span style="color:#f92672">::</span><span style="color:#a6e22e">zero</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">OrderStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">DRAFT</span>
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addItem</span>(<span style="color:#a6e22e">ItemId</span> $itemId, <span style="color:#a6e22e">Quantity</span> $quantity, <span style="color:#a6e22e">Money</span> $price)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">canAddItems</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">OrderCannotAddItemsException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">items</span> <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">items</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">OrderItem</span>($itemId, $quantity, $price));
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">total</span> <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">items</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">calculateTotal</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">confirm</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">canBeConfirmed</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">OrderCannotBeConfirmedException</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">OrderStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">CONFIRMED</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">canAddItems</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">OrderStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">DRAFT</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">canBeConfirmed</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">OrderStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">DRAFT</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">items</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isEmpty</span>()
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&amp;&amp;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">total</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">isPositive</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-tests-des-modèles-riches">🧪 Tests des Modèles Riches <a href="#-tests-des-mod%c3%a8les-riches" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="tests-unitaires-simplifiés">Tests Unitaires Simplifiés <a href="#tests-unitaires-simplifi%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Test]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">it_can_be_created_with_valid_amount</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $payment <span style="color:#f92672">=</span> <span style="color:#a6e22e">Payment</span><span style="color:#f92672">::</span><span style="color:#a6e22e">create</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">PaymentId</span><span style="color:#f92672">::</span><span style="color:#a6e22e">generate</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Money</span>(<span style="color:#ae81ff">100.0</span>, <span style="color:#a6e22e">Currency</span><span style="color:#f92672">::</span><span style="color:#a6e22e">EUR</span>)
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertEquals</span>(<span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PENDING</span>, $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStatus</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Test]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">it_cannot_be_created_with_negative_amount</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">expectException</span>(<span style="color:#a6e22e">InvalidAmountException</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Payment</span><span style="color:#f92672">::</span><span style="color:#a6e22e">create</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">PaymentId</span><span style="color:#f92672">::</span><span style="color:#a6e22e">generate</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Money</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">100.0</span>, <span style="color:#a6e22e">Currency</span><span style="color:#f92672">::</span><span style="color:#a6e22e">EUR</span>)
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[Test]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">it_can_be_processed_when_pending</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $payment <span style="color:#f92672">=</span> <span style="color:#a6e22e">Payment</span><span style="color:#f92672">::</span><span style="color:#a6e22e">create</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">PaymentId</span><span style="color:#f92672">::</span><span style="color:#a6e22e">generate</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Money</span>(<span style="color:#ae81ff">100.0</span>, <span style="color:#a6e22e">Currency</span><span style="color:#f92672">::</span><span style="color:#a6e22e">EUR</span>)
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">process</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Money</span>(<span style="color:#ae81ff">100.0</span>, <span style="color:#a6e22e">Currency</span><span style="color:#f92672">::</span><span style="color:#a6e22e">EUR</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertEquals</span>(<span style="color:#a6e22e">PaymentStatus</span><span style="color:#f92672">::</span><span style="color:#a6e22e">PROCESSED</span>, $payment<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getStatus</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-votre-prochaine-étape">🎯 Votre Prochaine Étape <a href="#-votre-prochaine-%c3%a9tape" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Maintenant que vous maîtrisez les modèles riches, quel est votre niveau de complexité ?</p>
+<h3 id="-option-a--application-simple-équipe-junior-développement-rapide">🟢 Option A : Application simple, équipe junior, développement rapide <a href="#-option-a--application-simple-%c3%a9quipe-junior-d%c3%a9veloppement-rapide" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez une approche simple et efficace</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Équipe de 1-3 développeurs</li>
+<li>Application monolithique</li>
+<li>Peu d&rsquo;intégrations externes</li>
+<li>Développement rapide requis</li>
+<li>Cohérence forte requise</li>
+</ul>
+<p><strong>Architecture recommandée</strong> : Classique
+<strong>Temps estimé</strong> : 1-2 semaines d&rsquo;apprentissage</p>
+<p>→ <strong>Aller au Chapitre 6</strong> (Repositories et Persistance) → <strong>Parcours Classique</strong></p>
+<hr>
+<h3 id="-option-b--système-avec-intégrations-besoin-de-découplage">🟡 Option B : Système avec intégrations, besoin de découplage <a href="#-option-b--syst%c3%a8me-avec-int%c3%a9grations-besoin-de-d%c3%a9couplage" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez explorer l&rsquo;architecture événementielle</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Équipe de 3-8 développeurs</li>
+<li>Intégrations multiples</li>
+<li>Besoin de découplage</li>
+<li>Architecture distribuée</li>
+<li>Équipe expérimentée</li>
+</ul>
+<p><strong>Architecture recommandée</strong> : Événementielle
+<strong>Temps estimé</strong> : 2-4 semaines d&rsquo;apprentissage</p>
+<p>→ <strong>Aller au Chapitre 5</strong> (Architecture Événementielle)</p>
+<hr>
+<h3 id="-option-c--je-veux-dabord-voir-les-options-de-stockage">🔴 Option C : Je veux d&rsquo;abord voir les options de stockage <a href="#-option-c--je-veux-dabord-voir-les-options-de-stockage" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez comprendre les patterns de repository</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Besoin de comprendre la persistance</li>
+<li>Implémentation technique importante</li>
+<li>Choix de stockage à faire</li>
+<li>Patterns de repository à maîtriser</li>
+</ul>
+<p><strong>Temps estimé</strong> : 30-45 minutes</p>
+<p>→ <strong>Aller au Chapitre 6</strong> (Repositories et Persistance)</p>
+<hr>
+<p><strong>💡 Conseil</strong> : Si vous n&rsquo;êtes pas sûr, choisissez l&rsquo;option C pour comprendre les patterns de repository avant de prendre une décision architecturale.</p>
+<p><strong>🔄 Alternative</strong> : Si vous voulez tout voir dans l&rsquo;ordre, continuez avec le Chapitre 5.</p>
+
+    </div>
+
+    
+
+    
+                                            </div>
+                                            <div><hr class="doc-hr">
+<div id="doc-nav" class="d-print-none">
+
+	<div class="row flex-xl-nowrap ">
+	<div class="col-sm-6 pt-2 doc-next">
+		<a href="/fr/chapitres/fondamentaux/chapitre-03-1-granularite-choix-architecturaux/">
+			<div class="card h-100 my-1">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Chapitre 3.1 : Granularité des Choix Architecturaux</p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	<div class="col-sm-6 pt-2 doc-prev">
+		<a class="ms-auto" href="/fr/chapitres/fondamentaux/chapitre-05-architecture-evenementielle/">
+			<div class="card h-100 my-1 text-end">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Chapitre 5 : Architecture Événementielle (Optionnel) <i class="material-icons align-middle">navigate_next</i></p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	</div>
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</main>
+            </div>
+        </div>
+
+        
+        
+        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        
+        
+
+        
+        
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+    <script src="/docs/js/bootstrap.js" defer></script>
+
+
+    <script type="text/javascript" src="http://localhost:1313/docs/js/bundle.js" defer></script>
+
+        
+
+        
+        <script type="module">
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script>
+        
+    </body>
+</html>

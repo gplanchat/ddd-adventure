@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Chapitre 2.2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business | DDD Journey</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guide complet de l&#39;Impact Mapping pour recentrer le périmètre d&#39;un projet autour d&#39;objectifs business précis">
+    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
+    <meta name="author" content="Colin Wilson - Lotus Labs" />
+    <meta name="email" content="support@aigis.uk" />
+    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="Version" content="v0.1.0" />
+    
+    <link rel="icon" href="http://localhost:1313/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="http://localhost:1313/site.webmanifest">
+<meta property="og:title" content="Chapitre 2.2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business" />
+<meta property="og:description" content="Guide complet de l&#39;Impact Mapping pour recentrer le périmètre d&#39;un projet autour d&#39;objectifs business précis" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/chapitres/fondamentaux/chapitre-02-2-impact-mapping/" /><meta property="og:image" content="http://localhost:1313/opengraph/card-base-2_hu_2ea8ac2ec50008ce.png"/><meta property="article:section" content="chapitres" />
+<meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/opengraph/card-base-2_hu_2ea8ac2ec50008ce.png"/>
+<meta name="twitter:title" content="Chapitre 2.2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business"/>
+<meta name="twitter:description" content="Guide complet de l&#39;Impact Mapping pour recentrer le périmètre d&#39;un projet autour d&#39;objectifs business précis"/>
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Journey" href="/index.xml" />
+    
+    
+    
+            
+                <script type="text/javascript" src="http://localhost:1313/docs/js/flexsearch.bundle.js"></script>
+            
+        
+    
+    
+
+    <link rel="stylesheet" href="/docs/scss/style.css" crossorigin="anonymous">
+    
+    
+    </head>
+<body>
+        <div class="content">
+            <div class="page-wrapper toggled">
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href='/' aria-label="HomePage" alt="HomePage">
+            
+                <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+            
+        </a>
+    </div>
+    <div class="sidebar-content" style="height: calc(100% - 131px);">
+        <ul class="sidebar-menu">
+            
+                
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon current active">
+                            <button class="btn">
+                                Chapitres Fondamentaux
+                            </button>
+                            <div class="sidebar-submenu d-block">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-02-atelier-event-storming/">Chapitre 2 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-02-1-example-mapping/">Chapitre 2.1 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="current no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-02-2-impact-mapping/">Chapitre 2.2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-03-complexite-accidentelle-essentielle/">Chapitre 3 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-03-1-granularite-choix-architecturaux/">Chapitre 3.1 : Granularité des Choix Architecturaux</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-04-modeles-riches-vs-anemiques/">Chapitre 4 : Modèles Riches vs Modèles Anémiques</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-05-architecture-evenementielle/">Chapitre 5 : Architecture Événementielle (Optionnel)</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/fondamentaux/chapitre-06-repositories-persistance/">Chapitre 6 : Repositories et Persistance</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Optionnels
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-07-event-sourcing/">Chapitre 7 : Event Sourcing - La Source de Vérité</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-08-architecture-cqs/">Chapitre 8 : Architecture CQS - Command Query Separation</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-09-architecture-cqrs/">Chapitre 9 : Architecture CQRS avec API Platform</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-10-cqrs-event-sourcing-combines/">Chapitre 10 : CQRS &#43; Event Sourcing Combinés</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/optionnels/chapitre-11-projections-event-sourcing/">Chapitre 11 : Projections Event Sourcing</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres de Stockage
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage SQL
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/chapitres/stockage/sql/chapitre-12-stockage-sql-classique/">Chapitre 12 : Stockage SQL - Approche Classique</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/chapitres/techniques/">
+                                
+                                Chapitres Techniques
+                            </a>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="http://localhost:1313/chapitres/avances/">
+                                
+                                Chapitres Avancés
+                            </a>
+                        </li>
+                    
+                
+            
+        </ul>
+        
+    </div>
+    
+        <ul class="sidebar-footer list-unstyled mb-0">
+            
+        </ul>
+    
+</nav>
+
+                    <main class="page-content bg-transparent">
+                        
+<div id="top-header" class="top-header d-print-none">
+    <div class="header-bar d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+                <div class="small">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+                <div class="big">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+            </a>
+            <button id="close-sidebar" class="btn btn-icon btn-soft">
+                <span class="material-icons size-20 menu-icon align-middle">menu</span>
+            </button>
+            
+            
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
+            </div>
+
+        <div class="d-flex align-items-center">
+            <ul class="list-unstyled mb-0">
+                
+            </ul>
+            
+        </div>
+    </div>
+    
+    
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
+    
+    
+</div>
+
+
+                            <div class="container-fluid">
+                                <div class="layout-spacing">
+                                    
+                                        <div class="d-md-flex justify-content-between align-items-center"><nav aria-label="breadcrumb" class="d-inline-block pb-2 mt-1 mt-sm-0">
+    <ul id="breadcrumbs" class="breadcrumb bg-transparent mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+        
+            
+                <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/">
+                        <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
+                    </a>
+                    <meta itemprop="position" content='1' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/fondamentaux/">
+                        <span itemprop="name">Chapitres Fondamentaux</span>
+                    </a>
+                    <meta itemprop="position" content='2' />
+                </li>
+            
+        
+            <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name">Chapitre 2.2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</span>
+                <meta itemprop="position" content='3' />
+            </li>
+        
+    </ul>
+</nav></div>
+                                    
+                                    <div class="row flex-xl-nowrap">
+                                        
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
+    <div class="fw-bold text-uppercase mb-2">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a></li>
+    <li><a href="#quest-ce-que-limpact-mapping-">Qu&rsquo;est-ce que l&rsquo;Impact Mapping ?</a>
+      <ul>
+        <li><a href="#définition">Définition</a></li>
+        <li><a href="#pourquoi-limpact-mapping-">Pourquoi l&rsquo;Impact Mapping ?</a></li>
+        <li><a href="#quand-utiliser-limpact-mapping-">Quand Utiliser l&rsquo;Impact Mapping ?</a></li>
+      </ul>
+    </li>
+    <li><a href="#les-4-niveaux-de-limpact-map">Les 4 Niveaux de l&rsquo;Impact Map</a>
+      <ul>
+        <li><a href="#1--lobjectif-le-pourquoi-">1. 🎯 L&rsquo;Objectif (Le Pourquoi ?)</a></li>
+        <li><a href="#2--les-acteurs-le-qui-">2. 👥 Les Acteurs (Le Qui ?)</a></li>
+        <li><a href="#3--les-impacts-le-comment-">3. 🎯 Les Impacts (Le Comment ?)</a></li>
+        <li><a href="#4--les-livrables-le-quoi-">4. 📦 Les Livrables (Le Quoi ?)</a></li>
+      </ul>
+    </li>
+    <li><a href="#guide-pratique-de-latelier">Guide Pratique de l&rsquo;Atelier</a>
+      <ul>
+        <li><a href="#préparation-de-latelier">Préparation de l&rsquo;Atelier</a></li>
+        <li><a href="#déroulement-de-latelier">Déroulement de l&rsquo;Atelier</a></li>
+        <li><a href="#exemple-complet--plateforme-de-formation">Exemple Complet : Plateforme de Formation</a></li>
+      </ul>
+    </li>
+    <li><a href="#écueils-à-éviter">Écueils à Éviter</a>
+      <ul>
+        <li><a href="#-trop-de-participants">❌ Trop de Participants</a></li>
+        <li><a href="#-ne-pas-impliquer-les-bonnes-personnes">❌ Ne Pas Impliquer les Bonnes Personnes</a></li>
+        <li><a href="#-critiquer-trop-tôt">❌ Critiquer Trop Tôt</a></li>
+        <li><a href="#-post-rationaliser-une-liste-de-fonctionnalités">❌ Post-Rationaliser une Liste de Fonctionnalités</a></li>
+        <li><a href="#-se-perdre-dans-les-détails">❌ Se Perdre dans les Détails</a></li>
+      </ul>
+    </li>
+    <li><a href="#intégration-avec-event-storming-et-example-mapping">Intégration avec Event Storming et Example Mapping</a>
+      <ul>
+        <li><a href="#workflow-complet">Workflow Complet</a></li>
+        <li><a href="#exemple-de-workflow">Exemple de Workflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#avantages-de-limpact-mapping">Avantages de l&rsquo;Impact Mapping</a>
+      <ul>
+        <li><a href="#1-alignement-business-technique">1. <strong>Alignement Business-Technique</strong></a></li>
+        <li><a href="#2-priorisation-claire">2. <strong>Priorisation Claire</strong></a></li>
+        <li><a href="#3-communication-améliorée">3. <strong>Communication Améliorée</strong></a></li>
+        <li><a href="#4-flexibilité">4. <strong>Flexibilité</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-votre-prochaine-étape">🎯 Votre Prochaine Étape</a>
+      <ul>
+        <li><a href="#-option-a--je-veux-détailler-les-règles-métier-avec-lexample-mapping">🟢 Option A : Je veux détailler les règles métier avec l&rsquo;Example Mapping</a></li>
+        <li><a href="#-option-b--je-veux-comprendre-la-complexité-architecturale">🟡 Option B : Je veux comprendre la complexité architecturale</a></li>
+        <li><a href="#-option-c--je-veux-voir-des-exemples-concrets-de-modèles">🔴 Option C : Je veux voir des exemples concrets de modèles</a></li>
+      </ul>
+    </li>
+    <li><a href="#références">Références</a></li>
+  </ul>
+</nav>
+    </toc></div>
+                                        
+                                        
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
+                                            <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
+                                                Table of Contents
+                                            </button>
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a></li>
+    <li><a href="#quest-ce-que-limpact-mapping-">Qu&rsquo;est-ce que l&rsquo;Impact Mapping ?</a>
+      <ul>
+        <li><a href="#définition">Définition</a></li>
+        <li><a href="#pourquoi-limpact-mapping-">Pourquoi l&rsquo;Impact Mapping ?</a></li>
+        <li><a href="#quand-utiliser-limpact-mapping-">Quand Utiliser l&rsquo;Impact Mapping ?</a></li>
+      </ul>
+    </li>
+    <li><a href="#les-4-niveaux-de-limpact-map">Les 4 Niveaux de l&rsquo;Impact Map</a>
+      <ul>
+        <li><a href="#1--lobjectif-le-pourquoi-">1. 🎯 L&rsquo;Objectif (Le Pourquoi ?)</a></li>
+        <li><a href="#2--les-acteurs-le-qui-">2. 👥 Les Acteurs (Le Qui ?)</a></li>
+        <li><a href="#3--les-impacts-le-comment-">3. 🎯 Les Impacts (Le Comment ?)</a></li>
+        <li><a href="#4--les-livrables-le-quoi-">4. 📦 Les Livrables (Le Quoi ?)</a></li>
+      </ul>
+    </li>
+    <li><a href="#guide-pratique-de-latelier">Guide Pratique de l&rsquo;Atelier</a>
+      <ul>
+        <li><a href="#préparation-de-latelier">Préparation de l&rsquo;Atelier</a></li>
+        <li><a href="#déroulement-de-latelier">Déroulement de l&rsquo;Atelier</a></li>
+        <li><a href="#exemple-complet--plateforme-de-formation">Exemple Complet : Plateforme de Formation</a></li>
+      </ul>
+    </li>
+    <li><a href="#écueils-à-éviter">Écueils à Éviter</a>
+      <ul>
+        <li><a href="#-trop-de-participants">❌ Trop de Participants</a></li>
+        <li><a href="#-ne-pas-impliquer-les-bonnes-personnes">❌ Ne Pas Impliquer les Bonnes Personnes</a></li>
+        <li><a href="#-critiquer-trop-tôt">❌ Critiquer Trop Tôt</a></li>
+        <li><a href="#-post-rationaliser-une-liste-de-fonctionnalités">❌ Post-Rationaliser une Liste de Fonctionnalités</a></li>
+        <li><a href="#-se-perdre-dans-les-détails">❌ Se Perdre dans les Détails</a></li>
+      </ul>
+    </li>
+    <li><a href="#intégration-avec-event-storming-et-example-mapping">Intégration avec Event Storming et Example Mapping</a>
+      <ul>
+        <li><a href="#workflow-complet">Workflow Complet</a></li>
+        <li><a href="#exemple-de-workflow">Exemple de Workflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#avantages-de-limpact-mapping">Avantages de l&rsquo;Impact Mapping</a>
+      <ul>
+        <li><a href="#1-alignement-business-technique">1. <strong>Alignement Business-Technique</strong></a></li>
+        <li><a href="#2-priorisation-claire">2. <strong>Priorisation Claire</strong></a></li>
+        <li><a href="#3-communication-améliorée">3. <strong>Communication Améliorée</strong></a></li>
+        <li><a href="#4-flexibilité">4. <strong>Flexibilité</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-votre-prochaine-étape">🎯 Votre Prochaine Étape</a>
+      <ul>
+        <li><a href="#-option-a--je-veux-détailler-les-règles-métier-avec-lexample-mapping">🟢 Option A : Je veux détailler les règles métier avec l&rsquo;Example Mapping</a></li>
+        <li><a href="#-option-b--je-veux-comprendre-la-complexité-architecturale">🟡 Option B : Je veux comprendre la complexité architecturale</a></li>
+        <li><a href="#-option-c--je-veux-voir-des-exemples-concrets-de-modèles">🔴 Option C : Je veux voir des exemples concrets de modèles</a></li>
+      </ul>
+    </li>
+    <li><a href="#références">Références</a></li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
+                                            <div class="mb-0 d-flex">
+                                                
+                                                <h1 class="content-title mb-0">
+                                                    Chapitre 2.2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business
+                                                    
+                                                </h1>
+                                            </div>
+                                            
+                                            <div id="content" class="main-content" >
+                                                
+    
+    <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
+        <h2 id="-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre <a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ce chapitre vous donne une méthodologie complète pour utiliser l&rsquo;Impact Mapping avant l&rsquo;Event Storming. Vous apprendrez :</p>
+<ul>
+<li>Comment aligner le produit sur les objectifs business</li>
+<li>Les 4 niveaux de l&rsquo;Impact Map (objectif, acteurs, impacts, livrables)</li>
+<li>Comment éviter les écueils courants</li>
+<li>L&rsquo;intégration avec l&rsquo;Event Storming et l&rsquo;Example Mapping</li>
+</ul>
+<h2 id="quest-ce-que-limpact-mapping-">Qu&rsquo;est-ce que l&rsquo;Impact Mapping ? <a href="#quest-ce-que-limpact-mapping-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="définition">Définition <a href="#d%c3%a9finition" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>L&rsquo;Impact Mapping est une méthode de planification stratégique créée par <a href="https://gojko.net" rel="external" target="_blank">Gojko Adzic<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> qui aide à établir et visualiser les relations de causalité entre :</p>
+<ul>
+<li>Un objectif business</li>
+<li>Les acteurs impliqués</li>
+<li>Les impacts attendus sur ces acteurs</li>
+<li>Les livrables qui vont créer ces impacts</li>
+</ul>
+<h3 id="pourquoi-limpact-mapping-">Pourquoi l&rsquo;Impact Mapping ? <a href="#pourquoi-limpact-mapping-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-recentrer-sur-les-objectifs-business">1. <strong>Recentrer sur les Objectifs Business</strong> <a href="#1-recentrer-sur-les-objectifs-business" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>Au lieu de partir d&rsquo;une liste de fonctionnalités, l&rsquo;Impact Mapping part des objectifs business et remonte vers les solutions.</p>
+<h4 id="2-favoriser-la-collaboration">2. <strong>Favoriser la Collaboration</strong> <a href="#2-favoriser-la-collaboration" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>L&rsquo;atelier implique business owners et équipes techniques pour créer une compréhension commune.</p>
+<h4 id="3-challenger-les-hypothèses">3. <strong>Challenger les Hypothèses</strong> <a href="#3-challenger-les-hypoth%c3%a8ses" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>La méthode encourage à définir et challenger les hypothèses sur lesquelles se base la stratégie.</p>
+<h4 id="4-intégration-avec-le-lean-startup">4. <strong>Intégration avec le Lean Startup</strong> <a href="#4-int%c3%a9gration-avec-le-lean-startup" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><p>L&rsquo;Impact Mapping s&rsquo;inscrit parfaitement dans la Build-Measure-Learn Feedback Loop.</p>
+<h3 id="quand-utiliser-limpact-mapping-">Quand Utiliser l&rsquo;Impact Mapping ? <a href="#quand-utiliser-limpact-mapping-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="-utilisez-limpact-mapping-si-">✅ Utilisez l&rsquo;Impact Mapping si : <a href="#-utilisez-limpact-mapping-si-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Vous démarrez un nouveau projet</li>
+<li>Vous voulez recentrer un projet existant</li>
+<li>Les objectifs business ne sont pas clairs</li>
+<li>Il y a un décalage entre business et technique</li>
+<li>Vous voulez challenger une roadmap existante</li>
+</ul>
+<h4 id="-évitez-limpact-mapping-si-">❌ Évitez l&rsquo;Impact Mapping si : <a href="#-%c3%a9vitez-limpact-mapping-si-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Les objectifs business sont déjà très clairs</li>
+<li>Le périmètre est très technique</li>
+<li>L&rsquo;équipe est déjà parfaitement alignée</li>
+<li>Le temps est très limité</li>
+</ul>
+<h2 id="les-4-niveaux-de-limpact-map">Les 4 Niveaux de l&rsquo;Impact Map <a href="#les-4-niveaux-de-limpact-map" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1--lobjectif-le-pourquoi-">1. 🎯 L&rsquo;Objectif (Le Pourquoi ?) <a href="#1--lobjectif-le-pourquoi-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>L&rsquo;élément central de l&rsquo;Impact Map est l&rsquo;objectif stratégique poursuivi. La question clé est : <strong>&ldquo;Pourquoi faisons-nous cela ?&rdquo;</strong></p>
+<h4 id="caractéristiques-dun-bon-objectif">Caractéristiques d&rsquo;un Bon Objectif <a href="#caract%c3%a9ristiques-dun-bon-objectif" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li><strong>Mesurable</strong> : On peut quantifier le succès</li>
+<li><strong>Temps défini</strong> : Horizon de 3-6 mois</li>
+<li><strong>Business</strong> : Pas technique</li>
+<li><strong>Motivant</strong> : Inspire l&rsquo;équipe</li>
+</ul>
+<h4 id="exemples-de-bons-objectifs">Exemples de Bons Objectifs <a href="#exemples-de-bons-objectifs" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>✅ Augmenter les revenus de 20% d&#39;ici 6 mois
+✅ Réduire le taux d&#39;abandon de 30% d&#39;ici 3 mois
+✅ Améliorer la satisfaction client de 15% d&#39;ici 4 mois</code></pre>
+<h4 id="exemples-de-mauvais-objectifs">Exemples de Mauvais Objectifs <a href="#exemples-de-mauvais-objectifs" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>❌ Créer une application mobile
+❌ Migrer vers React
+❌ Améliorer les performances
+❌ Être plus agile</code></pre>
+<h3 id="2--les-acteurs-le-qui-">2. 👥 Les Acteurs (Le Qui ?) <a href="#2--les-acteurs-le-qui-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Identifier qui peut avoir une influence sur le résultat. Les questions clés sont :</p>
+<ul>
+<li><strong>Sur le comportement de qui souhaitons-nous avoir un impact ?</strong></li>
+<li><strong>Qui peut produire l&rsquo;effet attendu ?</strong></li>
+<li><strong>Qui peut nous aider à atteindre l&rsquo;objectif ?</strong></li>
+<li><strong>Qui peut nous empêcher ou nous freiner ?</strong></li>
+</ul>
+<h4 id="types-dacteurs">Types d&rsquo;Acteurs <a href="#types-dacteurs" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li><strong>Utilisateurs finaux</strong> : Ceux qui utilisent le produit</li>
+<li><strong>Influenceurs</strong> : Ceux qui influencent les utilisateurs</li>
+<li><strong>Décideurs</strong> : Ceux qui prennent les décisions d&rsquo;achat</li>
+<li><strong>Opposants</strong> : Ceux qui peuvent freiner le projet</li>
+</ul>
+<h4 id="exemple--système-de-réservation-hôtelière">Exemple : Système de Réservation Hôtelière <a href="#exemple--syst%c3%a8me-de-r%c3%a9servation-h%c3%b4teli%c3%a8re" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>👥 ACTEURS :
+- Voyageurs (utilisateurs finaux)
+- Agences de voyage (influenceurs)
+- Directeurs d&#39;hôtel (décideurs)
+- Concurrence (opposants)</code></pre>
+<h3 id="3--les-impacts-le-comment-">3. 🎯 Les Impacts (Le Comment ?) <a href="#3--les-impacts-le-comment-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Définir les changements de comportement souhaités chez les acteurs. La question clé est : <strong>&ldquo;Comment pouvons-nous changer leur comportement ?&rdquo;</strong></p>
+<h4 id="caractéristiques-dun-bon-impact">Caractéristiques d&rsquo;un Bon Impact <a href="#caract%c3%a9ristiques-dun-bon-impact" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li><strong>Comportemental</strong> : Décrit un changement d&rsquo;action</li>
+<li><strong>Mesurable</strong> : On peut observer le changement</li>
+<li><strong>Spécifique</strong> : Pas vague ou général</li>
+<li><strong>Réaliste</strong> : Atteignable avec les moyens disponibles</li>
+</ul>
+<h4 id="exemples-de-bons-impacts">Exemples de Bons Impacts <a href="#exemples-de-bons-impacts" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>✅ Les voyageurs réservent plus souvent via notre plateforme
+✅ Les agences recommandent notre hôtel en priorité
+✅ Les directeurs d&#39;hôtel renouvellent leur contrat
+✅ La concurrence perd des parts de marché</code></pre>
+<h4 id="exemples-de-mauvais-impacts">Exemples de Mauvais Impacts <a href="#exemples-de-mauvais-impacts" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>❌ Les utilisateurs sont satisfaits
+❌ Le système est plus performant
+❌ L&#39;interface est plus intuitive
+❌ Le code est plus maintenable</code></pre>
+<h3 id="4--les-livrables-le-quoi-">4. 📦 Les Livrables (Le Quoi ?) <a href="#4--les-livrables-le-quoi-" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Définir les fonctionnalités et initiatives qui vont créer les impacts. La question clé est : <strong>&ldquo;Que pouvons-nous faire pour produire ces impacts ?&rdquo;</strong></p>
+<h4 id="caractéristiques-dun-bon-livrable">Caractéristiques d&rsquo;un Bon Livrable <a href="#caract%c3%a9ristiques-dun-bon-livrable" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li><strong>Actionnable</strong> : On peut l&rsquo;implémenter</li>
+<li><strong>Lien clair</strong> : Connecté à un impact spécifique</li>
+<li><strong>Testable</strong> : On peut valider son efficacité</li>
+<li><strong>Priorisable</strong> : On peut le classer par importance</li>
+</ul>
+<h4 id="exemple--système-de-réservation-hôtelière-1">Exemple : Système de Réservation Hôtelière <a href="#exemple--syst%c3%a8me-de-r%c3%a9servation-h%c3%b4teli%c3%a8re-1" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>📦 LIVRABLES :
+- Système de réservation en ligne
+- Programme de fidélité
+- Interface mobile optimisée
+- Système de notation et avis
+- Intégration avec les agences de voyage</code></pre>
+<h2 id="guide-pratique-de-latelier">Guide Pratique de l&rsquo;Atelier <a href="#guide-pratique-de-latelier" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="préparation-de-latelier">Préparation de l&rsquo;Atelier <a href="#pr%c3%a9paration-de-latelier" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-composer-l">1. <strong>Composer l&rsquo;Équipe (5-6 personnes maximum)</strong> <a href="#1-composer-l" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li><strong>1 Business Owner Senior</strong> : A le pouvoir de décision</li>
+<li><strong>1-2 Représentants Techniques</strong> : Comprendent les contraintes</li>
+<li><strong>1-2 Experts Métier</strong> : Connaissent les utilisateurs</li>
+<li><strong>1 Facilitateur</strong> : Anime l&rsquo;atelier</li>
+</ul>
+<h4 id="2-préparer-le-matériel">2. <strong>Préparer le Matériel</strong> <a href="#2-pr%c3%a9parer-le-mat%c3%a9riel" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Tableau blanc ou mur</li>
+<li>Post-its de 4 couleurs différentes</li>
+<li>Marqueurs</li>
+<li>Timer (pour respecter les phases)</li>
+</ul>
+<h4 id="3-définir-la-durée">3. <strong>Définir la Durée</strong> <a href="#3-d%c3%a9finir-la-dur%c3%a9e" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li><strong>2-3 heures</strong> pour un atelier complet</li>
+<li><strong>1 heure</strong> pour une session de validation</li>
+</ul>
+<h3 id="déroulement-de-latelier">Déroulement de l&rsquo;Atelier <a href="#d%c3%a9roulement-de-latelier" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="phase-1--définir-lobjectif-20-30-min">Phase 1 : Définir l&rsquo;Objectif (20-30 min) <a href="#phase-1--d%c3%a9finir-lobjectif-20-30-min" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ol>
+<li><strong>Le Business Owner</strong> présente le contexte</li>
+<li><strong>L&rsquo;équipe</strong> discute et clarifie l&rsquo;objectif</li>
+<li><strong>L&rsquo;objectif</strong> est écrit au centre du tableau</li>
+<li><strong>L&rsquo;équipe</strong> valide que l&rsquo;objectif est mesurable et motivant</li>
+</ol>
+<h4 id="phase-2--identifier-les-acteurs-30-45-min">Phase 2 : Identifier les Acteurs (30-45 min) <a href="#phase-2--identifier-les-acteurs-30-45-min" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ol>
+<li><strong>L&rsquo;équipe</strong> brainstorm sur tous les acteurs possibles</li>
+<li><strong>Chaque acteur</strong> est écrit sur un post-it</li>
+<li><strong>Les acteurs</strong> sont organisés autour de l&rsquo;objectif</li>
+<li><strong>L&rsquo;équipe</strong> valide que tous les acteurs importants sont présents</li>
+</ol>
+<h4 id="phase-3--définir-les-impacts-45-60-min">Phase 3 : Définir les Impacts (45-60 min) <a href="#phase-3--d%c3%a9finir-les-impacts-45-60-min" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ol>
+<li><strong>Pour chaque acteur</strong>, l&rsquo;équipe définit les impacts souhaités</li>
+<li><strong>Chaque impact</strong> est écrit sur un post-it</li>
+<li><strong>Les impacts</strong> sont placés sous les acteurs concernés</li>
+<li><strong>L&rsquo;équipe</strong> valide que les impacts sont comportementaux et mesurables</li>
+</ol>
+<h4 id="phase-4--identifier-les-livrables-30-45-min">Phase 4 : Identifier les Livrables (30-45 min) <a href="#phase-4--identifier-les-livrables-30-45-min" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ol>
+<li><strong>Pour chaque impact</strong>, l&rsquo;équipe identifie les livrables possibles</li>
+<li><strong>Chaque livrable</strong> est écrit sur un post-it</li>
+<li><strong>Les livrables</strong> sont placés sous les impacts concernés</li>
+<li><strong>L&rsquo;équipe</strong> valide que les livrables sont actionnables</li>
+</ol>
+<h3 id="exemple-complet--plateforme-de-formation">Exemple Complet : Plateforme de Formation <a href="#exemple-complet--plateforme-de-formation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="objectif">Objectif <a href="#objectif" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🎯 OBJECTIF : Augmenter le nombre d&#39;inscriptions aux formations de 50% d&#39;ici 6 mois</code></pre>
+<h4 id="acteurs-identifiés">Acteurs Identifiés <a href="#acteurs-identifi%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>👥 ACTEURS :
+- Développeurs (utilisateurs finaux)
+- Managers IT (décideurs d&#39;achat)
+- Influenceurs tech (recommandations)
+- Concurrents (opposition)</code></pre>
+<h4 id="impacts-souhaités">Impacts Souhaités <a href="#impacts-souhait%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>🎯 IMPACTS :
+- Les développeurs s&#39;inscrivent plus souvent aux formations
+- Les managers IT budgétisent plus pour la formation
+- Les influenceurs recommandent notre plateforme
+- Les concurrents perdent des parts de marché</code></pre>
+<h4 id="livrables-identifiés">Livrables Identifiés <a href="#livrables-identifi%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4>
+
+    
+    <pre tabindex="0"><code>📦 LIVRABLES :
+- Système de recommandation personnalisé
+- Programme de certification
+- Contenu gratuit pour attirer
+- Intégration avec les outils de développement
+- Système de gamification
+- Partenariats avec les influenceurs</code></pre>
+<h2 id="écueils-à-éviter">Écueils à Éviter <a href="#%c3%a9cueils-%c3%a0-%c3%a9viter" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="-trop-de-participants">❌ Trop de Participants <a href="#-trop-de-participants" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Problème</strong> : Plus de 6 personnes rendent l&rsquo;atelier difficile à animer
+<strong>Solution</strong> : Limiter à 5-6 personnes maximum, inclure les bonnes personnes</p>
+<h3 id="-ne-pas-impliquer-les-bonnes-personnes">❌ Ne Pas Impliquer les Bonnes Personnes <a href="#-ne-pas-impliquer-les-bonnes-personnes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Problème</strong> : Inviter des personnes sans pouvoir de décision
+<strong>Solution</strong> : S&rsquo;assurer que les business owners seniors sont présents</p>
+<h3 id="-critiquer-trop-tôt">❌ Critiquer Trop Tôt <a href="#-critiquer-trop-t%c3%b4t" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Problème</strong> : Tuer la créativité en critiquant les propositions
+<strong>Solution</strong> : Accorder du temps à la phase divergente avant de converger</p>
+<h3 id="-post-rationaliser-une-liste-de-fonctionnalités">❌ Post-Rationaliser une Liste de Fonctionnalités <a href="#-post-rationaliser-une-liste-de-fonctionnalit%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Problème</strong> : Venir avec une liste pré-définie de fonctionnalités
+<strong>Solution</strong> : Utiliser cette liste comme point de départ, puis challenger</p>
+<h3 id="-se-perdre-dans-les-détails">❌ Se Perdre dans les Détails <a href="#-se-perdre-dans-les-d%c3%a9tails" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><strong>Problème</strong> : Vouloir tout détailler dès le premier atelier
+<strong>Solution</strong> : Se concentrer sur les acteurs et impacts, les livrables évolueront</p>
+<h2 id="intégration-avec-event-storming-et-example-mapping">Intégration avec Event Storming et Example Mapping <a href="#int%c3%a9gration-avec-event-storming-et-example-mapping" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="workflow-complet">Workflow Complet <a href="#workflow-complet" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><h4 id="1-impact-mapping-2-3-heures">1. <strong>Impact Mapping</strong> (2-3 heures) <a href="#1-impact-mapping-2-3-heures" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Définir les objectifs business</li>
+<li>Identifier les acteurs et impacts</li>
+<li>Prioriser les livrables</li>
+</ul>
+<h4 id="2-event-storming-2-4-heures">2. <strong>Event Storming</strong> (2-4 heures) <a href="#2-event-storming-2-4-heures" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Découvrir les événements métier</li>
+<li>Modéliser les processus</li>
+<li>Définir les bounded contexts</li>
+</ul>
+<h4 id="3-example-mapping-30-45-min-par-fonctionnalité">3. <strong>Example Mapping</strong> (30-45 min par fonctionnalité) <a href="#3-example-mapping-30-45-min-par-fonctionnalit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h4><ul>
+<li>Détailer les règles métier</li>
+<li>Créer des exemples concrets</li>
+<li>Identifier les cas limites</li>
+</ul>
+<h3 id="exemple-de-workflow">Exemple de Workflow <a href="#exemple-de-workflow" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <pre tabindex="0"><code>Impact Mapping → &#34;Augmenter les inscriptions de 50%&#34;
+     ↓
+Event Storming → &#34;FormationInscrite&#34;, &#34;FormationComplétée&#34;
+     ↓
+Example Mapping → Règles de validation des inscriptions
+     ↓
+Implémentation → Code métier robuste</code></pre>
+<h2 id="avantages-de-limpact-mapping">Avantages de l&rsquo;Impact Mapping <a href="#avantages-de-limpact-mapping" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-alignement-business-technique">1. <strong>Alignement Business-Technique</strong> <a href="#1-alignement-business-technique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li>Toute l&rsquo;équipe comprend les objectifs</li>
+<li>Les décisions techniques sont guidées par le business</li>
+<li>Réduction des malentendus</li>
+</ul>
+<h3 id="2-priorisation-claire">2. <strong>Priorisation Claire</strong> <a href="#2-priorisation-claire" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li>Les livrables sont connectés aux objectifs</li>
+<li>Facilite la prise de décision</li>
+<li>Évite le développement de fonctionnalités inutiles</li>
+</ul>
+<h3 id="3-communication-améliorée">3. <strong>Communication Améliorée</strong> <a href="#3-communication-am%c3%a9lior%c3%a9e" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li>Langage commun entre business et technique</li>
+<li>Vision partagée du projet</li>
+<li>Facilite les présentations aux stakeholders</li>
+</ul>
+<h3 id="4-flexibilité">4. <strong>Flexibilité</strong> <a href="#4-flexibilit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li>Facilite les pivots si les hypothèses sont invalidées</li>
+<li>Permet de réévaluer régulièrement la stratégie</li>
+<li>S&rsquo;intègre bien dans les méthodologies agiles</li>
+</ul>
+<h2 id="-votre-prochaine-étape">🎯 Votre Prochaine Étape <a href="#-votre-prochaine-%c3%a9tape" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Maintenant que vous maîtrisez l&rsquo;Impact Mapping, quel est votre contexte ?</p>
+<h3 id="-option-a--je-veux-détailler-les-règles-métier-avec-lexample-mapping">🟢 Option A : Je veux détailler les règles métier avec l&rsquo;Example Mapping <a href="#-option-a--je-veux-d%c3%a9tailler-les-r%c3%a8gles-m%c3%a9tier-avec-lexample-mapping" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez explorer les règles complexes découvertes lors de l&rsquo;Event Storming</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Règles métier complexes identifiées</li>
+<li>Besoin de clarifier les cas limites</li>
+<li>Équipe avec expert métier disponible</li>
+<li>Temps pour approfondir les détails</li>
+</ul>
+<p><strong>Temps estimé</strong> : 30-45 minutes</p>
+<p>→ <strong><a href="/chapitres/fondamentaux/chapitre-02-5-example-mapping/">Aller au Chapitre 2.5</a></strong> (L&rsquo;Example Mapping - Détailer les Règles Métier)</p>
+<hr>
+<h3 id="-option-b--je-veux-comprendre-la-complexité-architecturale">🟡 Option B : Je veux comprendre la complexité architecturale <a href="#-option-b--je-veux-comprendre-la-complexit%c3%a9-architecturale" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez savoir quand utiliser quels patterns</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Équipe expérimentée</li>
+<li>Besoin de choisir une architecture</li>
+<li>Projet avec contraintes techniques</li>
+<li>Décision architecturale à prendre</li>
+</ul>
+<p><strong>Temps estimé</strong> : 20-30 minutes</p>
+<p>→ <strong><a href="/chapitres/fondamentaux/chapitre-03-complexite-accidentelle-essentielle/">Aller au Chapitre 3</a></strong> (Complexité Accidentelle vs Essentielle)</p>
+<hr>
+<h3 id="-option-c--je-veux-voir-des-exemples-concrets-de-modèles">🔴 Option C : Je veux voir des exemples concrets de modèles <a href="#-option-c--je-veux-voir-des-exemples-concrets-de-mod%c3%a8les" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p><em>Vous voulez comprendre la différence entre modèles riches et anémiques</em></p>
+<p><strong>Critères</strong> :</p>
+<ul>
+<li>Développeur avec expérience</li>
+<li>Besoin d&rsquo;exemples pratiques</li>
+<li>Compréhension des patterns de code</li>
+<li>Implémentation à faire</li>
+</ul>
+<p><strong>Temps estimé</strong> : 25-35 minutes</p>
+<p>→ <strong><a href="/chapitres/fondamentaux/chapitre-04-modeles-riches-vs-anemiques/">Aller au Chapitre 4</a></strong> (Modèles Riches vs Modèles Anémiques)</p>
+<hr>
+<p><strong>💡 Conseil</strong> : Si vous n&rsquo;êtes pas sûr, choisissez l&rsquo;option A pour détailler les règles métier, puis continuez avec les autres chapitres dans l&rsquo;ordre.</p>
+<p><strong>🔄 Alternative</strong> : Si vous voulez tout voir dans l&rsquo;ordre, continuez avec le <a href="/chapitres/fondamentaux/chapitre-02-5-example-mapping/">Chapitre 2.5</a>.</p>
+<h2 id="références">Références <a href="#r%c3%a9f%c3%a9rences" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><ul>
+<li><a href="https://impactmapping.org" rel="external" target="_blank">Site officiel de l&rsquo;Impact Mapping<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> - Introduction à la méthode par Gojko Adzic</li>
+<li><a href="https://draft.io/fr/example/impact-mapping" rel="external" target="_blank">Draft.io - Exemple d&rsquo;Impact Mapping<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> - Guide pratique avec exemples</li>
+<li><a href="https://medium.com/@pierrecriulanscy/construire-ensemble-chapitre-1-impact-mapping-c4f89ef1c033" rel="external" target="_blank">Medium - Construire Ensemble : Impact Mapping<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> - Exemple concret d&rsquo;application</li>
+</ul>
+
+    </div>
+
+    
+
+    
+                                            </div>
+                                            <div><hr class="doc-hr">
+<div id="doc-nav" class="d-print-none">
+
+	<div class="row flex-xl-nowrap ">
+	<div class="col-sm-6 pt-2 doc-next">
+		<a href="/chapitres/fondamentaux/chapitre-02-1-example-mapping/">
+			<div class="card h-100 my-1">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Chapitre 2.1 : L&#39;Example Mapping - Détailer les Règles Métier</p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	<div class="col-sm-6 pt-2 doc-prev">
+		<a class="ms-auto" href="/chapitres/fondamentaux/chapitre-03-complexite-accidentelle-essentielle/">
+			<div class="card h-100 my-1 text-end">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Chapitre 3 : Complexité Accidentelle vs Essentielle - Le Choix Architectural <i class="material-icons align-middle">navigate_next</i></p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	</div>
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</main>
+            </div>
+        </div>
+
+        
+        
+        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        
+        
+
+        
+        
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+    <script src="/docs/js/bootstrap.js" defer></script>
+
+
+    <script type="text/javascript" src="http://localhost:1313/docs/js/bundle.js" defer></script>
+
+        
+
+        
+        <script type="module">
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script>
+        
+    </body>
+</html>

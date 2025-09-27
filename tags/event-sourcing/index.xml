@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Event-Sourcing on DDD Journey</title>
+    <link>http://localhost:1313/tags/event-sourcing/</link>
+    <description>Recent content in Event-Sourcing on DDD Journey</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/event-sourcing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chapitre 27 : Stockage API - Event Sourcing &#43; CQRS</title>
+      <link>http://localhost:1313/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/</guid>
+      <description>&lt;h1 id=&#34;chapitre-27--stockage-api---event-sourcing--cqrs&#34;&gt;Chapitre 27 : Stockage API - Event Sourcing + CQRS&lt;/h1&gt;&#xA;&lt;h2 id=&#34;-objectif-du-chapitre&#34;&gt;🎯 Objectif du Chapitre&lt;/h2&gt;&#xA;&lt;p&gt;Ce chapitre explore la combinaison de l&amp;rsquo;Event Sourcing et du CQRS pour les APIs externes, offrant une séparation complète entre les opérations de lecture et d&amp;rsquo;écriture avec une traçabilité totale des événements.&lt;/p&gt;&#xA;&lt;h2 id=&#34;-prérequis&#34;&gt;📋 Prérequis&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Chapitre 10&lt;/strong&gt; : Event Sourcing - Comprendre la persistance des événements&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Chapitre 12&lt;/strong&gt; : Architecture CQRS - Séparation Command/Query&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Chapitre 26&lt;/strong&gt; : Stockage API - Event Sourcing + CQS - Base pour l&amp;rsquo;approche API&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-architecture-event-sourcing--cqrs-pour-apis&#34;&gt;🏗️ Architecture Event Sourcing + CQRS pour APIs&lt;/h2&gt;&#xA;&lt;h3 id=&#34;vue-densemble&#34;&gt;Vue d&amp;rsquo;Ensemble&lt;/h3&gt;&#xA;&lt;p&gt;L&amp;rsquo;Event Sourcing + CQRS pour les APIs combine :&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
