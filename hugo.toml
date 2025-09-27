@@ -1,12 +1,12 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'DDD Journey'
+baseURL = 'https://gplanchat.github.io/ddd-adventure/'
+languageCode = 'fr-fr'
+title = 'DDD Adventure'
 
 [params]
   # Footer configuration
   [params.footer]
-    copyright = "© :YEAR: DDD Journey. Tous droits réservés."
-  
+    copyright = "© :YEAR: Grégory Planchat. Tous droits réservés."
+
   # Sponsors configuration
   [params.sponsors]
     enable = true
