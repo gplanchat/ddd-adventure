@@ -1,0 +1,147 @@
+{{/*
+Shortcode pour afficher une option de navigation vers un chapitre
+Usage: {{< chapter-option 
+  letter="A" 
+  color="green" 
+  title="Titre de l'option" 
+  subtitle="Sous-titre explicatif"
+  criteria="Critère 1,Critère 2,Critère 3"
+  time="30-40 minutes"
+  chapter="16"
+  chapter-title="Titre du Chapitre"
+  chapter-url="/chapitres/fondamentaux/chapitre-16-titre/"
+>}}
+*/}}
+
+{{ $chapterNumber := .Get "chapter" }}
+{{ $chapterUrl := .Get "chapter-url" }}
+{{ $chapterTitle := .Get "chapter-title" }}
+
+{{/* Vérifier si le chapitre existe et s'il est en draft */}}
+{{ $isDraft := false }}
+{{ $chapterExists := false }}
+
+{{ if $chapterUrl }}
+  {{/* Extraire le chemin du chapitre depuis l'URL */}}
+  {{ $chapterPath := strings.TrimPrefix "/chapitres/" $chapterUrl }}
+  {{ $chapterPath = strings.TrimSuffix "/" $chapterPath }}
+  {{ $chapterPath = printf "content/chapitres/%s.md" $chapterPath }}
+  
+  {{/* Vérifier si le fichier existe */}}
+  {{ if fileExists $chapterPath }}
+    {{ $chapterExists = true }}
+    {{ $chapterContent := readFile $chapterPath }}
+    
+    {{/* Vérifier si le chapitre est marqué comme draft */}}
+    {{ if or (strings.Contains $chapterContent "draft: true") (strings.Contains $chapterContent "draft = true") }}
+      {{ $isDraft = true }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<div class="chapter-option" data-color="{{ .Get "color" | default "blue" }}" {{ if $isDraft }}data-draft="true"{{ end }}>
+  <div class="chapter-option-header">
+    <div class="chapter-option-letter">{{ .Get "letter" | default "A" }}</div>
+    <div>
+      <h3 class="chapter-option-title">{{ .Get "title" | default "Option" }}</h3>
+      <p class="chapter-option-subtitle">{{ .Get "subtitle" | default "" }}</p>
+    </div>
+  </div>
+  
+  <div class="chapter-option-content">
+    {{ if .Get "criteria" }}
+    <div class="chapter-option-criteria">
+      <h4 class="chapter-option-criteria-title">Critères d'adoption :</h4>
+      <ul class="chapter-option-criteria-list">
+        {{ range split (.Get "criteria") "," }}
+        <li>{{ trim . " " }}</li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+    
+    <div class="chapter-option-footer">
+      <span class="chapter-option-time">⏱️ {{ .Get "time" | default "Variable" }}</span>
+      
+      {{ if $isDraft }}
+        {{/* Bouton désactivé pour les chapitres en draft */}}
+        <span class="chapter-option-link chapter-option-link-disabled">
+          {{ $chapterTitle | default "Chapitre en cours de rédaction" }}
+          <span class="draft-indicator">📝</span>
+        </span>
+      {{ else if $chapterExists }}
+        {{/* Bouton actif pour les chapitres disponibles */}}
+        <a href="{{ $chapterUrl }}" class="chapter-option-link">
+          {{ $chapterTitle | default "Voir le chapitre" }}
+        </a>
+      {{ else }}
+        {{/* Bouton désactivé pour les chapitres inexistants */}}
+        <span class="chapter-option-link chapter-option-link-disabled">
+          {{ $chapterTitle | default "Chapitre à venir" }}
+          <span class="coming-soon-indicator">🚧</span>
+        </span>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+<style>
+/* Styles pour les boutons désactivés */
+.chapter-option-link-disabled {
+  background: #9ca3af !important;
+  color: #6b7280 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.chapter-option-link-disabled:hover {
+  background: #9ca3af !important;
+  color: #6b7280 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.chapter-option-link-disabled::after {
+  display: none !important;
+}
+
+/* Styles pour les chapitres en draft */
+.chapter-option[data-draft="true"] {
+  opacity: 0.8;
+  border-style: dashed;
+  border-color: #d1d5db;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-letter {
+  background: #9ca3af;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-title {
+  color: #6b7280;
+}
+
+.chapter-option[data-draft="true"] .chapter-option-subtitle {
+  color: #9ca3af;
+}
+
+/* Indicateurs visuels */
+.draft-indicator,
+.coming-soon-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Animation pour les chapitres en draft */
+.chapter-option[data-draft="true"] {
+  animation: draft-pulse 2s ease-in-out infinite;
+}
+
+@keyframes draft-pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+</style>

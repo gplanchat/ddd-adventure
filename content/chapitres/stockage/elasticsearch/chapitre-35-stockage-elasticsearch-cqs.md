@@ -1,0 +1,1084 @@
+---
+title: "Stockage ElasticSearch - CQS"
+description: "Implémentation Command Query Separation avec ElasticSearch pour optimiser les performances"
+date: 2024-12-19
+draft: true
+type: "docs"
+weight: 35
+---
+
+# ⚡ Stockage ElasticSearch - CQS
+
+## 🎯 **Contexte et Objectifs**
+
+### **Pourquoi CQS avec ElasticSearch ?**
+
+Après avoir exploré l'approche classique d'ElasticSearch, nous allons maintenant implémenter le **Command Query Separation (CQS)** pour optimiser les performances et la scalabilité.
+
+#### **Avantages de CQS avec ElasticSearch**
+- **Performance optimisée** : Séparation claire entre écriture et lecture
+- **Scalabilité** : Possibilité de scaler indépendamment les commandes et requêtes
+- **Flexibilité** : Requêtes optimisées pour chaque usage
+- **Maintenabilité** : Code plus clair et organisé
+
+### **Contexte Gyroscops**
+
+Dans notre écosystème **User → Organization → Workflow → Cloud Resources → Billing**, CQS avec ElasticSearch est particulièrement pertinent pour :
+- **Logs d'application** : Écriture rapide des logs, lecture optimisée pour l'analyse
+- **Métriques de performance** : Collecte des métriques, requêtes d'analytics
+- **Recherche de factures** : Indexation des factures, recherche full-text
+- **Analytics business** : Agrégations complexes pour les rapports
+
+## 🏗️ **Architecture CQS avec ElasticSearch**
+
+### **Séparation des Responsabilités**
+
+#### **Côté Commande (Write)**
+- **Command Handlers** : Traitement des commandes métier
+- **ElasticSearch Writer** : Indexation des documents
+- **Event Handlers** : Gestion des événements de domaine
+- **Bulk Operations** : Optimisation des écritures
+
+#### **Côté Requête (Read)**
+- **Query Handlers** : Traitement des requêtes
+- **ElasticSearch Reader** : Requêtes optimisées
+- **Search Services** : Services de recherche spécialisés
+- **Caches** : Optimisation des performances
+
+### **Flux de Données**
+
+```mermaid
+graph TD
+    A[Command] --> B[Command Handler]
+    B --> C[ElasticSearch Writer]
+    C --> D[ElasticSearch Cluster]
+    D --> E[Index Document]
+    
+    F[Query] --> G[Query Handler]
+    G --> H[ElasticSearch Reader]
+    H --> D
+    D --> I[Search Results]
+    I --> J[Response]
+    
+    K[Event] --> L[Event Handler]
+    L --> C
+```
+
+## 💻 **Implémentation Pratique**
+
+### **1. Command Side Implementation**
+
+#### **ElasticSearch Writer**
+
+```php
+<?php
+
+namespace App\Infrastructure\ElasticSearch\Command;
+
+use Elasticsearch\Client;
+use Psr\Log\LoggerInterface;
+
+class ElasticSearchWriter
+{
+    private Client $client;
+    private string $index;
+    private LoggerInterface $logger;
+    private array $bulkBuffer = [];
+    private int $bulkSize;
+
+    public function __construct(Client $client, string $index, LoggerInterface $logger, int $bulkSize = 100)
+    {
+        $this->client = $client;
+        $this->index = $index;
+        $this->logger = $logger;
+        $this->bulkSize = $bulkSize;
+    }
+
+    public function indexDocument(string $id, array $document): void
+    {
+        $this->bulkBuffer[] = [
+            'index' => [
+                '_index' => $this->index,
+                '_id' => $id
+            ]
+        ];
+        $this->bulkBuffer[] = $document;
+
+        if (count($this->bulkBuffer) >= $this->bulkSize * 2) {
+            $this->flushBulk();
+        }
+    }
+
+    public function updateDocument(string $id, array $document): void
+    {
+        $this->bulkBuffer[] = [
+            'update' => [
+                '_index' => $this->index,
+                '_id' => $id
+            ]
+        ];
+        $this->bulkBuffer[] = [
+            'doc' => $document,
+            'doc_as_upsert' => true
+        ];
+
+        if (count($this->bulkBuffer) >= $this->bulkSize * 2) {
+            $this->flushBulk();
+        }
+    }
+
+    public function deleteDocument(string $id): void
+    {
+        $this->bulkBuffer[] = [
+            'delete' => [
+                '_index' => $this->index,
+                '_id' => $id
+            ]
+        ];
+
+        if (count($this->bulkBuffer) >= $this->bulkSize * 2) {
+            $this->flushBulk();
+        }
+    }
+
+    public function flushBulk(): void
+    {
+        if (empty($this->bulkBuffer)) {
+            return;
+        }
+
+        try {
+            $response = $this->client->bulk([
+                'body' => $this->bulkBuffer,
+                'refresh' => false
+            ]);
+
+            $this->logger->info('Bulk operation completed', [
+                'index' => $this->index,
+                'operations' => count($this->bulkBuffer) / 2,
+                'errors' => $response['errors']
+            ]);
+
+            $this->bulkBuffer = [];
+
+        } catch (\Exception $e) {
+            $this->logger->error('Bulk operation failed', [
+                'index' => $this->index,
+                'error' => $e->getMessage(),
+                'operations' => count($this->bulkBuffer) / 2
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function createIndex(array $mapping = []): void
+    {
+        $params = [
+            'index' => $this->index,
+            'body' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                    'number_of_replicas' => 0,
+                    'refresh_interval' => '30s'
+                ]
+            ]
+        ];
+
+        if (!empty($mapping)) {
+            $params['body']['mappings'] = $mapping;
+        }
+
+        try {
+            $this->client->indices()->create($params);
+            $this->logger->info('Index created', ['index' => $this->index]);
+
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to create index', [
+                'index' => $this->index,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function refreshIndex(): void
+    {
+        try {
+            $this->client->indices()->refresh(['index' => $this->index]);
+            $this->logger->info('Index refreshed', ['index' => $this->index]);
+
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to refresh index', [
+                'index' => $this->index,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+}
+```
+
+#### **Command Handler pour les Paiements**
+
+```php
+<?php
+
+namespace App\Application\Command\Payment;
+
+use App\Domain\Payment\Payment;
+use App\Domain\Payment\PaymentRepositoryInterface;
+use App\Infrastructure\ElasticSearch\Command\ElasticSearchWriter;
+use Psr\Log\LoggerInterface;
+
+class CreatePaymentCommandHandler
+{
+    public function __construct(
+        private PaymentRepositoryInterface $paymentRepository,
+        private ElasticSearchWriter $elasticSearchWriter,
+        private LoggerInterface $logger
+    ) {}
+
+    public function handle(CreatePaymentCommand $command): void
+    {
+        try {
+            // Créer le paiement dans le repository principal
+            $payment = new Payment(
+                $command->getPaymentId(),
+                $command->getOrganizationId(),
+                $command->getUserId(),
+                $command->getAmount(),
+                $command->getCurrency(),
+                'pending',
+                $command->getDescription(),
+                new \DateTime(),
+                $command->getMetadata()
+            );
+
+            $this->paymentRepository->save($payment);
+
+            // Indexer dans ElasticSearch pour la recherche
+            $this->indexPaymentForSearch($payment);
+
+            $this->logger->info('Payment created and indexed', [
+                'paymentId' => $payment->getId(),
+                'organizationId' => $payment->getOrganizationId()
+            ]);
+
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to create payment', [
+                'paymentId' => $command->getPaymentId(),
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    private function indexPaymentForSearch(Payment $payment): void
+    {
+        $document = [
+            'paymentId' => $payment->getId(),
+            'organizationId' => $payment->getOrganizationId(),
+            'userId' => $payment->getUserId(),
+            'amount' => $payment->getAmount(),
+            'currency' => $payment->getCurrency(),
+            'status' => $payment->getStatus(),
+            'description' => $payment->getDescription(),
+            'processedAt' => $payment->getProcessedAt()->format('c'),
+            'metadata' => $payment->getMetadata(),
+            'indexedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->elasticSearchWriter->indexDocument($payment->getId(), $document);
+    }
+}
+```
+
+#### **Event Handler pour la Synchronisation**
+
+```php
+<?php
+
+namespace App\Application\EventHandler\Payment;
+
+use App\Domain\Event\DomainEvent;
+use App\Infrastructure\ElasticSearch\Command\ElasticSearchWriter;
+use Psr\Log\LoggerInterface;
+
+class PaymentEventHandler
+{
+    public function __construct(
+        private ElasticSearchWriter $elasticSearchWriter,
+        private LoggerInterface $logger
+    ) {}
+
+    public function handle(DomainEvent $event): void
+    {
+        switch ($event->getEventType()) {
+            case 'PaymentProcessed':
+                $this->handlePaymentProcessed($event);
+                break;
+            case 'PaymentFailed':
+                $this->handlePaymentFailed($event);
+                break;
+            case 'PaymentRefunded':
+                $this->handlePaymentRefunded($event);
+                break;
+        }
+    }
+
+    private function handlePaymentProcessed(DomainEvent $event): void
+    {
+        $update = [
+            'status' => 'completed',
+            'processedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->elasticSearchWriter->updateDocument($event->getAggregateId(), $update);
+
+        $this->logger->info('Payment processed event handled', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'completed'
+        ]);
+    }
+
+    private function handlePaymentFailed(DomainEvent $event): void
+    {
+        $update = [
+            'status' => 'failed',
+            'error' => $event->getData()['error'],
+            'failedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->elasticSearchWriter->updateDocument($event->getAggregateId(), $update);
+
+        $this->logger->info('Payment failed event handled', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'failed'
+        ]);
+    }
+
+    private function handlePaymentRefunded(DomainEvent $event): void
+    {
+        $update = [
+            'status' => 'refunded',
+            'refundAmount' => $event->getData()['refundAmount'],
+            'refundedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->elasticSearchWriter->updateDocument($event->getAggregateId(), $update);
+
+        $this->logger->info('Payment refunded event handled', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'refunded'
+        ]);
+    }
+}
+```
+
+### **2. Query Side Implementation**
+
+#### **ElasticSearch Reader**
+
+```php
+<?php
+
+namespace App\Infrastructure\ElasticSearch\Query;
+
+use Elasticsearch\Client;
+use Psr\Log\LoggerInterface;
+use Psr\Cache\CacheItemPoolInterface;
+
+class ElasticSearchReader
+{
+    private Client $client;
+    private string $index;
+    private LoggerInterface $logger;
+    private CacheItemPoolInterface $cache;
+
+    public function __construct(
+        Client $client, 
+        string $index, 
+        LoggerInterface $logger,
+        CacheItemPoolInterface $cache
+    ) {
+        $this->client = $client;
+        $this->index = $index;
+        $this->logger = $logger;
+        $this->cache = $cache;
+    }
+
+    public function search(array $query, string $cacheKey = null): array
+    {
+        // Vérifier le cache
+        if ($cacheKey) {
+            $cachedItem = $this->cache->getItem($cacheKey);
+            if ($cachedItem->isHit()) {
+                $this->logger->debug('Search result served from cache', [
+                    'index' => $this->index,
+                    'cacheKey' => $cacheKey
+                ]);
+                return $cachedItem->get();
+            }
+        }
+
+        try {
+            $response = $this->client->search([
+                'index' => $this->index,
+                'body' => $query
+            ]);
+
+            // Mettre en cache
+            if ($cacheKey) {
+                $cachedItem->set($response);
+                $cachedItem->expiresAfter(300); // 5 minutes
+                $this->cache->save($cachedItem);
+            }
+
+            $this->logger->info('Search executed', [
+                'index' => $this->index,
+                'hits' => $response['hits']['total']['value'],
+                'took' => $response['took']
+            ]);
+
+            return $response;
+
+        } catch (\Exception $e) {
+            $this->logger->error('Search failed', [
+                'index' => $this->index,
+                'query' => $query,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function getDocument(string $id): ?array
+    {
+        try {
+            $response = $this->client->get([
+                'index' => $this->index,
+                'id' => $id
+            ]);
+
+            return $response['_source'];
+
+        } catch (\Elasticsearch\Common\Exceptions\Missing404Exception $e) {
+            return null;
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to get document', [
+                'index' => $this->index,
+                'id' => $id,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function getSuggestions(string $query, string $field = 'description', int $size = 10): array
+    {
+        $searchQuery = [
+            'suggest' => [
+                'payment_suggestions' => [
+                    'prefix' => $query,
+                    'completion' => [
+                        'field' => $field . '.suggest',
+                        'size' => $size
+                    ]
+                ]
+            ],
+            'size' => 0
+        ];
+
+        $response = $this->search($searchQuery);
+
+        $suggestions = [];
+        if (isset($response['suggest']['payment_suggestions'][0]['options'])) {
+            foreach ($response['suggest']['payment_suggestions'][0]['options'] as $option) {
+                $suggestions[] = [
+                    'text' => $option['text'],
+                    'score' => $option['score']
+                ];
+            }
+        }
+
+        return $suggestions;
+    }
+}
+```
+
+#### **Query Handler pour les Paiements**
+
+```php
+<?php
+
+namespace App\Application\Query\Payment;
+
+use App\Infrastructure\ElasticSearch\Query\ElasticSearchReader;
+use App\Domain\Payment\Payment;
+use Psr\Log\LoggerInterface;
+
+class PaymentQueryHandler
+{
+    private ElasticSearchReader $reader;
+    private LoggerInterface $logger;
+
+    public function __construct(ElasticSearchReader $reader, LoggerInterface $logger)
+    {
+        $this->reader = $reader;
+        $this->logger = $logger;
+    }
+
+    public function handle(GetPaymentByIdQuery $query): ?Payment
+    {
+        $document = $this->reader->getDocument($query->getPaymentId());
+        
+        if (!$document) {
+            return null;
+        }
+        
+        return $this->documentToPayment($document);
+    }
+
+    public function handle(SearchPaymentsQuery $query): PaymentSearchResult
+    {
+        $searchQuery = $this->buildSearchQuery($query);
+        $cacheKey = $this->generateCacheKey($query);
+        
+        $response = $this->reader->search($searchQuery, $cacheKey);
+        
+        $payments = [];
+        foreach ($response['hits']['hits'] as $hit) {
+            $payments[] = $this->documentToPayment($hit['_source']);
+        }
+        
+        return new PaymentSearchResult(
+            $payments,
+            $response['hits']['total']['value'],
+            $query->getPage(),
+            $query->getSize()
+        );
+    }
+
+    public function handle(GetPaymentStatisticsQuery $query): array
+    {
+        $searchQuery = [
+            'query' => [
+                'bool' => [
+                    'must' => [
+                        ['term' => ['organizationId' => $query->getOrganizationId()]],
+                        ['range' => [
+                            'processedAt' => [
+                                'gte' => $query->getFrom()->format('c'),
+                                'lte' => $query->getTo()->format('c')
+                            ]
+                        ]]
+                    ]
+                ]
+            ],
+            'aggs' => [
+                'status_stats' => [
+                    'terms' => ['field' => 'status'],
+                    'aggs' => [
+                        'total_amount' => ['sum' => ['field' => 'amount']],
+                        'avg_amount' => ['avg' => ['field' => 'amount']]
+                    ]
+                ],
+                'currency_stats' => [
+                    'terms' => ['field' => 'currency'],
+                    'aggs' => [
+                        'total_amount' => ['sum' => ['field' => 'amount']]
+                    ]
+                ],
+                'daily_stats' => [
+                    'date_histogram' => [
+                        'field' => 'processedAt',
+                        'calendar_interval' => 'day'
+                    ],
+                    'aggs' => [
+                        'total_amount' => ['sum' => ['field' => 'amount']],
+                        'count' => ['value_count' => ['field' => 'paymentId']]
+                    ]
+                ]
+            ],
+            'size' => 0
+        ];
+        
+        $cacheKey = 'payment_stats_' . md5(serialize($query));
+        $response = $this->reader->search($searchQuery, $cacheKey);
+        
+        return [
+            'status_stats' => $response['aggregations']['status_stats']['buckets'],
+            'currency_stats' => $response['aggregations']['currency_stats']['buckets'],
+            'daily_stats' => $response['aggregations']['daily_stats']['buckets']
+        ];
+    }
+
+    public function handle(GetPaymentSuggestionsQuery $query): array
+    {
+        return $this->reader->getSuggestions(
+            $query->getQuery(),
+            'description',
+            $query->getSize()
+        );
+    }
+
+    private function buildSearchQuery(SearchPaymentsQuery $query): array
+    {
+        $searchQuery = [
+            'query' => [
+                'bool' => [
+                    'must' => []
+                ]
+            ],
+            'sort' => [
+                ['_score' => ['order' => 'desc']],
+                ['processedAt' => ['order' => 'desc']]
+            ],
+            'from' => $query->getOffset(),
+            'size' => $query->getSize()
+        ];
+        
+        // Filtres obligatoires
+        if ($query->getOrganizationId()) {
+            $searchQuery['query']['bool']['must'][] = [
+                'term' => ['organizationId' => $query->getOrganizationId()]
+            ];
+        }
+        
+        // Recherche textuelle
+        if ($query->getSearchText()) {
+            $searchQuery['query']['bool']['must'][] = [
+                'multi_match' => [
+                    'query' => $query->getSearchText(),
+                    'fields' => ['description^2', 'paymentId', 'metadata.tags'],
+                    'type' => 'best_fields',
+                    'fuzziness' => 'AUTO'
+                ]
+            ];
+        }
+        
+        // Filtres de statut
+        if ($query->getStatuses()) {
+            $searchQuery['query']['bool']['must'][] = [
+                'terms' => ['status' => $query->getStatuses()]
+            ];
+        }
+        
+        // Filtres de devise
+        if ($query->getCurrencies()) {
+            $searchQuery['query']['bool']['must'][] = [
+                'terms' => ['currency' => $query->getCurrencies()]
+            ];
+        }
+        
+        // Filtres de montant
+        if ($query->getMinAmount() || $query->getMaxAmount()) {
+            $range = [];
+            if ($query->getMinAmount()) {
+                $range['gte'] = $query->getMinAmount();
+            }
+            if ($query->getMaxAmount()) {
+                $range['lte'] = $query->getMaxAmount();
+            }
+            
+            $searchQuery['query']['bool']['must'][] = [
+                'range' => ['amount' => $range]
+            ];
+        }
+        
+        // Filtres de date
+        if ($query->getFrom() || $query->getTo()) {
+            $range = [];
+            if ($query->getFrom()) {
+                $range['gte'] = $query->getFrom()->format('c');
+            }
+            if ($query->getTo()) {
+                $range['lte'] = $query->getTo()->format('c');
+            }
+            
+            $searchQuery['query']['bool']['must'][] = [
+                'range' => ['processedAt' => $range]
+            ];
+        }
+        
+        return $searchQuery;
+    }
+
+    private function generateCacheKey(SearchPaymentsQuery $query): string
+    {
+        return 'payment_search_' . md5(serialize($query));
+    }
+
+    private function documentToPayment(array $document): Payment
+    {
+        return new Payment(
+            $document['paymentId'],
+            $document['organizationId'],
+            $document['userId'],
+            $document['amount'],
+            $document['currency'],
+            $document['status'],
+            $document['description'],
+            new \DateTime($document['processedAt']),
+            $document['metadata'] ?? []
+        );
+    }
+}
+```
+
+### **3. Service de Synchronisation**
+
+#### **Service de Synchronisation Bidirectionnelle**
+
+```php
+<?php
+
+namespace App\Application\Service\ElasticSearch;
+
+use App\Domain\Payment\PaymentRepositoryInterface;
+use App\Infrastructure\ElasticSearch\Command\ElasticSearchWriter;
+use App\Infrastructure\ElasticSearch\Query\ElasticSearchReader;
+use Psr\Log\LoggerInterface;
+
+class PaymentSynchronizationService
+{
+    public function __construct(
+        private PaymentRepositoryInterface $paymentRepository,
+        private ElasticSearchWriter $elasticSearchWriter,
+        private ElasticSearchReader $elasticSearchReader,
+        private LoggerInterface $logger
+    ) {}
+
+    public function synchronizePayment(string $paymentId): void
+    {
+        try {
+            // Récupérer le paiement depuis le repository principal
+            $payment = $this->paymentRepository->findById($paymentId);
+            
+            if (!$payment) {
+                $this->logger->warning('Payment not found for synchronization', [
+                    'paymentId' => $paymentId
+                ]);
+                return;
+            }
+
+            // Indexer dans ElasticSearch
+            $document = [
+                'paymentId' => $payment->getId(),
+                'organizationId' => $payment->getOrganizationId(),
+                'userId' => $payment->getUserId(),
+                'amount' => $payment->getAmount(),
+                'currency' => $payment->getCurrency(),
+                'status' => $payment->getStatus(),
+                'description' => $payment->getDescription(),
+                'processedAt' => $payment->getProcessedAt()->format('c'),
+                'metadata' => $payment->getMetadata(),
+                'synchronizedAt' => (new \DateTime())->format('c')
+            ];
+
+            $this->elasticSearchWriter->indexDocument($paymentId, $document);
+
+            $this->logger->info('Payment synchronized', [
+                'paymentId' => $paymentId,
+                'status' => $payment->getStatus()
+            ]);
+
+        } catch (\Exception $e) {
+            $this->logger->error('Payment synchronization failed', [
+                'paymentId' => $paymentId,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function synchronizeAllPayments(string $organizationId = null): void
+    {
+        try {
+            $payments = $organizationId 
+                ? $this->paymentRepository->findByOrganization($organizationId)
+                : $this->paymentRepository->findAll();
+
+            $count = 0;
+            foreach ($payments as $payment) {
+                $this->synchronizePayment($payment->getId());
+                $count++;
+            }
+
+            $this->logger->info('All payments synchronized', [
+                'count' => $count,
+                'organizationId' => $organizationId
+            ]);
+
+        } catch (\Exception $e) {
+            $this->logger->error('Bulk synchronization failed', [
+                'organizationId' => $organizationId,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function verifySynchronization(string $paymentId): bool
+    {
+        try {
+            $payment = $this->paymentRepository->findById($paymentId);
+            $document = $this->elasticSearchReader->getDocument($paymentId);
+
+            if (!$payment || !$document) {
+                return false;
+            }
+
+            // Vérifier que les données correspondent
+            return $payment->getStatus() === $document['status'] &&
+                   $payment->getAmount() === $document['amount'] &&
+                   $payment->getCurrency() === $document['currency'];
+
+        } catch (\Exception $e) {
+            $this->logger->error('Synchronization verification failed', [
+                'paymentId' => $paymentId,
+                'error' => $e->getMessage()
+            ]);
+
+            return false;
+        }
+    }
+}
+```
+
+## 🧪 **Tests et Validation**
+
+### **Tests d'Intégration CQS**
+
+```php
+<?php
+
+namespace App\Tests\Integration\ElasticSearch;
+
+use App\Application\Command\Payment\CreatePaymentCommand;
+use App\Application\Command\Payment\CreatePaymentCommandHandler;
+use App\Application\Query\Payment\GetPaymentByIdQuery;
+use App\Application\Query\Payment\SearchPaymentsQuery;
+use App\Application\Query\Payment\PaymentQueryHandler;
+use App\Infrastructure\ElasticSearch\Command\ElasticSearchWriter;
+use App\Infrastructure\ElasticSearch\Query\ElasticSearchReader;
+use Elasticsearch\ClientBuilder;
+
+class ElasticSearchCqsTest extends TestCase
+{
+    private ElasticSearchWriter $writer;
+    private ElasticSearchReader $reader;
+    private CreatePaymentCommandHandler $commandHandler;
+    private PaymentQueryHandler $queryHandler;
+
+    protected function setUp(): void
+    {
+        $client = ClientBuilder::create()->setHosts(['localhost:9200'])->build();
+        
+        $this->writer = new ElasticSearchWriter($client, 'test-payments', $this->createMock(LoggerInterface::class));
+        $this->reader = new ElasticSearchReader($client, 'test-payments', $this->createMock(LoggerInterface::class), $this->createMock(CacheItemPoolInterface::class));
+        
+        $this->commandHandler = new CreatePaymentCommandHandler(
+            $this->createMock(PaymentRepositoryInterface::class),
+            $this->writer,
+            $this->createMock(LoggerInterface::class)
+        );
+        
+        $this->queryHandler = new PaymentQueryHandler($this->reader, $this->createMock(LoggerInterface::class));
+    }
+
+    public function testCommandQuerySeparation(): void
+    {
+        // Exécuter une commande
+        $command = new CreatePaymentCommand(
+            'payment-123',
+            'org-456',
+            'user-789',
+            100.00,
+            'EUR',
+            'Test payment',
+            ['source' => 'test']
+        );
+        
+        $this->commandHandler->handle($command);
+        
+        // Vérifier avec une requête
+        $query = new GetPaymentByIdQuery('payment-123');
+        $payment = $this->queryHandler->handle($query);
+        
+        $this->assertNotNull($payment);
+        $this->assertEquals('payment-123', $payment->getId());
+        $this->assertEquals(100.00, $payment->getAmount());
+    }
+
+    public function testSearchFunctionality(): void
+    {
+        // Créer plusieurs paiements
+        $payments = [
+            new CreatePaymentCommand('payment-1', 'org-456', 'user-1', 100.00, 'EUR', 'Payment 1', []),
+            new CreatePaymentCommand('payment-2', 'org-456', 'user-2', 200.00, 'USD', 'Payment 2', []),
+            new CreatePaymentCommand('payment-3', 'org-789', 'user-3', 300.00, 'EUR', 'Payment 3', [])
+        ];
+        
+        foreach ($payments as $command) {
+            $this->commandHandler->handle($command);
+        }
+        
+        // Rechercher par organisation
+        $searchQuery = new SearchPaymentsQuery('org-456', 0, 10);
+        $result = $this->queryHandler->handle($searchQuery);
+        
+        $this->assertCount(2, $result->getPayments());
+        $this->assertEquals(2, $result->getTotal());
+    }
+}
+```
+
+## 📊 **Performance et Optimisation**
+
+### **Stratégies d'Optimisation CQS**
+
+#### **1. Bulk Operations**
+```php
+public function bulkIndexPayments(array $payments): void
+{
+    foreach ($payments as $payment) {
+        $this->elasticSearchWriter->indexDocument($payment->getId(), $this->paymentToDocument($payment));
+    }
+    
+    $this->elasticSearchWriter->flushBulk();
+}
+```
+
+#### **2. Cache Stratégique**
+```php
+public function searchWithCache(SearchPaymentsQuery $query): PaymentSearchResult
+{
+    $cacheKey = 'payment_search_' . md5(serialize($query));
+    
+    if ($cached = $this->cache->get($cacheKey)) {
+        return $cached;
+    }
+    
+    $result = $this->searchPayments($query);
+    $this->cache->set($cacheKey, $result, 300);
+    
+    return $result;
+}
+```
+
+#### **3. Index Optimisés**
+```json
+{
+  "mappings": {
+    "properties": {
+      "paymentId": { "type": "keyword" },
+      "organizationId": { "type": "keyword" },
+      "description": { 
+        "type": "text",
+        "fields": {
+          "suggest": { "type": "completion" }
+        }
+      },
+      "processedAt": { "type": "date" },
+      "amount": { "type": "double" }
+    }
+  },
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "refresh_interval": "30s"
+  }
+}
+```
+
+## 🎯 **Critères d'Adoption**
+
+### **Quand Utiliser CQS avec ElasticSearch**
+
+#### **✅ Avantages**
+- **Performance optimisée** : Séparation claire entre écriture et lecture
+- **Scalabilité** : Possibilité de scaler indépendamment
+- **Flexibilité** : Requêtes optimisées pour chaque usage
+- **Maintenabilité** : Code plus clair et organisé
+- **Cache efficace** : Mise en cache des requêtes
+
+#### **❌ Inconvénients**
+- **Complexité** : Architecture plus complexe
+- **Synchronisation** : Besoin de synchroniser les données
+- **Latence** : Délai entre écriture et lecture
+- **Expertise** : Équipe expérimentée requise
+
+#### **🎯 Critères d'Adoption**
+- **Performance importante** : Besoins de performance élevée
+- **Recherche complexe** : Besoins de recherche avancée
+- **Équipe expérimentée** : Maîtrise d'ElasticSearch et CQS
+- **Volume important** : Gros volumes de données
+- **Scalabilité** : Besoin de scaler indépendamment
+
+## 🚀 **Votre Prochaine Étape**
+
+{{< chapter-nav >}}
+  {{< chapter-option 
+    letter="A" 
+    color="green" 
+    title="Je veux voir l'approche CQRS avec ElasticSearch" 
+    subtitle="Vous voulez comprendre la séparation complète des responsabilités"
+    criteria="Architecture complexe,Équipe très expérimentée,Performance critique,Scalabilité maximale"
+    time="45-60 minutes"
+    chapter="36"
+    chapter-title="Stockage ElasticSearch - CQRS"
+    chapter-url="/chapitres/stockage/elasticsearch/chapitre-36-stockage-elasticsearch-cqrs/"
+  >}}
+  
+  {{< chapter-option 
+    letter="B" 
+    color="yellow" 
+    title="Je veux explorer les autres types de stockage" 
+    subtitle="Vous voulez voir les alternatives à ElasticSearch"
+    criteria="Comparaison nécessaire,Choix de stockage,Architecture à définir,Performance à optimiser"
+    time="30-40 minutes"
+    chapter="10"
+    chapter-title="Choix du Type de Stockage"
+    chapter-url="/chapitres/fondamentaux/chapitre-10-choix-type-stockage/"
+  >}}
+  
+  {{< chapter-option 
+    letter="C" 
+    color="blue" 
+    title="Je veux voir des exemples concrets" 
+    subtitle="Vous voulez comprendre les implémentations pratiques"
+    criteria="Développeur expérimenté,Besoin d'exemples pratiques,Implémentation à faire,Code à écrire"
+    time="Variable"
+    chapter="0"
+    chapter-title="Exemples et Implémentations"
+    chapter-url="/examples/"
+  >}}
+  
+  {{< chapter-option 
+    letter="D" 
+    color="purple" 
+    title="Je veux revenir aux fondamentaux" 
+    subtitle="Vous voulez comprendre les concepts de base"
+    criteria="Développeur débutant,Besoin de comprendre les concepts,Projet à structurer,Équipe à former"
+    time="45-60 minutes"
+    chapter="1"
+    chapter-title="Introduction au Domain-Driven Design et Event Storming"
+    chapter-url="/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"
+  >}}
+{{< /chapter-nav >}}
+
+---
+
+*CQS avec ElasticSearch offre un équilibre optimal entre performance et simplicité, parfaitement adapté aux besoins de recherche et d'analytics de Gyroscops.*

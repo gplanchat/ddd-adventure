@@ -1,0 +1,26 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'DDD Journey'
+
+[params]
+  # Footer configuration
+  [params.footer]
+    copyright = "© :YEAR: DDD Journey. Tous droits réservés."
+  
+  # Sponsors configuration
+  [params.sponsors]
+    enable = true
+    title = "Nos Sponsors"
+    subtitle = "Merci à nos partenaires qui soutiennent cette initiative"
+    sponsors = [
+      { name = "Kiboko", url = "https://kiboko.fr", logo = "kiboko-logo.png" },
+      { name = "Gyroscops", url = "https://gyroscops.com", logo = "gyroscops-logo.png" }
+    ]
+
+[module]
+    [[module.imports]]
+        path = "github.com/colinwilson/lotusdocs"
+        disable = false
+    [[module.imports]]
+        path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
+        disable = false

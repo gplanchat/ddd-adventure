@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chapitres Avancés on DDD Journey</title>
+    <link>http://localhost:1313/chapitres/avances/</link>
+    <description>Recent content in Chapitres Avancés on DDD Journey</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/chapitres/avances/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chapitre 62 : Sécurité et Autorisation - Protéger votre API Platform</title>
+      <link>http://localhost:1313/chapitres/avances/chapitre-62-securite-autorisation/</link>
+      <pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/chapitres/avances/chapitre-62-securite-autorisation/</guid>
+      <description>&lt;h2 id=&#34;-objectif-de-ce-chapitre&#34;&gt;🎯 Objectif de ce Chapitre &lt;a href=&#34;#-objectif-de-ce-chapitre&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id=&#34;mon-problème--comment-sécuriser-une-api-platform-complexe-&#34;&gt;Mon Problème : Comment Sécuriser une API Platform Complexe ? &lt;a href=&#34;#mon-probl%c3%a8me--comment-s%c3%a9curiser-une-api-platform-complexe-&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Voici ce qui s&amp;rsquo;est passé avec Gyroscops&lt;/strong&gt; : J&amp;rsquo;avais une API Platform qui fonctionnait bien, mais la sécurité était un vrai casse-tête. Comment gérer les permissions ? Comment sécuriser les endpoints ? Comment gérer l&amp;rsquo;authentification multi-tenant ?&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Mais attendez&amp;hellip;&lt;/strong&gt; Quand j&amp;rsquo;ai voulu implémenter une sécurité robuste, j&amp;rsquo;étais perdu. OAuth2, JWT, RBAC, ABAC, Keycloak&amp;hellip; Tellement d&amp;rsquo;options ! Comment choisir ? Comment implémenter ?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Chapitre 63 : Frontend et Intégration - Connecter votre Interface Utilisateur</title>
+      <link>http://localhost:1313/chapitres/avances/chapitre-63-frontend-integration/</link>
+      <pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/chapitres/avances/chapitre-63-frontend-integration/</guid>
+      <description>&lt;h2 id=&#34;-objectif-de-ce-chapitre&#34;&gt;🎯 Objectif de ce Chapitre &lt;a href=&#34;#-objectif-de-ce-chapitre&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id=&#34;mon-problème--comment-intégrer-un-frontend-avec-une-api-platform-ddd-&#34;&gt;Mon Problème : Comment Intégrer un Frontend avec une API Platform DDD ? &lt;a href=&#34;#mon-probl%c3%a8me--comment-int%c3%a9grer-un-frontend-avec-une-api-platform-ddd-&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Voici ce qui s&amp;rsquo;est passé avec Gyroscops&lt;/strong&gt; : J&amp;rsquo;avais une API Platform qui fonctionnait bien, mais comment créer une interface utilisateur ? Comment gérer l&amp;rsquo;authentification côté frontend ? Comment optimiser les performances ?&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Mais attendez&amp;hellip;&lt;/strong&gt; Quand j&amp;rsquo;ai voulu créer le frontend, j&amp;rsquo;étais perdu. React, Vue, Angular ? Comment gérer l&amp;rsquo;état ? Comment optimiser les requêtes ? Comment gérer les erreurs ?&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

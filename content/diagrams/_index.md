@@ -1,0 +1,126 @@
+---
+title: "Diagrammes et Visualisations"
+description: "Diagrammes Mermaid pour comprendre les architectures et processus"
+date: 2024-12-19
+draft: false
+type: "docs"
+weight: 5
+---
+
+# 📊 Diagrammes et Visualisations
+
+## 🎯 **Comprendre par l'Image**
+
+Cette section contient des diagrammes Mermaid interactifs qui illustrent les concepts et architectures abordés dans les chapitres. Chaque diagramme est conçu pour clarifier les concepts complexes et faciliter la compréhension.
+
+## 📁 **Organisation des Diagrammes**
+
+### **Architecture Générale**
+- **[Architecture Générale](/diagrams/architecture-generale/)** : Vue d'ensemble du système
+- **[Processus Event Storming](/diagrams/event-storming-process/)** : Étapes de l'Event Storming
+
+### **Patterns Architecturaux**
+- **CQRS** : Séparation des commandes et requêtes
+- **Event Sourcing** : Stockage des événements
+- **Repository Pattern** : Patterns de persistance
+- **Hexagonal Architecture** : Architecture hexagonale
+
+### **Flux Métier**
+- **Processus de Facturation** : Flux Gyroscops
+- **Gestion des Utilisateurs** : Cycle de vie
+- **Workflows Cloud** : Orchestration des ressources
+
+## 🚀 **Comment Utiliser ces Diagrammes**
+
+### **1. Comprendre le Concept**
+Chaque diagramme commence par une explication du concept illustré.
+
+### **2. Analyser la Structure**
+Les diagrammes montrent les relations entre les composants.
+
+### **3. Adapter à Votre Contexte**
+Utilisez les diagrammes comme base pour votre propre architecture.
+
+### **4. Partager avec l'Équipe**
+Les diagrammes facilitent la communication et la compréhension.
+
+## 💡 **Conseils d'Utilisation**
+
+### **Pour les Débutants**
+- Commencez par les diagrammes d'architecture générale
+- Lisez les explications avant d'analyser les diagrammes
+- Utilisez les diagrammes pour valider votre compréhension
+
+### **Pour les Expérimentés**
+- Adaptez les diagrammes à votre contexte
+- Créez vos propres diagrammes basés sur ces exemples
+- Utilisez les diagrammes pour documenter vos choix
+
+### **Pour les Équipes**
+- Utilisez les diagrammes comme base de discussion
+- Adaptez ensemble selon votre domaine métier
+- Documentez vos choix architecturaux avec des diagrammes
+
+## 🔗 **Liens avec les Chapitres**
+
+Chaque diagramme correspond à un ou plusieurs chapitres :
+- **Chapitres 1-5** → Diagrammes d'architecture générale
+- **Chapitres 6-9** → Diagrammes de patterns
+- **Chapitres 10-15** → Diagrammes de stockage
+- **Chapitres 16+** → Diagrammes d'implémentation
+
+## 🎯 **Votre Prochaine Étape**
+
+{{< chapter-nav >}}
+  {{< chapter-option 
+    letter="A" 
+    color="green" 
+    title="Je veux voir l'architecture générale" 
+    subtitle="Vous voulez comprendre la vue d'ensemble du système"
+    criteria="Besoin de vue d'ensemble,Équipe en réflexion,Architecture à définir,Compréhension globale"
+    time="15-20 minutes"
+    chapter="0"
+    chapter-title="Architecture Générale"
+    chapter-url="/diagrams/architecture-generale/"
+  >}}
+  
+  {{< chapter-option 
+    letter="B" 
+    color="yellow" 
+    title="Je veux comprendre l'Event Storming" 
+    subtitle="Vous voulez voir le processus de découverte métier"
+    criteria="Event Storming à organiser,Équipe à former,Concepts métier à découvrir,Atelier à préparer"
+    time="20-30 minutes"
+    chapter="0"
+    chapter-title="Processus Event Storming"
+    chapter-url="/diagrams/event-storming-process/"
+  >}}
+  
+  {{< chapter-option 
+    letter="C" 
+    color="blue" 
+    title="Je veux commencer par les chapitres" 
+    subtitle="Vous voulez comprendre les concepts avant de voir les diagrammes"
+    criteria="Développeur débutant,Besoin de comprendre les concepts,Équipe à former,Projet à structurer"
+    time="45-60 minutes"
+    chapter="1"
+    chapter-title="Introduction au Domain-Driven Design et Event Storming"
+    chapter-url="/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"
+  >}}
+  
+  {{< chapter-option 
+    letter="D" 
+    color="purple" 
+    title="Je veux revenir à l'accueil" 
+    subtitle="Vous voulez voir la vue d'ensemble du guide"
+    criteria="Besoin de vue d'ensemble,Équipe en réflexion,Planification de formation"
+    time="5-10 minutes"
+    chapter="0"
+    chapter-title="Une architecture dont vous êtes le héros"
+    chapter-url="/"
+  >}}
+{{< /chapter-nav >}}
+
+---
+
+*Ces diagrammes sont conçus pour faciliter la compréhension des concepts complexes du Domain-Driven Design.*

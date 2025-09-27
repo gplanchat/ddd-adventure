@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Le Concept du Guide Interactif on DDD Journey</title><link>https://example.org/concept/</link><description>Recent content in Le Concept du Guide Interactif on DDD Journey</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/concept/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://example.org/concept/guide-navigation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/concept/guide-navigation/</guid><description>&lt;h1 id="guide-de-navigation-livre-dont-vous-êtes-le-héros"&gt;Guide de Navigation &amp;ldquo;Livre dont vous êtes le héros&amp;rdquo;&lt;/h1&gt;
+&lt;h2 id="-comment-naviguer-dans-ce-guide"&gt;🎮 Comment Naviguer dans ce Guide&lt;/h2&gt;
+&lt;p&gt;Ce guide est conçu comme un &lt;strong&gt;&amp;ldquo;livre dont vous êtes le héros&amp;rdquo;&lt;/strong&gt; où chaque chapitre vous propose des choix basés sur votre contexte, votre expérience et vos besoins. Vous n&amp;rsquo;êtes pas obligé de tout lire dans l&amp;rsquo;ordre !&lt;/p&gt;
+&lt;h3 id="-démarrage-rapide"&gt;🚀 Démarrage Rapide&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Si vous êtes pressé et voulez aller droit au but :&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Commencez par le &lt;a href="https://example.org/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"&gt;Chapitre 1 : Introduction Event Storming DDD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Répondez aux questions de navigation à la fin de chaque chapitre&lt;/li&gt;
+&lt;li&gt;Suivez le parcours qui correspond à votre situation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Si vous voulez tout comprendre dans l&amp;rsquo;ordre :&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

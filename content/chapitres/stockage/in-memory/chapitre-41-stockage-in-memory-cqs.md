@@ -1,0 +1,1091 @@
+---
+title: "Stockage In-Memory - CQS"
+description: "Implémentation Command Query Separation avec In-Memory pour optimiser les performances"
+date: 2024-12-19
+draft: true
+type: "docs"
+weight: 41
+---
+
+# ⚡ Stockage In-Memory - CQS
+
+## 🎯 **Contexte et Objectifs**
+
+### **Pourquoi CQS avec In-Memory ?**
+
+La combinaison CQS avec In-Memory offre une architecture optimisée qui sépare clairement les responsabilités tout en conservant les performances exceptionnelles du stockage en mémoire.
+
+#### **Avantages de CQS avec In-Memory**
+- **Performance optimisée** : Séparation claire entre écriture et lecture
+- **Scalabilité** : Possibilité de scaler indépendamment les commandes et requêtes
+- **Flexibilité** : Requêtes optimisées pour chaque usage
+- **Maintenabilité** : Code plus clair et organisé
+- **Cache efficace** : Mise en cache des requêtes
+
+### **Contexte Gyroscops**
+
+Dans notre écosystème **User → Organization → Workflow → Cloud Resources → Billing**, CQS avec In-Memory est particulièrement pertinent pour :
+- **Cache haute performance** : Séparation des écritures et lectures de cache
+- **Sessions utilisateur** : Gestion optimisée des sessions
+- **Métriques en temps réel** : Collecte et lecture des métriques
+- **Tests et développement** : Environnements de test rapides et organisés
+
+## 🏗️ **Architecture CQS avec In-Memory**
+
+### **Séparation des Responsabilités**
+
+#### **Côté Commande (Write)**
+- **Command Handlers** : Traitement des commandes métier
+- **In-Memory Writer** : Écriture optimisée en mémoire
+- **Event Handlers** : Gestion des événements de domaine
+- **Bulk Operations** : Optimisation des écritures
+
+#### **Côté Requête (Read)**
+- **Query Handlers** : Traitement des requêtes
+- **In-Memory Reader** : Requêtes optimisées
+- **Search Services** : Services de recherche spécialisés
+- **Caches** : Optimisation des performances
+
+### **Flux de Données**
+
+```mermaid
+graph TD
+    A[Command] --> B[Command Handler]
+    B --> C[In-Memory Writer]
+    C --> D[Data in RAM]
+    D --> E[Index Update]
+    
+    F[Query] --> G[Query Handler]
+    G --> H[In-Memory Reader]
+    H --> D
+    D --> I[Search Results]
+    I --> J[Response]
+    
+    K[Event] --> L[Event Handler]
+    L --> C
+    
+    M[Cache] --> N[Cache Manager]
+    N --> D
+    D --> O[Cached Data]
+    O --> P[Fast Response]
+```
+
+## 💻 **Implémentation Pratique**
+
+### **1. Command Side Implementation**
+
+#### **In-Memory Writer**
+
+```php
+<?php
+
+namespace App\Infrastructure\InMemory\Command;
+
+use App\Infrastructure\InMemory\InMemoryStorage;
+use App\Infrastructure\InMemory\InMemoryIndexer;
+use Psr\Log\LoggerInterface;
+
+class InMemoryWriter
+{
+    private InMemoryStorage $storage;
+    private InMemoryIndexer $indexer;
+    private LoggerInterface $logger;
+    private array $bulkBuffer = [];
+    private int $bulkSize;
+
+    public function __construct(
+        InMemoryStorage $storage,
+        InMemoryIndexer $indexer,
+        LoggerInterface $logger,
+        int $bulkSize = 100
+    ) {
+        $this->storage = $storage;
+        $this->indexer = $indexer;
+        $this->logger = $logger;
+        $this->bulkSize = $bulkSize;
+    }
+
+    public function store(string $key, mixed $value, array $indexFields = []): void
+    {
+        $this->bulkBuffer[] = [
+            'operation' => 'store',
+            'key' => $key,
+            'value' => $value,
+            'indexFields' => $indexFields
+        ];
+
+        if (count($this->bulkBuffer) >= $this->bulkSize) {
+            $this->flushBulk();
+        }
+    }
+
+    public function update(string $key, mixed $value, array $indexFields = []): void
+    {
+        $this->bulkBuffer[] = [
+            'operation' => 'update',
+            'key' => $key,
+            'value' => $value,
+            'indexFields' => $indexFields
+        ];
+
+        if (count($this->bulkBuffer) >= $this->bulkSize) {
+            $this->flushBulk();
+        }
+    }
+
+    public function delete(string $key): void
+    {
+        $this->bulkBuffer[] = [
+            'operation' => 'delete',
+            'key' => $key
+        ];
+
+        if (count($this->bulkBuffer) >= $this->bulkSize) {
+            $this->flushBulk();
+        }
+    }
+
+    public function flushBulk(): void
+    {
+        if (empty($this->bulkBuffer)) {
+            return;
+        }
+
+        try {
+            foreach ($this->bulkBuffer as $operation) {
+                switch ($operation['operation']) {
+                    case 'store':
+                        $this->storage->store($operation['key'], $operation['value']);
+                        if (!empty($operation['indexFields'])) {
+                            $this->indexer->addToIndex(
+                                $this->getEntityType($operation['key']),
+                                $operation['key'],
+                                $operation['value'],
+                                $operation['indexFields']
+                            );
+                        }
+                        break;
+
+                    case 'update':
+                        $this->storage->store($operation['key'], $operation['value']);
+                        if (!empty($operation['indexFields'])) {
+                            $this->indexer->removeFromIndex(
+                                $this->getEntityType($operation['key']),
+                                $operation['key']
+                            );
+                            $this->indexer->addToIndex(
+                                $this->getEntityType($operation['key']),
+                                $operation['key'],
+                                $operation['value'],
+                                $operation['indexFields']
+                            );
+                        }
+                        break;
+
+                    case 'delete':
+                        $this->indexer->removeFromIndex(
+                            $this->getEntityType($operation['key']),
+                            $operation['key']
+                        );
+                        $this->storage->delete($operation['key']);
+                        break;
+                }
+            }
+
+            $this->logger->info('Bulk operations completed', [
+                'operations' => count($this->bulkBuffer)
+            ]);
+
+            $this->bulkBuffer = [];
+
+        } catch (\Exception $e) {
+            $this->logger->error('Bulk operations failed', [
+                'error' => $e->getMessage(),
+                'operations' => count($this->bulkBuffer)
+            ]);
+
+            throw $e;
+        }
+    }
+
+    private function getEntityType(string $key): string
+    {
+        $parts = explode(':', $key);
+        return $parts[0] ?? 'Unknown';
+    }
+}
+```
+
+#### **Command Handler pour les Paiements**
+
+```php
+<?php
+
+namespace App\Application\Command\Payment;
+
+use App\Domain\Payment\Payment;
+use App\Domain\Payment\PaymentRepositoryInterface;
+use App\Infrastructure\InMemory\Command\InMemoryWriter;
+use Psr\Log\LoggerInterface;
+
+class CreatePaymentCommandHandler
+{
+    public function __construct(
+        private PaymentRepositoryInterface $paymentRepository,
+        private InMemoryWriter $writer,
+        private LoggerInterface $logger
+    ) {}
+
+    public function handle(CreatePaymentCommand $command): void
+    {
+        try {
+            // Créer le paiement
+            $payment = new Payment(
+                $command->getPaymentId(),
+                $command->getOrganizationId(),
+                $command->getUserId(),
+                $command->getAmount(),
+                $command->getCurrency(),
+                'pending',
+                $command->getDescription(),
+                new \DateTime(),
+                $command->getMetadata()
+            );
+
+            // Sauvegarder dans le repository principal
+            $this->paymentRepository->save($payment);
+
+            // Indexer dans In-Memory pour la recherche
+            $this->indexPaymentForSearch($payment);
+
+            $this->logger->info('Payment created and indexed', [
+                'paymentId' => $payment->getId(),
+                'organizationId' => $payment->getOrganizationId()
+            ]);
+
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to create payment', [
+                'paymentId' => $command->getPaymentId(),
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    private function indexPaymentForSearch(Payment $payment): void
+    {
+        $key = "Payment:{$payment->getId()}";
+        $document = [
+            'paymentId' => $payment->getId(),
+            'organizationId' => $payment->getOrganizationId(),
+            'userId' => $payment->getUserId(),
+            'amount' => $payment->getAmount(),
+            'currency' => $payment->getCurrency(),
+            'status' => $payment->getStatus(),
+            'description' => $payment->getDescription(),
+            'processedAt' => $payment->getProcessedAt()->format('c'),
+            'metadata' => $payment->getMetadata(),
+            'indexedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->writer->store($key, $document, [
+            'organizationId',
+            'userId',
+            'status',
+            'currency'
+        ]);
+    }
+}
+```
+
+#### **Event Handler pour la Synchronisation**
+
+```php
+<?php
+
+namespace App\Application\EventHandler\Payment;
+
+use App\Domain\Event\DomainEvent;
+use App\Infrastructure\InMemory\Command\InMemoryWriter;
+use Psr\Log\LoggerInterface;
+
+class PaymentEventHandler
+{
+    public function __construct(
+        private InMemoryWriter $writer,
+        private LoggerInterface $logger
+    ) {}
+
+    public function handle(DomainEvent $event): void
+    {
+        switch ($event->getEventType()) {
+            case 'PaymentProcessed':
+                $this->handlePaymentProcessed($event);
+                break;
+            case 'PaymentFailed':
+                $this->handlePaymentFailed($event);
+                break;
+            case 'PaymentRefunded':
+                $this->handlePaymentRefunded($event);
+                break;
+        }
+    }
+
+    private function handlePaymentProcessed(DomainEvent $event): void
+    {
+        $key = "Payment:{$event->getAggregateId()}";
+        $update = [
+            'status' => 'completed',
+            'processedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->writer->update($key, $update, ['status']);
+
+        $this->logger->info('Payment processed event handled', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'completed'
+        ]);
+    }
+
+    private function handlePaymentFailed(DomainEvent $event): void
+    {
+        $key = "Payment:{$event->getAggregateId()}";
+        $update = [
+            'status' => 'failed',
+            'error' => $event->getData()['error'],
+            'failedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->writer->update($key, $update, ['status']);
+
+        $this->logger->info('Payment failed event handled', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'failed'
+        ]);
+    }
+
+    private function handlePaymentRefunded(DomainEvent $event): void
+    {
+        $key = "Payment:{$event->getAggregateId()}";
+        $update = [
+            'status' => 'refunded',
+            'refundAmount' => $event->getData()['refundAmount'],
+            'refundedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->writer->update($key, $update, ['status']);
+
+        $this->logger->info('Payment refunded event handled', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'refunded'
+        ]);
+    }
+}
+```
+
+### **2. Query Side Implementation**
+
+#### **In-Memory Reader**
+
+```php
+<?php
+
+namespace App\Infrastructure\InMemory\Query;
+
+use App\Infrastructure\InMemory\InMemoryStorage;
+use App\Infrastructure\InMemory\InMemoryIndexer;
+use Psr\Log\LoggerInterface;
+use Psr\Cache\CacheItemPoolInterface;
+
+class InMemoryReader
+{
+    private InMemoryStorage $storage;
+    private InMemoryIndexer $indexer;
+    private LoggerInterface $logger;
+    private CacheItemPoolInterface $cache;
+
+    public function __construct(
+        InMemoryStorage $storage,
+        InMemoryIndexer $indexer,
+        LoggerInterface $logger,
+        CacheItemPoolInterface $cache
+    ) {
+        $this->storage = $storage;
+        $this->indexer = $indexer;
+        $this->logger = $logger;
+        $this->cache = $cache;
+    }
+
+    public function get(string $key, string $cacheKey = null): mixed
+    {
+        // Vérifier le cache
+        if ($cacheKey) {
+            $cachedItem = $this->cache->getItem($cacheKey);
+            if ($cachedItem->isHit()) {
+                $this->logger->debug('Data served from cache', [
+                    'key' => $key,
+                    'cacheKey' => $cacheKey
+                ]);
+                return $cachedItem->get();
+            }
+        }
+
+        $data = $this->storage->get($key);
+
+        // Mettre en cache
+        if ($cacheKey && $data !== null) {
+            $cachedItem->set($data);
+            $cachedItem->expiresAfter(300); // 5 minutes
+            $this->cache->save($cachedItem);
+        }
+
+        return $data;
+    }
+
+    public function search(array $criteria, string $cacheKey = null): array
+    {
+        // Vérifier le cache
+        if ($cacheKey) {
+            $cachedItem = $this->cache->getItem($cacheKey);
+            if ($cachedItem->isHit()) {
+                $this->logger->debug('Search result served from cache', [
+                    'criteria' => $criteria,
+                    'cacheKey' => $cacheKey
+                ]);
+                return $cachedItem->get();
+            }
+        }
+
+        $results = $this->performSearch($criteria);
+
+        // Mettre en cache
+        if ($cacheKey) {
+            $cachedItem->set($results);
+            $cachedItem->expiresAfter(300); // 5 minutes
+            $this->cache->save($cachedItem);
+        }
+
+        $this->logger->info('Search executed', [
+            'criteria' => $criteria,
+            'results' => count($results)
+        ]);
+
+        return $results;
+    }
+
+    public function searchByField(string $entityType, string $field, mixed $value): array
+    {
+        $keys = $this->indexer->search($entityType, $field, $value);
+        
+        $results = [];
+        foreach ($keys as $key) {
+            $data = $this->storage->get($key);
+            if ($data !== null) {
+                $results[] = $data;
+            }
+        }
+        
+        return $results;
+    }
+
+    public function searchByMultipleFields(string $entityType, array $criteria): array
+    {
+        $results = [];
+        $allData = $this->storage->getAll();
+
+        foreach ($allData as $key => $value) {
+            if (!$this->isEntityType($key, $entityType)) {
+                continue;
+            }
+
+            $matches = true;
+            foreach ($criteria as $field => $expectedValue) {
+                if (!$this->fieldMatches($value, $field, $expectedValue)) {
+                    $matches = false;
+                    break;
+                }
+            }
+
+            if ($matches) {
+                $results[] = $value;
+            }
+        }
+
+        return $results;
+    }
+
+    public function getStatistics(string $entityType): array
+    {
+        $allData = $this->storage->getAll();
+        $entityData = [];
+
+        foreach ($allData as $key => $value) {
+            if ($this->isEntityType($key, $entityType)) {
+                $entityData[] = $value;
+            }
+        }
+
+        return [
+            'total' => count($entityData),
+            'memoryUsage' => memory_get_usage(true),
+            'peakMemoryUsage' => memory_get_peak_usage(true)
+        ];
+    }
+
+    private function performSearch(array $criteria): array
+    {
+        $results = [];
+        $allData = $this->storage->getAll();
+
+        foreach ($allData as $key => $value) {
+            if ($this->matchesCriteria($value, $criteria)) {
+                $results[] = $value;
+            }
+        }
+
+        return $results;
+    }
+
+    private function isEntityType(string $key, string $entityType): bool
+    {
+        return str_starts_with($key, "{$entityType}:");
+    }
+
+    private function matchesCriteria(mixed $value, array $criteria): bool
+    {
+        foreach ($criteria as $field => $expectedValue) {
+            if (!$this->fieldMatches($value, $field, $expectedValue)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function fieldMatches(mixed $value, string $field, mixed $expectedValue): bool
+    {
+        $fieldValue = $this->getFieldValue($value, $field);
+        
+        if (is_array($expectedValue)) {
+            return in_array($fieldValue, $expectedValue);
+        }
+
+        return $fieldValue === $expectedValue;
+    }
+
+    private function getFieldValue(mixed $value, string $field): mixed
+    {
+        if (is_array($value)) {
+            return $value[$field] ?? null;
+        }
+
+        if (is_object($value)) {
+            return $value->$field ?? null;
+        }
+
+        return null;
+    }
+}
+```
+
+#### **Query Handler pour les Paiements**
+
+```php
+<?php
+
+namespace App\Application\Query\Payment;
+
+use App\Infrastructure\InMemory\Query\InMemoryReader;
+use App\Domain\Payment\Payment;
+use Psr\Log\LoggerInterface;
+
+class PaymentQueryHandler
+{
+    private InMemoryReader $reader;
+    private LoggerInterface $logger;
+
+    public function __construct(InMemoryReader $reader, LoggerInterface $logger)
+    {
+        $this->reader = $reader;
+        $this->logger = $logger;
+    }
+
+    public function handle(GetPaymentByIdQuery $query): ?Payment
+    {
+        $key = "Payment:{$query->getPaymentId()}";
+        $cacheKey = "payment_{$query->getPaymentId()}";
+        
+        $data = $this->reader->get($key, $cacheKey);
+        
+        if (!$data) {
+            return null;
+        }
+        
+        return $this->dataToPayment($data);
+    }
+
+    public function handle(SearchPaymentsQuery $query): PaymentSearchResult
+    {
+        $criteria = $this->buildSearchCriteria($query);
+        $cacheKey = $this->generateCacheKey($query);
+        
+        $results = $this->reader->search($criteria, $cacheKey);
+        
+        $payments = [];
+        foreach ($results as $data) {
+            $payments[] = $this->dataToPayment($data);
+        }
+        
+        return new PaymentSearchResult(
+            $payments,
+            count($payments),
+            $query->getPage(),
+            $query->getSize()
+        );
+    }
+
+    public function handle(GetPaymentStatisticsQuery $query): array
+    {
+        $criteria = [
+            'organizationId' => $query->getOrganizationId()
+        ];
+        
+        if ($query->getFrom() && $query->getTo()) {
+            $criteria['processedAt'] = [
+                'gte' => $query->getFrom()->format('c'),
+                'lte' => $query->getTo()->format('c')
+            ];
+        }
+        
+        $results = $this->reader->search($criteria);
+        
+        $statistics = [
+            'total' => count($results),
+            'byStatus' => [],
+            'byCurrency' => [],
+            'totalAmount' => 0
+        ];
+        
+        foreach ($results as $data) {
+            $status = $data['status'] ?? 'unknown';
+            $currency = $data['currency'] ?? 'unknown';
+            $amount = $data['amount'] ?? 0;
+            
+            $statistics['byStatus'][$status] = ($statistics['byStatus'][$status] ?? 0) + 1;
+            $statistics['byCurrency'][$currency] = ($statistics['byCurrency'][$currency] ?? 0) + 1;
+            $statistics['totalAmount'] += $amount;
+        }
+        
+        return $statistics;
+    }
+
+    private function buildSearchCriteria(SearchPaymentsQuery $query): array
+    {
+        $criteria = [];
+        
+        if ($query->getOrganizationId()) {
+            $criteria['organizationId'] = $query->getOrganizationId();
+        }
+        
+        if ($query->getStatuses()) {
+            $criteria['status'] = $query->getStatuses();
+        }
+        
+        if ($query->getCurrencies()) {
+            $criteria['currency'] = $query->getCurrencies();
+        }
+        
+        if ($query->getMinAmount() || $query->getMaxAmount()) {
+            $criteria['amount'] = [];
+            if ($query->getMinAmount()) {
+                $criteria['amount']['gte'] = $query->getMinAmount();
+            }
+            if ($query->getMaxAmount()) {
+                $criteria['amount']['lte'] = $query->getMaxAmount();
+            }
+        }
+        
+        return $criteria;
+    }
+
+    private function generateCacheKey(SearchPaymentsQuery $query): string
+    {
+        return 'payment_search_' . md5(serialize($query));
+    }
+
+    private function dataToPayment(array $data): Payment
+    {
+        return new Payment(
+            $data['paymentId'],
+            $data['organizationId'],
+            $data['userId'],
+            $data['amount'],
+            $data['currency'],
+            $data['status'],
+            $data['description'],
+            new \DateTime($data['processedAt']),
+            $data['metadata'] ?? []
+        );
+    }
+}
+```
+
+### **3. Service de Synchronisation**
+
+#### **Service de Synchronisation Bidirectionnelle**
+
+```php
+<?php
+
+namespace App\Application\Service\InMemory;
+
+use App\Domain\Payment\PaymentRepositoryInterface;
+use App\Infrastructure\InMemory\Command\InMemoryWriter;
+use App\Infrastructure\InMemory\Query\InMemoryReader;
+use Psr\Log\LoggerInterface;
+
+class PaymentSynchronizationService
+{
+    public function __construct(
+        private PaymentRepositoryInterface $paymentRepository,
+        private InMemoryWriter $writer,
+        private InMemoryReader $reader,
+        private LoggerInterface $logger
+    ) {}
+
+    public function synchronizePayment(string $paymentId): void
+    {
+        try {
+            // Récupérer le paiement depuis le repository principal
+            $payment = $this->paymentRepository->findById($paymentId);
+            
+            if (!$payment) {
+                $this->logger->warning('Payment not found for synchronization', [
+                    'paymentId' => $paymentId
+                ]);
+                return;
+            }
+
+            // Indexer dans In-Memory
+            $this->indexPaymentForSearch($payment);
+
+            $this->logger->info('Payment synchronized', [
+                'paymentId' => $paymentId,
+                'status' => $payment->getStatus()
+            ]);
+
+        } catch (\Exception $e) {
+            $this->logger->error('Payment synchronization failed', [
+                'paymentId' => $paymentId,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function synchronizeAllPayments(string $organizationId = null): void
+    {
+        try {
+            $payments = $organizationId 
+                ? $this->paymentRepository->findByOrganization($organizationId)
+                : $this->paymentRepository->findAll();
+
+            $count = 0;
+            foreach ($payments as $payment) {
+                $this->synchronizePayment($payment->getId());
+                $count++;
+            }
+
+            $this->logger->info('All payments synchronized', [
+                'count' => $count,
+                'organizationId' => $organizationId
+            ]);
+
+        } catch (\Exception $e) {
+            $this->logger->error('Bulk synchronization failed', [
+                'organizationId' => $organizationId,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function verifySynchronization(string $paymentId): bool
+    {
+        try {
+            $payment = $this->paymentRepository->findById($paymentId);
+            $data = $this->reader->get("Payment:{$paymentId}");
+
+            if (!$payment || !$data) {
+                return false;
+            }
+
+            // Vérifier que les données correspondent
+            return $payment->getStatus() === $data['status'] &&
+                   $payment->getAmount() === $data['amount'] &&
+                   $payment->getCurrency() === $data['currency'];
+
+        } catch (\Exception $e) {
+            $this->logger->error('Synchronization verification failed', [
+                'paymentId' => $paymentId,
+                'error' => $e->getMessage()
+            ]);
+
+            return false;
+        }
+    }
+
+    private function indexPaymentForSearch(Payment $payment): void
+    {
+        $key = "Payment:{$payment->getId()}";
+        $document = [
+            'paymentId' => $payment->getId(),
+            'organizationId' => $payment->getOrganizationId(),
+            'userId' => $payment->getUserId(),
+            'amount' => $payment->getAmount(),
+            'currency' => $payment->getCurrency(),
+            'status' => $payment->getStatus(),
+            'description' => $payment->getDescription(),
+            'processedAt' => $payment->getProcessedAt()->format('c'),
+            'metadata' => $payment->getMetadata(),
+            'synchronizedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->writer->store($key, $document, [
+            'organizationId',
+            'userId',
+            'status',
+            'currency'
+        ]);
+    }
+}
+```
+
+## 🧪 **Tests et Validation**
+
+### **Tests d'Intégration CQS**
+
+```php
+<?php
+
+namespace App\Tests\Integration\InMemory;
+
+use App\Application\Command\Payment\CreatePaymentCommand;
+use App\Application\Command\Payment\CreatePaymentCommandHandler;
+use App\Application\Query\Payment\GetPaymentByIdQuery;
+use App\Application\Query\Payment\SearchPaymentsQuery;
+use App\Application\Query\Payment\PaymentQueryHandler;
+use App\Infrastructure\InMemory\Command\InMemoryWriter;
+use App\Infrastructure\InMemory\Query\InMemoryReader;
+use App\Infrastructure\InMemory\InMemoryStorage;
+use App\Infrastructure\InMemory\InMemoryIndexer;
+
+class InMemoryCqsTest extends TestCase
+{
+    private InMemoryWriter $writer;
+    private InMemoryReader $reader;
+    private CreatePaymentCommandHandler $commandHandler;
+    private PaymentQueryHandler $queryHandler;
+
+    protected function setUp(): void
+    {
+        $storage = new InMemoryStorage();
+        $indexer = new InMemoryIndexer();
+        
+        $this->writer = new InMemoryWriter($storage, $indexer, $this->createMock(LoggerInterface::class));
+        $this->reader = new InMemoryReader($storage, $indexer, $this->createMock(LoggerInterface::class), $this->createMock(CacheItemPoolInterface::class));
+        
+        $this->commandHandler = new CreatePaymentCommandHandler(
+            $this->createMock(PaymentRepositoryInterface::class),
+            $this->writer,
+            $this->createMock(LoggerInterface::class)
+        );
+        
+        $this->queryHandler = new PaymentQueryHandler($this->reader, $this->createMock(LoggerInterface::class));
+    }
+
+    public function testCommandQuerySeparation(): void
+    {
+        // Exécuter une commande
+        $command = new CreatePaymentCommand(
+            'payment-123',
+            'org-456',
+            'user-789',
+            100.00,
+            'EUR',
+            'Test payment',
+            ['source' => 'test']
+        );
+        
+        $this->commandHandler->handle($command);
+        
+        // Vérifier avec une requête
+        $query = new GetPaymentByIdQuery('payment-123');
+        $payment = $this->queryHandler->handle($query);
+        
+        $this->assertNotNull($payment);
+        $this->assertEquals('payment-123', $payment->getId());
+        $this->assertEquals(100.00, $payment->getAmount());
+    }
+
+    public function testSearchFunctionality(): void
+    {
+        // Créer plusieurs paiements
+        $payments = [
+            new CreatePaymentCommand('payment-1', 'org-456', 'user-1', 100.00, 'EUR', 'Payment 1', []),
+            new CreatePaymentCommand('payment-2', 'org-456', 'user-2', 200.00, 'USD', 'Payment 2', []),
+            new CreatePaymentCommand('payment-3', 'org-789', 'user-3', 300.00, 'EUR', 'Payment 3', [])
+        ];
+        
+        foreach ($payments as $command) {
+            $this->commandHandler->handle($command);
+        }
+        
+        // Rechercher par organisation
+        $searchQuery = new SearchPaymentsQuery('org-456', 0, 10);
+        $result = $this->queryHandler->handle($searchQuery);
+        
+        $this->assertCount(2, $result->getPayments());
+        $this->assertEquals(2, $result->getTotal());
+    }
+}
+```
+
+## 📊 **Performance et Optimisation**
+
+### **Stratégies d'Optimisation CQS**
+
+#### **1. Bulk Operations**
+```php
+public function bulkStorePayments(array $payments): void
+{
+    foreach ($payments as $payment) {
+        $this->writer->store(
+            "Payment:{$payment->getId()}",
+            $this->paymentToData($payment),
+            ['organizationId', 'userId', 'status', 'currency']
+        );
+    }
+    
+    $this->writer->flushBulk();
+}
+```
+
+#### **2. Cache Stratégique**
+```php
+public function searchWithCache(SearchPaymentsQuery $query): PaymentSearchResult
+{
+    $cacheKey = 'payment_search_' . md5(serialize($query));
+    
+    if ($cached = $this->cache->get($cacheKey)) {
+        return $cached;
+    }
+    
+    $result = $this->searchPayments($query);
+    $this->cache->set($cacheKey, $result, 300);
+    
+    return $result;
+}
+```
+
+#### **3. Index Optimisés**
+```php
+public function optimizeIndexes(): void
+{
+    // Nettoyer les index orphelins
+    $this->cleanOrphanedIndexes();
+    
+    // Compacter les index
+    $this->compactIndexes();
+    
+    // Forcer le garbage collection
+    gc_collect_cycles();
+}
+```
+
+## 🎯 **Critères d'Adoption**
+
+### **Quand Utiliser CQS avec In-Memory**
+
+#### **✅ Avantages**
+- **Performance optimisée** : Séparation claire entre écriture et lecture
+- **Scalabilité** : Possibilité de scaler indépendamment
+- **Flexibilité** : Requêtes optimisées pour chaque usage
+- **Maintenabilité** : Code plus clair et organisé
+- **Cache efficace** : Mise en cache des requêtes
+
+#### **❌ Inconvénients**
+- **Complexité** : Architecture plus complexe
+- **Volatilité** : Données perdues au redémarrage
+- **Limitation mémoire** : Contraint par la RAM disponible
+- **Expertise** : Équipe expérimentée requise
+
+#### **🎯 Critères d'Adoption**
+- **Performance importante** : Besoins de performance élevée
+- **Données temporaires** : Cache, sessions, métriques
+- **Équipe expérimentée** : Maîtrise d'In-Memory et CQS
+- **Tests et développement** : Environnements de test rapides
+- **Mémoire suffisante** : RAM disponible pour toutes les données
+- **Pas de persistance** : Données temporaires uniquement
+
+## 🚀 **Votre Prochaine Étape**
+
+{{< chapter-nav >}}
+  {{< chapter-option 
+    letter="A" 
+    color="green" 
+    title="Je veux voir l'approche CQRS avec In-Memory" 
+    subtitle="Vous voulez comprendre la séparation complète des responsabilités"
+    criteria="Architecture complexe,Équipe très expérimentée,Performance critique,Scalabilité maximale"
+    time="40-50 minutes"
+    chapter="42"
+    chapter-title="Stockage In-Memory - CQRS"
+    chapter-url="/chapitres/stockage/in-memory/chapitre-42-stockage-in-memory-cqrs/"
+  >}}
+  
+  {{< chapter-option 
+    letter="B" 
+    color="yellow" 
+    title="Je veux explorer les autres types de stockage" 
+    subtitle="Vous voulez voir les alternatives à In-Memory"
+    criteria="Comparaison nécessaire,Choix de stockage,Architecture à définir,Performance à optimiser"
+    time="30-40 minutes"
+    chapter="10"
+    chapter-title="Choix du Type de Stockage"
+    chapter-url="/chapitres/fondamentaux/chapitre-10-choix-type-stockage/"
+  >}}
+  
+  {{< chapter-option 
+    letter="C" 
+    color="blue" 
+    title="Je veux voir des exemples concrets" 
+    subtitle="Vous voulez comprendre les implémentations pratiques"
+    criteria="Développeur expérimenté,Besoin d'exemples pratiques,Implémentation à faire,Code à écrire"
+    time="Variable"
+    chapter="0"
+    chapter-title="Exemples et Implémentations"
+    chapter-url="/examples/"
+  >}}
+  
+  {{< chapter-option 
+    letter="D" 
+    color="purple" 
+    title="Je veux revenir aux fondamentaux" 
+    subtitle="Vous voulez comprendre les concepts de base"
+    criteria="Développeur débutant,Besoin de comprendre les concepts,Projet à structurer,Équipe à former"
+    time="45-60 minutes"
+    chapter="1"
+    chapter-title="Introduction au Domain-Driven Design et Event Storming"
+    chapter-url="/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"
+  >}}
+{{< /chapter-nav >}}
+
+---
+
+*CQS avec In-Memory offre un équilibre optimal entre performance et organisation, parfaitement adapté aux besoins de cache et de données temporaires de Gyroscops.*

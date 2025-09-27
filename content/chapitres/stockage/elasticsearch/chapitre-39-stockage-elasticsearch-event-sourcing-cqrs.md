@@ -1,0 +1,961 @@
+---
+title: "Stockage ElasticSearch - Event Sourcing + CQRS"
+description: "Implémentation complète Event Sourcing avec CQRS pour ElasticSearch - Architecture maximale"
+date: 2024-12-19
+draft: true
+type: "docs"
+weight: 39
+---
+
+# 🚀 Stockage ElasticSearch - Event Sourcing + CQRS
+
+## 🎯 **Contexte et Objectifs**
+
+### **L'Architecture Maximale : Event Sourcing + CQRS avec ElasticSearch**
+
+Nous arrivons maintenant à l'approche la plus sophistiquée et puissante : **Event Sourcing + CQRS avec ElasticSearch**. Cette combinaison représente l'état de l'art en matière d'architecture scalable pour la recherche et l'analytics.
+
+#### **Pourquoi cette Combinaison ?**
+- **Audit trail complet** : Historique immuable de tous les événements
+- **Scalabilité maximale** : Possibilité de scaler indépendamment chaque côté
+- **Recherche avancée** : Full-text search sur les événements avec analytics
+- **Performance optimale** : Chaque côté optimisé pour son usage
+- **Flexibilité maximale** : Projections multiples pour différents besoins
+
+### **Contexte Gyroscops**
+
+Dans notre écosystème **User → Organization → Workflow → Cloud Resources → Billing**, Event Sourcing + CQRS avec ElasticSearch est la solution ultime pour :
+- **Système de facturation** : Audit trail complet avec analytics avancées
+- **Logs d'application** : Historique complet avec recherche et monitoring
+- **Métriques de performance** : Traçabilité des performances avec analytics temporelles
+- **Workflows** : Historique des étapes avec recherche et analytics
+
+## 🏗️ **Architecture Event Sourcing + CQRS**
+
+### **Séparation Complète des Responsabilités**
+
+#### **Command Side (Write)**
+- **Command Handlers** : Traitement des commandes métier
+- **Event Store** : Persistance des événements dans ElasticSearch
+- **Event Handlers** : Gestion des événements de domaine
+- **Command Bus** : Orchestration des commandes
+- **Bulk Operations** : Optimisation des écritures
+
+#### **Query Side (Read)**
+- **Query Handlers** : Traitement des requêtes
+- **Event Search** : Recherche dans les événements
+- **Analytics Services** : Services d'analytics temporelles
+- **Query Bus** : Orchestration des requêtes
+- **Caches** : Optimisation des performances
+
+### **Flux de Données Complet**
+
+```mermaid
+graph TD
+    A[Command] --> B[Command Bus]
+    B --> C[Command Handler]
+    C --> D[Aggregate]
+    D --> E[Events]
+    E --> F[Event Store ElasticSearch]
+    F --> G[Event Bus]
+    G --> H[Event Handlers]
+    H --> I[Projections]
+    I --> J[Read Models]
+    
+    K[Query] --> L[Query Bus]
+    L --> M[Query Handler]
+    M --> N[Event Search]
+    N --> F
+    F --> O[Search Results]
+    O --> P[Response]
+    
+    Q[Analytics] --> R[Analytics Service]
+    R --> F
+    F --> S[Historical Data]
+    S --> T[Analytics Results]
+```
+
+## 💻 **Implémentation Complète**
+
+### **1. Command Side Implementation**
+
+#### **Event Store ElasticSearch Avancé**
+
+```php
+<?php
+
+namespace App\Infrastructure\EventStore;
+
+use Elasticsearch\Client;
+use App\Domain\Event\DomainEvent;
+use App\Domain\Event\EventStoreInterface;
+use Psr\Log\LoggerInterface;
+
+class ElasticSearchEventStore implements EventStoreInterface
+{
+    private Client $client;
+    private string $index;
+    private LoggerInterface $logger;
+    private array $bulkBuffer = [];
+    private int $bulkSize;
+
+    public function __construct(
+        Client $client, 
+        string $index, 
+        LoggerInterface $logger,
+        int $bulkSize = 100
+    ) {
+        $this->client = $client;
+        $this->index = $index;
+        $this->logger = $logger;
+        $this->bulkSize = $bulkSize;
+    }
+
+    public function appendEvents(string $aggregateId, array $events, int $expectedVersion): void
+    {
+        try {
+            // Vérifier la version attendue
+            $lastEvent = $this->getLastEvent($aggregateId);
+            
+            if ($lastEvent && $lastEvent['version'] !== $expectedVersion) {
+                throw new ConcurrencyException('Version mismatch');
+            }
+            
+            // Préparer les événements pour l'insertion
+            $version = $expectedVersion + 1;
+            
+            foreach ($events as $event) {
+                $this->bulkBuffer[] = [
+                    'index' => [
+                        '_index' => $this->index,
+                        '_id' => $event->getId()
+                    ]
+                ];
+                
+                $this->bulkBuffer[] = [
+                    'eventId' => $event->getId(),
+                    'aggregateId' => $aggregateId,
+                    'aggregateType' => $event->getAggregateType(),
+                    'eventType' => $event->getEventType(),
+                    'eventData' => $event->toArray(),
+                    'version' => $version++,
+                    'timestamp' => $event->getTimestamp()->format('c'),
+                    'correlationId' => $event->getCorrelationId(),
+                    'causationId' => $event->getCausationId(),
+                    'metadata' => $event->getMetadata()
+                ];
+                
+                if (count($this->bulkBuffer) >= $this->bulkSize * 2) {
+                    $this->flushBulk();
+                }
+            }
+            
+            $this->flushBulk();
+            
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to append events', [
+                'aggregateId' => $aggregateId,
+                'events' => count($events),
+                'error' => $e->getMessage()
+            ]);
+            
+            throw $e;
+        }
+    }
+
+    public function getEvents(string $aggregateId, int $fromVersion = 0): array
+    {
+        $query = [
+            'query' => [
+                'bool' => [
+                    'must' => [
+                        ['term' => ['aggregateId' => $aggregateId]],
+                        ['range' => ['version' => ['gte' => $fromVersion]]]
+                    ]
+                ]
+            ],
+            'sort' => [['version' => ['order' => 'asc']]]
+        ];
+        
+        $response = $this->client->search([
+            'index' => $this->index,
+            'body' => $query
+        ]);
+        
+        $events = [];
+        foreach ($response['hits']['hits'] as $hit) {
+            $events[] = $this->deserializeEvent($hit['_source']);
+        }
+        
+        return $events;
+    }
+
+    public function searchEvents(array $criteria): array
+    {
+        $query = [
+            'query' => [
+                'bool' => [
+                    'must' => []
+                ]
+            ],
+            'sort' => [['timestamp' => ['order' => 'desc']]]
+        ];
+        
+        if (isset($criteria['aggregateType'])) {
+            $query['query']['bool']['must'][] = [
+                'term' => ['aggregateType' => $criteria['aggregateType']]
+            ];
+        }
+        
+        if (isset($criteria['eventType'])) {
+            $query['query']['bool']['must'][] = [
+                'term' => ['eventType' => $criteria['eventType']]
+            ];
+        }
+        
+        if (isset($criteria['searchText'])) {
+            $query['query']['bool']['must'][] = [
+                'multi_match' => [
+                    'query' => $criteria['searchText'],
+                    'fields' => ['eventData.*', 'metadata.*']
+                ]
+            ];
+        }
+        
+        if (isset($criteria['from']) || isset($criteria['to'])) {
+            $range = [];
+            if (isset($criteria['from'])) {
+                $range['gte'] = $criteria['from']->format('c');
+            }
+            if (isset($criteria['to'])) {
+                $range['lte'] = $criteria['to']->format('c');
+            }
+            
+            $query['query']['bool']['must'][] = [
+                'range' => ['timestamp' => $range]
+            ];
+        }
+        
+        $response = $this->client->search([
+            'index' => $this->index,
+            'body' => $query
+        ]);
+        
+        $events = [];
+        foreach ($response['hits']['hits'] as $hit) {
+            $events[] = $this->deserializeEvent($hit['_source']);
+        }
+        
+        return $events;
+    }
+
+    private function getLastEvent(string $aggregateId): ?array
+    {
+        $query = [
+            'query' => [
+                'term' => ['aggregateId' => $aggregateId]
+            ],
+            'sort' => [['version' => ['order' => 'desc']]],
+            'size' => 1
+        ];
+        
+        $response = $this->client->search([
+            'index' => $this->index,
+            'body' => $query
+        ]);
+        
+        if (empty($response['hits']['hits'])) {
+            return null;
+        }
+        
+        return $response['hits']['hits'][0]['_source'];
+    }
+
+    private function flushBulk(): void
+    {
+        if (empty($this->bulkBuffer)) {
+            return;
+        }
+
+        try {
+            $response = $this->client->bulk([
+                'body' => $this->bulkBuffer,
+                'refresh' => false
+            ]);
+
+            $this->logger->info('Bulk events inserted', [
+                'index' => $this->index,
+                'operations' => count($this->bulkBuffer) / 2,
+                'errors' => $response['errors']
+            ]);
+
+            $this->bulkBuffer = [];
+
+        } catch (\Exception $e) {
+            $this->logger->error('Bulk events insertion failed', [
+                'index' => $this->index,
+                'error' => $e->getMessage(),
+                'operations' => count($this->bulkBuffer) / 2
+            ]);
+
+            throw $e;
+        }
+    }
+
+    private function deserializeEvent(array $document): DomainEvent
+    {
+        $eventClass = $document['eventType'];
+        return $eventClass::fromArray($document['eventData']);
+    }
+}
+```
+
+#### **Command Bus avec Middleware**
+
+```php
+<?php
+
+namespace App\Application\CommandBus;
+
+use App\Domain\Command\CommandInterface;
+use App\Domain\Command\CommandHandlerInterface;
+use Psr\Log\LoggerInterface;
+
+class CommandBus
+{
+    private array $handlers = [];
+    private array $middleware = [];
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    public function registerHandler(string $commandClass, CommandHandlerInterface $handler): void
+    {
+        $this->handlers[$commandClass] = $handler;
+    }
+
+    public function addMiddleware(callable $middleware): void
+    {
+        $this->middleware[] = $middleware;
+    }
+
+    public function handle(CommandInterface $command): void
+    {
+        $commandClass = get_class($command);
+        
+        if (!isset($this->handlers[$commandClass])) {
+            throw new \InvalidArgumentException("No handler registered for command: $commandClass");
+        }
+
+        $handler = $this->handlers[$commandClass];
+        
+        // Exécuter les middleware
+        $this->executeMiddleware($command, function() use ($handler, $command) {
+            $this->logger->info('Executing command', [
+                'command' => get_class($command),
+                'data' => $command->toArray()
+            ]);
+            
+            $handler->handle($command);
+        });
+    }
+
+    private function executeMiddleware(CommandInterface $command, callable $next): void
+    {
+        $middleware = array_reverse($this->middleware);
+        
+        foreach ($middleware as $mw) {
+            $next = function() use ($mw, $command, $next) {
+                return $mw($command, $next);
+            };
+        }
+        
+        $next();
+    }
+}
+```
+
+### **2. Query Side Implementation**
+
+#### **Query Bus avec Cache**
+
+```php
+<?php
+
+namespace App\Application\QueryBus;
+
+use App\Domain\Query\QueryInterface;
+use App\Domain\Query\QueryHandlerInterface;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Log\LoggerInterface;
+
+class QueryBus
+{
+    private array $handlers = [];
+    private CacheItemPoolInterface $cache;
+    private LoggerInterface $logger;
+
+    public function __construct(CacheItemPoolInterface $cache, LoggerInterface $logger)
+    {
+        $this->cache = $cache;
+        $this->logger = $logger;
+    }
+
+    public function registerHandler(string $queryClass, QueryHandlerInterface $handler): void
+    {
+        $this->handlers[$queryClass] = $handler;
+    }
+
+    public function handle(QueryInterface $query): mixed
+    {
+        $queryClass = get_class($query);
+        
+        if (!isset($this->handlers[$queryClass])) {
+            throw new \InvalidArgumentException("No handler registered for query: $queryClass");
+        }
+
+        // Vérifier le cache
+        $cacheKey = $this->generateCacheKey($query);
+        $cachedItem = $this->cache->getItem($cacheKey);
+        
+        if ($cachedItem->isHit()) {
+            $this->logger->debug('Query result served from cache', [
+                'query' => $queryClass,
+                'cacheKey' => $cacheKey
+            ]);
+            
+            return $cachedItem->get();
+        }
+
+        // Exécuter la requête
+        $handler = $this->handlers[$queryClass];
+        $result = $handler->handle($query);
+        
+        // Mettre en cache
+        $cachedItem->set($result);
+        $cachedItem->expiresAfter(300); // 5 minutes
+        $this->cache->save($cachedItem);
+        
+        $this->logger->info('Query executed and cached', [
+            'query' => $queryClass,
+            'cacheKey' => $cacheKey
+        ]);
+        
+        return $result;
+    }
+
+    private function generateCacheKey(QueryInterface $query): string
+    {
+        return 'query_' . md5(serialize($query));
+    }
+}
+```
+
+#### **Event Search Service Avancé**
+
+```php
+<?php
+
+namespace App\Infrastructure\ElasticSearch\Query;
+
+use Elasticsearch\Client;
+use Psr\Log\LoggerInterface;
+use Psr\Cache\CacheItemPoolInterface;
+
+class EventSearchService
+{
+    private Client $client;
+    private string $index;
+    private LoggerInterface $logger;
+    private CacheItemPoolInterface $cache;
+
+    public function __construct(
+        Client $client, 
+        string $index, 
+        LoggerInterface $logger,
+        CacheItemPoolInterface $cache
+    ) {
+        $this->client = $client;
+        $this->index = $index;
+        $this->logger = $logger;
+        $this->cache = $cache;
+    }
+
+    public function searchEvents(array $query, string $cacheKey = null): array
+    {
+        // Vérifier le cache
+        if ($cacheKey) {
+            $cachedItem = $this->cache->getItem($cacheKey);
+            if ($cachedItem->isHit()) {
+                $this->logger->debug('Event search result served from cache', [
+                    'index' => $this->index,
+                    'cacheKey' => $cacheKey
+                ]);
+                return $cachedItem->get();
+            }
+        }
+
+        try {
+            $response = $this->client->search([
+                'index' => $this->index,
+                'body' => $query
+            ]);
+
+            // Mettre en cache
+            if ($cacheKey) {
+                $cachedItem->set($response);
+                $cachedItem->expiresAfter(300); // 5 minutes
+                $this->cache->save($cachedItem);
+            }
+
+            $this->logger->info('Event search executed', [
+                'index' => $this->index,
+                'hits' => $response['hits']['total']['value'],
+                'took' => $response['took']
+            ]);
+
+            return $response;
+
+        } catch (\Exception $e) {
+            $this->logger->error('Event search failed', [
+                'index' => $this->index,
+                'query' => $query,
+                'error' => $e->getMessage()
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function getEventStatistics(string $eventType, \DateTime $from, \DateTime $to): array
+    {
+        $query = [
+            'query' => [
+                'bool' => [
+                    'must' => [
+                        ['term' => ['eventType' => $eventType]],
+                        ['range' => [
+                            'timestamp' => [
+                                'gte' => $from->format('c'),
+                                'lte' => $to->format('c')
+                            ]
+                        ]]
+                    ]
+                ]
+            ],
+            'aggs' => [
+                'by_hour' => [
+                    'date_histogram' => [
+                        'field' => 'timestamp',
+                        'calendar_interval' => 'hour'
+                    ]
+                ],
+                'by_organization' => [
+                    'terms' => [
+                        'field' => 'metadata.organizationId'
+                    ]
+                ],
+                'by_user' => [
+                    'terms' => [
+                        'field' => 'metadata.userId'
+                    ]
+                ]
+            ],
+            'size' => 0
+        ];
+        
+        $cacheKey = "event_stats_{$eventType}_{$from->getTimestamp()}_{$to->getTimestamp()}";
+        $response = $this->searchEvents($query, $cacheKey);
+        
+        return [
+            'total' => $response['hits']['total']['value'],
+            'by_hour' => $response['aggregations']['by_hour']['buckets'],
+            'by_organization' => $response['aggregations']['by_organization']['buckets'],
+            'by_user' => $response['aggregations']['by_user']['buckets']
+        ];
+    }
+
+    public function getEventTrends(string $eventType, \DateTime $from, \DateTime $to, string $interval = 'day'): array
+    {
+        $query = [
+            'query' => [
+                'bool' => [
+                    'must' => [
+                        ['term' => ['eventType' => $eventType]],
+                        ['range' => [
+                            'timestamp' => [
+                                'gte' => $from->format('c'),
+                                'lte' => $to->format('c')
+                            ]
+                        ]]
+                    ]
+                ]
+            ],
+            'aggs' => [
+                'trends' => [
+                    'date_histogram' => [
+                        'field' => 'timestamp',
+                        'calendar_interval' => $interval
+                    ]
+                ]
+            ],
+            'size' => 0
+        ];
+        
+        $cacheKey = "event_trends_{$eventType}_{$interval}_{$from->getTimestamp()}_{$to->getTimestamp()}";
+        $response = $this->searchEvents($query, $cacheKey);
+        
+        $trends = [];
+        foreach ($response['aggregations']['trends']['buckets'] as $bucket) {
+            $trends[] = [
+                'date' => $bucket['key_as_string'],
+                'count' => $bucket['doc_count']
+            ];
+        }
+        
+        return $trends;
+    }
+}
+```
+
+### **3. Service de Projection Avancé**
+
+#### **Service de Projection pour les Analytics**
+
+```php
+<?php
+
+namespace App\Application\Service\ElasticSearch;
+
+use App\Domain\Event\DomainEvent;
+use App\Infrastructure\ElasticSearch\Command\ElasticSearchWriter;
+use Psr\Log\LoggerInterface;
+
+class PaymentProjectionService
+{
+    private ElasticSearchWriter $writer;
+    private LoggerInterface $logger;
+
+    public function __construct(ElasticSearchWriter $writer, LoggerInterface $logger)
+    {
+        $this->writer = $writer;
+        $this->logger = $logger;
+    }
+
+    public function handleEvent(DomainEvent $event): void
+    {
+        switch ($event->getEventType()) {
+            case 'PaymentProcessed':
+                $this->handlePaymentProcessed($event);
+                break;
+            case 'PaymentFailed':
+                $this->handlePaymentFailed($event);
+                break;
+            case 'PaymentRefunded':
+                $this->handlePaymentRefunded($event);
+                break;
+        }
+    }
+
+    private function handlePaymentProcessed(DomainEvent $event): void
+    {
+        $update = [
+            'status' => 'completed',
+            'processedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->writer->updateDocument(
+            $event->getAggregateId(),
+            $update,
+            $event->getMetadata()['organizationId'] ?? null
+        );
+
+        $this->logger->info('Payment processed projection updated', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'completed'
+        ]);
+    }
+
+    private function handlePaymentFailed(DomainEvent $event): void
+    {
+        $update = [
+            'status' => 'failed',
+            'error' => $event->getData()['error'],
+            'failedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->writer->updateDocument(
+            $event->getAggregateId(),
+            $update,
+            $event->getMetadata()['organizationId'] ?? null
+        );
+
+        $this->logger->info('Payment failed projection updated', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'failed'
+        ]);
+    }
+
+    private function handlePaymentRefunded(DomainEvent $event): void
+    {
+        $update = [
+            'status' => 'refunded',
+            'refundAmount' => $event->getData()['refundAmount'],
+            'refundedAt' => $event->getTimestamp()->format('c'),
+            'updatedAt' => (new \DateTime())->format('c')
+        ];
+
+        $this->writer->updateDocument(
+            $event->getAggregateId(),
+            $update,
+            $event->getMetadata()['organizationId'] ?? null
+        );
+
+        $this->logger->info('Payment refunded projection updated', [
+            'paymentId' => $event->getAggregateId(),
+            'status' => 'refunded'
+        ]);
+    }
+}
+```
+
+## 🧪 **Tests et Validation**
+
+### **Tests d'Intégration Event Sourcing + CQRS**
+
+```php
+<?php
+
+namespace App\Tests\Integration\ElasticSearch;
+
+use App\Application\Command\Payment\ProcessPaymentCommand;
+use App\Application\Command\Payment\ProcessPaymentCommandHandler;
+use App\Application\Query\Payment\GetPaymentHistoryQuery;
+use App\Application\Query\Payment\PaymentEventQueryHandler;
+use App\Infrastructure\EventStore\ElasticSearchEventStore;
+use App\Infrastructure\ElasticSearch\Query\EventSearchService;
+use Elasticsearch\ClientBuilder;
+
+class ElasticSearchEventSourcingCqrsTest extends TestCase
+{
+    private ElasticSearchEventStore $eventStore;
+    private EventSearchService $eventSearch;
+    private ProcessPaymentCommandHandler $commandHandler;
+    private PaymentEventQueryHandler $queryHandler;
+
+    protected function setUp(): void
+    {
+        $client = ClientBuilder::create()->setHosts(['localhost:9200'])->build();
+        
+        $this->eventStore = new ElasticSearchEventStore($client, 'test-events', $this->createMock(LoggerInterface::class));
+        $this->eventSearch = new EventSearchService($client, 'test-events', $this->createMock(LoggerInterface::class), $this->createMock(CacheItemPoolInterface::class));
+        
+        $this->commandHandler = new ProcessPaymentCommandHandler(
+            $this->eventStore,
+            $this->createMock(EventBusInterface::class),
+            $this->createMock(LoggerInterface::class)
+        );
+        
+        $this->queryHandler = new PaymentEventQueryHandler($this->eventSearch, $this->createMock(LoggerInterface::class));
+    }
+
+    public function testEventSourcingCqrsFlow(): void
+    {
+        // Exécuter une commande
+        $command = new ProcessPaymentCommand(
+            'payment-123',
+            100.00,
+            'EUR'
+        );
+        
+        $this->commandHandler->handle($command);
+        
+        // Vérifier l'historique des événements
+        $query = new GetPaymentHistoryQuery('payment-123');
+        $history = $this->queryHandler->handle($query);
+        
+        $this->assertNotEmpty($history);
+        $this->assertCount(1, $history);
+        $this->assertEquals('PaymentProcessed', $history[0]['eventType']);
+    }
+
+    public function testEventSearchWithAnalytics(): void
+    {
+        // Créer plusieurs événements
+        $commands = [
+            new ProcessPaymentCommand('payment-1', 100.00, 'EUR'),
+            new ProcessPaymentCommand('payment-2', 200.00, 'USD'),
+            new ProcessPaymentCommand('payment-3', 300.00, 'EUR')
+        ];
+        
+        foreach ($commands as $command) {
+            $this->commandHandler->handle($command);
+        }
+        
+        // Rechercher les événements
+        $searchQuery = new SearchPaymentEventsQuery(
+            new \DateTime('2024-01-01'),
+            new \DateTime('2024-12-31')
+        );
+        
+        $results = $this->queryHandler->handle($searchQuery);
+        
+        $this->assertCount(3, $results);
+        $this->assertEquals('PaymentProcessed', $results[0]['eventType']);
+    }
+}
+```
+
+## 📊 **Performance et Optimisation**
+
+### **Stratégies d'Optimisation Event Sourcing + CQRS**
+
+#### **1. Index Optimisés pour les Événements**
+```json
+{
+  "mappings": {
+    "properties": {
+      "eventId": { "type": "keyword" },
+      "aggregateId": { "type": "keyword" },
+      "aggregateType": { "type": "keyword" },
+      "eventType": { "type": "keyword" },
+      "eventData": { "type": "object" },
+      "version": { "type": "integer" },
+      "timestamp": { "type": "date" },
+      "correlationId": { "type": "keyword" },
+      "causationId": { "type": "keyword" },
+      "metadata": { "type": "object" }
+    }
+  },
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1,
+    "refresh_interval": "30s"
+  }
+}
+```
+
+#### **2. Cache Multi-Niveaux**
+```php
+public function searchEventsWithCache(array $query, string $cacheKey = null): array
+{
+    // Cache L1: Mémoire
+    if (isset($this->memoryCache[$cacheKey])) {
+        return $this->memoryCache[$cacheKey];
+    }
+    
+    // Cache L2: Redis
+    if ($cached = $this->redis->get("event_search:{$cacheKey}")) {
+        $result = json_decode($cached, true);
+        $this->memoryCache[$cacheKey] = $result;
+        return $result;
+    }
+    
+    // ElasticSearch
+    $result = $this->searchEvents($query);
+    
+    // Mettre en cache
+    $this->memoryCache[$cacheKey] = $result;
+    $this->redis->setex("event_search:{$cacheKey}", 300, json_encode($result));
+    
+    return $result;
+}
+```
+
+#### **3. Projections Asynchrones**
+```php
+public function handleEventAsync(DomainEvent $event): void
+{
+    // Mettre en queue pour traitement asynchrone
+    $this->messageBus->dispatch(new ProcessProjectionCommand($event));
+}
+```
+
+## 🎯 **Critères d'Adoption**
+
+### **Quand Utiliser Event Sourcing + CQRS avec ElasticSearch**
+
+#### **✅ Avantages**
+- **Audit trail complet** : Historique immuable de tous les événements
+- **Scalabilité maximale** : Possibilité de scaler indépendamment
+- **Recherche avancée** : Full-text search sur les événements
+- **Analytics temporelles** : Analyse des tendances dans le temps
+- **Performance optimale** : Chaque côté optimisé pour son usage
+- **Flexibilité maximale** : Projections multiples pour différents besoins
+
+#### **❌ Inconvénients**
+- **Complexité maximale** : Architecture très complexe
+- **Stockage important** : Beaucoup d'espace disque nécessaire
+- **Performance** : Requêtes plus lentes sur de gros volumes
+- **Expertise** : Équipe très expérimentée requise
+- **Coût** : Infrastructure très coûteuse
+
+#### **🎯 Critères d'Adoption**
+- **Système très complexe** : Besoins de scalabilité maximale
+- **Audit trail critique** : Besoin de traçabilité complète
+- **Recherche avancée** : Besoin de rechercher dans les événements
+- **Analytics temporelles** : Besoin d'analyser les tendances
+- **Équipe très expérimentée** : Maîtrise d'Event Sourcing, CQRS et ElasticSearch
+- **Budget important** : Investissement en complexité justifié
+- **Performance critique** : Besoins de performance maximale
+
+## 🚀 **Votre Prochaine Étape**
+
+{{< chapter-nav >}}
+  {{< chapter-option 
+    letter="A" 
+    color="green" 
+    title="Je veux explorer les autres types de stockage" 
+    subtitle="Vous voulez voir les alternatives à ElasticSearch"
+    criteria="Comparaison nécessaire,Choix de stockage,Architecture à définir,Performance à optimiser"
+    time="30-40 minutes"
+    chapter="10"
+    chapter-title="Choix du Type de Stockage"
+    chapter-url="/chapitres/fondamentaux/chapitre-10-choix-type-stockage/"
+  >}}
+  
+  {{< chapter-option 
+    letter="B" 
+    color="yellow" 
+    title="Je veux voir des exemples concrets" 
+    subtitle="Vous voulez comprendre les implémentations pratiques"
+    criteria="Développeur expérimenté,Besoin d'exemples pratiques,Implémentation à faire,Code à écrire"
+    time="Variable"
+    chapter="0"
+    chapter-title="Exemples et Implémentations"
+    chapter-url="/examples/"
+  >}}
+  
+  {{< chapter-option 
+    letter="C" 
+    color="blue" 
+    title="Je veux revenir aux fondamentaux" 
+    subtitle="Vous voulez comprendre les concepts de base"
+    criteria="Développeur débutant,Besoin de comprendre les concepts,Projet à structurer,Équipe à former"
+    time="45-60 minutes"
+    chapter="1"
+    chapter-title="Introduction au Domain-Driven Design et Event Storming"
+    chapter-url="/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"
+  >}}
+  
+  {{< chapter-option 
+    letter="D" 
+    color="purple" 
+    title="Je veux voir la vue d'ensemble des chapitres" 
+    subtitle="Vous voulez comprendre l'organisation complète du guide"
+    criteria="Besoin de vue d'ensemble,Équipe en réflexion,Planification de formation,Architecture à définir"
+    time="10-15 minutes"
+    chapter="0"
+    chapter-title="Vue d'ensemble des chapitres"
+    chapter-url="/chapitres/"
+  >}}
+{{< /chapter-nav >}}
+
+---
+
+*Event Sourcing + CQRS avec ElasticSearch représente l'état de l'art en matière d'architecture scalable pour la recherche et l'analytics, parfaitement adapté aux besoins les plus exigeants de Gyroscops.*

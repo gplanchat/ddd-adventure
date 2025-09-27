@@ -1,0 +1,328 @@
+{{/*
+Shortcode pour afficher les options de navigation vers les chapitres suivants
+Usage: {{< chapter-nav >}}
+  {{< chapter-option 
+    letter="A" 
+    color="green" 
+    title="Je veux aligner le produit sur les objectifs business" 
+    subtitle="Vous voulez recentrer le périmètre du projet autour d'objectifs business précis"
+    criteria="Objectifs business à clarifier,Besoin d'aligner business et technique,Équipe avec business owners disponibles,Temps pour la planification stratégique"
+    time="2-3 heures"
+    chapter="2"
+    chapter-title="L'Impact Mapping - Aligner le Produit sur les Objectifs Business"
+    chapter-url="/chapitres/fondamentaux/chapitre-02-impact-mapping/"
+  >}}
+{{< /chapter-nav >}}
+*/}}
+
+<div class="chapter-navigation">
+  <h2 class="chapter-nav-title">🎯 Votre Prochaine Étape</h2>
+  <p class="chapter-nav-subtitle">Maintenant que vous comprenez les concepts de base et que j'ai partagé mon expérience avec Gyroscops, quel est votre contexte ?</p>
+  
+  <div class="chapter-options">
+    {{ .Inner }}
+  </div>
+</div>
+
+<style>
+.chapter-navigation {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  border-left: 4px solid #3b82f6;
+}
+
+.chapter-nav-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.chapter-nav-subtitle {
+  margin: 0 0 1.5rem 0;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.chapter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Styles de base pour les options de chapitres */
+.chapter-option {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+}
+
+.chapter-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--option-color, #6b7280);
+  border-radius: 0 2px 2px 0;
+}
+
+.chapter-option-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.chapter-option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--option-color, #6b7280);
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.chapter-option-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.chapter-option-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-style: italic;
+  margin: 0.25rem 0 0 0;
+  line-height: 1.4;
+}
+
+.chapter-option-content {
+  margin-left: 2.75rem;
+}
+
+.chapter-option-criteria {
+  margin-bottom: 0.75rem;
+}
+
+.chapter-option-criteria-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+}
+
+.chapter-option-criteria-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chapter-option-criteria-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.chapter-option-criteria-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.chapter-option-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.chapter-option-time {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.chapter-option-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--option-color, #6b7280);
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.chapter-option-link:hover {
+  background: var(--option-color-dark, #4b5563);
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.chapter-option-link:visited {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.chapter-option-link:focus {
+  color: white !important;
+  text-decoration: none !important;
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.chapter-option-link:active {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.chapter-option-link::after {
+  content: '→';
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+  color: white !important;
+}
+
+.chapter-option-link:hover::after {
+  transform: translateX(2px);
+  color: white !important;
+}
+
+/* Neutralisation des styles de liens par défaut dans les boutons */
+.chapter-navigation a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Couleurs spécifiques par option */
+.chapter-option[data-color="green"] {
+  --option-color: #10b981;
+  --option-color-dark: #059669;
+}
+
+.chapter-option[data-color="yellow"] {
+  --option-color: #f59e0b;
+  --option-color-dark: #d97706;
+}
+
+.chapter-option[data-color="red"] {
+  --option-color: #ef4444;
+  --option-color-dark: #dc2626;
+}
+
+.chapter-option[data-color="blue"] {
+  --option-color: #3b82f6;
+  --option-color-dark: #2563eb;
+}
+
+.chapter-option[data-color="purple"] {
+  --option-color: #8b5cf6;
+  --option-color-dark: #7c3aed;
+}
+
+.chapter-option[data-color="orange"] {
+  --option-color: #f97316;
+  --option-color-dark: #ea580c;
+}
+
+.chapter-option[data-color="teal"] {
+  --option-color: #14b8a6;
+  --option-color-dark: #0d9488;
+}
+
+.chapter-option[data-color="indigo"] {
+  --option-color: #6366f1;
+  --option-color-dark: #4f46e5;
+}
+
+.chapter-option[data-color="pink"] {
+  --option-color: #ec4899;
+  --option-color-dark: #db2777;
+}
+
+.chapter-option[data-color="cyan"] {
+  --option-color: #06b6d4;
+  --option-color-dark: #0891b2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chapter-navigation {
+    padding: 1rem;
+  }
+  
+  .chapter-option {
+    padding: 1rem;
+  }
+  
+  .chapter-option-content {
+    margin-left: 2.5rem;
+  }
+  
+  .chapter-option-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .chapter-option-link {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+</style>

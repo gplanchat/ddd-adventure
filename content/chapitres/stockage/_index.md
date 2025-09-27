@@ -1,0 +1,105 @@
+---
+title: "Chapitres de Stockage"
+description: "Implémentations contextualisées selon l'architecture choisie (Classique, CQS, CQRS, Event Sourcing)"
+date: 2024-12-19
+draft: true
+type: "docs"
+weight: 3
+---
+
+# 🗄️ Chapitres de Stockage
+
+Ces chapitres présentent les implémentations de stockage contextualisées selon l'architecture choisie. Chaque type de stockage est décliné selon les 6 approches architecturales.
+
+## 🎯 Approches Architecturales
+
+### 1. Approche Classique
+- Repository unique par entité
+- Modèles de lecture/écriture identiques
+- Transactions classiques
+- Développement rapide
+
+### 2. Approche CQS (Command Query Separation)
+- Séparation Command/Query dans un seul modèle
+- Propriétés en lecture publique
+- Modification par méthodes
+- Performance améliorée
+
+### 3. Approche CQRS (Command Query Responsibility Segregation)
+- Repositories séparés Command/Query
+- Modèles optimisés par usage
+- Eventual consistency
+- Performance optimisée
+
+### 4. Event Sourcing seul
+- Événements comme source de vérité
+- Audit trail complet
+- Reconstruction d'état
+- Modèles similaires
+
+### 5. Event Sourcing + CQS
+- Event Sourcing avec séparation Command/Query
+- Audit trail + performance modérée
+- Modèles similaires
+- Bon compromis
+
+### 6. Event Sourcing + CQRS
+- Architecture combinée complète
+- Audit trail + performance maximale
+- Modèles distincts
+- Maximum de flexibilité
+
+## 📚 Types de Stockage
+
+### [Stockage SQL](/chapitres/stockage/sql/)
+- PostgreSQL, MySQL, SQLite
+- Données relationnelles
+- ACID transactions
+- Requêtes SQL complexes
+
+### [Stockage API](/chapitres/stockage/api/)
+- Keycloak, services tiers
+- Données distribuées
+- Intégrations multiples
+- Services spécialisés
+
+### [Stockage ElasticSearch](/chapitres/stockage/elasticsearch/)
+- Recherche full-text
+- Analytics et reporting
+- Grandes volumes de données
+- Requêtes non-SQL
+
+### [Stockage MongoDB](/chapitres/stockage/mongodb/)
+- Base de données document
+- Flexibilité du schéma
+- Performance de lecture élevée
+- Données semi-structurées
+
+### [Stockage In-Memory](/chapitres/stockage/in-memory/)
+- Données en mémoire
+- Lecture seule
+- Performance maximale
+- Données de configuration
+
+### [Stockage Composite piloté par Temporal](/chapitres/stockage/temporal/)
+- Stockage composite orchestré
+- Transactions distribuées
+- Orchestration complexe
+- Tolérance aux pannes
+
+### [Stockage Multi-sources](/chapitres/stockage/multi-sources/)
+- Agrégation de données multiples
+- Intégration de sources hétérogènes
+- Synchronisation complexe
+- Données distribuées
+
+## 🎯 Comment Choisir
+
+1. **Identifiez votre type de stockage** principal
+2. **Choisissez votre approche architecturale** selon vos besoins
+3. **Consultez le chapitre correspondant** pour l'implémentation
+4. **Adaptez les exemples** à votre contexte
+
+## 💡 Conseil
+
+Commencez par l'approche Classique pour votre type de stockage, puis évoluez vers des approches plus complexes si nécessaire.

@@ -1,0 +1,99 @@
+hero:
+  enable: true
+  weight: 10
+  template: hero
+  title: "Le voyage du DDD"
+  subtitle: "Une aventure dont vous êtes le héros pour maîtriser le Domain-Driven Design avec <string>API Platform</strong>."
+  info: "De débutant à expert, découvrez les secrets de l'architecture logicielle moderne dans un guide pratique et accessible."
+  # image:
+  #   path: "images"
+  #   filename: "hero-ddd-illustration.png"
+  #   alt: "Illustration Domain-Driven Design"
+  #   boxShadow: true
+  #   rounded: true
+  ctaButton:
+    icon: rocket_launch
+    btnText: "Commencer l'aventure"
+    url: "/demarrer/"
+  cta2Button:
+    icon: construction
+    btnText: "Découvrir le concept"
+    url: "/concept/"
+  badge:
+    text: v0.1.0
+    color: primary # primary, secondary, success, danger, warning, info, light, dark
+    pill: false # boolean
+    soft: true # boolean
+
+imageCompare:
+  enable: false
+
+featureGrid:
+  enable: true
+  weight: 20
+  template: feature-grid
+  title: "Les sujets de votre formation DDD"
+  subtitle: "Un parcours complet pour maîtriser tous les aspects du Domain-Driven Design avec API Platform"
+  items:
+    - title: "Event Storming"
+      icon: "speed"
+      description: "Apprenez à organiser des sessions de découverte du domaine avec les experts métier pour identifier les événements, commandes et agrégats."
+      ctaLink:
+        text: "Commencer"
+        url: "/getting-started/event-storming/"
+    
+    - title: "Modèles Riches"
+      icon: "architecture"
+      description: "Créez des modèles expressifs qui encapsulent la logique métier et respectent les principes du DDD."
+      ctaLink:
+        text: "Apprendre"
+        url: "/getting-started/modeles-riches/"
+    
+    - title: "CQRS"
+      icon: "sync"
+      description: "Séparez les commandes des requêtes pour optimiser les performances et la scalabilité de votre application."
+      ctaLink:
+        text: "Découvrir"
+        url: "/concepts/cqrs/"
+    
+    - title: "Event Sourcing"
+      icon: "history"
+      description: "Stockez les événements comme source de vérité pour une traçabilité complète et une reconstruction de l'état."
+      ctaLink:
+        text: "Explorer"
+        url: "/concepts/event-sourcing/"
+    
+    - title: "Repositories"
+      icon: "storage"
+      description: "Implémentez des patterns de persistance robustes avec Doctrine, ElasticSearch et MongoDB."
+      ctaLink:
+        text: "Implémenter"
+        url: "/concepts/repositories/"
+    
+    - title: "API Platform"
+      icon: "api"
+      description: "Leveragez la puissance d'API Platform pour créer des APIs REST et GraphQL automatiquement."
+      ctaLink:
+        text: "Utiliser"
+        url: "/implementation/api-platform/"
+    
+    - title: "Tests Unitaires"
+      icon: "science"
+      description: "Écrivez des tests robustes pour valider vos modèles et garantir la qualité de votre code."
+      ctaLink:
+        text: "Tester"
+        url: "/getting-started/tests/"
+    
+    - title: "Temporal Workflows"
+      icon: "workflow"
+      description: "Orchestrez des processus métier complexes avec des workflows distribués et résilients."
+      ctaLink:
+        text: "Orchestrer"
+        url: "/implementation/temporal-workflows/"
+    
+    - title: "Projections"
+      icon: "analytics"
+      description: "Construisez des vues optimisées pour la lecture à partir de vos événements stockés."
+      ctaLink:
+        text: "Projeter"
+        url: "/implementation/projections/"

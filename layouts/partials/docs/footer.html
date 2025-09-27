@@ -1,0 +1,37 @@
+<!-- Footer Start -->
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        {{ $yearToken := (cond (isset .Site.Params (lower "copyrightYearToken")) $.Site.Params.copyrightYearToken ":YEAR:") }}
+                        {{ replace $.Site.Params.footer.copyright $yearToken (string (now.Format "2006")) | markdownify }}
+                    </p>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+        
+        <!-- Sponsors Section -->
+        {{ if .Site.Params.sponsors.enable }}
+        <div class="row mt-3 pt-3 border-top">
+            <div class="col-12">
+                <div class="text-center">
+                    <h6 class="text-muted mb-2">{{ .Site.Params.sponsors.title }}</h6>
+                    <p class="text-muted small mb-2">{{ .Site.Params.sponsors.subtitle }}</p>
+                    <div class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                        {{ range .Site.Params.sponsors.sponsors }}
+                        <div class="sponsor-item">
+                            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <span class="badge bg-light text-dark border px-2 py-1 small">{{ .name }}</span>
+                            </a>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div><!--end container-->
+</footer><!--end footer-->
+<!-- End -->

@@ -1,0 +1,620 @@
+---
+title: "Stockage MongoDB - Event Sourcing + CQS"
+description: "Implémentation Event Sourcing avec CQS pour MongoDB, optimisant les performances et la scalabilité"
+date: 2024-12-19
+draft: true
+type: "docs"
+weight: 32
+---
+
+# 🚀 Stockage MongoDB - Event Sourcing + CQS
+
+## 🎯 **Contexte et Objectifs**
+
+### **Pourquoi Event Sourcing + CQS avec MongoDB ?**
+
+Après avoir exploré l'Event Sourcing pur avec MongoDB, nous allons maintenant combiner cette approche avec le **Command Query Separation (CQS)** pour optimiser les performances et la scalabilité.
+
+#### **Avantages de cette Combinaison**
+- **Performance optimisée** : Séparation claire entre écriture et lecture
+- **Scalabilité** : Possibilité de scaler indépendamment les commandes et requêtes
+- **Flexibilité** : Projections multiples pour différents besoins
+- **Audit trail** : Historique complet des événements
+
+### **Contexte Gyroscops**
+
+Dans notre écosystème **User → Organization → Workflow → Cloud Resources → Billing**, cette approche est particulièrement pertinente pour :
+- **Gestion des factures** : Audit trail complet des modifications
+- **Workflows complexes** : Événements de progression et d'état
+- **Ressources cloud** : Historique des changements d'infrastructure
+
+## 🏗️ **Architecture Event Sourcing + CQS**
+
+### **Séparation des Responsabilités**
+
+#### **Côté Commande (Write)**
+- **Event Store** : Stockage des événements dans MongoDB
+- **Command Handlers** : Traitement des commandes métier
+- **Event Handlers** : Gestion des événements générés
+- **Aggregates** : Logique métier et invariants
+
+#### **Côté Requête (Read)**
+- **Projections** : Vues optimisées pour la lecture
+- **Query Handlers** : Traitement des requêtes
+- **Read Models** : Modèles optimisés pour l'affichage
+- **Caches** : Optimisation des performances
+
+### **Flux de Données**
+
+```mermaid
+graph TD
+    A[Command] --> B[Command Handler]
+    B --> C[Aggregate]
+    C --> D[Events]
+    D --> E[Event Store MongoDB]
+    D --> F[Event Handlers]
+    F --> G[Projections]
+    G --> H[Read Models]
+    H --> I[Query Handler]
+    I --> J[Response]
+    
+    K[Query] --> I
+```
+
+## 💻 **Implémentation Pratique**
+
+### **1. Event Store MongoDB**
+
+#### **Structure des Collections**
+
+```javascript
+// Collection: events
+{
+  _id: ObjectId("..."),
+  aggregateId: "payment-123",
+  aggregateType: "Payment",
+  eventType: "PaymentProcessed",
+  eventData: {
+    amount: 100.00,
+    currency: "EUR",
+    status: "completed"
+  },
+  version: 1,
+  timestamp: ISODate("2024-12-19T10:00:00Z"),
+  metadata: {
+    userId: "user-456",
+    organizationId: "org-789"
+  }
+}
+
+// Collection: snapshots
+{
+  _id: ObjectId("..."),
+  aggregateId: "payment-123",
+  aggregateType: "Payment",
+  data: {
+    amount: 100.00,
+    currency: "EUR",
+    status: "completed",
+    processedAt: ISODate("2024-12-19T10:00:00Z")
+  },
+  version: 1,
+  timestamp: ISODate("2024-12-19T10:00:00Z")
+}
+```
+
+#### **Index MongoDB**
+
+```javascript
+// Index pour les événements
+db.events.createIndex({ aggregateId: 1, version: 1 })
+db.events.createIndex({ aggregateType: 1, timestamp: 1 })
+db.events.createIndex({ eventType: 1, timestamp: 1 })
+
+// Index pour les snapshots
+db.snapshots.createIndex({ aggregateId: 1 })
+db.snapshots.createIndex({ aggregateType: 1, timestamp: 1 })
+```
+
+### **2. Command Side Implementation**
+
+#### **Event Store Repository**
+
+```php
+<?php
+
+namespace App\Infrastructure\EventStore;
+
+use MongoDB\Client;
+use MongoDB\Collection;
+use App\Domain\Event\DomainEvent;
+use App\Domain\Event\EventStoreInterface;
+
+class MongoEventStore implements EventStoreInterface
+{
+    private Collection $events;
+    private Collection $snapshots;
+
+    public function __construct(Client $mongoClient)
+    {
+        $this->events = $mongoClient->selectCollection('hive', 'events');
+        $this->snapshots = $mongoClient->selectCollection('hive', 'snapshots');
+    }
+
+    public function appendEvents(string $aggregateId, array $events, int $expectedVersion): void
+    {
+        $session = $this->events->getDatabase()->getClient()->startSession();
+        
+        try {
+            $session->startTransaction();
+            
+            // Vérifier la version attendue
+            $lastEvent = $this->events->findOne(
+                ['aggregateId' => $aggregateId],
+                ['sort' => ['version' => -1]]
+            );
+            
+            if ($lastEvent && $lastEvent['version'] !== $expectedVersion) {
+                throw new ConcurrencyException('Version mismatch');
+            }
+            
+            // Insérer les nouveaux événements
+            $documents = [];
+            $version = $expectedVersion + 1;
+            
+            foreach ($events as $event) {
+                $documents[] = [
+                    'aggregateId' => $aggregateId,
+                    'aggregateType' => $event->getAggregateType(),
+                    'eventType' => $event->getEventType(),
+                    'eventData' => $event->toArray(),
+                    'version' => $version++,
+                    'timestamp' => new \MongoDB\BSON\UTCDateTime(),
+                    'metadata' => $event->getMetadata()
+                ];
+            }
+            
+            $this->events->insertMany($documents);
+            $session->commitTransaction();
+            
+        } catch (\Exception $e) {
+            $session->abortTransaction();
+            throw $e;
+        }
+    }
+
+    public function getEvents(string $aggregateId, int $fromVersion = 0): array
+    {
+        $cursor = $this->events->find(
+            [
+                'aggregateId' => $aggregateId,
+                'version' => ['$gte' => $fromVersion]
+            ],
+            ['sort' => ['version' => 1]]
+        );
+        
+        $events = [];
+        foreach ($cursor as $document) {
+            $events[] = $this->deserializeEvent($document);
+        }
+        
+        return $events;
+    }
+
+    private function deserializeEvent(array $document): DomainEvent
+    {
+        $eventClass = $document['eventType'];
+        return $eventClass::fromArray($document['eventData']);
+    }
+}
+```
+
+#### **Command Handler**
+
+```php
+<?php
+
+namespace App\Application\Command\Payment;
+
+use App\Domain\Payment\PaymentAggregate;
+use App\Domain\Event\EventStoreInterface;
+use App\Domain\Payment\PaymentRepositoryInterface;
+
+class ProcessPaymentCommandHandler
+{
+    public function __construct(
+        private EventStoreInterface $eventStore,
+        private PaymentRepositoryInterface $paymentRepository
+    ) {}
+
+    public function handle(ProcessPaymentCommand $command): void
+    {
+        // Charger l'agrégat
+        $events = $this->eventStore->getEvents($command->getPaymentId());
+        $payment = PaymentAggregate::fromEvents($events);
+        
+        // Exécuter la commande
+        $payment->processPayment($command->getAmount(), $command->getCurrency());
+        
+        // Sauvegarder les événements
+        $this->eventStore->appendEvents(
+            $command->getPaymentId(),
+            $payment->getUncommittedEvents(),
+            $payment->getVersion()
+        );
+        
+        // Nettoyer les événements non commités
+        $payment->markEventsAsCommitted();
+    }
+}
+```
+
+### **3. Query Side Implementation**
+
+#### **Projection Handler**
+
+```php
+<?php
+
+namespace App\Application\Projection\Payment;
+
+use App\Domain\Event\DomainEvent;
+use App\Infrastructure\ReadModel\PaymentReadModel;
+use MongoDB\Client;
+
+class PaymentProjectionHandler
+{
+    private \MongoDB\Collection $readModel;
+
+    public function __construct(Client $mongoClient)
+    {
+        $this->readModel = $mongoClient->selectCollection('hive', 'payment_read_models');
+    }
+
+    public function handle(DomainEvent $event): void
+    {
+        switch ($event->getEventType()) {
+            case 'PaymentProcessed':
+                $this->handlePaymentProcessed($event);
+                break;
+            case 'PaymentFailed':
+                $this->handlePaymentFailed($event);
+                break;
+        }
+    }
+
+    private function handlePaymentProcessed(DomainEvent $event): void
+    {
+        $this->readModel->updateOne(
+            ['paymentId' => $event->getAggregateId()],
+            [
+                '$set' => [
+                    'paymentId' => $event->getAggregateId(),
+                    'amount' => $event->getData()['amount'],
+                    'currency' => $event->getData()['currency'],
+                    'status' => 'completed',
+                    'processedAt' => $event->getTimestamp(),
+                    'updatedAt' => new \MongoDB\BSON\UTCDateTime()
+                ]
+            ],
+            ['upsert' => true]
+        );
+    }
+
+    private function handlePaymentFailed(DomainEvent $event): void
+    {
+        $this->readModel->updateOne(
+            ['paymentId' => $event->getAggregateId()],
+            [
+                '$set' => [
+                    'status' => 'failed',
+                    'error' => $event->getData()['error'],
+                    'updatedAt' => new \MongoDB\BSON\UTCDateTime()
+                ]
+            ],
+            ['upsert' => true]
+        );
+    }
+}
+```
+
+#### **Query Handler**
+
+```php
+<?php
+
+namespace App\Application\Query\Payment;
+
+use App\Infrastructure\ReadModel\PaymentReadModel;
+use MongoDB\Client;
+
+class PaymentQueryHandler
+{
+    private \MongoDB\Collection $readModel;
+
+    public function __construct(Client $mongoClient)
+    {
+        $this->readModel = $mongoClient->selectCollection('hive', 'payment_read_models');
+    }
+
+    public function getPaymentById(string $paymentId): ?PaymentReadModel
+    {
+        $document = $this->readModel->findOne(['paymentId' => $paymentId]);
+        
+        if (!$document) {
+            return null;
+        }
+        
+        return PaymentReadModel::fromArray($document);
+    }
+
+    public function getPaymentsByOrganization(string $organizationId, int $limit = 50, int $offset = 0): array
+    {
+        $cursor = $this->readModel->find(
+            ['organizationId' => $organizationId],
+            [
+                'sort' => ['processedAt' => -1],
+                'limit' => $limit,
+                'skip' => $offset
+            ]
+        );
+        
+        $payments = [];
+        foreach ($cursor as $document) {
+            $payments[] = PaymentReadModel::fromArray($document);
+        }
+        
+        return $payments;
+    }
+
+    public function getPaymentStatistics(string $organizationId, \DateTime $from, \DateTime $to): array
+    {
+        $pipeline = [
+            [
+                '$match' => [
+                    'organizationId' => $organizationId,
+                    'processedAt' => [
+                        '$gte' => new \MongoDB\BSON\UTCDateTime($from),
+                        '$lte' => new \MongoDB\BSON\UTCDateTime($to)
+                    ]
+                ]
+            ],
+            [
+                '$group' => [
+                    '_id' => '$status',
+                    'count' => ['$sum' => 1],
+                    'totalAmount' => ['$sum' => '$amount']
+                ]
+            ]
+        ];
+        
+        $cursor = $this->readModel->aggregate($pipeline);
+        
+        $statistics = [];
+        foreach ($cursor as $document) {
+            $statistics[$document['_id']] = [
+                'count' => $document['count'],
+                'totalAmount' => $document['totalAmount']
+            ];
+        }
+        
+        return $statistics;
+    }
+}
+```
+
+## 🧪 **Tests et Validation**
+
+### **Tests Unitaires**
+
+```php
+<?php
+
+namespace App\Tests\Infrastructure\EventStore;
+
+use PHPUnit\Framework\TestCase;
+use App\Infrastructure\EventStore\MongoEventStore;
+use App\Domain\Payment\PaymentProcessedEvent;
+
+class MongoEventStoreTest extends TestCase
+{
+    private MongoEventStore $eventStore;
+    private \MongoDB\Client $mongoClient;
+
+    protected function setUp(): void
+    {
+        $this->mongoClient = new \MongoDB\Client('mongodb://localhost:27017');
+        $this->eventStore = new MongoEventStore($this->mongoClient);
+        
+        // Nettoyer les collections de test
+        $this->mongoClient->selectCollection('test', 'events')->drop();
+        $this->mongoClient->selectCollection('test', 'snapshots')->drop();
+    }
+
+    public function testAppendEvents(): void
+    {
+        $paymentId = 'payment-123';
+        $event = new PaymentProcessedEvent($paymentId, 100.00, 'EUR');
+        
+        $this->eventStore->appendEvents($paymentId, [$event], 0);
+        
+        $events = $this->eventStore->getEvents($paymentId);
+        $this->assertCount(1, $events);
+        $this->assertInstanceOf(PaymentProcessedEvent::class, $events[0]);
+    }
+
+    public function testConcurrencyControl(): void
+    {
+        $paymentId = 'payment-123';
+        $event1 = new PaymentProcessedEvent($paymentId, 100.00, 'EUR');
+        $event2 = new PaymentProcessedEvent($paymentId, 200.00, 'EUR');
+        
+        // Premier append
+        $this->eventStore->appendEvents($paymentId, [$event1], 0);
+        
+        // Tentative de concourrence
+        $this->expectException(ConcurrencyException::class);
+        $this->eventStore->appendEvents($paymentId, [$event2], 0);
+    }
+}
+```
+
+### **Tests d'Intégration**
+
+```php
+<?php
+
+namespace App\Tests\Integration\Payment;
+
+use App\Application\Command\Payment\ProcessPaymentCommand;
+use App\Application\Command\Payment\ProcessPaymentCommandHandler;
+use App\Application\Query\Payment\PaymentQueryHandler;
+use App\Infrastructure\EventStore\MongoEventStore;
+use MongoDB\Client;
+
+class PaymentEventSourcingCqsTest extends TestCase
+{
+    public function testCompletePaymentFlow(): void
+    {
+        $mongoClient = new Client('mongodb://localhost:27017');
+        $eventStore = new MongoEventStore($mongoClient);
+        
+        $commandHandler = new ProcessPaymentCommandHandler($eventStore, $this->createMock(PaymentRepositoryInterface::class));
+        $queryHandler = new PaymentQueryHandler($mongoClient);
+        
+        // Exécuter la commande
+        $command = new ProcessPaymentCommand('payment-123', 100.00, 'EUR');
+        $commandHandler->handle($command);
+        
+        // Vérifier la requête
+        $payment = $queryHandler->getPaymentById('payment-123');
+        $this->assertNotNull($payment);
+        $this->assertEquals(100.00, $payment->getAmount());
+        $this->assertEquals('EUR', $payment->getCurrency());
+        $this->assertEquals('completed', $payment->getStatus());
+    }
+}
+```
+
+## 📊 **Performance et Optimisation**
+
+### **Stratégies d'Optimisation**
+
+#### **1. Index MongoDB**
+```javascript
+// Index composés pour les requêtes fréquentes
+db.events.createIndex({ aggregateType: 1, timestamp: -1 })
+db.events.createIndex({ eventType: 1, aggregateId: 1 })
+db.payment_read_models.createIndex({ organizationId: 1, processedAt: -1 })
+db.payment_read_models.createIndex({ status: 1, processedAt: -1 })
+```
+
+#### **2. Snapshots**
+```php
+public function createSnapshot(string $aggregateId, int $version): void
+{
+    $events = $this->getEvents($aggregateId, 0);
+    $aggregate = PaymentAggregate::fromEvents($events);
+    
+    $this->snapshots->replaceOne(
+        ['aggregateId' => $aggregateId],
+        [
+            'aggregateId' => $aggregateId,
+            'aggregateType' => 'Payment',
+            'data' => $aggregate->toSnapshot(),
+            'version' => $version,
+            'timestamp' => new \MongoDB\BSON\UTCDateTime()
+        ],
+        ['upsert' => true]
+    );
+}
+```
+
+#### **3. Projections Asynchrones**
+```php
+public function handleEventAsync(DomainEvent $event): void
+{
+    // Mettre en queue pour traitement asynchrone
+    $this->messageBus->dispatch(new ProcessProjectionCommand($event));
+}
+```
+
+## 🎯 **Critères d'Adoption**
+
+### **Quand Utiliser Event Sourcing + CQS avec MongoDB**
+
+#### **✅ Avantages**
+- **Audit trail complet** : Historique de tous les changements
+- **Performance optimisée** : Séparation lecture/écriture
+- **Scalabilité** : Possibilité de scaler indépendamment
+- **Flexibilité** : Projections multiples pour différents besoins
+- **Debugging** : Possibilité de rejouer les événements
+
+#### **❌ Inconvénients**
+- **Complexité** : Architecture plus complexe
+- **Latence** : Délai entre écriture et lecture
+- **Stockage** : Plus d'espace disque nécessaire
+- **Expertise** : Équipe expérimentée requise
+
+#### **🎯 Critères d'Adoption**
+- **Audit trail critique** : Besoin de traçabilité complète
+- **Performance importante** : Lectures et écritures très différentes
+- **Équipe expérimentée** : Maîtrise des patterns avancés
+- **Budget important** : Investissement en complexité justifié
+- **Évolutivité** : Besoin de scaler indépendamment
+
+## 🚀 **Votre Prochaine Étape**
+
+{{< chapter-nav >}}
+  {{< chapter-option 
+    letter="A" 
+    color="green" 
+    title="Je veux voir l'implémentation Event Sourcing + CQRS complète" 
+    subtitle="Vous voulez comprendre l'approche la plus avancée avec CQRS"
+    criteria="Équipe très expérimentée,Architecture complexe,Performance critique,Audit trail complet"
+    time="45-60 minutes"
+    chapter="33"
+    chapter-title="Stockage MongoDB - Event Sourcing + CQRS"
+    chapter-url="/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/"
+  >}}
+  
+  {{< chapter-option 
+    letter="B" 
+    color="yellow" 
+    title="Je veux explorer les autres types de stockage" 
+    subtitle="Vous voulez voir les alternatives à MongoDB"
+    criteria="Comparaison nécessaire,Choix de stockage,Architecture à définir,Performance à optimiser"
+    time="30-40 minutes"
+    chapter="10"
+    chapter-title="Choix du Type de Stockage"
+    chapter-url="/chapitres/fondamentaux/chapitre-10-choix-type-stockage/"
+  >}}
+  
+  {{< chapter-option 
+    letter="C" 
+    color="blue" 
+    title="Je veux voir des exemples concrets" 
+    subtitle="Vous voulez comprendre les implémentations pratiques"
+    criteria="Développeur expérimenté,Besoin d'exemples pratiques,Implémentation à faire,Code à écrire"
+    time="Variable"
+    chapter="0"
+    chapter-title="Exemples et Implémentations"
+    chapter-url="/examples/"
+  >}}
+  
+  {{< chapter-option 
+    letter="D" 
+    color="purple" 
+    title="Je veux revenir aux fondamentaux" 
+    subtitle="Vous voulez comprendre les concepts de base"
+    criteria="Développeur débutant,Besoin de comprendre les concepts,Projet à structurer,Équipe à former"
+    time="45-60 minutes"
+    chapter="1"
+    chapter-title="Introduction au Domain-Driven Design et Event Storming"
+    chapter-url="/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"
+  >}}
+{{< /chapter-nav >}}
+
+---
+
+*Cette approche Event Sourcing + CQS avec MongoDB offre un équilibre optimal entre performance, scalabilité et audit trail, parfaitement adapté aux besoins complexes de Gyroscops.*

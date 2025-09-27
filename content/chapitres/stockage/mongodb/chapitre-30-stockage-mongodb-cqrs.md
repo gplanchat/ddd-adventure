@@ -1,0 +1,474 @@
+---
+title: "Chapitre 30 : Stockage MongoDB - Approche CQRS"
+weight: 30
+draft: true
+---
+
+# Chapitre 30 : Stockage MongoDB - Approche CQRS
+
+## 🎯 **Objectif de ce Chapitre**
+
+Dans ce chapitre, vous allez découvrir comment implémenter CQRS (Command Query Responsibility Segregation) avec MongoDB, en séparant complètement les modèles de lecture et d'écriture pour une architecture distribuée et évolutive.
+
+## 📖 **Mon Expérience avec Gyroscops**
+
+Avec Gyroscops, nous avions atteint les limites de l'approche CQS classique. Nos équipes de développement et d'analytics avaient des besoins complètement différents, et nous avions besoin d'une séparation plus radicale.
+
+### **Le Problème avec CQS**
+
+Notre collection `billing_queries` était devenue un monstre :
+- Structure complexe pour satisfaire tous les cas d'usage
+- Index contradictoires entre les équipes
+- Performance dégradée par la polyvalence
+
+### **La Révolution CQRS**
+
+J'ai découvert que CQRS permettait de créer des modèles complètement différents :
+- **Modèle de commande** : Optimisé pour les écritures
+- **Modèles de requête** : Spécialisés par cas d'usage
+- **Découplage total** : Équipes indépendantes
+
+## 🏗️ **Architecture CQRS avec MongoDB**
+
+### **Séparation Complète des Modèles**
+
+```javascript
+// Modèle de commande (écriture)
+const InvoiceCommand = {
+  _id: ObjectId(),
+  type: "CreateInvoice",
+  aggregateId: "invoice_123",
+  data: {
+    customerId: "cust_456",
+    amount: 1500.00,
+    currency: "EUR",
+    items: [
+      { description: "Cloud Resources", amount: 1200.00 },
+      { description: "Support", amount: 300.00 }
+    ]
+  },
+  timestamp: new Date(),
+  version: 1,
+  metadata: {
+    userId: "user_789",
+    correlationId: "corr_abc"
+  }
+};
+
+// Modèle de requête - Vue facturation
+const InvoiceBillingView = {
+  _id: "invoice_123",
+  invoiceNumber: "INV-2024-001",
+  customer: {
+    id: "cust_456",
+    name: "Acme Corp",
+    billingAddress: "123 Main St, Paris"
+  },
+  totalAmount: 1500.00,
+  currency: "EUR",
+  status: "pending",
+  dueDate: new Date("2024-02-15"),
+  createdAt: new Date()
+};
+
+// Modèle de requête - Vue analytics
+const InvoiceAnalyticsView = {
+  _id: "invoice_123",
+  customerSegment: "enterprise",
+  revenue: 1500.00,
+  currency: "EUR",
+  month: "2024-01",
+  region: "europe",
+  productCategory: "cloud",
+  createdAt: new Date()
+};
+```
+
+### **Collections Spécialisées**
+
+```javascript
+// Collection de commandes
+db.invoice_commands.createIndex({ "aggregateId": 1, "version": 1 });
+db.invoice_commands.createIndex({ "timestamp": 1 });
+db.invoice_commands.createIndex({ "type": 1 });
+
+// Collection de vues facturation
+db.invoice_billing_views.createIndex({ "customer.id": 1, "status": 1 });
+db.invoice_billing_views.createIndex({ "dueDate": 1 });
+db.invoice_billing_views.createIndex({ "createdAt": -1 });
+
+// Collection de vues analytics
+db.invoice_analytics_views.createIndex({ "customerSegment": 1, "month": 1 });
+db.invoice_analytics_views.createIndex({ "region": 1, "productCategory": 1 });
+db.invoice_analytics_views.createIndex({ "revenue": -1 });
+```
+
+## 🔄 **Projection des Vues**
+
+### **Projection en Temps Réel**
+
+```javascript
+// Change Stream pour les commandes
+const changeStream = db.invoice_commands.watch([
+  { $match: { "operationType": "insert" } }
+]);
+
+changeStream.on('change', async (change) => {
+  const command = change.fullDocument;
+  
+  try {
+    // Projeter vers la vue facturation
+    await projectToBillingView(command);
+    
+    // Projeter vers la vue analytics
+    await projectToAnalyticsView(command);
+    
+    console.log(`Command ${command._id} projected successfully`);
+  } catch (error) {
+    console.error(`Projection failed for command ${command._id}:`, error);
+    // Gérer l'erreur (retry, dead letter queue, etc.)
+  }
+});
+```
+
+### **Projection vers la Vue Facturation**
+
+```javascript
+async function projectToBillingView(command) {
+  const invoiceData = command.data;
+  
+  // Enrichir les données client
+  const customer = await db.customers.findOne({ _id: invoiceData.customerId });
+  
+  // Créer la vue facturation
+  const billingView = {
+    _id: command.aggregateId,
+    invoiceNumber: generateInvoiceNumber(command),
+    customer: {
+      id: customer._id,
+      name: customer.name,
+      billingAddress: customer.billingAddress
+    },
+    totalAmount: invoiceData.amount,
+    currency: invoiceData.currency,
+    status: "pending",
+    dueDate: calculateDueDate(command.timestamp),
+    createdAt: command.timestamp
+  };
+  
+  await db.invoice_billing_views.replaceOne(
+    { _id: command.aggregateId },
+    billingView,
+    { upsert: true }
+  );
+}
+```
+
+### **Projection vers la Vue Analytics**
+
+```javascript
+async function projectToAnalyticsView(command) {
+  const invoiceData = command.data;
+  
+  // Enrichir les données analytics
+  const customer = await db.customers.findOne({ _id: invoiceData.customerId });
+  const customerSegment = determineCustomerSegment(customer);
+  
+  // Créer la vue analytics
+  const analyticsView = {
+    _id: command.aggregateId,
+    customerSegment: customerSegment,
+    revenue: invoiceData.amount,
+    currency: invoiceData.currency,
+    month: formatMonth(command.timestamp),
+    region: customer.region,
+    productCategory: determineProductCategory(invoiceData.items),
+    createdAt: command.timestamp
+  };
+  
+  await db.invoice_analytics_views.replaceOne(
+    { _id: command.aggregateId },
+    analyticsView,
+    { upsert: true }
+  );
+}
+```
+
+## 📊 **Avantages de CQRS avec MongoDB**
+
+### **Performance Optimisée par Cas d'Usage**
+
+```javascript
+// Requête facturation ultra-rapide
+const pendingInvoices = await db.invoice_billing_views.find({
+  "customer.id": "cust_456",
+  "status": "pending"
+}).sort({ "dueDate": 1 });
+
+// Requête analytics complexe
+const monthlyRevenue = await db.invoice_analytics_views.aggregate([
+  { $match: { "month": "2024-01", "region": "europe" } },
+  { $group: { _id: "$customerSegment", totalRevenue: { $sum: "$revenue" } } },
+  { $sort: { totalRevenue: -1 } }
+]);
+```
+
+### **Évolutivité Horizontale**
+
+```javascript
+// Sharding par domaine métier
+sh.shardCollection("gyroscops.invoice_commands", { "type": 1 });
+sh.shardCollection("gyroscops.invoice_billing_views", { "customer.id": 1 });
+sh.shardCollection("gyroscops.invoice_analytics_views", { "month": 1 });
+```
+
+### **Découplage des Équipes**
+
+```javascript
+// Équipe facturation - Modèle simple
+const BillingService = {
+  async getPendingInvoices(customerId) {
+    return await db.invoice_billing_views.find({
+      "customer.id": customerId,
+      "status": "pending"
+    });
+  }
+};
+
+// Équipe analytics - Modèle complexe
+const AnalyticsService = {
+  async getRevenueBySegment(month, region) {
+    return await db.invoice_analytics_views.aggregate([
+      { $match: { month, region } },
+      { $group: { _id: "$customerSegment", revenue: { $sum: "$revenue" } } }
+    ]);
+  }
+};
+```
+
+## ⚠️ **Défis et Solutions**
+
+### **Cohérence Éventuelle**
+
+```javascript
+// Vérification de cohérence entre vues
+async function checkViewConsistency(aggregateId) {
+  const command = await db.invoice_commands.findOne({ aggregateId });
+  const billingView = await db.invoice_billing_views.findOne({ _id: aggregateId });
+  const analyticsView = await db.invoice_analytics_views.findOne({ _id: aggregateId });
+  
+  if (!command || !billingView || !analyticsView) {
+    throw new Error(`Inconsistent views for aggregate ${aggregateId}`);
+  }
+  
+  return { command, billingView, analyticsView };
+}
+```
+
+### **Gestion des Erreurs de Projection**
+
+```javascript
+// Dead Letter Queue pour les échecs de projection
+async function handleProjectionFailure(command, error) {
+  await db.projection_failures.insertOne({
+    commandId: command._id,
+    aggregateId: command.aggregateId,
+    error: error.message,
+    timestamp: new Date(),
+    retryCount: 0
+  });
+  
+  // Notifier l'équipe de monitoring
+  await notifyMonitoringTeam(command, error);
+}
+```
+
+### **Replay des Projections**
+
+```javascript
+// Replay des projections en cas d'erreur
+async function replayProjections(fromTimestamp) {
+  const commands = await db.invoice_commands.find({
+    timestamp: { $gte: fromTimestamp }
+  }).sort({ timestamp: 1 });
+  
+  for (const command of commands) {
+    try {
+      await projectToBillingView(command);
+      await projectToAnalyticsView(command);
+    } catch (error) {
+      console.error(`Replay failed for command ${command._id}:`, error);
+    }
+  }
+}
+```
+
+## 🎯 **Critères d'Adoption**
+
+### **Quand Utiliser CQRS avec MongoDB**
+
+- ✅ **Équipes multiples** : Développement, analytics, facturation
+- ✅ **Cas d'usage très différents** : Lectures complexes vs écritures simples
+- ✅ **Performance critique** : Latence < 50ms requise
+- ✅ **Évolutivité maximale** : Croissance > 100x prévue
+
+### **Quand Éviter CQRS avec MongoDB**
+
+- ❌ **Équipe unique** : Pas de séparation des responsabilités
+- ❌ **Application simple** : Cas d'usage uniformes
+- ❌ **Cohérence forte requise** : Données financières critiques
+- ❌ **Budget limité** : Complexité non justifiée
+
+## 📈 **Métriques de Succès**
+
+### **Performance par Vue**
+
+```javascript
+const performanceMetrics = {
+  billingView: {
+    readLatency: "< 30ms",
+    writeLatency: "< 100ms",
+    throughput: "> 20k ops/sec"
+  },
+  analyticsView: {
+    readLatency: "< 100ms",
+    writeLatency: "< 200ms",
+    throughput: "> 5k ops/sec"
+  }
+};
+```
+
+### **Monitoring des Projections**
+
+```javascript
+const projectionMetrics = {
+  successRate: "> 99.9%",
+  averageLag: "< 1 second",
+  errorRate: "< 0.1%",
+  replayTime: "< 5 minutes"
+};
+```
+
+## 🔄 **Migration depuis CQS**
+
+### **Étape 1 : Créer les Nouvelles Collections**
+
+```javascript
+// Créer les collections CQRS
+db.createCollection("invoice_commands");
+db.createCollection("invoice_billing_views");
+db.createCollection("invoice_analytics_views");
+```
+
+### **Étape 2 : Migrer les Données Existantes**
+
+```javascript
+// Migration des données CQS vers CQRS
+async function migrateFromCQS() {
+  const existingQueries = await db.billing_queries.find({});
+  
+  for (const query of existingQueries) {
+    // Créer la commande
+    await db.invoice_commands.insertOne({
+      type: "migration",
+      aggregateId: query._id,
+      data: query,
+      timestamp: new Date(),
+      version: 1
+    });
+    
+    // Projeter vers les vues
+    await projectToBillingView({ aggregateId: query._id, data: query });
+    await projectToAnalyticsView({ aggregateId: query._id, data: query });
+  }
+}
+```
+
+### **Étape 3 : Basculer Progressivement**
+
+```javascript
+// Feature flag pour basculer vers CQRS
+const useCQRS = await getFeatureFlag("mongodb_cqrs_enabled");
+
+if (useCQRS) {
+  // Utiliser les vues CQRS
+  return await queryFromCQRSViews();
+} else {
+  // Utiliser l'ancienne collection CQS
+  return await queryFromCQSCollection();
+}
+```
+
+## 💡 **Conseils Pratiques**
+
+### **Design des Vues**
+
+1. **Vue facturation** : Structure simple, optimisée pour les requêtes métier
+2. **Vue analytics** : Structure complexe, optimisée pour les agrégations
+3. **Index spécialisés** : Différents pour chaque vue
+4. **Sharding** : Stratégies différentes selon l'usage
+
+### **Monitoring et Alertes**
+
+1. **Lag de projection** : < 1 seconde
+2. **Taux d'erreur** : < 0.1%
+3. **Performance** : Latence < 50ms
+4. **Cohérence** : Vérification quotidienne
+
+## 🎯 **Votre Prochaine Étape**
+
+Maintenant que vous comprenez l'approche CQRS avec MongoDB, quelle est votre situation ?
+
+{{< chapter-nav >}}
+  {{< chapter-option 
+    letter="A" 
+    color="green" 
+    title="Je veux comprendre l'approche Event Sourcing" 
+    subtitle="Vous voulez voir comment stocker les événements"
+    criteria="Audit trail critique,Debugging complexe,Équipe très expérimentée,Budget important"
+    time="40-50 minutes"
+    chapter="31"
+    chapter-title="Stockage MongoDB - Event Sourcing"
+    chapter-url="/chapitres/stockage/mongodb/chapitre-31-stockage-mongodb-event-sourcing/"
+  >}}
+  
+  {{< chapter-option 
+    letter="B" 
+    color="yellow" 
+    title="Je veux voir CQRS + Event Sourcing" 
+    subtitle="Vous voulez combiner les deux approches"
+    criteria="Audit trail critique,Debugging complexe,Équipe très expérimentée,Budget important"
+    time="45-55 minutes"
+    chapter="32"
+    chapter-title="Stockage MongoDB - CQRS + Event Sourcing"
+    chapter-url="/chapitres/stockage/mongodb/chapitre-32-stockage-mongodb-cqrs-event-sourcing/"
+  >}}
+  
+  {{< chapter-option 
+    letter="C" 
+    color="red" 
+    title="Je veux revenir à l'approche CQS" 
+    subtitle="Vous voulez une approche plus simple"
+    criteria="Équipe expérimentée,Besoin d'optimiser les performances,Séparation des responsabilités importante,Évolutivité importante"
+    time="30-40 minutes"
+    chapter="29"
+    chapter-title="Stockage MongoDB - Approche CQS"
+    chapter-url="/chapitres/stockage/mongodb/chapitre-29-stockage-mongodb-cqs/"
+  >}}
+  
+  {{< chapter-option 
+    letter="D" 
+    color="blue" 
+    title="Je veux explorer d'autres types de stockage" 
+    subtitle="Vous voulez voir les alternatives à MongoDB"
+    criteria="Besoin de comparer les options,Choix de stockage à faire,Équipe en réflexion"
+    time="30-40 minutes"
+    chapter="10"
+    chapter-title="Choix du Type de Stockage"
+    chapter-url="/chapitres/fondamentaux/chapitre-10-choix-type-stockage/"
+  >}}
+{{< /chapter-nav >}}
+
+**💡 Conseil** : Si vous n'êtes pas sûr, commencez par l'approche CQS (option C) pour bien comprendre la séparation des responsabilités, puis revenez à CQRS quand vous serez prêt.
+
+**🔄 Alternative** : Si vous voulez tout voir dans l'ordre, continuez avec l'approche Event Sourcing (option A).
