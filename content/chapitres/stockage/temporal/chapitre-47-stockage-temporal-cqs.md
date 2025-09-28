@@ -1027,3 +1027,4 @@ public function getWorkflowMetrics(): array
 ---
 
 *CQS avec Temporal offre un équilibre optimal entre performance et orchestration, parfaitement adapté aux besoins de workflows complexes de Gyroscops.*
+

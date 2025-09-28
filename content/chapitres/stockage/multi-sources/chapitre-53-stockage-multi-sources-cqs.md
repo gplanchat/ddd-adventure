@@ -986,3 +986,4 @@ public function getMultiSourceMetrics(): array
 ---
 
 *CQS avec Multi-sources offre un équilibre optimal entre performance et flexibilité, parfaitement adapté aux besoins complexes de Gyroscops.*
+

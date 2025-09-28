@@ -325,16 +325,16 @@ final class SecurityAuditLogger
 
 **Résultat** : Sécurité robuste et évolutive.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Sécurité Appliquée à Hive
+### Sécurité Appliquée à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de sécurité à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes de sécurité à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Système d'Authentification Hive
+#### Système d'Authentification Gyroscops Cloud
 
 ```php
-// ✅ Système d'Authentification Hive (Projet Hive)
+// ✅ Système d'Authentification Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveAuthenticationService
 {
     public function __construct(
@@ -411,10 +411,10 @@ final class HiveAuthenticationService
 }
 ```
 
-#### Système d'Autorisation Hive
+#### Système d'Autorisation Gyroscops Cloud
 
 ```php
-// ✅ Système d'Autorisation Hive (Projet Hive)
+// ✅ Système d'Autorisation Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveAuthorizationService
 {
     public function __construct(
@@ -505,10 +505,10 @@ final class HiveAuthorizationService
 }
 ```
 
-#### Voters de Sécurité Hive
+#### Voters de Sécurité Gyroscops Cloud
 
 ```php
-// ✅ Voters de Sécurité Hive (Projet Hive)
+// ✅ Voters de Sécurité Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentVoter extends Voter
 {
     public function __construct(
@@ -611,10 +611,10 @@ final class PaymentVoter extends Voter
 }
 ```
 
-#### Audit de Sécurité Hive
+#### Audit de Sécurité Gyroscops Cloud
 
 ```php
-// ✅ Audit de Sécurité Hive (Projet Hive)
+// ✅ Audit de Sécurité Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveSecurityAuditService
 {
     public function __construct(
@@ -685,9 +685,9 @@ final class HiveSecurityAuditService
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE025** : Authorization System - Système d'autorisation
 - **HIVE026** : Keycloak Resource and Scope Management - Gestion des ressources et scopes
 - **HIVE040** : Enhanced Models with Property Access Patterns - Modèles enrichis pour la sécurité

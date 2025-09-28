@@ -87,7 +87,7 @@ Le stockage SQL classique consiste à utiliser une base de données relationnell
 **Avec Gyroscops** : J'ai créé les entités :
 
 ```php
-// ✅ Entité Payment Hive (Projet Hive)
+// ✅ Entité Payment Gyroscops Cloud (projet Gyroscops Cloud)
 #[Entity]
 #[Table(name: 'payments')]
 #[ApiResource(
@@ -147,7 +147,7 @@ final class Payment
 **Avec Gyroscops** : J'ai créé les repositories :
 
 ```php
-// ✅ Repository Payment Hive (Projet Hive)
+// ✅ Repository Payment Gyroscops Cloud (projet Gyroscops Cloud)
 final class PaymentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -265,16 +265,16 @@ final class PaymentRepository extends ServiceEntityRepository
 
 **Pourquoi c'est crucial ?** Les requêtes N+1 tuent les performances.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le projet Gyroscops Cloud
 
-### Stockage SQL Classique Appliqué à Hive
+### Stockage SQL Classique Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage SQL classique à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le projet Gyroscops Cloud applique concrètement les principes du stockage SQL classique à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration Doctrine Hive
+#### Configuration Doctrine Gyroscops Cloud
 
 ```php
-// ✅ Configuration Doctrine Hive (Projet Hive)
+// ✅ Configuration Doctrine Gyroscops Cloud (projet Gyroscops Cloud)
 final class HiveDoctrineConfiguration
 {
     public function configureDoctrine(ContainerBuilder $container): void
@@ -295,9 +295,9 @@ final class HiveDoctrineConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Gyroscops Cloud :
 - **HIVE012** : Database Repositories - Repositories de base de données
 - **HIVE016** : Database Migrations - Migrations de base de données
 - **HIVE033** : Hydrator Implementation Patterns - Patterns d'hydratation

@@ -1089,3 +1089,4 @@ public function optimizeIndexes(): void
 ---
 
 *CQS avec In-Memory offre un équilibre optimal entre performance et organisation, parfaitement adapté aux besoins de cache et de données temporaires de Gyroscops.*
+

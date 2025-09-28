@@ -1183,3 +1183,4 @@ public function handleEventAsync(DomainEvent $event): void
 ---
 
 *CQRS avec ElasticSearch représente l'état de l'art en matière d'architecture scalable pour la recherche et l'analytics, parfaitement adapté aux besoins les plus exigeants de Gyroscops.*
+

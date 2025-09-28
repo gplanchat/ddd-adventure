@@ -108,7 +108,7 @@ Le stockage SQL Event Sourcing + CQRS combine l'Event Sourcing pour l'écriture 
 **Avec Gyroscops** : J'ai créé les Command Models :
 
 ```php
-// ✅ Command Model Payment Hive (Projet Hive)
+// ✅ Command Model Payment Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentCommandModel
 {
     public function __construct(
@@ -222,7 +222,7 @@ final class PaymentCommandModel
 **Avec Gyroscops** : J'ai créé les Query Models :
 
 ```php
-// ✅ Query Model Payment List Hive (Projet Hive)
+// ✅ Query Model Payment List Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentListQueryModel
 {
     public function __construct(
@@ -294,7 +294,7 @@ final class PaymentListQueryModel
     }
 }
 
-// ✅ Query Model Payment Details Hive (Projet Hive)
+// ✅ Query Model Payment Details Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentDetailsQueryModel
 {
     public function __construct(
@@ -337,7 +337,7 @@ final class PaymentDetailsQueryModel
     }
 }
 
-// ✅ Query Model Payment Analytics Hive (Projet Hive)
+// ✅ Query Model Payment Analytics Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentAnalyticsQueryModel
 {
     public function __construct(
@@ -378,7 +378,7 @@ final class PaymentAnalyticsQueryModel
 **Avec Gyroscops** : J'ai créé les Command Handlers :
 
 ```php
-// ✅ Command Handler Payment Hive (Projet Hive)
+// ✅ Command Handler Payment Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentCommandHandler
 {
     public function __construct(
@@ -487,7 +487,7 @@ final class PaymentCommandHandler
 **Avec Gyroscops** : J'ai créé les Query Handlers :
 
 ```php
-// ✅ Query Handler Payment List Hive (Projet Hive)
+// ✅ Query Handler Payment List Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentListQueryHandler
 {
     public function __construct(
@@ -553,7 +553,7 @@ final class PaymentListQueryHandler
     }
 }
 
-// ✅ Query Handler Payment Details Hive (Projet Hive)
+// ✅ Query Handler Payment Details Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentDetailsQueryHandler
 {
     public function __construct(
@@ -603,7 +603,7 @@ final class PaymentDetailsQueryHandler
     }
 }
 
-// ✅ Query Handler Payment Analytics Hive (Projet Hive)
+// ✅ Query Handler Payment Analytics Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentAnalyticsQueryHandler
 {
     public function __construct(
@@ -690,7 +690,7 @@ final class PaymentAnalyticsQueryHandler
 **Avec Gyroscops** : J'ai créé les projections spécialisées :
 
 ```php
-// ✅ Projection Payment List Hive (Projet Hive)
+// ✅ Projection Payment List Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentListProjectionHandler
 {
     public function __construct(
@@ -779,7 +779,7 @@ final class PaymentListProjectionHandler
     }
 }
 
-// ✅ Projection Payment Details Hive (Projet Hive)
+// ✅ Projection Payment Details Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentDetailsProjectionHandler
 {
     public function __construct(
@@ -993,16 +993,16 @@ final class PaymentDetailsProjectionHandler
 
 **Pourquoi c'est critique ?** Sans formation, l'équipe ne peut pas maintenir le système.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Stockage SQL Event Sourcing + CQRS Appliqué à Hive
+### Stockage SQL Event Sourcing + CQRS Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage SQL Event Sourcing + CQRS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes du stockage SQL Event Sourcing + CQRS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration Event Sourcing + CQRS Hive
+#### Configuration Event Sourcing + CQRS Gyroscops Cloud
 
 ```php
-// ✅ Configuration Event Sourcing + CQRS Hive (Projet Hive)
+// ✅ Configuration Event Sourcing + CQRS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveEventSourcingCQRSConfiguration
 {
     public function configureEventSourcingCQRS(ContainerBuilder $container): void
@@ -1053,9 +1053,9 @@ final class HiveEventSourcingCQRSConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE006** : Query Models for API Platform - Modèles de requête
 - **HIVE007** : Command Models for API Platform - Modèles de commande
 - **HIVE008** : Event Collaboration - Collaboration par événements

@@ -2,7 +2,7 @@
 
 ## 📋 Vue d'Ensemble
 
-Ce document fournit des exemples concrets d'implémentation pour chaque approche de stockage présentée dans la documentation. Chaque exemple est basé sur le projet Hive et suit les patterns établis dans les ADR.
+Ce document fournit des exemples concrets d'implémentation pour chaque approche de stockage présentée dans la documentation. Chaque exemple est basé sur le Gyroscops Cloud et suit les patterns établis dans les ADR.
 
 ## 🏗️ Approches de Stockage
 
@@ -11,7 +11,7 @@ Ce document fournit des exemples concrets d'implémentation pour chaque approche
 #### Exemple : Repository de Paiement
 
 ```php
-// Repository de Paiement Classique - Projet Hive
+// Repository de Paiement Classique - Projet Gyroscops Cloud
 final class DatabasePaymentRepository implements PaymentRepositoryInterface
 {
     public function __construct(
@@ -124,7 +124,7 @@ final class DatabasePaymentRepository implements PaymentRepositoryInterface
 #### Exemple : Repository de Paiement CQS
 
 ```php
-// Repository de Paiement CQS - Projet Hive
+// Repository de Paiement CQS - Projet Gyroscops Cloud
 final class DatabasePaymentCQSRepository implements PaymentCQSRepositoryInterface
 {
     public function __construct(
@@ -285,7 +285,7 @@ final class DatabasePaymentCQSRepository implements PaymentCQSRepositoryInterfac
 #### Exemple : Repository de Paiement CQRS
 
 ```php
-// Repository de Paiement CQRS - Projet Hive
+// Repository de Paiement CQRS - Projet Gyroscops Cloud
 final class DatabasePaymentCQRSRepository implements PaymentCQRSRepositoryInterface
 {
     public function __construct(
@@ -446,7 +446,7 @@ final class DatabasePaymentCQRSRepository implements PaymentCQRSRepositoryInterf
 #### Exemple : Repository de Paiement Event Sourcing
 
 ```php
-// Repository de Paiement Event Sourcing - Projet Hive
+// Repository de Paiement Event Sourcing - Projet Gyroscops Cloud
 final class DatabasePaymentEventSourcingRepository implements PaymentEventSourcingRepositoryInterface
 {
     public function __construct(
@@ -589,7 +589,7 @@ final class DatabasePaymentEventSourcingRepository implements PaymentEventSourci
 #### Exemple : Repository de Paiement API
 
 ```php
-// Repository de Paiement API - Projet Hive
+// Repository de Paiement API - Projet Gyroscops Cloud
 final class ApiPaymentRepository implements PaymentRepositoryInterface
 {
     public function __construct(
@@ -678,7 +678,7 @@ final class ApiPaymentRepository implements PaymentRepositoryInterface
 #### Exemple : Repository de Paiement ElasticSearch
 
 ```php
-// Repository de Paiement ElasticSearch - Projet Hive
+// Repository de Paiement ElasticSearch - Projet Gyroscops Cloud
 final class ElasticSearchPaymentRepository implements PaymentRepositoryInterface
 {
     public function __construct(
@@ -822,7 +822,7 @@ final class ElasticSearchPaymentRepository implements PaymentRepositoryInterface
 #### Exemple : Repository de Paiement MongoDB
 
 ```php
-// Repository de Paiement MongoDB - Projet Hive
+// Repository de Paiement MongoDB - Projet Gyroscops Cloud
 final class MongoPaymentRepository implements PaymentRepositoryInterface
 {
     public function __construct(
@@ -907,7 +907,7 @@ final class MongoPaymentRepository implements PaymentRepositoryInterface
 #### Exemple : Repository de Paiement In-Memory
 
 ```php
-// Repository de Paiement In-Memory - Projet Hive
+// Repository de Paiement In-Memory - Projet Gyroscops Cloud
 final class InMemoryPaymentRepository implements PaymentRepositoryInterface
 {
     private array $payments = [];
@@ -961,7 +961,7 @@ final class InMemoryPaymentRepository implements PaymentRepositoryInterface
 ### 1. Factory Pattern pour les Repositories
 
 ```php
-// Factory Pattern - Projet Hive
+// Factory Pattern - Projet Gyroscops Cloud
 final class PaymentRepositoryFactory
 {
     public function __construct(
@@ -1004,7 +1004,7 @@ final class PaymentRepositoryFactory
 ### 2. Strategy Pattern pour les Repositories
 
 ```php
-// Strategy Pattern - Projet Hive
+// Strategy Pattern - Projet Gyroscops Cloud
 interface PaymentRepositoryStrategyInterface
 {
     public function get(PaymentId $id): Payment;
@@ -1038,7 +1038,7 @@ final class PaymentRepositoryStrategy
 ### 3. Decorator Pattern pour les Repositories
 
 ```php
-// Decorator Pattern - Projet Hive
+// Decorator Pattern - Projet Gyroscops Cloud
 final class CachedPaymentRepository implements PaymentRepositoryInterface
 {
     public function __construct(
@@ -1102,4 +1102,4 @@ final class CachedPaymentRepository implements PaymentRepositoryInterface
 
 ---
 
-*Ces exemples sont basés sur les Architecture Decision Records (ADR) du projet Hive et suivent les principes établis dans "API Platform Con 2025 - Et si on utilisait l'Event Storming ?"*
+*Ces exemples sont basés sur les Architecture Decision Records (ADR) du Gyroscops Cloud et suivent les principes établis dans "API Platform Con 2025 - Et si on utilisait l'Event Storming ?"*

@@ -105,7 +105,7 @@ L'Event Sourcing consiste à stocker les événements comme source de vérité a
 **Avec Gyroscops** : J'ai défini les événements métier :
 
 ```php
-// ✅ Événements Métier Hive (Projet Hive)
+// ✅ Événements Métier Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentCreated implements DomainEvent
 {
     public function __construct(
@@ -155,7 +155,7 @@ final class PaymentCreated implements DomainEvent
 **Avec Gyroscops** : J'ai créé l'Event Store :
 
 ```php
-// ✅ Event Store Hive (Projet Hive)
+// ✅ Event Store Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveEventStore implements EventStoreInterface
 {
     public function __construct(
@@ -241,7 +241,7 @@ final class HiveEventStore implements EventStoreInterface
 **Avec Gyroscops** : J'ai implémenté la reconstruction :
 
 ```php
-// ✅ Reconstruction d'État Hive (Projet Hive)
+// ✅ Reconstruction d'État Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentAggregate
 {
     private PaymentId $id;
@@ -348,7 +348,7 @@ final class PaymentAggregate
 **Avec Gyroscops** : J'ai créé les projections :
 
 ```php
-// ✅ Projections Hive (Projet Hive)
+// ✅ Projections Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentProjection
 {
     public function __construct(
@@ -561,16 +561,16 @@ final class PaymentProjection
 
 **Résultat** : Traçabilité complète et évolutivité maximale.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Event Sourcing Appliqué à Hive
+### Event Sourcing Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de l'Event Sourcing à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes de l'Event Sourcing à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Event Store Hive
+#### Event Store Gyroscops Cloud
 
 ```php
-// ✅ Event Store Hive (Projet Hive)
+// ✅ Event Store Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveEventStore
 {
     public function __construct(
@@ -656,10 +656,10 @@ final class HiveEventStore
 }
 ```
 
-#### Projections Hive
+#### Projections Gyroscops Cloud
 
 ```php
-// ✅ Projections Hive (Projet Hive)
+// ✅ Projections Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveProjectionManager
 {
     public function __construct(
@@ -708,9 +708,9 @@ final class HiveProjectionManager
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE008** : Event Collaboration - Collaboration basée sur les événements
 - **HIVE009** : Message Buses - Bus de messages pour les événements
 - **HIVE040** : Enhanced Models with Property Access Patterns - Modèles enrichis pour l'Event Sourcing

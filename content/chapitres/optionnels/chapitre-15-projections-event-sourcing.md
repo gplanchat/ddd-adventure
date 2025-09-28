@@ -59,7 +59,7 @@ graph TD
 ### 1. Projection de Base
 
 ```php
-// Projection de Base - Projet Hive
+// Projection de Base - Projet Gyroscops Cloud
 abstract class BaseProjection
 {
     public function __construct(
@@ -95,7 +95,7 @@ abstract class BaseProjection
 ### 2. Projection de Paiement
 
 ```php
-// Projection de Paiement - Projet Hive
+// Projection de Paiement - Projet Gyroscops Cloud
 final class PaymentProjection extends BaseProjection
 {
     public function getProjectionName(): string
@@ -253,7 +253,7 @@ final class PaymentProjection extends BaseProjection
 ### 3. Projection d'Abonnement
 
 ```php
-// Projection d'Abonnement - Projet Hive
+// Projection d'Abonnement - Projet Gyroscops Cloud
 final class SubscriptionProjection extends BaseProjection
 {
     public function getProjectionName(): string
@@ -421,7 +421,7 @@ final class SubscriptionProjection extends BaseProjection
 ### Projection Manager
 
 ```php
-// Projection Manager - Projet Hive
+// Projection Manager - Projet Gyroscops Cloud
 final class ProjectionManager
 {
     private array $projections = [];
@@ -487,7 +487,7 @@ final class ProjectionManager
 ### Event Handler
 
 ```php
-// Event Handler - Projet Hive
+// Event Handler - Projet Gyroscops Cloud
 final class ProjectionEventHandler
 {
     public function __construct(
@@ -597,9 +597,9 @@ final class ProjectionEventHandler
 - **CQRS** : Séparation des modèles
 - **Sagas** : Orchestration de processus
 
-## 📚 Références aux ADR du Projet Hive
+## 📚 Références aux ADR du Projet Gyroscops Cloud
 
-Cette approche suit les patterns établis dans les Architecture Decision Records du projet Hive :
+Cette approche suit les patterns établis dans les Architecture Decision Records du Gyroscops Cloud :
 
 - **[HIVE008](https://github.com/yourusername/hive/blob/main/architecture/HIVE008-event-collaboration.md)** : Event Collaboration - Architecture événementielle
 - **[HIVE009](https://github.com/yourusername/hive/blob/main/architecture/HIVE009-message-buses.md)** : Message Buses - Event Bus, Command Bus, Query Bus

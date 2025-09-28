@@ -22,17 +22,36 @@ Usage: {{< chapter-option
 {{ $chapterExists := false }}
 
 {{ if $chapterUrl }}
-  {{/* Extraire le chemin du chapitre depuis l'URL */}}
-  {{ $chapterPath := strings.TrimPrefix "/chapitres/" $chapterUrl }}
-  {{ $chapterPath = strings.TrimSuffix "/" $chapterPath }}
-  {{ $chapterPath = printf "content/chapitres/%s.md" $chapterPath }}
+  {{ $chapterPath := "" }}
+  
+  {{/* Gérer les différents types d'URLs */}}
+  {{ if strings.HasPrefix $chapterUrl "/chapitres/" }}
+    {{/* URL de chapitre standard */}}
+    {{ $chapterPath = strings.TrimPrefix "/chapitres/" $chapterUrl }}
+    {{ $chapterPath = strings.TrimSuffix "/" $chapterPath }}
+    {{ if eq $chapterPath "" }}
+      {{/* URL /chapitres/ pointe vers content/chapitres/_index.md */}}
+      {{ $chapterPath = "content/chapitres/_index.md" }}
+    {{ else }}
+      {{ $chapterPath = printf "content/chapitres/%s.md" $chapterPath }}
+    {{ end }}
+  {{ else if strings.HasPrefix $chapterUrl "/" }}
+    {{/* URL de page spéciale (/, /concept/, /examples/, etc.) */}}
+    {{ $chapterPath = strings.TrimPrefix "/" $chapterUrl }}
+    {{ $chapterPath = strings.TrimSuffix "/" $chapterPath }}
+    {{ if eq $chapterPath "" }}
+      {{ $chapterPath = "content/_index.md" }}
+    {{ else }}
+      {{ $chapterPath = printf "content/%s/_index.md" $chapterPath }}
+    {{ end }}
+  {{ end }}
   
   {{/* Vérifier si le fichier existe */}}
-  {{ if fileExists $chapterPath }}
+  {{ if and $chapterPath (fileExists $chapterPath) }}
     {{ $chapterExists = true }}
     {{ $chapterContent := readFile $chapterPath }}
     
-    {{/* Vérifier si le chapitre est marqué comme draft */}}
+    {{/* Vérifier si la page est marquée comme draft */}}
     {{ if or (strings.Contains $chapterContent "draft: true") (strings.Contains $chapterContent "draft = true") }}
       {{ $isDraft = true }}
     {{ end }}

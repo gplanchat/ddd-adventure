@@ -9,15 +9,15 @@ weight: 7
 
 ## 🎯 Objectif de ce Chapitre
 
-Ce chapitre vous montre concrètement la différence entre modèles riches et anémiques avec des exemples de code du projet Hive. Vous apprendrez :
+Ce chapitre vous montre concrètement la différence entre modèles riches et anémiques avec des exemples de code du projet Gyroscops Cloud. Vous apprendrez :
 - Comment identifier un modèle anémique
 - Comment transformer un modèle anémique en modèle riche
 - Les patterns de modèles riches
 - La conservation de l'intention métier
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Gyroscops Cloud :
 - **HIVE040** : Enhanced Models with Property Access Patterns - Patterns d'accès aux propriétés des modèles
 - **HIVE041** : Cross-Cutting Concerns Architecture - Architecture des préoccupations transversales
 - **HIVE005** : Common Identifier Model Interfaces - Interfaces standardisées pour les identifiants
@@ -90,12 +90,12 @@ class PaymentService
 }
 ```
 
-### Exemple du Projet Hive : Modèle Anémique
+### Exemple du projet Gyroscops Cloud : Modèle Anémique
 
-Voici un exemple réel d'un modèle anémique que l'on pourrait trouver dans le projet Hive :
+Voici un exemple réel d'un modèle anémique que l'on pourrait trouver dans le projet Gyroscops Cloud :
 
 ```php
-// ❌ Modèle Anémique - Exemple typique (Projet Hive)
+// ❌ Modèle Anémique - Exemple typique (projet Gyroscops Cloud)
 class Payment
 {
     public function __construct(
@@ -131,12 +131,12 @@ class Payment
 
 Le DDD place la logique métier au cœur du modèle, dans les entités et objets de valeur.
 
-### Exemple du Projet Hive : Modèle Riche
+### Exemple du projet Gyroscops Cloud : Modèle Riche
 
-Voici un exemple réel de modèle riche du projet Hive, respectant les ADR :
+Voici un exemple réel de modèle riche du projet Gyroscops Cloud, respectant les ADR :
 
 ```php
-// ✅ Modèle Riche - Approche DDD (Projet Hive)
+// ✅ Modèle Riche - Approche DDD (projet Gyroscops Cloud)
 final class Payment
 {
     public function __construct(
@@ -339,12 +339,12 @@ class Money
 }
 ```
 
-### Exemple du Projet Hive : Value Object Price
+### Exemple du projet Gyroscops Cloud : Value Object Price
 
-Voici un exemple réel de Value Object du projet Hive :
+Voici un exemple réel de Value Object du projet Gyroscops Cloud :
 
 ```php
-// ✅ Value Object Price - Projet Hive
+// ✅ Value Object Price - projet Gyroscops Cloud
 final readonly class Price
 {
     public function __construct(
@@ -421,12 +421,12 @@ enum PaymentStatus: string
 }
 ```
 
-### Exemple du Projet Hive : Énumération Statuses
+### Exemple du projet Gyroscops Cloud : Énumération Statuses
 
-Voici un exemple réel d'énumération du projet Hive :
+Voici un exemple réel d'énumération du projet Gyroscops Cloud :
 
 ```php
-// ✅ Énumération Statuses - Projet Hive
+// ✅ Énumération Statuses - projet Gyroscops Cloud
 enum Statuses: string
 {
     case Pending = 'Pending';
@@ -454,10 +454,10 @@ enum Statuses: string
 - **Lisibilité** : Noms explicites pour chaque état
 - **Encapsulation** : Logique métier dans l'énumération
 
-### Exemple du Projet Hive : Énumération Recurrences
+### Exemple du projet Gyroscops Cloud : Énumération Recurrences
 
 ```php
-// ✅ Énumération Recurrences - Projet Hive
+// ✅ Énumération Recurrences - projet Gyroscops Cloud
 enum Recurrences: string
 {
     case Once = 'Once';
@@ -527,12 +527,12 @@ class Subscription
 }
 ```
 
-### Exemple du Projet Hive : Identifiants Value Objects
+### Exemple du projet Gyroscops Cloud : Identifiants Value Objects
 
-Voici un exemple réel d'identifiant du projet Hive :
+Voici un exemple réel d'identifiant du projet Gyroscops Cloud :
 
 ```php
-// ✅ Identifiant UserId - Projet Hive
+// ✅ Identifiant UserId - projet Gyroscops Cloud
 final readonly class UserId implements UuidInterface, LocatableInterface
 {
     public const string REQUIREMENT = Requirement::UUID_V7;
@@ -604,9 +604,9 @@ final readonly class UserId implements UuidInterface, LocatableInterface
 - **URI support** : Parsing et génération d'URIs
 - **Immutabilité** : `readonly` class
 
-### 📚 Références aux ADR du Projet Hive
+### 📚 Références aux ADR du projet Gyroscops Cloud
 
-Ces exemples suivent les patterns établis dans les Architecture Decision Records du projet Hive :
+Ces exemples suivent les patterns établis dans les Architecture Decision Records du projet Gyroscops Cloud :
 
 - **[HIVE040](https://github.com/yourusername/hive/blob/main/architecture/HIVE040-enhanced-models-with-property-access-patterns.md)** : Enhanced Models with Property Access Patterns - Patterns de modèles riches avec accès aux propriétés
 - **[HIVE005](https://github.com/yourusername/hive/blob/main/architecture/HIVE005-common-identifier-model-interfaces.md)** : Common Identifier Model Interfaces - Interfaces communes pour les identifiants

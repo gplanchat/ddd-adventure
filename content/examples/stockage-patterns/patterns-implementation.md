@@ -1,6 +1,15 @@
+---
+title: "Patterns d'Implémentation pour le Stockage"
+description: "Patterns d'implémentation spécifiques pour chaque type de stockage dans le projet Gyroscops Cloud"
+date: 2024-12-19
+draft: false
+type: "docs"
+weight: 1
+---
+
 # Patterns d'Implémentation pour le Stockage
 
-Ce document explique les patterns d'implémentation spécifiques pour chaque type de stockage dans le projet Hive.
+Ce document explique les patterns d'implémentation spécifiques pour chaque type de stockage dans le projet Gyroscops Cloud.
 
 ## 🏗️ Architecture des Patterns
 
@@ -546,7 +555,7 @@ final class HydratorTest extends TestCase
 
 ## 📚 Références aux ADR
 
-Ces patterns s'appuient sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ces patterns s'appuient sur les Architecture Decision Records (ADR) suivants du projet Gyroscops Cloud :
 
 - **HIVE010** : Repositories - Patterns de repository fondamentaux
 - **HIVE011** : In-Memory Repositories - Patterns de repository en mémoire

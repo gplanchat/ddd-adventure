@@ -1,6 +1,6 @@
 ---
 title: "Chapitre 58 : Gestion des Données et Validation"
-description: "Gestion des données et validation dans le projet Hive avec des exemples concrets"
+description: "Gestion des données et validation dans le Gyroscops Cloud avec des exemples concrets"
 date: 2024-12-19
 draft: true
 type: "docs"
@@ -9,15 +9,15 @@ weight: 58
 
 ## 🎯 Objectif de ce Chapitre
 
-Ce chapitre vous montre comment gérer les données et la validation dans le projet Hive. Vous apprendrez :
+Ce chapitre vous montre comment gérer les données et la validation dans le Gyroscops Cloud. Vous apprendrez :
 - Comment valider les données d'entrée
 - Comment gérer les erreurs de validation
 - Comment transformer les données entre les couches
 - Comment tester la validation
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE003** : Dates Management - Gestion des dates et timezones
 - **HIVE004** : Opaque and Secret Data Objects - Gestion des données sensibles
 - **HIVE036** : Input Validation Patterns - Patterns de validation des entrées
@@ -52,7 +52,7 @@ api/src/
 ### Interface de Validation
 
 ```php
-// ✅ Interface de Validation (Projet Hive)
+// ✅ Interface de Validation (Projet Gyroscops Cloud)
 interface ValidatorInterface
 {
     public function validate(mixed $data, array $constraints = []): ValidationResult;
@@ -84,7 +84,7 @@ final class ValidationResult
 ### Validation des Value Objects
 
 ```php
-// ✅ Value Object Email avec Validation (Projet Hive)
+// ✅ Value Object Email avec Validation (Projet Gyroscops Cloud)
 final readonly class Email
 {
     public function __construct(private string $value)
@@ -117,7 +117,7 @@ final readonly class Email
 ### Validation des Agrégats
 
 ```php
-// ✅ Agrégat Payment avec Validation (Projet Hive)
+// ✅ Agrégat Payment avec Validation (Projet Gyroscops Cloud)
 final class Payment
 {
     public function __construct(
@@ -161,7 +161,7 @@ final class Payment
 ### Validation des Commandes
 
 ```php
-// ✅ Commande avec Validation (Projet Hive)
+// ✅ Commande avec Validation (Projet Gyroscops Cloud)
 final class CreatePaymentCommand
 {
     public function __construct(
@@ -228,7 +228,7 @@ final class CreatePaymentCommand
 ### Validation des Paramètres de Requête
 
 ```php
-// ✅ Validation des Paramètres de Requête (Projet Hive)
+// ✅ Validation des Paramètres de Requête (Projet Gyroscops Cloud)
 final class PaymentQueryValidator
 {
     public function __construct(
@@ -272,7 +272,7 @@ final class PaymentQueryValidator
 ### Validation des Filtres
 
 ```php
-// ✅ Validation des Filtres (Projet Hive)
+// ✅ Validation des Filtres (Projet Gyroscops Cloud)
 final class PaymentFilterValidator
 {
     public function __construct(
@@ -310,7 +310,7 @@ final class PaymentFilterValidator
 ### Exceptions de Validation
 
 ```php
-// ✅ Exceptions de Validation (Projet Hive)
+// ✅ Exceptions de Validation (Projet Gyroscops Cloud)
 final class ValidationException extends \DomainException
 {
     public function __construct(
@@ -353,7 +353,7 @@ final class InvalidPaymentException extends ValidationException
 ### Gestionnaire d'Erreurs de Validation
 
 ```php
-// ✅ Gestionnaire d'Erreurs de Validation (Projet Hive)
+// ✅ Gestionnaire d'Erreurs de Validation (Projet Gyroscops Cloud)
 final class ValidationErrorHandler
 {
     public function __construct(
@@ -393,7 +393,7 @@ final class ValidationErrorHandler
 ### Mapper de Données
 
 ```php
-// ✅ Mapper de Données (Projet Hive)
+// ✅ Mapper de Données (Projet Gyroscops Cloud)
 final class PaymentDataMapper
 {
     public function __construct(
@@ -495,7 +495,7 @@ final class PaymentDataMapper
 ### Test des Value Objects
 
 ```php
-// ✅ Test des Value Objects (Projet Hive)
+// ✅ Test des Value Objects (Projet Gyroscops Cloud)
 final class EmailTest extends TestCase
 {
     /** @test */
@@ -543,7 +543,7 @@ final class EmailTest extends TestCase
 ### Test des Agrégats
 
 ```php
-// ✅ Test des Agrégats (Projet Hive)
+// ✅ Test des Agrégats (Projet Gyroscops Cloud)
 final class PaymentTest extends TestCase
 {
     /** @test */
@@ -628,7 +628,7 @@ final class PaymentTest extends TestCase
 ### Test des Mappers
 
 ```php
-// ✅ Test des Mappers (Projet Hive)
+// ✅ Test des Mappers (Projet Gyroscops Cloud)
 final class PaymentDataMapperTest extends TestCase
 {
     private PaymentDataMapper $mapper;
@@ -714,14 +714,14 @@ final class PaymentDataMapperTest extends TestCase
 }
 ```
 
-## 🏗️ Bonnes Pratiques du Projet Hive
+## 🏗️ Bonnes Pratiques du Projet Gyroscops Cloud
 
-### Architecture de Validation dans Hive
+### Architecture de Validation dans Gyroscops Cloud
 
-Le projet Hive suit une architecture de validation en couches, respectant les principes DDD et les ADR du projet :
+Le Gyroscops Cloud suit une architecture de validation en couches, respectant les principes DDD et les ADR du projet :
 
 ```php
-// ✅ Architecture de Validation Hive (Projet Hive)
+// ✅ Architecture de Validation Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveValidationService
 {
     public function __construct(
@@ -784,10 +784,10 @@ final class HiveValidationService
 
 ### Gestion des Erreurs selon HIVE038
 
-Le projet Hive implémente une gestion d'erreurs robuste selon l'ADR HIVE038 :
+Le Gyroscops Cloud implémente une gestion d'erreurs robuste selon l'ADR HIVE038 :
 
 ```php
-// ✅ Gestion d'Erreurs Hive (Projet Hive)
+// ✅ Gestion d'Erreurs Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveErrorHandler
 {
     public function __construct(
@@ -837,10 +837,10 @@ final class HiveErrorHandler
 
 ### Validation des Dates selon HIVE003
 
-Le projet Hive gère les dates de manière cohérente selon l'ADR HIVE003 :
+Le Gyroscops Cloud gère les dates de manière cohérente selon l'ADR HIVE003 :
 
 ```php
-// ✅ Validation des Dates Hive (Projet Hive)
+// ✅ Validation des Dates Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveDateValidator
 {
     public function __construct(
@@ -887,10 +887,10 @@ final class HiveDateValidator
 
 ### Gestion des Données Sensibles selon HIVE004
 
-Le projet Hive gère les données sensibles de manière sécurisée selon l'ADR HIVE004 :
+Le Gyroscops Cloud gère les données sensibles de manière sécurisée selon l'ADR HIVE004 :
 
 ```php
-// ✅ Gestion des Données Sensibles Hive (Projet Hive)
+// ✅ Gestion des Données Sensibles Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveSecretDataHandler
 {
     public function __construct(
@@ -957,10 +957,10 @@ final class HiveSecretDataHandler
 
 ### Tests de Validation selon HIVE027
 
-Le projet Hive suit les standards de test PHPUnit selon l'ADR HIVE027 :
+Le Gyroscops Cloud suit les standards de test PHPUnit selon l'ADR HIVE027 :
 
 ```php
-// ✅ Tests de Validation Hive (Projet Hive)
+// ✅ Tests de Validation Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveValidationServiceTest extends TestCase
 {
     private HiveValidationService $service;

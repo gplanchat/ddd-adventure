@@ -100,7 +100,7 @@ Le stockage SQL Event Sourcing consiste à stocker les événements comme source
 **Avec Gyroscops** : J'ai créé la table des événements :
 
 ```sql
--- ✅ Table des événements Hive (Projet Hive)
+-- ✅ Table des événements Gyroscops Cloud (Projet Gyroscops Cloud)
 CREATE TABLE event_store (
     event_id UUID PRIMARY KEY,
     aggregate_id UUID NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE event_store (
 **Avec Gyroscops** : J'ai créé la table des snapshots :
 
 ```sql
--- ✅ Table des snapshots Hive (Projet Hive)
+-- ✅ Table des snapshots Gyroscops Cloud (Projet Gyroscops Cloud)
 CREATE TABLE snapshots (
     aggregate_id UUID PRIMARY KEY,
     version INTEGER NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE snapshots (
 **Avec Gyroscops** : J'ai créé l'Event Store :
 
 ```php
-// ✅ Event Store Hive (Projet Hive)
+// ✅ Event Store Gyroscops Cloud (Projet Gyroscops Cloud)
 final class SqlEventStore implements EventStoreInterface
 {
     public function __construct(
@@ -218,7 +218,7 @@ final class SqlEventStore implements EventStoreInterface
 **Avec Gyroscops** : J'ai créé les agrégats :
 
 ```php
-// ✅ Agrégat Payment Event Sourcing Hive (Projet Hive)
+// ✅ Agrégat Payment Event Sourcing Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentAggregate
 {
     private string $id;
@@ -375,7 +375,7 @@ final class PaymentAggregate
 **Avec Gyroscops** : J'ai créé les projections :
 
 ```php
-// ✅ Projection Payment Hive (Projet Hive)
+// ✅ Projection Payment Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentProjection
 {
     public function __construct(
@@ -558,16 +558,16 @@ final class PaymentProjection
 
 **Pourquoi c'est essentiel ?** Sans snapshots, les performances se dégradent.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Stockage SQL Event Sourcing Appliqué à Hive
+### Stockage SQL Event Sourcing Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage SQL Event Sourcing à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes du stockage SQL Event Sourcing à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration Event Store Hive
+#### Configuration Event Store Gyroscops Cloud
 
 ```php
-// ✅ Configuration Event Store Hive (Projet Hive)
+// ✅ Configuration Event Store Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveEventStoreConfiguration
 {
     public function configureEventStore(ContainerBuilder $container): void
@@ -590,9 +590,9 @@ final class HiveEventStoreConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE008** : Event Collaboration - Collaboration par événements
 - **HIVE009** : Message Buses - Bus de messages
 - **HIVE010** : Repositories - Repositories de base

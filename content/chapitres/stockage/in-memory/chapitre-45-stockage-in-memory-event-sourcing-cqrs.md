@@ -832,3 +832,4 @@ public function optimizeIndexes(): void
 ---
 
 *Event Sourcing + CQRS avec In-Memory représente l'état de l'art en matière d'architecture scalable pour la performance et l'audit trail, parfaitement adapté aux besoins les plus exigeants de Gyroscops.*
+

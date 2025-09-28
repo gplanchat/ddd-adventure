@@ -458,16 +458,16 @@ public function publish(DomainEvent $event): void
 
 **Résultat** : Architecture évolutive et maintenable.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Architecture Événementielle Appliquée à Hive
+### Architecture Événementielle Appliquée à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de l'architecture événementielle à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes de l'architecture événementielle à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Event Bus Hive
+#### Event Bus Gyroscops Cloud
 
 ```php
-// ✅ Event Bus Hive (Projet Hive)
+// ✅ Event Bus Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveEventBus
 {
     public function __construct(
@@ -516,10 +516,10 @@ final class HiveEventBus
 }
 ```
 
-#### Événements Métier Hive
+#### Événements Métier Gyroscops Cloud
 
 ```php
-// ✅ Événements Métier Hive (Projet Hive)
+// ✅ Événements Métier Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveDomainEvents
 {
     // Événements d'Authentification
@@ -544,10 +544,10 @@ final class HiveDomainEvents
 }
 ```
 
-#### Event Handlers Hive
+#### Event Handlers Gyroscops Cloud
 
 ```php
-// ✅ Event Handlers Hive (Projet Hive)
+// ✅ Event Handlers Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveEventHandlers
 {
     // Handler d'Authentification
@@ -603,7 +603,7 @@ final class HiveEventHandlers
 #### Configuration des Événements
 
 ```php
-// ✅ Configuration des Événements Hive (Projet Hive)
+// ✅ Configuration des Événements Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveEventConfiguration
 {
     public function configureEventBus(EventBusInterface $eventBus): void
@@ -631,9 +631,9 @@ final class HiveEventConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE008** : Event Collaboration - Collaboration basée sur les événements
 - **HIVE009** : Message Buses - Bus de messages pour les événements
 - **HIVE040** : Enhanced Models with Property Access Patterns - Modèles enrichis pour les événements

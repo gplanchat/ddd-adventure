@@ -842,3 +842,4 @@ public function getWorkflowMetrics(): array
 ---
 
 *CQRS avec Temporal représente l'état de l'art en matière d'architecture scalable pour l'orchestration, parfaitement adapté aux besoins les plus exigeants de Gyroscops.*
+

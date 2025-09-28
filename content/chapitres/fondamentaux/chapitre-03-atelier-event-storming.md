@@ -383,13 +383,13 @@ L'Event Storming est une technique de conception collaborative qui utilise des p
 
 **Résultat** : Développement guidé par le domaine métier.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le projet Gyroscops Cloud
 
-### Event Storming Appliqué à Hive
+### Event Storming Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de l'Event Storming à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le projet Gyroscops Cloud applique concrètement les principes de l'Event Storming à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Atelier Event Storming Hive
+#### Atelier Event Storming Gyroscops Cloud
 
 **Participants** :
 - **Product Owner** : Vision produit et roadmap
@@ -404,7 +404,7 @@ Le projet Hive applique concrètement les principes de l'Event Storming à trave
 #### Événements Identifiés
 
 ```php
-// ✅ Événements Métier Hive (Projet Hive)
+// ✅ Événements Métier Gyroscops Cloud (projet Gyroscops Cloud)
 final class HiveDomainEvents
 {
     // Événements d'Authentification
@@ -432,7 +432,7 @@ final class HiveDomainEvents
 #### Commandes Identifiées
 
 ```php
-// ✅ Commandes Hive (Projet Hive)
+// ✅ Commandes Gyroscops Cloud (projet Gyroscops Cloud)
 final class HiveCommands
 {
     // Commandes d'Authentification
@@ -455,7 +455,7 @@ final class HiveCommands
 #### Règles Métier Découvertes
 
 ```php
-// ✅ Règles Métier Hive (Projet Hive)
+// ✅ Règles Métier Gyroscops Cloud (projet Gyroscops Cloud)
 final class HiveBusinessRules
 {
     // Règles d'Authentification
@@ -475,9 +475,9 @@ final class HiveBusinessRules
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Gyroscops Cloud :
 - **HIVE008** : Event Collaboration - Collaboration basée sur les événements
 - **HIVE009** : Message Buses - Bus de messages pour les événements
 - **HIVE040** : Enhanced Models with Property Access Patterns - Modèles enrichis pour les événements

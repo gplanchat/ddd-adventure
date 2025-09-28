@@ -240,11 +240,11 @@ L'Example Mapping est une technique complémentaire à l'Event Storming qui util
 
 **Résultat** : Développement guidé par le domaine métier.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le projet Gyroscops Cloud
 
-### Example Mapping Appliqué à Hive
+### Example Mapping Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de l'Example Mapping à travers ses tests et ses ADR (Architecture Decision Records). Voici comment :
+Le projet Gyroscops Cloud applique concrètement les principes de l'Example Mapping à travers ses tests et ses ADR (Architecture Decision Records). Voici comment :
 
 #### Exemples Concrets d'Example Mapping
 
@@ -264,7 +264,7 @@ Le projet Hive applique concrètement les principes de l'Example Mapping à trav
 #### Implémentation des Exemples
 
 ```php
-// ✅ Tests d'Example Mapping Hive (Projet Hive)
+// ✅ Tests d'Example Mapping Gyroscops Cloud (projet Gyroscops Cloud)
 final class UserAuthenticationExampleMappingTest extends TestCase
 {
     /** @test */
@@ -334,7 +334,7 @@ final class UserAuthenticationExampleMappingTest extends TestCase
 #### Règles Métier Découvertes
 
 ```php
-// ✅ Règles Métier Hive (Projet Hive)
+// ✅ Règles Métier Gyroscops Cloud (projet Gyroscops Cloud)
 final class HiveBusinessRules
 {
     // Règles d'Authentification
@@ -355,9 +355,9 @@ final class HiveBusinessRules
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Gyroscops Cloud :
 - **HIVE027** : PHPUnit Testing Standards - Standards de tests PHPUnit
 - **HIVE023** : Repository Testing Strategies - Stratégies de tests des repositories
 - **HIVE028** : Faker for test data generation - Génération de données de test avec Faker

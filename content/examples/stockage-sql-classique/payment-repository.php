@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
  * Exemple de Repository SQL Classique pour Payment
  * 
  * Ce fichier montre comment implémenter un repository SQL classique
- * en suivant les patterns du projet Hive.
+ * en suivant les patterns du projet Gyroscops Cloud.
  * 
  * Références ADR :
  * - HIVE012 : Database Repositories

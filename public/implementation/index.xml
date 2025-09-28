@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Implémentation on DDD Adventure</title>
-    <link>http://localhost:1313/ddd-adventure/implementation/</link>
+    <link>//localhost:41733/implementation/</link>
     <description>Recent content in Implémentation on DDD Adventure</description>
     <generator>Hugo</generator>
     <language>fr-fr</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="http://localhost:1313/ddd-adventure/implementation/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:41733/implementation/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

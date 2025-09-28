@@ -103,7 +103,7 @@ Le stockage API CQS combine l'utilisation d'APIs externes avec la Command Query 
 **Avec Gyroscops** : J'ai créé les Command Handlers :
 
 ```php
-// ✅ Command Handler User API Hive (Projet Hive)
+// ✅ Command Handler User API Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserCommandHandler
 {
     public function __construct(
@@ -198,7 +198,7 @@ final class UserCommandHandler
 **Avec Gyroscops** : J'ai créé les Query Models :
 
 ```php
-// ✅ Query Model User Hive (Projet Hive)
+// ✅ Query Model User Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserQueryModel
 {
     public function __construct(
@@ -256,7 +256,7 @@ final class UserQueryModel
     }
 }
 
-// ✅ Query Model User List Hive (Projet Hive)
+// ✅ Query Model User List Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserListQueryModel
 {
     public function __construct(
@@ -297,7 +297,7 @@ final class UserListQueryModel
 **Avec Gyroscops** : J'ai créé les Query Handlers :
 
 ```php
-// ✅ Query Handler User Hive (Projet Hive)
+// ✅ Query Handler User Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserQueryHandler
 {
     public function __construct(
@@ -418,7 +418,7 @@ final class UserQueryHandler
 **Avec Gyroscops** : J'ai créé les projections asynchrones :
 
 ```php
-// ✅ Projection User Asynchrone Hive (Projet Hive)
+// ✅ Projection User Asynchrone Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserProjectionHandler
 {
     public function __construct(
@@ -642,16 +642,16 @@ final class UserProjectionHandler
 
 **Pourquoi c'est essentiel ?** Les APIs externes peuvent échouer.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Stockage API CQS Appliqué à Hive
+### Stockage API CQS Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage API CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes du stockage API CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration API CQS Hive
+#### Configuration API CQS Gyroscops Cloud
 
 ```php
-// ✅ Configuration API CQS Hive (Projet Hive)
+// ✅ Configuration API CQS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveApiCQSConfiguration
 {
     public function configureApiCQS(ContainerBuilder $container): void
@@ -690,9 +690,9 @@ final class HiveApiCQSConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE011** : Command Query Separation - Séparation des commandes et requêtes
 - **HIVE015** : API Repositories - Repositories d'API
 - **HIVE025** : Authorization System - Système d'autorisation

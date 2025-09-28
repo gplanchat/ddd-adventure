@@ -427,16 +427,16 @@ class UserService
 
 **Résultat** : Architecture robuste et maintenable.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Repositories Appliqués à Hive
+### Repositories Appliqués à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes des Repositories à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes des Repositories à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Interfaces de Repositories Hive
+#### Interfaces de Repositories Gyroscops Cloud
 
 ```php
-// ✅ Interfaces de Repositories Hive (Projet Hive)
+// ✅ Interfaces de Repositories Gyroscops Cloud (Projet Gyroscops Cloud)
 interface PaymentCommandRepositoryInterface
 {
     public function save(Payment $payment): void;
@@ -468,10 +468,10 @@ interface UserQueryRepositoryInterface
 }
 ```
 
-#### Implémentations de Repositories Hive
+#### Implémentations de Repositories Gyroscops Cloud
 
 ```php
-// ✅ Implémentations de Repositories Hive (Projet Hive)
+// ✅ Implémentations de Repositories Gyroscops Cloud (Projet Gyroscops Cloud)
 final class SqlPaymentCommandRepository implements PaymentCommandRepositoryInterface
 {
     public function __construct(
@@ -530,10 +530,10 @@ final class SqlPaymentCommandRepository implements PaymentCommandRepositoryInter
 }
 ```
 
-#### Mappers Hive
+#### Mappers Gyroscops Cloud
 
 ```php
-// ✅ Mappers Hive (Projet Hive)
+// ✅ Mappers Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentMapper
 {
     public function toArray(Payment $payment): array
@@ -583,7 +583,7 @@ final class PaymentMapper
 #### Configuration des Repositories
 
 ```php
-// ✅ Configuration des Repositories Hive (Projet Hive)
+// ✅ Configuration des Repositories Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveRepositoryConfiguration
 {
     public function configureRepositories(ContainerInterface $container): void
@@ -606,9 +606,9 @@ final class HiveRepositoryConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE010** : Repositories - Repositories fondamentaux
 - **HIVE011** : In-Memory Repositories - Repositories en mémoire pour les tests
 - **HIVE012** : Database Repositories - Repositories de base de données

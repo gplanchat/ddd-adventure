@@ -73,7 +73,7 @@ weight: X
 **Avec Gyroscops** : J'ai [action réalisée] :
 
 ```php
-// ✅ [Description du code] (Projet Hive)
+// ✅ [Description du code] (Projet Gyroscops Cloud)
 [Code d'exemple]
 ```
 
@@ -165,18 +165,18 @@ weight: X
 **Résultat** : [Résultat].
 ```
 
-### 8. Implémentation Concrète Hive
+### 8. Implémentation Concrète Gyroscops Cloud
 ```markdown
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### [Concept] Appliqué à Hive
+### [Concept] Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de [concept] à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes de [concept] à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
 #### [Implémentation 1]
 
 ```php
-// ✅ [Description] (Projet Hive)
+// ✅ [Description] (Projet Gyroscops Cloud)
 [Code d'exemple]
 ```
 
@@ -184,9 +184,9 @@ Le projet Hive applique concrètement les principes de [concept] à travers son 
 
 [Pattern répété pour chaque implémentation]
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **[HIVEXXX]** : [Nom de l'ADR] - [Description]
 - **[HIVEXXX]** : [Nom de l'ADR] - [Description]
 - **[HIVEXXX]** : [Nom de l'ADR] - [Description]
@@ -250,7 +250,7 @@ Maintenant que vous comprenez [concept] et que j'ai partagé mon expérience ave
 - **Complets** : Code fonctionnel et exécutable
 - **Commentés** : Expliquer les parties importantes
 - **Contexte** : Toujours indiquer le contexte d'utilisation
-- **Projet Hive** : Référencer le projet Hive quand approprié
+- **Projet Gyroscops Cloud** : Référencer le Gyroscops Cloud quand approprié
 
 ### 5. **Navigation**
 - **Choix clairs** : Chaque option doit être distincte
@@ -298,7 +298,7 @@ Maintenant que vous comprenez [concept] et que j'ai partagé mon expérience ave
 
 ## Ressources Utiles
 
-### ADR du Projet Hive
+### ADR du Projet Gyroscops Cloud
 - **HIVE040** : Enhanced Models with Property Access Patterns
 - **HIVE041** : Cross-Cutting Concerns Architecture
 - **HIVE025** : Authorization System

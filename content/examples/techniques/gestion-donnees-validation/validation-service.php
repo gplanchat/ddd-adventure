@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Psr\Log\LoggerInterface;
 
 /**
- * Service de validation des données selon les bonnes pratiques du projet Hive
+ * Service de validation des données selon les bonnes pratiques du projet Gyroscops Cloud
  * 
  * Ce service implémente une validation robuste des données d'entrée
  * en respectant les ADR HIVE036, HIVE038 et HIVE027.

@@ -3,7 +3,6 @@ title: "Le Concept du Guide Interactif"
 description: "Découvrez l'ambition et le concept innovant de ce guide DDD interactif"
 date: 2024-12-19
 draft: false
-type: "docs"
 weight: 3
 ---
 
@@ -234,3 +233,4 @@ Ce guide est né de l'expérience **Gyroscops**, une plateforme cloud native com
 ---
 
 *Ce guide est le fruit de l'expérience acquise avec Gyroscops, transformée en parcours interactif pour révolutionner l'apprentissage de l'architecture logicielle.*
+

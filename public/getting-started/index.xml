@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Commencer votre safari DDD on DDD Journey</title>
-    <link>http://localhost:1313/getting-started/</link>
-    <description>Recent content in Commencer votre safari DDD on DDD Journey</description>
+    <title>Getting-Starteds on DDD Adventure</title>
+    <link>//localhost:41733/getting-started/</link>
+    <description>Recent content in Getting-Starteds on DDD Adventure</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate></lastBuildDate>
-    <atom:link href="http://localhost:1313/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    <language>fr-fr</language>
+    <lastBuildDate>Thu, 19 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:41733/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Event Storming</title>
+      <link>//localhost:41733/getting-started/event-storming/</link>
+      <pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:41733/getting-started/event-storming/</guid>
+      <description>&lt;h1 id=&#34;event-storming&#34;&gt;Event Storming &lt;a href=&#34;#event-storming&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Cette page est en cours de rédaction&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Modèles Riches</title>
+      <link>//localhost:41733/getting-started/modeles-riches/</link>
+      <pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:41733/getting-started/modeles-riches/</guid>
+      <description>&lt;h1 id=&#34;modèles-riches&#34;&gt;Modèles Riches &lt;a href=&#34;#mod%c3%a8les-riches&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Cette page est en cours de rédaction&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Tests Unitaires</title>
+      <link>//localhost:41733/getting-started/tests/</link>
+      <pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:41733/getting-started/tests/</guid>
+      <description>&lt;h1 id=&#34;tests-unitaires&#34;&gt;Tests Unitaires &lt;a href=&#34;#tests-unitaires&#34; class=&#34;anchor&#34; aria-hidden=&#34;true&#34;&gt;&lt;i class=&#34;material-icons align-middle&#34;&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Cette page est disponible et prête à être lue.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

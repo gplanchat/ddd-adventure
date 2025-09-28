@@ -66,7 +66,7 @@ graph TD
 ### 1. Modèle de Commande avec Event Sourcing
 
 ```php
-// Modèle de Commande avec Event Sourcing - Projet Hive
+// Modèle de Commande avec Event Sourcing - Projet Gyroscops Cloud
 final class PaymentCommand
 {
     private PaymentId $id;
@@ -164,7 +164,7 @@ final class PaymentCommand
 ### 2. Modèle de Requête Optimisé
 
 ```php
-// Modèle de Requête Optimisé - Projet Hive
+// Modèle de Requête Optimisé - Projet Gyroscops Cloud
 final class PaymentQuery
 {
     public function __construct(
@@ -264,7 +264,7 @@ final class PaymentQuery
 ### Projection de Base
 
 ```php
-// Projection de Base - Projet Hive
+// Projection de Base - Projet Gyroscops Cloud
 final class PaymentProjection
 {
     public function __construct(
@@ -363,7 +363,7 @@ final class PaymentProjection
 ### Event Handler
 
 ```php
-// Event Handler - Projet Hive
+// Event Handler - Projet Gyroscops Cloud
 final class PaymentEventHandler
 {
     public function __construct(
@@ -462,9 +462,9 @@ final class PaymentEventHandler
 - **Projections** : Synchronisation des modèles
 - **Event Handlers** : Gestion des événements
 
-## 📚 Références aux ADR du Projet Hive
+## 📚 Références aux ADR du Projet Gyroscops Cloud
 
-Cette approche suit les patterns établis dans les Architecture Decision Records du projet Hive :
+Cette approche suit les patterns établis dans les Architecture Decision Records du Gyroscops Cloud :
 
 - **[HIVE006](https://github.com/yourusername/hive/blob/main/architecture/HIVE006-query-models-for-api-platform.md)** : Query Models for API Platform - Modèles de requête
 - **[HIVE007](https://github.com/yourusername/hive/blob/main/architecture/HIVE007-command-models-for-api-platform.md)** : Command Models for API Platform - Modèles de commande

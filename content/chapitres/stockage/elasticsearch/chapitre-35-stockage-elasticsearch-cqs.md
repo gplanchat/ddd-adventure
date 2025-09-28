@@ -1082,3 +1082,4 @@ public function searchWithCache(SearchPaymentsQuery $query): PaymentSearchResult
 ---
 
 *CQS avec ElasticSearch offre un équilibre optimal entre performance et simplicité, parfaitement adapté aux besoins de recherche et d'analytics de Gyroscops.*
+

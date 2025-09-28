@@ -289,11 +289,11 @@ L'Impact Mapping est une méthode de planification stratégique qui utilise des 
 
 **Résultat** : Développement aligné sur le business et techniquement solide.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Impact Mapping Appliqué à Hive
+### Impact Mapping Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de l'Impact Mapping à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes de l'Impact Mapping à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
 #### Objectif Business : Plateforme d'Intégration Robuste
 
@@ -307,7 +307,7 @@ Le projet Hive applique concrètement les principes de l'Impact Mapping à trave
 #### Acteurs Identifiés
 
 ```php
-// ✅ Acteurs du Projet Hive (Projet Hive)
+// ✅ Acteurs du Projet Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveActors
 {
     // Acteurs principaux
@@ -326,7 +326,7 @@ final class HiveActors
 #### Impacts Mesurés
 
 ```php
-// ✅ Métriques d'Impact Hive (Projet Hive)
+// ✅ Métriques d'Impact Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveImpactMetrics
 {
     public function measureDeveloperProductivity(): array
@@ -361,7 +361,7 @@ final class HiveImpactMetrics
 #### Livrables Prioritaires
 
 ```php
-// ✅ Livrables Prioritaires Hive (Projet Hive)
+// ✅ Livrables Prioritaires Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveDeliverables
 {
     // Priorité 1 : Fonctionnalités Core
@@ -397,7 +397,7 @@ final class HiveDeliverables
 
 **Livrables** :
 ```php
-// ✅ Système d'Authentification Hive (Projet Hive)
+// ✅ Système d'Authentification Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveAuthenticationSystem
 {
     public function __construct(
@@ -451,7 +451,7 @@ final class HiveAuthenticationSystem
 
 **Livrables** :
 ```php
-// ✅ Système d'Intégration Hive (Projet Hive)
+// ✅ Système d'Intégration Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveIntegrationSystem
 {
     public function __construct(
@@ -497,9 +497,9 @@ final class HiveIntegrationSystem
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE025** : Authorization System - Système d'autorisation basé sur les acteurs
 - **HIVE026** : Keycloak Resource and Scope Management - Gestion des ressources et scopes
 - **HIVE040** : Enhanced Models with Property Access Patterns - Modèles enrichis pour les acteurs

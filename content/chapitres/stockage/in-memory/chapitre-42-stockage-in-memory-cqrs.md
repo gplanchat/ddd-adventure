@@ -1103,3 +1103,4 @@ public function optimizeIndexes(): void
 ---
 
 *CQRS avec In-Memory représente l'état de l'art en matière d'architecture scalable pour la performance, parfaitement adapté aux besoins les plus exigeants de Gyroscops.*
+

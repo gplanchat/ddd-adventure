@@ -932,3 +932,4 @@ public function getWorkflowMetrics(): array
 ---
 
 *Event Sourcing avec Temporal offre une approche unique pour l'audit trail et l'orchestration, parfaitement adaptée aux besoins de traçabilité de Gyroscops.*
+

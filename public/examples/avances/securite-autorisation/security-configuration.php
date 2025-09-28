@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-// ✅ Configuration de Sécurité Hive (Projet Hive)
+// ✅ Configuration de Sécurité Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveSecurityConfiguration
 {
     public function configureSecurity(ContainerBuilder $container): void

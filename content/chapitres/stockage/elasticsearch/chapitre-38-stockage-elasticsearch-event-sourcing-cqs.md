@@ -1144,3 +1144,4 @@ public function appendEventsBulk(array $aggregateEvents): void
 ---
 
 *Event Sourcing + CQS avec ElasticSearch offre une approche sophistiquée pour l'audit trail et la recherche avancée, parfaitement adaptée aux besoins les plus exigeants de Gyroscops.*
+

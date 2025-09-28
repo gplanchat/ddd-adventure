@@ -1,4 +1,4 @@
-baseURL = 'https://gplanchat.github.io/ddd-adventure/'
+#baseURL = 'https://gplanchat.github.io/ddd-adventure/'
 languageCode = 'fr-fr'
 title = 'DDD Adventure'
 
@@ -13,9 +13,15 @@ title = 'DDD Adventure'
     title = "Nos Sponsors"
     subtitle = "Merci à nos partenaires qui soutiennent cette initiative"
     sponsors = [
-      { name = "Kiboko", url = "https://kiboko.fr", logo = "kiboko-logo.png" },
-      { name = "Gyroscops", url = "https://gyroscops.com", logo = "gyroscops-logo.png" }
+      { name = "Kiboko", url = "https://kiboko.fr", logo = "logo-kiboko-fr.svg" },
+      { name = "Gyroscops", url = "https://gyroscops.com", logo = "logo-gyroscops.svg" }
     ]
+
+  # Assets configuration
+  [params.assets]
+    [params.assets.customCSS]
+      enable = true
+      files = ["custom.scss"]
 
 [module]
     [[module.imports]]

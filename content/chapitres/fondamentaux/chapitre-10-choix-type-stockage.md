@@ -139,7 +139,7 @@ Le choix du type de stockage consiste à analyser les besoins de l'application e
 **Avec Gyroscops** : J'ai analysé les besoins :
 
 ```php
-// ✅ Analyse des Besoins Gyroscops (Projet Hive)
+// ✅ Analyse des Besoins Gyroscops (projet Gyroscops Cloud)
 final class StorageNeedsAnalysis
 {
     public function analyzeNeeds(DomainContext $context): StorageRecommendation
@@ -207,7 +207,7 @@ final class StorageNeedsAnalysis
 **Avec Gyroscops** : J'ai évalué les contraintes :
 
 ```php
-// ✅ Évaluation des Contraintes Gyroscops (Projet Hive)
+// ✅ Évaluation des Contraintes Gyroscops (projet Gyroscops Cloud)
 final class TechnicalConstraintsEvaluation
 {
     public function evaluateConstraints(ProjectContext $context): ConstraintScore
@@ -262,7 +262,7 @@ final class TechnicalConstraintsEvaluation
 **Avec Gyroscops** : J'ai créé une matrice de décision :
 
 ```php
-// ✅ Matrice de Décision Gyroscops (Projet Hive)
+// ✅ Matrice de Décision Gyroscops (projet Gyroscops Cloud)
 final class StorageDecisionMatrix
 {
     public function recommendStorage(StorageNeeds $needs, ConstraintScore $constraints): StorageRecommendation
@@ -432,16 +432,16 @@ final class StorageDecisionMatrix
 
 **Pourquoi c'est essentiel ?** L'équipe doit pouvoir maintenir la solution.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le projet Gyroscops Cloud
 
-### Choix du Stockage Appliqué à Hive
+### Choix du Stockage Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du choix du stockage à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le projet Gyroscops Cloud applique concrètement les principes du choix du stockage à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Stratégie de Stockage Hive
+#### Stratégie de Stockage Gyroscops Cloud
 
 ```php
-// ✅ Stratégie de Stockage Hive (Projet Hive)
+// ✅ Stratégie de Stockage Gyroscops Cloud (projet Gyroscops Cloud)
 final class HiveStorageStrategy
 {
     public function getStorageStrategy(DomainContext $context): StorageStrategy
@@ -498,9 +498,9 @@ final class HiveStorageStrategy
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Gyroscops Cloud :
 - **HIVE010** : Repositories - Patterns de repository
 - **HIVE012** : Database Repositories - Repositories SQL
 - **HIVE014** : ElasticSearch Repositories - Repositories de recherche

@@ -74,7 +74,7 @@ CQS (Command Query Separation) consiste à séparer les opérations en deux cat�
 **Avec Gyroscops** : J'ai séparé les interfaces :
 
 ```php
-// ✅ Interfaces CQS Hive (Projet Hive)
+// ✅ Interfaces CQS Gyroscops Cloud (Projet Gyroscops Cloud)
 interface PaymentCommandRepositoryInterface
 {
     public function save(Payment $payment): void;
@@ -100,7 +100,7 @@ interface PaymentQueryRepositoryInterface
 **Avec Gyroscops** : J'ai implémenté les commandes :
 
 ```php
-// ✅ Commandes Hive (Projet Hive)
+// ✅ Commandes Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentCommandService
 {
     public function __construct(
@@ -208,7 +208,7 @@ final class PaymentCommandService
 **Avec Gyroscops** : J'ai implémenté les requêtes :
 
 ```php
-// ✅ Requêtes Hive (Projet Hive)
+// ✅ Requêtes Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentQueryService
 {
     public function __construct(
@@ -297,7 +297,7 @@ final class PaymentQueryService
 **Avec Gyroscops** : J'ai créé les contrôleurs :
 
 ```php
-// ✅ Contrôleurs CQS Hive (Projet Hive)
+// ✅ Contrôleurs CQS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentCommandController
 {
     public function __construct(
@@ -591,16 +591,16 @@ final class PaymentQueryController
 
 **Résultat** : Architecture claire et performante.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### CQS Appliqué à Hive
+### CQS Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes de CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Services CQS Hive
+#### Services CQS Gyroscops Cloud
 
 ```php
-// ✅ Services CQS Hive (Projet Hive)
+// ✅ Services CQS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveCQSService
 {
     public function __construct(
@@ -673,10 +673,10 @@ final class HiveCQSService
 }
 ```
 
-#### Configuration CQS Hive
+#### Configuration CQS Gyroscops Cloud
 
 ```php
-// ✅ Configuration CQS Hive (Projet Hive)
+// ✅ Configuration CQS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveCQSConfiguration
 {
     public function configureServices(ContainerBuilder $container): void
@@ -707,9 +707,9 @@ final class HiveCQSConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE006** : Query Models for API Platform - Modèles de requête
 - **HIVE007** : Command Models for API Platform - Modèles de commande
 - **HIVE040** : Enhanced Models with Property Access Patterns - Modèles enrichis pour CQS

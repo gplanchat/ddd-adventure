@@ -933,3 +933,4 @@ public function optimizeIndexes(): void
 ---
 
 *Event Sourcing + CQS avec In-Memory offre une approche sophistiquée pour l'audit trail et la performance, parfaitement adaptée aux besoins les plus exigeants de Gyroscops.*
+

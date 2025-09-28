@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
  * Exemple de Repository Command SQL CQRS pour Payment
  * 
  * Ce fichier montre comment implémenter un repository Command
- * en suivant les patterns CQRS du projet Hive.
+ * en suivant les patterns CQRS du projet Gyroscops Cloud.
  * 
  * Références ADR :
  * - HIVE006 : Query Models for API Platform

@@ -1,6 +1,6 @@
 ---
 title: "Chapitre 59 : Pagination et Performance"
-description: "Pagination et performance dans le projet Hive avec des exemples concrets"
+description: "Pagination et performance dans le Gyroscops Cloud avec des exemples concrets"
 date: 2024-12-19
 draft: true
 type: "docs"
@@ -9,15 +9,15 @@ weight: 59
 
 ## 🎯 Objectif de ce Chapitre
 
-Ce chapitre vous montre comment implémenter la pagination et optimiser les performances dans le projet Hive. Vous apprendrez :
+Ce chapitre vous montre comment implémenter la pagination et optimiser les performances dans le Gyroscops Cloud. Vous apprendrez :
 - Comment implémenter la pagination efficace
 - Comment optimiser les performances des requêtes
 - Comment gérer les grandes quantités de données
 - Comment tester la pagination
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE037** : Pagination Implementation Guidelines - Guidelines d'implémentation de la pagination
 - **HIVE039** : Cursor-Based Pagination - Pagination basée sur les curseurs
 - **HIVE013** : Collection Management - Gestion des collections
@@ -54,7 +54,7 @@ api/src/
 ### Interfaces de Pagination
 
 ```php
-// ✅ Interface de Pagination (Projet Hive)
+// ✅ Interface de Pagination (Projet Gyroscops Cloud)
 interface PaginatedRepositoryInterface
 {
     public function findPaginated(
@@ -135,7 +135,7 @@ final class PaginationResponse
 ### Service de Pagination par Offset
 
 ```php
-// ✅ Service de Pagination par Offset (Projet Hive)
+// ✅ Service de Pagination par Offset (Projet Gyroscops Cloud)
 final class OffsetPaginationService
 {
     public function __construct(
@@ -172,7 +172,7 @@ final class OffsetPaginationService
 ### Repository avec Pagination par Offset
 
 ```php
-// ✅ Repository avec Pagination par Offset (Projet Hive)
+// ✅ Repository avec Pagination par Offset (Projet Gyroscops Cloud)
 final class SqlPaymentRepository implements PaginatedRepositoryInterface
 {
     public function __construct(
@@ -296,7 +296,7 @@ final class SqlPaymentRepository implements PaginatedRepositoryInterface
 ### Service de Pagination par Curseur
 
 ```php
-// ✅ Service de Pagination par Curseur (Projet Hive)
+// ✅ Service de Pagination par Curseur (Projet Gyroscops Cloud)
 final class CursorPaginationService
 {
     public function __construct(
@@ -333,7 +333,7 @@ final class CursorPaginationService
 ### Repository avec Pagination par Curseur
 
 ```php
-// ✅ Repository avec Pagination par Curseur (Projet Hive)
+// ✅ Repository avec Pagination par Curseur (Projet Gyroscops Cloud)
 final class SqlPaymentRepository implements CursorPaginatedRepositoryInterface
 {
     public function __construct(
@@ -433,7 +433,7 @@ final class SqlPaymentRepository implements CursorPaginatedRepositoryInterface
 ### Optimisation des Requêtes
 
 ```php
-// ✅ Optimisation des Requêtes (Projet Hive)
+// ✅ Optimisation des Requêtes (Projet Gyroscops Cloud)
 final class OptimizedPaymentRepository implements PaginatedRepositoryInterface
 {
     public function __construct(
@@ -583,7 +583,7 @@ final class OptimizedPaymentRepository implements PaginatedRepositoryInterface
 ### Cache de Pagination
 
 ```php
-// ✅ Cache de Pagination (Projet Hive)
+// ✅ Cache de Pagination (Projet Gyroscops Cloud)
 final class CachedPaginationService
 {
     public function __construct(
@@ -644,7 +644,7 @@ final class CachedPaginationService
 ### Test de Pagination par Offset
 
 ```php
-// ✅ Test de Pagination par Offset (Projet Hive)
+// ✅ Test de Pagination par Offset (Projet Gyroscops Cloud)
 final class OffsetPaginationServiceTest extends TestCase
 {
     private OffsetPaginationService $service;
@@ -727,7 +727,7 @@ final class OffsetPaginationServiceTest extends TestCase
 ### Test de Pagination par Curseur
 
 ```php
-// ✅ Test de Pagination par Curseur (Projet Hive)
+// ✅ Test de Pagination par Curseur (Projet Gyroscops Cloud)
 final class CursorPaginationServiceTest extends TestCase
 {
     private CursorPaginationService $service;
@@ -806,14 +806,14 @@ final class CursorPaginationServiceTest extends TestCase
 }
 ```
 
-## 🏗️ Bonnes Pratiques du Projet Hive
+## 🏗️ Bonnes Pratiques du Projet Gyroscops Cloud
 
 ### Pagination selon HIVE037 et HIVE039
 
-Le projet Hive implémente une pagination robuste selon les ADR HIVE037 et HIVE039 :
+Le Gyroscops Cloud implémente une pagination robuste selon les ADR HIVE037 et HIVE039 :
 
 ```php
-// ✅ Pagination Hive (Projet Hive)
+// ✅ Pagination Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HivePaginationService
 {
     public function __construct(
@@ -907,10 +907,10 @@ final class HivePaginationService
 
 ### Optimisation des Requêtes selon HIVE035
 
-Le projet Hive optimise les requêtes avec un logging détaillé selon l'ADR HIVE035 :
+Le Gyroscops Cloud optimise les requêtes avec un logging détaillé selon l'ADR HIVE035 :
 
 ```php
-// ✅ Optimisation des Requêtes Hive (Projet Hive)
+// ✅ Optimisation des Requêtes Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveQueryOptimizer
 {
     public function __construct(
@@ -993,10 +993,10 @@ final class HiveQueryOptimizer
 
 ### Cache de Pagination selon HIVE013
 
-Le projet Hive implémente un cache intelligent pour la pagination selon l'ADR HIVE013 :
+Le Gyroscops Cloud implémente un cache intelligent pour la pagination selon l'ADR HIVE013 :
 
 ```php
-// ✅ Cache de Pagination Hive (Projet Hive)
+// ✅ Cache de Pagination Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HivePaginationCache
 {
     public function __construct(
@@ -1099,10 +1099,10 @@ final class HivePaginationCache
 
 ### Tests de Pagination selon HIVE027
 
-Le projet Hive teste la pagination selon les standards HIVE027 :
+Le Gyroscops Cloud teste la pagination selon les standards HIVE027 :
 
 ```php
-// ✅ Tests de Pagination Hive (Projet Hive)
+// ✅ Tests de Pagination Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HivePaginationServiceTest extends TestCase
 {
     private HivePaginationService $service;

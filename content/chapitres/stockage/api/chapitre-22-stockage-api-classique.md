@@ -87,7 +87,7 @@ Le stockage API classique consiste à utiliser des clients HTTP pour interagir a
 **Avec Gyroscops** : J'ai créé les clients HTTP :
 
 ```php
-// ✅ Client Keycloak Hive (Projet Hive)
+// ✅ Client Keycloak Gyroscops Cloud (Projet Gyroscops Cloud)
 final class KeycloakClient
 {
     public function __construct(
@@ -223,7 +223,7 @@ final class KeycloakClient
 **Avec Gyroscops** : J'ai créé les repositories API :
 
 ```php
-// ✅ Repository User API Hive (Projet Hive)
+// ✅ Repository User API Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserApiRepository implements UserRepositoryInterface
 {
     public function __construct(
@@ -293,7 +293,7 @@ final class UserApiRepository implements UserRepositoryInterface
 **Avec Gyroscops** : J'ai créé les mappers :
 
 ```php
-// ✅ Mapper User Hive (Projet Hive)
+// ✅ Mapper User Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserMapper
 {
     public function toArray(User $user): array
@@ -344,7 +344,7 @@ final class UserMapper
 **Avec Gyroscops** : J'ai créé les entités API Platform :
 
 ```php
-// ✅ Entité User API Platform Hive (Projet Hive)
+// ✅ Entité User API Platform Gyroscops Cloud (Projet Gyroscops Cloud)
 #[ApiResource(
     operations: [
         new Get(),
@@ -429,7 +429,7 @@ final class User
 **Avec Gyroscops** : J'ai créé les filtres :
 
 ```php
-// ✅ Filtre Email User Hive (Projet Hive)
+// ✅ Filtre Email User Gyroscops Cloud (Projet Gyroscops Cloud)
 final class EmailFilter extends AbstractFilter
 {
     protected function getPropertyName(string $property): string
@@ -453,7 +453,7 @@ final class EmailFilter extends AbstractFilter
     }
 }
 
-// ✅ Filtre Organization User Hive (Projet Hive)
+// ✅ Filtre Organization User Gyroscops Cloud (Projet Gyroscops Cloud)
 final class OrganizationFilter extends AbstractFilter
 {
     protected function getPropertyName(string $property): string
@@ -577,16 +577,16 @@ final class OrganizationFilter extends AbstractFilter
 
 **Pourquoi c'est essentiel ?** Les timeouts évitent les blocages.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Stockage API Classique Appliqué à Hive
+### Stockage API Classique Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage API classique à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes du stockage API classique à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration API Clients Hive
+#### Configuration API Clients Gyroscops Cloud
 
 ```php
-// ✅ Configuration API Clients Hive (Projet Hive)
+// ✅ Configuration API Clients Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveApiClientsConfiguration
 {
     public function configureApiClients(ContainerBuilder $container): void
@@ -623,9 +623,9 @@ final class HiveApiClientsConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE015** : API Repositories - Repositories d'API
 - **HIVE025** : Authorization System - Système d'autorisation
 - **HIVE026** : Keycloak Resource and Scope Management - Gestion des ressources Keycloak

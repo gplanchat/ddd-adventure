@@ -41,7 +41,7 @@ Dans notre écosystème **User → Organization → Workflow → Cloud Resources
 #### **Index et Types**
 ```json
 {
-  "index": "hive-payments",
+  "index": "Gyroscops Cloud-payments",
   "mapping": {
     "properties": {
       "paymentId": { "type": "keyword" },
@@ -1017,3 +1017,4 @@ public function searchWithCache(PaymentSearchCriteria $criteria): PaymentSearchR
 ---
 
 *ElasticSearch classique offre une approche puissante pour la recherche et l'analytics, parfaitement adaptée aux besoins de recherche et de reporting de Gyroscops.*
+

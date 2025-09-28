@@ -103,7 +103,7 @@ Le stockage SQL Event Sourcing + CQS combine l'Event Sourcing pour l'écriture a
 **Avec Gyroscops** : J'ai créé l'Event Store :
 
 ```php
-// ✅ Event Store Hive (Projet Hive)
+// ✅ Event Store Gyroscops Cloud (Projet Gyroscops Cloud)
 final class SqlEventStore implements EventStoreInterface
 {
     public function __construct(
@@ -182,7 +182,7 @@ final class SqlEventStore implements EventStoreInterface
 **Avec Gyroscops** : J'ai créé les Command Handlers :
 
 ```php
-// ✅ Command Handler Payment Hive (Projet Hive)
+// ✅ Command Handler Payment Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentCommandHandler
 {
     public function __construct(
@@ -255,7 +255,7 @@ final class PaymentCommandHandler
 **Avec Gyroscops** : J'ai créé les Query Models :
 
 ```php
-// ✅ Query Model Payment Hive (Projet Hive)
+// ✅ Query Model Payment Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentQueryModel
 {
     public function __construct(
@@ -321,7 +321,7 @@ final class PaymentQueryModel
 **Avec Gyroscops** : J'ai créé les Query Handlers :
 
 ```php
-// ✅ Query Handler Payment Hive (Projet Hive)
+// ✅ Query Handler Payment Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentQueryHandler
 {
     public function __construct(
@@ -441,7 +441,7 @@ final class PaymentQueryHandler
 **Avec Gyroscops** : J'ai créé les projections asynchrones :
 
 ```php
-// ✅ Projection Payment Asynchrone Hive (Projet Hive)
+// ✅ Projection Payment Asynchrone Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentProjectionHandler
 {
     public function __construct(
@@ -639,16 +639,16 @@ final class PaymentProjectionHandler
 
 **Pourquoi c'est essentiel ?** Les projections complexes ralentissent le système.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Stockage SQL Event Sourcing + CQS Appliqué à Hive
+### Stockage SQL Event Sourcing + CQS Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage SQL Event Sourcing + CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes du stockage SQL Event Sourcing + CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration Event Sourcing + CQS Hive
+#### Configuration Event Sourcing + CQS Gyroscops Cloud
 
 ```php
-// ✅ Configuration Event Sourcing + CQS Hive (Projet Hive)
+// ✅ Configuration Event Sourcing + CQS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveEventSourcingCQSConfiguration
 {
     public function configureEventSourcingCQS(ContainerBuilder $container): void
@@ -687,9 +687,9 @@ final class HiveEventSourcingCQSConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE008** : Event Collaboration - Collaboration par événements
 - **HIVE009** : Message Buses - Bus de messages
 - **HIVE010** : Repositories - Repositories de base

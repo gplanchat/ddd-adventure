@@ -934,3 +934,4 @@ public function getWorkflowMetrics(): array
 ---
 
 *Event Sourcing + CQS avec Temporal représente l'état de l'art en matière d'architecture performante et traçable pour l'orchestration, parfaitement adapté aux besoins les plus exigeants de Gyroscops.*
+

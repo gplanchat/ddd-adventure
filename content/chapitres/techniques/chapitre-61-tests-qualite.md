@@ -1,6 +1,6 @@
 ---
 title: "Chapitre 61 : Tests et Qualité"
-description: "Tests et qualité dans le projet Hive avec des exemples concrets"
+description: "Tests et qualité dans le Gyroscops Cloud avec des exemples concrets"
 date: 2024-12-19
 draft: true
 type: "docs"
@@ -9,15 +9,15 @@ weight: 61
 
 ## 🎯 Objectif de ce Chapitre
 
-Ce chapitre vous montre comment implémenter les tests et maintenir la qualité dans le projet Hive. Vous apprendrez :
+Ce chapitre vous montre comment implémenter les tests et maintenir la qualité dans le Gyroscops Cloud. Vous apprendrez :
 - Comment écrire des tests de qualité
 - Comment maintenir la couverture de code
 - Comment utiliser les outils de qualité
 - Comment tester les différents composants
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE027** : PHPUnit Testing Standards - Standards de test PHPUnit
 - **HIVE023** : Repository Testing Strategies - Stratégies de test des repositories
 - **HIVE028** : Testing Data and Faker Best Practices - Bonnes pratiques de test et Faker
@@ -66,7 +66,7 @@ api/tests/
 ### Base de Test
 
 ```php
-// ✅ Base de Test (Projet Hive)
+// ✅ Base de Test (Projet Gyroscops Cloud)
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
@@ -113,7 +113,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 ### Test des Value Objects
 
 ```php
-// ✅ Test des Value Objects (Projet Hive)
+// ✅ Test des Value Objects (Projet Gyroscops Cloud)
 final class EmailTest extends TestCase
 {
     /** @test */
@@ -175,7 +175,7 @@ final class EmailTest extends TestCase
 ### Test des Agrégats
 
 ```php
-// ✅ Test des Agrégats (Projet Hive)
+// ✅ Test des Agrégats (Projet Gyroscops Cloud)
 final class PaymentTest extends TestCase
 {
     /** @test */
@@ -324,7 +324,7 @@ final class PaymentTest extends TestCase
 ### Test des Repositories
 
 ```php
-// ✅ Test des Repositories (Projet Hive)
+// ✅ Test des Repositories (Projet Gyroscops Cloud)
 final class SqlPaymentRepositoryTest extends TestCase
 {
     private Connection $connection;
@@ -500,7 +500,7 @@ final class SqlPaymentRepositoryTest extends TestCase
 ### Test des Endpoints API
 
 ```php
-// ✅ Test des Endpoints API (Projet Hive)
+// ✅ Test des Endpoints API (Projet Gyroscops Cloud)
 final class PaymentApiTest extends ApiTestCase
 {
     private PaymentFixtures $fixtures;
@@ -701,7 +701,7 @@ final class PaymentApiTest extends ApiTestCase
 ### Configuration PHPStan
 
 ```php
-// ✅ Configuration PHPStan (Projet Hive)
+// ✅ Configuration PHPStan (Projet Gyroscops Cloud)
 // phpstan.neon
 parameters:
     level: 8
@@ -724,7 +724,7 @@ parameters:
 ### Configuration PHP-CS-Fixer
 
 ```php
-// ✅ Configuration PHP-CS-Fixer (Projet Hive)
+// ✅ Configuration PHP-CS-Fixer (Projet Gyroscops Cloud)
 // .php-cs-fixer.php
 <?php
 
@@ -847,14 +847,14 @@ $config->setFinder(
 return $config;
 ```
 
-## 🏗️ Bonnes Pratiques du Projet Hive
+## 🏗️ Bonnes Pratiques du Projet Gyroscops Cloud
 
 ### Tests selon HIVE027
 
-Le projet Hive suit les standards de test PHPUnit selon l'ADR HIVE027 :
+Le Gyroscops Cloud suit les standards de test PHPUnit selon l'ADR HIVE027 :
 
 ```php
-// ✅ Tests Hive (Projet Hive)
+// ✅ Tests Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveTestSuite
 {
     public function __construct(
@@ -923,10 +923,10 @@ final class HiveTestSuite
 
 ### Tests de Repositories selon HIVE023
 
-Le projet Hive teste les repositories selon l'ADR HIVE023 :
+Le Gyroscops Cloud teste les repositories selon l'ADR HIVE023 :
 
 ```php
-// ✅ Tests de Repositories Hive (Projet Hive)
+// ✅ Tests de Repositories Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveRepositoryTestSuite
 {
     public function __construct(
@@ -1004,10 +1004,10 @@ final class HiveRepositoryTestSuite
 
 ### Tests avec Faker selon HIVE028
 
-Le projet Hive utilise Faker pour générer des données de test selon l'ADR HIVE028 :
+Le Gyroscops Cloud utilise Faker pour générer des données de test selon l'ADR HIVE028 :
 
 ```php
-// ✅ Tests avec Faker Hive (Projet Hive)
+// ✅ Tests avec Faker Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveTestDataGenerator
 {
     public function __construct(
@@ -1099,10 +1099,10 @@ final class HiveTestDataGenerator
 
 ### Qualité de Code selon HIVE001
 
-Le projet Hive maintient la qualité de code selon l'ADR HIVE001 :
+Le Gyroscops Cloud maintient la qualité de code selon l'ADR HIVE001 :
 
 ```php
-// ✅ Qualité de Code Hive (Projet Hive)
+// ✅ Qualité de Code Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveCodeQualityChecker
 {
     public function __construct(
@@ -1153,7 +1153,7 @@ final class HiveCodeQualityChecker
 
     private function checkCustomRules(string $filePath, CodeQualityReport $report): void
     {
-        // Check for HIVE-specific rules
+        // Check for Gyroscops Cloud-specific rules
         $this->checkHiveNamingConventions($filePath, $report);
         $this->checkHiveArchitectureCompliance($filePath, $report);
         $this->checkHiveTestingStandards($filePath, $report);
@@ -1162,7 +1162,7 @@ final class HiveCodeQualityChecker
     private function checkHiveNamingConventions(string $filePath, CodeQualityReport $report): void
     {
         // Check enum naming conventions (HIVE024)
-        $this->logger->debug('Checking HIVE naming conventions', [
+        $this->logger->debug('Checking Gyroscops Cloud naming conventions', [
             'file' => $filePath
         ]);
     }
@@ -1170,7 +1170,7 @@ final class HiveCodeQualityChecker
     private function checkHiveArchitectureCompliance(string $filePath, CodeQualityReport $report): void
     {
         // Check architecture compliance (HIVE040, HIVE041)
-        $this->logger->debug('Checking HIVE architecture compliance', [
+        $this->logger->debug('Checking Gyroscops Cloud architecture compliance', [
             'file' => $filePath
         ]);
     }
@@ -1178,7 +1178,7 @@ final class HiveCodeQualityChecker
     private function checkHiveTestingStandards(string $filePath, CodeQualityReport $report): void
     {
         // Check testing standards (HIVE027)
-        $this->logger->debug('Checking HIVE testing standards', [
+        $this->logger->debug('Checking Gyroscops Cloud testing standards', [
             'file' => $filePath
         ]);
     }
@@ -1231,10 +1231,10 @@ final class CodeQualityReport
 
 ### Tests d'Intégration selon HIVE027
 
-Le projet Hive teste l'intégration selon les standards HIVE027 :
+Le Gyroscops Cloud teste l'intégration selon les standards HIVE027 :
 
 ```php
-// ✅ Tests d'Intégration Hive (Projet Hive)
+// ✅ Tests d'Intégration Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveIntegrationTestSuite
 {
     public function __construct(

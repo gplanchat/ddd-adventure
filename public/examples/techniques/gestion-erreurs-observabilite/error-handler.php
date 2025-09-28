@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\ConstraintViolation;
 
 /**
- * Gestionnaire d'erreurs selon les bonnes pratiques du projet Hive
+ * Gestionnaire d'erreurs selon les bonnes pratiques du projet Gyroscops Cloud
  * 
  * Ce service implémente une gestion d'erreurs robuste
  * en respectant les ADR HIVE038 et HIVE035.

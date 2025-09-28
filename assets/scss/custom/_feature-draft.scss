@@ -1,0 +1,74 @@
+/* Styles pour les éléments du featureGrid en draft */
+
+.feature-draft {
+    opacity: 0.6;
+    background-color: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 40%, rgba(0,0,0,0.05) 50%, transparent 60%);
+        background-size: 20px 20px;
+        animation: shimmer 2s infinite;
+        pointer-events: none;
+    }
+}
+
+.icon-draft {
+    opacity: 0.5;
+    color: #6c757d !important;
+}
+
+.title-draft {
+    color: #6c757d !important;
+}
+
+.para-draft {
+    color: #adb5bd !important;
+}
+
+.cta-disabled {
+    cursor: not-allowed;
+    text-decoration: none;
+    display: inline-block;
+    
+    &:hover {
+        color: #6c757d !important;
+        text-decoration: none;
+    }
+    
+    small {
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -20px 0;
+    }
+    100% {
+        background-position: 20px 0;
+    }
+}
+
+/* Animation de pulsation pour attirer l'attention */
+.feature-draft:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Style pour l'icône de draft */
+.cta-disabled .material-icons {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    margin-left: 0.25rem;
+}
+

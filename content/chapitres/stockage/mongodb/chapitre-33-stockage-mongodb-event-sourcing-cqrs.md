@@ -164,9 +164,9 @@ class MongoEventStore implements EventStoreInterface
 
     public function __construct(Client $mongoClient)
     {
-        $this->events = $mongoClient->selectCollection('hive', 'events');
-        $this->snapshots = $mongoClient->selectCollection('hive', 'snapshots');
-        $this->projectionsMetadata = $mongoClient->selectCollection('hive', 'projections_metadata');
+        $this->events = $mongoClient->selectCollection('Gyroscops Cloud', 'events');
+        $this->snapshots = $mongoClient->selectCollection('Gyroscops Cloud', 'snapshots');
+        $this->projectionsMetadata = $mongoClient->selectCollection('Gyroscops Cloud', 'projections_metadata');
     }
 
     public function appendEvents(string $aggregateId, array $events, int $expectedVersion, string $correlationId = null): void
@@ -486,8 +486,8 @@ class PaymentProjectionHandler
 
     public function __construct(Client $mongoClient, LoggerInterface $logger)
     {
-        $this->readModel = $mongoClient->selectCollection('hive', 'payment_read_models');
-        $this->projectionsMetadata = $mongoClient->selectCollection('hive', 'projections_metadata');
+        $this->readModel = $mongoClient->selectCollection('Gyroscops Cloud', 'payment_read_models');
+        $this->projectionsMetadata = $mongoClient->selectCollection('Gyroscops Cloud', 'projections_metadata');
         $this->logger = $logger;
     }
 
@@ -609,7 +609,7 @@ class PaymentQueryHandler implements QueryHandlerInterface
 
     public function __construct(Client $mongoClient, LoggerInterface $logger)
     {
-        $this->readModel = $mongoClient->selectCollection('hive', 'payment_read_models');
+        $this->readModel = $mongoClient->selectCollection('Gyroscops Cloud', 'payment_read_models');
         $this->logger = $logger;
     }
 
@@ -949,3 +949,4 @@ public function handle(GetPaymentByIdQuery $query): ?PaymentReadModel
 ---
 
 *Cette approche Event Sourcing + CQRS avec MongoDB représente l'état de l'art en matière d'architecture scalable et flexible, parfaitement adaptée aux besoins les plus exigeants de Gyroscops.*
+

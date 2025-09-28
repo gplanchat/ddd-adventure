@@ -687,7 +687,7 @@ version: '3.8'
 services:
   mongodb:
     image: mongo:6.0
-    container_name: hive-mongodb
+    container_name: Gyroscops Cloud-mongodb
     restart: unless-stopped
     ports:
       - "27017:27017"
@@ -699,17 +699,17 @@ services:
       - mongodb_data:/data/db
       - ./mongodb/init:/docker-entrypoint-initdb.d
     networks:
-      - hive-network
+      - Gyroscops Cloud-network
 
 volumes:
   mongodb_data:
 
 networks:
-  hive-network:
+  Gyroscops Cloud-network:
     driver: bridge
 ```
 
-## 📚 Exemples Concrets du Projet Hive
+## 📚 Exemples Concrets du projet Gyroscops Cloud
 
 ### 1. Repository de Paiements
 

@@ -105,7 +105,7 @@ Des grappes d'objets métier qui sont traités comme une unité cohérente. L'ag
 
 Des objets immuables qui représentent des concepts métier par leur valeur, pas par leur identité.
 
-**Exemple concret du projet Hive** :
+**Exemple concret du projet Gyroscops Cloud** :
 
 ```php
 use Assert\Assertion;
@@ -208,7 +208,7 @@ final readonly class Price
 
 ### Exemple Concret : Un Système de Paiement
 
-Voici un exemple réel tiré du projet Hive, montrant comment l'approche DDD guide la conception :
+Voici un exemple réel tiré du projet Gyroscops Cloud, montrant comment l'approche DDD guide la conception :
 
 ```php
 use Assert\Assertion;
@@ -1151,13 +1151,13 @@ Les exemples concrets rendent les règles métier tangibles et compréhensibles.
 
 Les exemples deviennent naturellement des tests d'acceptation. **C'est la magie de l'Example Mapping !**
 
-**Avec Gyroscops, voici ce qui s'est passé** : Après notre session d'Example Mapping sur les paiements, j'ai directement transformé les exemples en tests. Voici un exemple réel du projet Hive :
+**Avec Gyroscops, voici ce qui s'est passé** : Après notre session d'Example Mapping sur les paiements, j'ai directement transformé les exemples en tests. Voici un exemple réel du projet Gyroscops Cloud :
 
 ```php
 /** @test */
 public function itShouldHydrateInstanceWithValidData(): void
 {
-    // 🟢 EXEMPLE : Hydratation d'un paiement avec des données valides (Projet Hive)
+    // 🟢 EXEMPLE : Hydratation d'un paiement avec des données valides (projet Gyroscops Cloud)
     $paymentData = $this->createValidPaymentData();
     
     $result = $this->hydrator->hydrate($paymentData);
@@ -1171,7 +1171,7 @@ public function itShouldHydrateInstanceWithValidData(): void
 /** @test */
 public function itShouldRejectInvalidPaymentData(): void
 {
-    // 🔴 EXEMPLE : Rejet de données de paiement invalides (Projet Hive)
+    // 🔴 EXEMPLE : Rejet de données de paiement invalides (projet Gyroscops Cloud)
     $this->expectException(MultipleValidationException::class);
     
     $invalidData = [
@@ -1369,7 +1369,7 @@ class PaymentTest extends TestCase
 
 ### Structure par Bounded Context
 
-Voici la structure réelle du projet Hive, organisée par Bounded Context :
+Voici la structure réelle du projet Gyroscops Cloud, organisée par Bounded Context :
 
 ```
 api/src/
@@ -1411,9 +1411,9 @@ J'ai vu trop d'équipes exploser leur codebase en 15 services "indépendants" qu
 
 **Comme le dit [Jean-Vincent Quilichini](https://www.linkedin.com/posts/jeanvincentquilichini_je-ne-fais-presque-plus-de-microservices-activity-7375767071550423040-Kivq) : "Le microservice doit être un outil. Pas une posture."**
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du projet Gyroscops Cloud
 
-Cette architecture suit les principes définis dans les Architecture Decision Records (ADR) du projet Hive :
+Cette architecture suit les principes définis dans les Architecture Decision Records (ADR) du projet Gyroscops Cloud :
 
 - **HIVE040** : Enhanced Models with Property Access Patterns - Utilisation de propriétés publiques en lecture seule
 - **HIVE041** : Cross-Cutting Concerns Architecture - Séparation claire des responsabilités

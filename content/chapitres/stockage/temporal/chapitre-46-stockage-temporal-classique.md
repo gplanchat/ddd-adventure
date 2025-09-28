@@ -892,3 +892,4 @@ public function getWorkflowMetrics(): array
 ---
 
 *Temporal classique offre une approche puissante pour l'orchestration de processus métier complexes, parfaitement adaptée aux besoins de workflows de Gyroscops.*
+

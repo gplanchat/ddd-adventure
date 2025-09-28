@@ -1,6 +1,6 @@
 ---
 title: "Chapitre 60 : Gestion d'Erreurs et Observabilité"
-description: "Gestion d'erreurs et observabilité dans le projet Hive avec des exemples concrets"
+description: "Gestion d'erreurs et observabilité dans le Gyroscops Cloud avec des exemples concrets"
 date: 2024-12-19
 draft: true
 type: "docs"
@@ -9,15 +9,15 @@ weight: 60
 
 ## 🎯 Objectif de ce Chapitre
 
-Ce chapitre vous montre comment gérer les erreurs et implémenter l'observabilité dans le projet Hive. Vous apprendrez :
+Ce chapitre vous montre comment gérer les erreurs et implémenter l'observabilité dans le Gyroscops Cloud. Vous apprendrez :
 - Comment gérer les erreurs de manière robuste
 - Comment implémenter l'observabilité
 - Comment monitorer votre application
 - Comment tester la gestion d'erreurs
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE038** : Robust Error Handling Patterns - Patterns de gestion d'erreurs robustes
 - **HIVE035** : Database Operation Logging - Logging des opérations de base de données
 - **HIVE036** : Input Validation Patterns - Patterns de validation des entrées
@@ -54,7 +54,7 @@ api/src/
 ### Hiérarchie des Exceptions
 
 ```php
-// ✅ Hiérarchie des Exceptions (Projet Hive)
+// ✅ Hiérarchie des Exceptions (Projet Gyroscops Cloud)
 abstract class DomainException extends \DomainException
 {
     public function __construct(
@@ -120,7 +120,7 @@ final class InfrastructureException extends DomainException
 ### Value Objects pour les Erreurs
 
 ```php
-// ✅ Value Objects pour les Erreurs (Projet Hive)
+// ✅ Value Objects pour les Erreurs (Projet Gyroscops Cloud)
 final class ErrorCode
 {
     public function __construct(
@@ -221,7 +221,7 @@ final class ErrorContext
 ### Gestionnaire Principal
 
 ```php
-// ✅ Gestionnaire Principal (Projet Hive)
+// ✅ Gestionnaire Principal (Projet Gyroscops Cloud)
 final class ErrorHandler
 {
     public function __construct(
@@ -333,7 +333,7 @@ final class ErrorHandler
 ### Logger d'Erreurs
 
 ```php
-// ✅ Logger d'Erreurs (Projet Hive)
+// ✅ Logger d'Erreurs (Projet Gyroscops Cloud)
 final class ErrorLogger
 {
     public function __construct(
@@ -379,7 +379,7 @@ final class ErrorLogger
 ### Collecteur de Métriques
 
 ```php
-// ✅ Collecteur de Métriques (Projet Hive)
+// ✅ Collecteur de Métriques (Projet Gyroscops Cloud)
 final class MetricsCollector
 {
     public function __construct(
@@ -427,7 +427,7 @@ final class MetricsCollector
 ### Service de Tracing
 
 ```php
-// ✅ Service de Tracing (Projet Hive)
+// ✅ Service de Tracing (Projet Gyroscops Cloud)
 final class TracingService
 {
     public function __construct(
@@ -546,7 +546,7 @@ final class Span
 ### Vérificateur de Santé
 
 ```php
-// ✅ Vérificateur de Santé (Projet Hive)
+// ✅ Vérificateur de Santé (Projet Gyroscops Cloud)
 final class HealthChecker
 {
     public function __construct(
@@ -741,7 +741,7 @@ final class CheckResult
 ### Test du Gestionnaire d'Erreurs
 
 ```php
-// ✅ Test du Gestionnaire d'Erreurs (Projet Hive)
+// ✅ Test du Gestionnaire d'Erreurs (Projet Gyroscops Cloud)
 final class ErrorHandlerTest extends TestCase
 {
     private ErrorHandler $handler;
@@ -825,7 +825,7 @@ final class ErrorHandlerTest extends TestCase
 ### Test du Collecteur de Métriques
 
 ```php
-// ✅ Test du Collecteur de Métriques (Projet Hive)
+// ✅ Test du Collecteur de Métriques (Projet Gyroscops Cloud)
 final class MetricsCollectorTest extends TestCase
 {
     private MetricsCollector $collector;
@@ -899,14 +899,14 @@ final class MetricsCollectorTest extends TestCase
 }
 ```
 
-## 🏗️ Bonnes Pratiques du Projet Hive
+## 🏗️ Bonnes Pratiques du Projet Gyroscops Cloud
 
 ### Gestion d'Erreurs selon HIVE038
 
-Le projet Hive implémente une gestion d'erreurs robuste selon l'ADR HIVE038 :
+Le Gyroscops Cloud implémente une gestion d'erreurs robuste selon l'ADR HIVE038 :
 
 ```php
-// ✅ Gestion d'Erreurs Hive (Projet Hive)
+// ✅ Gestion d'Erreurs Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveErrorHandler
 {
     public function __construct(
@@ -995,10 +995,10 @@ final class HiveErrorHandler
 
 ### Observabilité selon HIVE035
 
-Le projet Hive implémente une observabilité complète selon l'ADR HIVE035 :
+Le Gyroscops Cloud implémente une observabilité complète selon l'ADR HIVE035 :
 
 ```php
-// ✅ Observabilité Hive (Projet Hive)
+// ✅ Observabilité Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveObservabilityService
 {
     public function __construct(
@@ -1105,10 +1105,10 @@ final class HiveObservabilityService
 
 ### Logging selon HIVE035
 
-Le projet Hive implémente un logging structuré selon l'ADR HIVE035 :
+Le Gyroscops Cloud implémente un logging structuré selon l'ADR HIVE035 :
 
 ```php
-// ✅ Logging Hive (Projet Hive)
+// ✅ Logging Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveLogger
 {
     public function __construct(
@@ -1215,10 +1215,10 @@ final class HiveLogger
 
 ### Tests d'Observabilité selon HIVE027
 
-Le projet Hive teste l'observabilité selon les standards HIVE027 :
+Le Gyroscops Cloud teste l'observabilité selon les standards HIVE027 :
 
 ```php
-// ✅ Tests d'Observabilité Hive (Projet Hive)
+// ✅ Tests d'Observabilité Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveObservabilityServiceTest extends TestCase
 {
     private HiveObservabilityService $service;

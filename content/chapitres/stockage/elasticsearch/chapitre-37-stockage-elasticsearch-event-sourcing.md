@@ -37,7 +37,7 @@ Dans notre écosystème **User → Organization → Workflow → Cloud Resources
 #### **Index des Événements**
 ```json
 {
-  "index": "hive-events",
+  "index": "Gyroscops Cloud-events",
   "mapping": {
     "properties": {
       "eventId": { "type": "keyword" },
@@ -901,3 +901,4 @@ public function getAggregateWithCache(string $aggregateId): PaymentAggregate
 ---
 
 *Event Sourcing avec ElasticSearch offre une approche unique pour l'audit trail et la recherche dans l'historique, parfaitement adaptée aux besoins de traçabilité de Gyroscops.*
+

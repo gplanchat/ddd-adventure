@@ -9,15 +9,15 @@ weight: 18
 
 ## 🎯 Objectif de ce Chapitre
 
-Ce chapitre vous montre comment implémenter le stockage SQL avec Command Query Responsibility Segregation (CQRS) dans le projet Hive. Vous apprendrez :
+Ce chapitre vous montre comment implémenter le stockage SQL avec Command Query Responsibility Segregation (CQRS) dans le Gyroscops Cloud. Vous apprendrez :
 - Comment séparer complètement les modèles de commande et de requête
 - Comment optimiser les performances de lecture et d'écriture
 - Comment gérer la cohérence éventuelle entre les modèles
 - Comment tester les repositories CQRS
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE006** : Query Models for API Platform - Modèles de requête pour API Platform
 - **HIVE007** : Command Models for API Platform - Modèles de commande pour API Platform
 - **HIVE012** : Database Repositories - Patterns de repository pour base de données
@@ -60,7 +60,7 @@ api/src/
 ### Agrégat Payment (Command)
 
 ```php
-// ✅ Agrégat Payment - Command (Projet Hive)
+// ✅ Agrégat Payment - Command (Projet Gyroscops Cloud)
 final class Payment
 {
     public function __construct(
@@ -182,7 +182,7 @@ final class Payment
 ### Repository Command
 
 ```php
-// ✅ Repository Command - DatabasePaymentRepository (Projet Hive)
+// ✅ Repository Command - DatabasePaymentRepository (Projet Gyroscops Cloud)
 final class DatabasePaymentRepository implements PaymentRepositoryInterface
 {
     public function __construct(
@@ -305,7 +305,7 @@ final class DatabasePaymentRepository implements PaymentRepositoryInterface
 ### Modèle de Requête Payment
 
 ```php
-// ✅ Modèle Query - Payment (Projet Hive)
+// ✅ Modèle Query - Payment (Projet Gyroscops Cloud)
 final readonly class Payment
 {
     public function __construct(
@@ -341,7 +341,7 @@ final readonly class Payment
 ### Vue Optimisée pour la Lecture
 
 ```php
-// ✅ Vue Optimisée - PaymentView (Projet Hive)
+// ✅ Vue Optimisée - PaymentView (Projet Gyroscops Cloud)
 final readonly class PaymentView
 {
     public function __construct(
@@ -382,7 +382,7 @@ final readonly class PaymentView
 ### Repository Query
 
 ```php
-// ✅ Repository Query - DatabasePaymentRepository (Projet Hive)
+// ✅ Repository Query - DatabasePaymentRepository (Projet Gyroscops Cloud)
 final class DatabasePaymentRepository implements PaymentRepositoryInterface
 {
     public function __construct(
@@ -659,7 +659,7 @@ final class DatabasePaymentRepository implements PaymentRepositoryInterface
 ### Test du Repository Command
 
 ```php
-// ✅ Test Repository Command - DatabasePaymentRepositoryTest (Projet Hive)
+// ✅ Test Repository Command - DatabasePaymentRepositoryTest (Projet Gyroscops Cloud)
 final class DatabasePaymentRepositoryTest extends TestCase
 {
     private EntityManagerInterface $entityManager;
@@ -731,7 +731,7 @@ final class DatabasePaymentRepositoryTest extends TestCase
 ### Test du Repository Query
 
 ```php
-// ✅ Test Repository Query - DatabasePaymentRepositoryTest (Projet Hive)
+// ✅ Test Repository Query - DatabasePaymentRepositoryTest (Projet Gyroscops Cloud)
 final class DatabasePaymentRepositoryTest extends TestCase
 {
     private Connection $connection;

@@ -391,16 +391,16 @@ export const usePayments = (organizationId: string) => {
 
 **Résultat** : Application frontend robuste et performante.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Frontend Appliqué à Hive
+### Frontend Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes d'intégration frontend à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes d'intégration frontend à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### API Client Hive
+#### API Client Gyroscops Cloud
 
 ```typescript
-// ✅ API Client Hive (Projet Hive)
+// ✅ API Client Gyroscops Cloud (Projet Gyroscops Cloud)
 class HiveApiClient {
   private baseURL: string;
   private token: string | null = null;
@@ -547,10 +547,10 @@ class HiveApiClient {
 }
 ```
 
-#### State Management Hive
+#### State Management Gyroscops Cloud
 
 ```typescript
-// ✅ State Management Hive (Projet Hive)
+// ✅ State Management Gyroscops Cloud (Projet Gyroscops Cloud)
 interface HiveState {
   auth: AuthState;
   payments: PaymentState;
@@ -654,10 +654,10 @@ const paymentSlice = createSlice({
 });
 ```
 
-#### Services Hive
+#### Services Gyroscops Cloud
 
 ```typescript
-// ✅ Services Hive (Projet Hive)
+// ✅ Services Gyroscops Cloud (Projet Gyroscops Cloud)
 class HivePaymentService {
   constructor(private apiClient: HiveApiClient) {}
 
@@ -732,10 +732,10 @@ class HiveAuthService {
 }
 ```
 
-#### Hooks Hive
+#### Hooks Gyroscops Cloud
 
 ```typescript
-// ✅ Hooks Hive (Projet Hive)
+// ✅ Hooks Gyroscops Cloud (Projet Gyroscops Cloud)
 export const usePayments = (organizationId: string, pagination: PaginationRequest) => {
   return useQuery(
     ['payments', organizationId, pagination.page, pagination.pageSize],
@@ -789,10 +789,10 @@ export const useUpdatePayment = () => {
 };
 ```
 
-#### Composants Hive
+#### Composants Gyroscops Cloud
 
 ```typescript
-// ✅ Composants Hive (Projet Hive)
+// ✅ Composants Gyroscops Cloud (Projet Gyroscops Cloud)
 const PaymentList: React.FC<{ organizationId: string }> = ({ organizationId }) => {
   const [pagination, setPagination] = useState({
     page: 1,
@@ -905,9 +905,9 @@ const PaymentForm: React.FC<{ payment?: Payment; onSubmit: (data: CreatePaymentR
 };
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE025** : Authorization System - Système d'autorisation pour le frontend
 - **HIVE026** : Keycloak Resource and Scope Management - Gestion des ressources et scopes
 - **HIVE040** : Enhanced Models with Property Access Patterns - Modèles enrichis pour le frontend

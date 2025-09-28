@@ -72,7 +72,7 @@ Le stockage SQL CQS consiste à séparer les opérations de lecture et d'écritu
 **Avec Gyroscops** : J'ai créé les repositories de commande :
 
 ```php
-// ✅ Repository de Commande Payment Hive (Projet Hive)
+// ✅ Repository de Commande Payment Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentCommandRepository
 {
     public function __construct(
@@ -118,7 +118,7 @@ final class PaymentCommandRepository
 **Avec Gyroscops** : J'ai créé les repositories de requête :
 
 ```php
-// ✅ Repository de Requête Payment Hive (Projet Hive)
+// ✅ Repository de Requête Payment Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentQueryRepository
 {
     public function __construct(
@@ -256,16 +256,16 @@ final class PaymentQueryRepository
 
 **Pourquoi c'est crucial ?** La duplication complique la maintenance.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Stockage SQL CQS Appliqué à Hive
+### Stockage SQL CQS Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage SQL CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes du stockage SQL CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration CQS Hive
+#### Configuration CQS Gyroscops Cloud
 
 ```php
-// ✅ Configuration CQS Hive (Projet Hive)
+// ✅ Configuration CQS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveCQSConfiguration
 {
     public function configureServices(ContainerBuilder $container): void
@@ -288,9 +288,9 @@ final class HiveCQSConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE006** : Query Models for API Platform - Modèles de requête
 - **HIVE007** : Command Models for API Platform - Modèles de commande
 - **HIVE012** : Database Repositories - Repositories de base de données

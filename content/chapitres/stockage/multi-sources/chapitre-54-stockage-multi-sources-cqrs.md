@@ -1128,3 +1128,4 @@ public function getMultiSourceCqrsMetrics(): array
 ---
 
 *CQRS avec Multi-sources représente l'état de l'art en matière d'architecture scalable et flexible pour l'orchestration, parfaitement adapté aux besoins les plus exigeants de Gyroscops.*
+

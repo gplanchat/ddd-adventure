@@ -1,4 +1,4 @@
-// ✅ API Client Hive (Projet Hive)
+// ✅ API Client Gyroscops Cloud (Projet Gyroscops Cloud)
 export class HiveApiClient {
   private baseURL: string;
   private token: string | null = null;

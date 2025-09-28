@@ -126,7 +126,7 @@ graph TB
     style VALIDATE_AMOUNT fill:#ff9800
 ```
 
-## Bounded Contexts - Système Hive
+## Bounded Contexts - Système Gyroscops Cloud
 
 ```mermaid
 graph TB

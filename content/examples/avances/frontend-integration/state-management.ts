@@ -1,4 +1,4 @@
-// ✅ State Management Hive (Projet Hive)
+// ✅ State Management Gyroscops Cloud (Projet Gyroscops Cloud)
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { HiveApiClient, User, Payment, PaginationRequest, PaginationResponse } from './api-client';
 

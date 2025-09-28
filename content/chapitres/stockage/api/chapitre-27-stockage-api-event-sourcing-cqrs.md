@@ -605,7 +605,7 @@ EXPOSE 9000
 CMD ["php-fpm"]
 ```
 
-## 📚 Exemples Concrets du Projet Hive
+## 📚 Exemples Concrets du projet Gyroscops Cloud
 
 ### 1. Intégration Stripe avec Event Sourcing
 

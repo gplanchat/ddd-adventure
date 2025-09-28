@@ -19,7 +19,7 @@ Ce plan complet détaille tous les chapitres de la documentation avec leurs crit
 - Problématique des modèles anémiques et du CRUD
 - Introduction à l'Event Storming comme solution de conception collaborative
 - Justification de l'approche DDD
-- Exemples concrets du projet Hive
+- Exemples concrets du Gyroscops Cloud
 
 ### Chapitre 2 : L'Atelier Event Storming - Guide Pratique
 **Objectif** : Maîtriser la méthode de conception collaborative
@@ -366,4 +366,4 @@ Ce plan complet détaille tous les chapitres de la documentation avec leurs crit
 
 ---
 
-*Ce plan est basé sur les Architecture Decision Records (ADR) du projet Hive et suit les principes établis dans "API Platform Con 2025 - Et si on utilisait l'Event Storming ?"*
+*Ce plan est basé sur les Architecture Decision Records (ADR) du Gyroscops Cloud et suit les principes établis dans "API Platform Con 2025 - Et si on utilisait l'Event Storming ?"*

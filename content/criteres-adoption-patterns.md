@@ -415,4 +415,4 @@ Pour chaque pattern, calculez un score basé sur :
 
 ---
 
-*Ce document est basé sur les Architecture Decision Records (ADR) du projet Hive et suit les principes établis dans "API Platform Con 2025 - Et si on utilisait l'Event Storming ?"*
+*Ce document est basé sur les Architecture Decision Records (ADR) du Gyroscops Cloud et suit les principes établis dans "API Platform Con 2025 - Et si on utilisait l'Event Storming ?"*

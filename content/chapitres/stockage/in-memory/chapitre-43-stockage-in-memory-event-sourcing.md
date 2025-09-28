@@ -899,3 +899,4 @@ public function compressEvents(): void
 ---
 
 *Event Sourcing avec In-Memory offre une approche unique pour l'audit trail et la performance, parfaitement adaptée aux besoins de traçabilité de Gyroscops.*
+

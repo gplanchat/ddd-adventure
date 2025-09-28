@@ -1,4 +1,4 @@
-# Architecture Générale du Projet Hive
+# Architecture Générale du Projet Gyroscops Cloud
 
 ## Vue d'ensemble de l'Architecture
 

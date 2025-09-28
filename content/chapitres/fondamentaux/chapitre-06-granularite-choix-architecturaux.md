@@ -302,16 +302,16 @@ La granularité architecturale est le niveau auquel on applique les choix archit
 
 **Résultat** : Architecture optimale à tous les niveaux.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Granularité Appliquée à Hive
+### Granularité Appliquée à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de granularité à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes de granularité à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
 #### Granularité par Domaine
 
 ```php
-// ✅ Granularité par Domaine Hive (Projet Hive)
+// ✅ Granularité par Domaine Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveDomainGranularity
 {
     // Domaine d'Authentification
@@ -339,7 +339,7 @@ final class HiveDomainGranularity
 #### Granularité par Bounded Context
 
 ```php
-// ✅ Granularité par Bounded Context Hive (Projet Hive)
+// ✅ Granularité par Bounded Context Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveBoundedContextGranularity
 {
     // Bounded Context d'Authentification
@@ -362,7 +362,7 @@ final class HiveBoundedContextGranularity
 #### Granularité par Agrégat
 
 ```php
-// ✅ Granularité par Agrégat Hive (Projet Hive)
+// ✅ Granularité par Agrégat Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveAggregateGranularity
 {
     // Agrégat d'Utilisateur
@@ -385,7 +385,7 @@ final class HiveAggregateGranularity
 #### Exemple Concret : Granularité des Repositories
 
 ```php
-// ✅ Granularité des Repositories Hive (Projet Hive)
+// ✅ Granularité des Repositories Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveRepositoryGranularity
 {
     // Repository par Domaine
@@ -424,9 +424,9 @@ final class HiveRepositoryGranularity
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE040** : Enhanced Models with Property Access Patterns - Modèles enrichis avec granularité
 - **HIVE041** : Cross-Cutting Concerns Architecture - Architecture des préoccupations transversales
 - **HIVE010** : Repositories - Repositories avec granularité appropriée

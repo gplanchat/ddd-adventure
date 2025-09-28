@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
-// ✅ Middleware de Sécurité Hive (Projet Hive)
+// ✅ Middleware de Sécurité Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveSecurityMiddleware
 {
     public function __construct(

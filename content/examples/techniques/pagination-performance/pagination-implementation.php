@@ -14,7 +14,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Psr\Log\LoggerInterface;
 
-// ✅ Implémentation de Pagination Hive (Projet Hive)
+// ✅ Implémentation de Pagination Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HivePaginationImplementation
 {
     public function __construct(

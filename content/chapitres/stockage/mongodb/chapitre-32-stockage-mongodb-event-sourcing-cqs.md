@@ -137,8 +137,8 @@ class MongoEventStore implements EventStoreInterface
 
     public function __construct(Client $mongoClient)
     {
-        $this->events = $mongoClient->selectCollection('hive', 'events');
-        $this->snapshots = $mongoClient->selectCollection('hive', 'snapshots');
+        $this->events = $mongoClient->selectCollection('Gyroscops Cloud', 'events');
+        $this->snapshots = $mongoClient->selectCollection('Gyroscops Cloud', 'snapshots');
     }
 
     public function appendEvents(string $aggregateId, array $events, int $expectedVersion): void
@@ -268,7 +268,7 @@ class PaymentProjectionHandler
 
     public function __construct(Client $mongoClient)
     {
-        $this->readModel = $mongoClient->selectCollection('hive', 'payment_read_models');
+        $this->readModel = $mongoClient->selectCollection('Gyroscops Cloud', 'payment_read_models');
     }
 
     public function handle(DomainEvent $event): void
@@ -334,7 +334,7 @@ class PaymentQueryHandler
 
     public function __construct(Client $mongoClient)
     {
-        $this->readModel = $mongoClient->selectCollection('hive', 'payment_read_models');
+        $this->readModel = $mongoClient->selectCollection('Gyroscops Cloud', 'payment_read_models');
     }
 
     public function getPaymentById(string $paymentId): ?PaymentReadModel
@@ -618,3 +618,4 @@ public function handleEventAsync(DomainEvent $event): void
 ---
 
 *Cette approche Event Sourcing + CQS avec MongoDB offre un équilibre optimal entre performance, scalabilité et audit trail, parfaitement adapté aux besoins complexes de Gyroscops.*
+

@@ -92,7 +92,7 @@ CQRS (Command Query Responsibility Segregation) consiste à séparer complèteme
 **Avec Gyroscops** : J'ai créé les modèles de commande :
 
 ```php
-// ✅ Modèles de Commande Hive (Projet Hive)
+// ✅ Modèles de Commande Gyroscops Cloud (Projet Gyroscops Cloud)
 final class Payment
 {
     private PaymentId $id;
@@ -202,7 +202,7 @@ final class Payment
 **Avec Gyroscops** : J'ai créé les modèles de requête :
 
 ```php
-// ✅ Modèles de Requête Hive (Projet Hive)
+// ✅ Modèles de Requête Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentView
 {
     public function __construct(
@@ -301,7 +301,7 @@ final class PaymentStatistics
 **Avec Gyroscops** : J'ai implémenté les repositories :
 
 ```php
-// ✅ Repositories CQRS Hive (Projet Hive)
+// ✅ Repositories CQRS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentCommandRepository
 {
     public function __construct(
@@ -503,7 +503,7 @@ final class PaymentQueryRepository
 **Avec Gyroscops** : J'ai créé les projections :
 
 ```php
-// ✅ Projections CQRS Hive (Projet Hive)
+// ✅ Projections CQRS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class PaymentProjection
 {
     public function __construct(
@@ -754,16 +754,16 @@ final class PaymentProjection
 
 **Résultat** : Architecture optimale mais complexe.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### CQRS Appliqué à Hive
+### CQRS Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes de CQRS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes de CQRS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration CQRS Hive
+#### Configuration CQRS Gyroscops Cloud
 
 ```php
-// ✅ Configuration CQRS Hive (Projet Hive)
+// ✅ Configuration CQRS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveCQRSConfiguration
 {
     public function configureServices(ContainerBuilder $container): void
@@ -798,10 +798,10 @@ final class HiveCQRSConfiguration
 }
 ```
 
-#### API Platform CQRS Hive
+#### API Platform CQRS Gyroscops Cloud
 
 ```php
-// ✅ API Platform CQRS Hive (Projet Hive)
+// ✅ API Platform CQRS Gyroscops Cloud (Projet Gyroscops Cloud)
 #[ApiResource(
     operations: [
         new Post(uriTemplate: '/payments'),
@@ -848,9 +848,9 @@ final class PaymentView
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE006** : Query Models for API Platform - Modèles de requête
 - **HIVE007** : Command Models for API Platform - Modèles de commande
 - **HIVE008** : Event Collaboration - Collaboration basée sur les événements

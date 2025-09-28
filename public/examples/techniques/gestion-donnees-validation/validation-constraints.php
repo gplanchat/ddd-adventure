@@ -5,7 +5,7 @@ namespace App\Technical\DataManagement\Validation\Constraint;
 use App\Technical\DataManagement\Validation\Result\ConstraintViolation;
 use App\Technical\DataManagement\Validation\Result\ValidationResult;
 
-// ✅ Contraintes de Validation Hive (Projet Hive)
+// ✅ Contraintes de Validation Gyroscops Cloud (Projet Gyroscops Cloud)
 abstract class Constraint
 {
     public function validate(mixed $value, string $propertyPath): array

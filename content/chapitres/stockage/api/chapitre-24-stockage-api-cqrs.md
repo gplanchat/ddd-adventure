@@ -107,7 +107,7 @@ Le stockage API CQRS combine l'utilisation d'APIs externes avec la séparation c
 **Avec Gyroscops** : J'ai créé les Command Models :
 
 ```php
-// ✅ Command Model User API Hive (Projet Hive)
+// ✅ Command Model User API Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserCommandModel
 {
     public function __construct(
@@ -226,7 +226,7 @@ final class UserCommandModel
 **Avec Gyroscops** : J'ai créé les Query Models :
 
 ```php
-// ✅ Query Model User List Hive (Projet Hive)
+// ✅ Query Model User List Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserListQueryModel
 {
     public function __construct(
@@ -316,7 +316,7 @@ final class UserListQueryModel
     }
 }
 
-// ✅ Query Model User Details Hive (Projet Hive)
+// ✅ Query Model User Details Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserDetailsQueryModel
 {
     public function __construct(
@@ -361,7 +361,7 @@ final class UserDetailsQueryModel
     }
 }
 
-// ✅ Query Model User Analytics Hive (Projet Hive)
+// ✅ Query Model User Analytics Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserAnalyticsQueryModel
 {
     public function __construct(
@@ -406,7 +406,7 @@ final class UserAnalyticsQueryModel
 **Avec Gyroscops** : J'ai créé les Command Handlers :
 
 ```php
-// ✅ Command Handler User API Hive (Projet Hive)
+// ✅ Command Handler User API Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserCommandHandler
 {
     public function __construct(
@@ -553,7 +553,7 @@ final class UserCommandHandler
 **Avec Gyroscops** : J'ai créé les Query Handlers :
 
 ```php
-// ✅ Query Handler User List Hive (Projet Hive)
+// ✅ Query Handler User List Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserListQueryHandler
 {
     public function __construct(
@@ -624,7 +624,7 @@ final class UserListQueryHandler
     }
 }
 
-// ✅ Query Handler User Details Hive (Projet Hive)
+// ✅ Query Handler User Details Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserDetailsQueryHandler
 {
     public function __construct(
@@ -676,7 +676,7 @@ final class UserDetailsQueryHandler
     }
 }
 
-// ✅ Query Handler User Analytics Hive (Projet Hive)
+// ✅ Query Handler User Analytics Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserAnalyticsQueryHandler
 {
     public function __construct(
@@ -771,7 +771,7 @@ final class UserAnalyticsQueryHandler
 **Avec Gyroscops** : J'ai créé les projections spécialisées :
 
 ```php
-// ✅ Projection User List Hive (Projet Hive)
+// ✅ Projection User List Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserListProjectionHandler
 {
     public function __construct(
@@ -871,7 +871,7 @@ final class UserListProjectionHandler
     }
 }
 
-// ✅ Projection User Details Hive (Projet Hive)
+// ✅ Projection User Details Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserDetailsProjectionHandler
 {
     public function __construct(
@@ -1090,16 +1090,16 @@ final class UserDetailsProjectionHandler
 
 **Pourquoi c'est critique ?** Les APIs externes peuvent échouer.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Stockage API CQRS Appliqué à Hive
+### Stockage API CQRS Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage API CQRS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes du stockage API CQRS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration API CQRS Hive
+#### Configuration API CQRS Gyroscops Cloud
 
 ```php
-// ✅ Configuration API CQRS Hive (Projet Hive)
+// ✅ Configuration API CQRS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveApiCQRSConfiguration
 {
     public function configureApiCQRS(ContainerBuilder $container): void
@@ -1150,9 +1150,9 @@ final class HiveApiCQRSConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE006** : Query Models for API Platform - Modèles de requête
 - **HIVE007** : Command Models for API Platform - Modèles de commande
 - **HIVE015** : API Repositories - Repositories d'API

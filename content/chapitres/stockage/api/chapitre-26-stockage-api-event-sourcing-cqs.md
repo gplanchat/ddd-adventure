@@ -104,7 +104,7 @@ Le stockage API Event Sourcing + CQS combine l'Event Sourcing pour l'écriture a
 **Avec Gyroscops** : J'ai créé l'Event Store :
 
 ```php
-// ✅ Event Store API Hive (Projet Hive)
+// ✅ Event Store API Gyroscops Cloud (Projet Gyroscops Cloud)
 final class ApiEventStore implements EventStoreInterface
 {
     public function __construct(
@@ -183,7 +183,7 @@ final class ApiEventStore implements EventStoreInterface
 **Avec Gyroscops** : J'ai créé les Command Handlers :
 
 ```php
-// ✅ Command Handler User API Hive (Projet Hive)
+// ✅ Command Handler User API Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserApiCommandHandler
 {
     public function __construct(
@@ -316,7 +316,7 @@ final class UserApiCommandHandler
 **Avec Gyroscops** : J'ai créé les Query Models :
 
 ```php
-// ✅ Query Model User API Hive (Projet Hive)
+// ✅ Query Model User API Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserApiQueryModel
 {
     public function __construct(
@@ -380,7 +380,7 @@ final class UserApiQueryModel
     }
 }
 
-// ✅ Query Model User API List Hive (Projet Hive)
+// ✅ Query Model User API List Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserApiListQueryModel
 {
     public function __construct(
@@ -476,7 +476,7 @@ final class UserApiListQueryModel
 **Avec Gyroscops** : J'ai créé les Query Handlers :
 
 ```php
-// ✅ Query Handler User API Hive (Projet Hive)
+// ✅ Query Handler User API Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserApiQueryHandler
 {
     public function __construct(
@@ -599,7 +599,7 @@ final class UserApiQueryHandler
 **Avec Gyroscops** : J'ai créé les projections asynchrones :
 
 ```php
-// ✅ Projection User API Asynchrone Hive (Projet Hive)
+// ✅ Projection User API Asynchrone Gyroscops Cloud (Projet Gyroscops Cloud)
 final class UserApiProjectionHandler
 {
     public function __construct(
@@ -874,16 +874,16 @@ final class UserApiProjectionHandler
 
 **Pourquoi c'est essentiel ?** Les APIs externes peuvent échouer.
 
-## 🏗️ Implémentation Concrète dans le Projet Hive
+## 🏗️ Implémentation Concrète dans le Projet Gyroscops Cloud
 
-### Stockage API Event Sourcing + CQS Appliqué à Hive
+### Stockage API Event Sourcing + CQS Appliqué à Gyroscops Cloud
 
-Le projet Hive applique concrètement les principes du stockage API Event Sourcing + CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
+Le Gyroscops Cloud applique concrètement les principes du stockage API Event Sourcing + CQS à travers son architecture et ses ADR (Architecture Decision Records). Voici comment :
 
-#### Configuration API Event Sourcing + CQS Hive
+#### Configuration API Event Sourcing + CQS Gyroscops Cloud
 
 ```php
-// ✅ Configuration API Event Sourcing + CQS Hive (Projet Hive)
+// ✅ Configuration API Event Sourcing + CQS Gyroscops Cloud (Projet Gyroscops Cloud)
 final class HiveApiEventSourcingCQSConfiguration
 {
     public function configureApiEventSourcingCQS(ContainerBuilder $container): void
@@ -922,9 +922,9 @@ final class HiveApiEventSourcingCQSConfiguration
 }
 ```
 
-### Références aux ADR du Projet Hive
+### Références aux ADR du Projet Gyroscops Cloud
 
-Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :
+Ce chapitre s'appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :
 - **HIVE008** : Event Collaboration - Collaboration par événements
 - **HIVE009** : Message Buses - Bus de messages
 - **HIVE011** : Command Query Separation - Séparation des commandes et requêtes
