@@ -1,0 +1,92 @@
+name: Deploy to OVHCloud
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Permet le déploiement manuel
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+        fetch-depth: 0
+
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.150.0'
+        extended: true
+
+    - name: Build Hugo Site
+      run: hugo --minify --gc
+
+    - name: Deploy to OVHCloud via SFTP
+      if: github.ref == 'refs/heads/main' && true # Changez à true si vous préférez SFTP
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        server: ${{ secrets.OVH_SFTP_SERVER }}
+        username: ${{ secrets.OVH_SFTP_USERNAME }}
+        password: ${{ secrets.OVH_SFTP_PASSWORD }}
+        local_path: './public/*'
+        remote_path: ${{ secrets.OVH_SFTP_PATH || '/' }}
+        exclude: |
+          **/.DS_Store
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/.vscode/**
+          **/README.md
+          **/.env*
+
+    - name: Deploy to OVHCloud via SSH
+      if: github.ref == 'refs/heads/main' && false # Changez à true si vous préférez SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.OVH_SSH_HOST }}
+        username: ${{ secrets.OVH_SSH_USERNAME }}
+        key: ${{ secrets.OVH_SSH_PRIVATE_KEY }}
+        port: ${{ secrets.OVH_SSH_PORT || 22 }}
+        script: |
+          cd ${{ secrets.OVH_SSH_PATH || '/var/www/html' }}
+          rm -rf *
+          # Le contenu sera uploadé via rsync dans l'étape suivante
+
+    - name: Sync files via rsync
+      if: github.ref == 'refs/heads/main' && false # Changez à true si vous utilisez SSH
+      uses: burnett01/rsync-deployments@6.0.0
+      with:
+        switches: -avzr --delete
+        path: ./public/
+        remote_path: ${{ secrets.OVH_SSH_PATH || '/var/www/html' }}
+        remote_host: ${{ secrets.OVH_SSH_HOST }}
+        remote_user: ${{ secrets.OVH_SSH_USERNAME }}
+        remote_key: ${{ secrets.OVH_SSH_PRIVATE_KEY }}
+
+    - name: Deploy to OVHCloud via WebDAV
+      if: github.ref == 'refs/heads/main' && false # Changez à true si vous préférez WebDAV
+      uses: SamKirkland/web-deploy@v1.0.0
+      with:
+        server: ${{ secrets.OVH_WEBDAV_SERVER }}
+        username: ${{ secrets.OVH_WEBDAV_USERNAME }}
+        password: ${{ secrets.OVH_WEBDAV_PASSWORD }}
+        local-dir: ./public/
+        server-dir: ${{ secrets.OVH_WEBDAV_PATH || '/' }}
+
+    - name: Notify deployment success
+      if: success()
+      run: |
+        echo "✅ Site déployé avec succès sur OVHCloud !"
+        echo "🌐 URL: ${{ secrets.OVH_SITE_URL || 'Votre URL OVHCloud' }}"
+
+    - name: Notify deployment failure
+      if: failure()
+      run: |
+        echo "❌ Échec du déploiement sur OVHCloud"
+        echo "Vérifiez les secrets GitHub et la configuration OVHCloud"
