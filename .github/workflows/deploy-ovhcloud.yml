@@ -45,40 +45,6 @@ jobs:
           **/README.md
           **/.env*
 
-    - name: Deploy to OVHCloud via SSH
-      if: github.ref == 'refs/heads/main' && false # Changez à true si vous préférez SSH
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.OVH_SSH_HOST }}
-        username: ${{ secrets.OVH_SSH_USERNAME }}
-        key: ${{ secrets.OVH_SSH_PRIVATE_KEY }}
-        port: ${{ secrets.OVH_SSH_PORT || 22 }}
-        script: |
-          cd ${{ secrets.OVH_SSH_PATH || '/var/www/html' }}
-          rm -rf *
-          # Le contenu sera uploadé via rsync dans l'étape suivante
-
-    - name: Sync files via rsync
-      if: github.ref == 'refs/heads/main' && false # Changez à true si vous utilisez SSH
-      uses: burnett01/rsync-deployments@6.0.0
-      with:
-        switches: -avzr --delete
-        path: ./public/
-        remote_path: ${{ secrets.OVH_SSH_PATH || '/var/www/html' }}
-        remote_host: ${{ secrets.OVH_SSH_HOST }}
-        remote_user: ${{ secrets.OVH_SSH_USERNAME }}
-        remote_key: ${{ secrets.OVH_SSH_PRIVATE_KEY }}
-
-    - name: Deploy to OVHCloud via WebDAV
-      if: github.ref == 'refs/heads/main' && false # Changez à true si vous préférez WebDAV
-      uses: SamKirkland/web-deploy@v1.0.0
-      with:
-        server: ${{ secrets.OVH_WEBDAV_SERVER }}
-        username: ${{ secrets.OVH_WEBDAV_USERNAME }}
-        password: ${{ secrets.OVH_WEBDAV_PASSWORD }}
-        local-dir: ./public/
-        server-dir: ${{ secrets.OVH_WEBDAV_PATH || '/' }}
-
     - name: Notify deployment success
       if: success()
       run: |
