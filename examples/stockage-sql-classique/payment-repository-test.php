@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
  * Exemple de Test pour Repository SQL Classique
  * 
  * Ce fichier montre comment tester un repository SQL classique
- * en suivant les standards du projet Hive.
+ * en suivant les standards du projet Gyroscops Cloud.
  * 
  * Références ADR :
  * - HIVE023 : Repository Testing Strategies

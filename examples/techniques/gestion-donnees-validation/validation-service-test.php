@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Tests du service de validation selon les standards HIVE027
  * 
- * Ces tests suivent les bonnes pratiques du projet Hive
+ * Ces tests suivent les bonnes pratiques du projet Gyroscops Cloud
  * en respectant l'ADR HIVE027 pour les tests PHPUnit.
  */
 final class ValidationServiceTest extends TestCase

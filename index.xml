@@ -1,8 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DDD Adventure</title><link>https://gplanchat.github.io/ddd-adventure/</link><description>Recent content on DDD Adventure</description><generator>Hugo</generator><language>fr-fr</language><lastBuildDate>Thu, 19 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://gplanchat.github.io/ddd-adventure/index.xml" rel="self" type="application/rss+xml"/><item><title>Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</title><link>https://gplanchat.github.io/ddd-adventure/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/</link><pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/</guid><description>&lt;h2 id="-objectif-de-ce-chapitre"&gt;🎯 Objectif de ce Chapitre &lt;a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="un-récit-personnel"&gt;Un Récit Personnel &lt;a href="#un-r%c3%a9cit-personnel" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Il est 17h30, je viens de passer 3 heures dans xdebug pour un bug qui semblait simple. Le problème ? Une modification
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DDD Adventure</title><link>/</link><description>Recent content on DDD Adventure</description><generator>Hugo</generator><language>fr-fr</language><lastBuildDate>Thu, 19 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</title><link>/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/</link><pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate><guid>/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/</guid><description>&lt;h2 id="-objectif-de-ce-chapitre"&gt;🎯 Objectif de ce Chapitre &lt;a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="un-récit-personnel"&gt;Un Récit Personnel &lt;a href="#un-r%c3%a9cit-personnel" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Il est 17h30, je viens de passer 3 heures dans xdebug pour un bug qui semblait simple. Le problème ? Une modification
 dans une partie du code a cassé quelque chose dans une autre partie, à des kilomètres de là. Je me demande : &amp;ldquo;Comment en
 sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Cette situation vous dit quelque chose ?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Moi, je l&amp;rsquo;ai vécue des dizaines de fois :&lt;/p&gt;</description></item><item><title>Organisation des dossiers en DDD</title><link>https://gplanchat.github.io/ddd-adventure/annexes/organisation-dossiers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/annexes/organisation-dossiers/</guid><description>&lt;h1 id="-organisation-des-dossiers"&gt;📁 Organisation des dossiers&lt;/h1&gt;
+&lt;p&gt;Moi, je l&amp;rsquo;ai vécue des dizaines de fois :&lt;/p&gt;</description></item><item><title>Patterns d'Implémentation pour le Stockage</title><link>/examples/stockage-patterns/patterns-implementation/</link><pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate><guid>/examples/stockage-patterns/patterns-implementation/</guid><description>&lt;h1 id="patterns-dimplémentation-pour-le-stockage"&gt;Patterns d&amp;rsquo;Implémentation pour le Stockage &lt;a href="#patterns-dimpl%c3%a9mentation-pour-le-stockage" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Ce document explique les patterns d&amp;rsquo;implémentation spécifiques pour chaque type de stockage dans le projet Gyroscops Cloud.&lt;/p&gt;
+&lt;h2 id="-architecture-des-patterns"&gt;🏗️ Architecture des Patterns &lt;a href="#-architecture-des-patterns" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="1-pattern-repository"&gt;1. Pattern Repository &lt;a href="#1-pattern-repository" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Le pattern Repository encapsule la logique d&amp;rsquo;accès aux données et fournit une interface plus orientée objet pour accéder à la couche de persistance.&lt;/p&gt;
+&lt;h4 id="structure-de-base"&gt;Structure de Base &lt;a href="#structure-de-base" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h4&gt;
+
+ 
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;interface&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;RepositoryInterface&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;save&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Aggregate&lt;/span&gt; $aggregate)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;void&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;find&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Id&lt;/span&gt; $id)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Aggregate&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;remove&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Id&lt;/span&gt; $id)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;void&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id="implémentation-sql-classique"&gt;Implémentation SQL Classique &lt;a href="#impl%c3%a9mentation-sql-classique" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h4&gt;
+
+ 
+ &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DatabaseRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;RepositoryInterface&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EntityManagerInterface&lt;/span&gt; $entityManager,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EventBusInterface&lt;/span&gt; $eventBus,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;LoggerInterface&lt;/span&gt; $logger
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ) {}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;save&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Aggregate&lt;/span&gt; $aggregate)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;void&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;beginTransaction&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $entity &lt;span style="color:#f92672"&gt;=&lt;/span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;toEntity&lt;/span&gt;($aggregate);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;persist&lt;/span&gt;($entity);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $events &lt;span style="color:#f92672"&gt;=&lt;/span&gt; $aggregate&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;releaseEvents&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;foreach&lt;/span&gt; ($events &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; $event) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;eventBus&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;publish&lt;/span&gt;($event);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;flush&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;commit&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#66d9ef"&gt;catch&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;\Exception&lt;/span&gt; $e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;rollback&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;throw&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;StorageException&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;Failed to save&amp;#39;&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;, $e);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="2-pattern-hydrator"&gt;2. Pattern Hydrator &lt;a href="#2-pattern-hydrator" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Le pattern Hydrator convertit les données brutes de la base de données en objets du domaine.&lt;/p&gt;</description></item><item><title>Organisation des dossiers en DDD</title><link>/annexes/organisation-dossiers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/annexes/organisation-dossiers/</guid><description>&lt;h1 id="-organisation-des-dossiers"&gt;📁 Organisation des dossiers&lt;/h1&gt;
 &lt;p&gt;Découvrez différentes approches pour structurer votre projet DDD selon sa taille et sa complexité.&lt;/p&gt;
 &lt;h2 id="-principes-fondamentaux"&gt;🎯 Principes fondamentaux&lt;/h2&gt;
 &lt;p&gt;L&amp;rsquo;organisation des dossiers en DDD doit respecter plusieurs principes clés :&lt;/p&gt;
@@ -11,7 +55,14 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;h3 id="-couches-architecturales"&gt;📦 Couches architecturales&lt;/h3&gt;
 &lt;p&gt;Domain, Application, Infrastructure et Interface clairement séparées.&lt;/p&gt;
 &lt;h3 id="-cqrs-et-event-sourcing"&gt;🔄 CQRS et Event Sourcing&lt;/h3&gt;
-&lt;p&gt;Séparation claire entre Command et Query, avec gestion des événements.&lt;/p&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/avantages-inconvenients-patterns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/avantages-inconvenients-patterns/</guid><description>&lt;h1 id="-avantages-et-inconvénients-détaillés-de-chaque-pattern"&gt;⚖️ Avantages et Inconvénients Détaillés de Chaque Pattern&lt;/h1&gt;
+&lt;p&gt;Séparation claire entre Command et Query, avec gestion des événements.&lt;/p&gt;</description></item><item><title>Commencer l'Aventure DDD</title><link>/demarrer/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>/demarrer/</guid><description>&lt;h1 id="-commencer-laventure-ddd"&gt;🚀 Commencer l&amp;rsquo;Aventure DDD &lt;a href="#-commencer-laventure-ddd" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h1&gt;&lt;h2 id="-bienvenue-dans-votre-voyage-architectural"&gt;🎯 &lt;strong&gt;Bienvenue dans votre Voyage Architectural&lt;/strong&gt; &lt;a href="#-bienvenue-dans-votre-voyage-architectural" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Vous voici au début d&amp;rsquo;une aventure unique : &lt;strong&gt;construire une architecture robuste et évolutive&lt;/strong&gt; en utilisant le Domain-Driven Design (DDD) avec API Platform. Ce guide interactif vous accompagnera pas à pas, en s&amp;rsquo;adaptant à votre niveau et à vos besoins spécifiques.&lt;/p&gt;
+&lt;h3 id="pourquoi-ce-guide-existe-t-il-"&gt;&lt;strong&gt;Pourquoi ce Guide Existe-t-il ?&lt;/strong&gt; &lt;a href="#pourquoi-ce-guide-existe-t-il-" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Avec &lt;strong&gt;Gyroscops&lt;/strong&gt;, j&amp;rsquo;ai vécu les défis de l&amp;rsquo;architecture logicielle moderne :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Comment structurer un code qui évolue avec les besoins métier ?&lt;/li&gt;
+&lt;li&gt;Comment gérer la complexité croissante sans perdre en maintenabilité ?&lt;/li&gt;
+&lt;li&gt;Comment choisir les bons patterns au bon moment ?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ce guide est le fruit de cette expérience, transformée en &lt;strong&gt;parcours interactif&lt;/strong&gt; qui s&amp;rsquo;adapte à votre contexte.&lt;/p&gt;</description></item><item><title>Tests Unitaires</title><link>/getting-started/tests/</link><pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate><guid>/getting-started/tests/</guid><description>&lt;h1 id="tests-unitaires"&gt;Tests Unitaires &lt;a href="#tests-unitaires" class="anchor" aria-hidden="true"&gt;&lt;i class="material-icons align-middle"&gt;link&lt;/i&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Cette page est disponible et prête à être lue.&lt;/p&gt;</description></item><item><title/><link>/avantages-inconvenients-patterns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/avantages-inconvenients-patterns/</guid><description>&lt;h1 id="-avantages-et-inconvénients-détaillés-de-chaque-pattern"&gt;⚖️ Avantages et Inconvénients Détaillés de Chaque Pattern&lt;/h1&gt;
 &lt;h2 id="-vue-densemble"&gt;📋 Vue d&amp;rsquo;Ensemble&lt;/h2&gt;
 &lt;p&gt;Ce document détaille les avantages et inconvénients de chaque pattern architectural présenté dans la documentation. Chaque pattern est analysé selon des critères techniques, organisationnels et métier.&lt;/p&gt;
 &lt;h2 id="-patterns-architecturaux"&gt;🏗️ Patterns Architecturaux&lt;/h2&gt;
@@ -27,17 +78,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;Performance Prévisible&lt;/strong&gt; : Comportement prévisible&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Cohérence Immédiate&lt;/strong&gt; : Données toujours cohérentes&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Organisationnels :&lt;/strong&gt;&lt;/p&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/concept/guide-navigation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/concept/guide-navigation/</guid><description>&lt;h1 id="guide-de-navigation-livre-dont-vous-êtes-le-héros"&gt;Guide de Navigation &amp;ldquo;Livre dont vous êtes le héros&amp;rdquo;&lt;/h1&gt;
-&lt;h2 id="-comment-naviguer-dans-ce-guide"&gt;🎮 Comment Naviguer dans ce Guide&lt;/h2&gt;
-&lt;p&gt;Ce guide est conçu comme un &lt;strong&gt;&amp;ldquo;livre dont vous êtes le héros&amp;rdquo;&lt;/strong&gt; où chaque chapitre vous propose des choix basés sur votre contexte, votre expérience et vos besoins. Vous n&amp;rsquo;êtes pas obligé de tout lire dans l&amp;rsquo;ordre !&lt;/p&gt;
-&lt;h3 id="-démarrage-rapide"&gt;🚀 Démarrage Rapide&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Si vous êtes pressé et voulez aller droit au but :&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Commencez par le &lt;a href="https://gplanchat.github.io/ddd-adventure/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"&gt;Chapitre 1 : Introduction Event Storming DDD&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Répondez aux questions de navigation à la fin de chaque chapitre&lt;/li&gt;
-&lt;li&gt;Suivez le parcours qui correspond à votre situation&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Si vous voulez tout comprendre dans l&amp;rsquo;ordre :&lt;/strong&gt;&lt;/p&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/criteres-adoption-patterns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/criteres-adoption-patterns/</guid><description>&lt;h1 id="-critères-dadoption-détaillés-pour-chaque-pattern"&gt;🎯 Critères d&amp;rsquo;Adoption Détaillés pour Chaque Pattern&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Organisationnels :&lt;/strong&gt;&lt;/p&gt;</description></item><item><title/><link>/criteres-adoption-patterns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/criteres-adoption-patterns/</guid><description>&lt;h1 id="-critères-dadoption-détaillés-pour-chaque-pattern"&gt;🎯 Critères d&amp;rsquo;Adoption Détaillés pour Chaque Pattern&lt;/h1&gt;
 &lt;h2 id="-vue-densemble"&gt;📋 Vue d&amp;rsquo;Ensemble&lt;/h2&gt;
 &lt;p&gt;Ce document détaille les critères d&amp;rsquo;adoption spécifiques pour chaque pattern architectural présenté dans la documentation. Chaque pattern est évalué selon des critères techniques, organisationnels et métier.&lt;/p&gt;
 &lt;h2 id="-patterns-architecturaux"&gt;🏗️ Patterns Architecturaux&lt;/h2&gt;
@@ -51,7 +92,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;li&gt;Données relationnelles standard&lt;/li&gt;
 &lt;li&gt;Pas d&amp;rsquo;intégrations multiples&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Critères Organisationnels :&lt;/strong&gt;&lt;/p&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/diagrams/architecture-generale/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/diagrams/architecture-generale/</guid><description>&lt;h1 id="architecture-générale-du-projet-hive"&gt;Architecture Générale du Projet Hive&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Critères Organisationnels :&lt;/strong&gt;&lt;/p&gt;</description></item><item><title/><link>/diagrams/architecture-generale/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/diagrams/architecture-generale/</guid><description>&lt;h1 id="architecture-générale-du-projet-gyroscops-cloud"&gt;Architecture Générale du Projet Gyroscops Cloud&lt;/h1&gt;
 &lt;h2 id="vue-densemble-de-larchitecture"&gt;Vue d&amp;rsquo;ensemble de l&amp;rsquo;Architecture&lt;/h2&gt;
 &lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
  subgraph &amp;#34;Frontend Layer&amp;#34;
@@ -382,7 +423,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
  style REDUX fill:#fff3e0
  style API_CLIENT fill:#e8f5e8
  style ROUTER fill:#fff8e1
-&lt;/code&gt;&lt;/pre&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/diagrams/event-storming-process/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/diagrams/event-storming-process/</guid><description>&lt;h1 id="processus-event-storming"&gt;Processus Event Storming&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title/><link>/diagrams/event-storming-process/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/diagrams/event-storming-process/</guid><description>&lt;h1 id="processus-event-storming"&gt;Processus Event Storming&lt;/h1&gt;
 &lt;h2 id="atelier-event-storming---étapes"&gt;Atelier Event Storming - Étapes&lt;/h2&gt;
 &lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TD
  A[Préparation] --&amp;gt; B[Session 1: Découverte]
@@ -501,7 +542,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
  style CREATE_PAYMENT fill:#ffeb3b
  style PAYMENT_CREATED fill:#4caf50
  style VALIDATE_AMOUNT fill:#ff9800
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="bounded-contexts---système-hive"&gt;Bounded Contexts - Système Hive&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="bounded-contexts---système-gyroscops-cloud"&gt;Bounded Contexts - Système Gyroscops Cloud&lt;/h2&gt;
 &lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph TB
  subgraph &amp;#34;Authentication Context&amp;#34;
  AUTH_USER[User]
@@ -693,57 +734,13 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
  style T2 fill:#ffebee
  style T3 fill:#ffebee
  style T4 fill:#ffebee
-&lt;/code&gt;&lt;/pre&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/examples/stockage-patterns/patterns-implementation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/examples/stockage-patterns/patterns-implementation/</guid><description>&lt;h1 id="patterns-dimplémentation-pour-le-stockage"&gt;Patterns d&amp;rsquo;Implémentation pour le Stockage&lt;/h1&gt;
-&lt;p&gt;Ce document explique les patterns d&amp;rsquo;implémentation spécifiques pour chaque type de stockage dans le projet Hive.&lt;/p&gt;
-&lt;h2 id="-architecture-des-patterns"&gt;🏗️ Architecture des Patterns&lt;/h2&gt;
-&lt;h3 id="1-pattern-repository"&gt;1. Pattern Repository&lt;/h3&gt;
-&lt;p&gt;Le pattern Repository encapsule la logique d&amp;rsquo;accès aux données et fournit une interface plus orientée objet pour accéder à la couche de persistance.&lt;/p&gt;
-&lt;h4 id="structure-de-base"&gt;Structure de Base&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;interface&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;RepositoryInterface&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;save&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Aggregate&lt;/span&gt; $aggregate)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;void&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;find&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Id&lt;/span&gt; $id)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Aggregate&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;remove&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Id&lt;/span&gt; $id)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;void&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="implémentation-sql-classique"&gt;Implémentation SQL Classique&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DatabaseRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;RepositoryInterface&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EntityManagerInterface&lt;/span&gt; $entityManager,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EventBusInterface&lt;/span&gt; $eventBus,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;LoggerInterface&lt;/span&gt; $logger
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ) {}
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;save&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Aggregate&lt;/span&gt; $aggregate)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;void&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;try&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;beginTransaction&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $entity &lt;span style="color:#f92672"&gt;=&lt;/span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;toEntity&lt;/span&gt;($aggregate);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;persist&lt;/span&gt;($entity);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $events &lt;span style="color:#f92672"&gt;=&lt;/span&gt; $aggregate&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;releaseEvents&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;foreach&lt;/span&gt; ($events &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; $event) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;eventBus&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;publish&lt;/span&gt;($event);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;flush&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;commit&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#66d9ef"&gt;catch&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;\Exception&lt;/span&gt; $e) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; $this&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;entityManager&lt;/span&gt;&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;rollback&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;throw&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;StorageException&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;Failed to save&amp;#39;&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;, $e);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-pattern-hydrator"&gt;2. Pattern Hydrator&lt;/h3&gt;
-&lt;p&gt;Le pattern Hydrator convertit les données brutes de la base de données en objets du domaine.&lt;/p&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/exemples-concrets-stockage/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/exemples-concrets-stockage/</guid><description>&lt;h1 id="-exemples-concrets-pour-chaque-approche-de-stockage"&gt;💾 Exemples Concrets pour Chaque Approche de Stockage&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title/><link>/exemples-concrets-stockage/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/exemples-concrets-stockage/</guid><description>&lt;h1 id="-exemples-concrets-pour-chaque-approche-de-stockage"&gt;💾 Exemples Concrets pour Chaque Approche de Stockage&lt;/h1&gt;
 &lt;h2 id="-vue-densemble"&gt;📋 Vue d&amp;rsquo;Ensemble&lt;/h2&gt;
-&lt;p&gt;Ce document fournit des exemples concrets d&amp;rsquo;implémentation pour chaque approche de stockage présentée dans la documentation. Chaque exemple est basé sur le projet Hive et suit les patterns établis dans les ADR.&lt;/p&gt;
+&lt;p&gt;Ce document fournit des exemples concrets d&amp;rsquo;implémentation pour chaque approche de stockage présentée dans la documentation. Chaque exemple est basé sur le Gyroscops Cloud et suit les patterns établis dans les ADR.&lt;/p&gt;
 &lt;h2 id="-approches-de-stockage"&gt;🏗️ Approches de Stockage&lt;/h2&gt;
 &lt;h3 id="1-stockage-sql---approche-classique"&gt;1. Stockage SQL - Approche Classique&lt;/h3&gt;
 &lt;h4 id="exemple--repository-de-paiement"&gt;Exemple : Repository de Paiement&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement Classique - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement Classique - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DatabasePaymentRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -851,7 +848,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-stockage-sql---approche-cqs"&gt;2. Stockage SQL - Approche CQS&lt;/h3&gt;
 &lt;h4 id="exemple--repository-de-paiement-cqs"&gt;Exemple : Repository de Paiement CQS&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement CQS - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement CQS - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DatabasePaymentCQSRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentCQSRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -1007,7 +1004,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="3-stockage-sql---approche-cqrs"&gt;3. Stockage SQL - Approche CQRS&lt;/h3&gt;
 &lt;h4 id="exemple--repository-de-paiement-cqrs"&gt;Exemple : Repository de Paiement CQRS&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement CQRS - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement CQRS - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DatabasePaymentCQRSRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentCQRSRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -1163,7 +1160,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="4-stockage-sql---event-sourcing"&gt;4. Stockage SQL - Event Sourcing&lt;/h3&gt;
 &lt;h4 id="exemple--repository-de-paiement-event-sourcing"&gt;Exemple : Repository de Paiement Event Sourcing&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement Event Sourcing - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement Event Sourcing - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DatabasePaymentEventSourcingRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentEventSourcingRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -1301,7 +1298,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="5-stockage-api---approche-classique"&gt;5. Stockage API - Approche Classique&lt;/h3&gt;
 &lt;h4 id="exemple--repository-de-paiement-api"&gt;Exemple : Repository de Paiement API&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement API - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement API - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ApiPaymentRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -1385,7 +1382,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="6-stockage-elasticsearch---approche-classique"&gt;6. Stockage ElasticSearch - Approche Classique&lt;/h3&gt;
 &lt;h4 id="exemple--repository-de-paiement-elasticsearch"&gt;Exemple : Repository de Paiement ElasticSearch&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement ElasticSearch - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement ElasticSearch - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ElasticSearchPaymentRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -1524,7 +1521,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="7-stockage-mongodb---approche-classique"&gt;7. Stockage MongoDB - Approche Classique&lt;/h3&gt;
 &lt;h4 id="exemple--repository-de-paiement-mongodb"&gt;Exemple : Repository de Paiement MongoDB&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement MongoDB - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement MongoDB - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;MongoPaymentRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -1604,7 +1601,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="8-stockage-in-memory---approche-classique"&gt;8. Stockage In-Memory - Approche Classique&lt;/h3&gt;
 &lt;h4 id="exemple--repository-de-paiement-in-memory"&gt;Exemple : Repository de Paiement In-Memory&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement In-Memory - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Repository de Paiement In-Memory - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;InMemoryPaymentRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;array&lt;/span&gt; $payments &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [];
@@ -1653,7 +1650,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="-patterns-dimplémentation"&gt;🔧 Patterns d&amp;rsquo;Implémentation&lt;/h2&gt;
 &lt;h3 id="1-factory-pattern-pour-les-repositories"&gt;1. Factory Pattern pour les Repositories&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Factory Pattern - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Factory Pattern - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentRepositoryFactory&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -1692,7 +1689,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-strategy-pattern-pour-les-repositories"&gt;2. Strategy Pattern pour les Repositories&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Strategy Pattern - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Strategy Pattern - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;interface&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentRepositoryStrategyInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;get&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;PaymentId&lt;/span&gt; $id)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Payment&lt;/span&gt;;
@@ -1722,7 +1719,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="3-decorator-pattern-pour-les-repositories"&gt;3. Decorator Pattern pour les Repositories&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Decorator Pattern - Projet Hive
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-php" data-lang="php"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Decorator Pattern - Projet Gyroscops Cloud
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;CachedPaymentRepository&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;implements&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PaymentRepositoryInterface&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;__construct&lt;/span&gt;(
@@ -1896,7 +1893,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Ces exemples sont basés sur les Architecture Decision Records (ADR) du projet Hive et suivent les principes établis dans &amp;ldquo;API Platform Con 2025 - Et si on utilisait l&amp;rsquo;Event Storming ?&amp;rdquo;&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/plan-complet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/plan-complet/</guid><description>&lt;h1 id="-plan-complet-avec-critères-dadoption"&gt;📋 Plan Complet avec Critères d&amp;rsquo;Adoption&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Ces exemples sont basés sur les Architecture Decision Records (ADR) du Gyroscops Cloud et suivent les principes établis dans &amp;ldquo;API Platform Con 2025 - Et si on utilisait l&amp;rsquo;Event Storming ?&amp;rdquo;&lt;/em&gt;&lt;/p&gt;</description></item><item><title/><link>/plan-complet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/plan-complet/</guid><description>&lt;h1 id="-plan-complet-avec-critères-dadoption"&gt;📋 Plan Complet avec Critères d&amp;rsquo;Adoption&lt;/h1&gt;
 &lt;h2 id="-vue-densemble-du-plan"&gt;🎯 Vue d&amp;rsquo;Ensemble du Plan&lt;/h2&gt;
 &lt;p&gt;Ce plan complet détaille tous les chapitres de la documentation avec leurs critères d&amp;rsquo;adoption spécifiques. Il sert de référence pour comprendre quand et pourquoi adopter chaque pattern architectural.&lt;/p&gt;
 &lt;h2 id="-chapitres-fondamentaux-parcours-principal"&gt;📚 Chapitres Fondamentaux (Parcours Principal)&lt;/h2&gt;
@@ -1909,7 +1906,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;li&gt;✅ &lt;strong&gt;Durée&lt;/strong&gt; : 30-45 minutes&lt;/li&gt;
 &lt;li&gt;✅ &lt;strong&gt;Public&lt;/strong&gt; : Tous les développeurs&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Contenu&lt;/strong&gt; :&lt;/p&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/templates/choix-interactifs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/templates/choix-interactifs/</guid><description>&lt;h1 id="templates-de-choix-interactifs"&gt;Templates de Choix Interactifs&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Contenu&lt;/strong&gt; :&lt;/p&gt;</description></item><item><title/><link>/templates/choix-interactifs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/templates/choix-interactifs/</guid><description>&lt;h1 id="templates-de-choix-interactifs"&gt;Templates de Choix Interactifs&lt;/h1&gt;
 &lt;h2 id="template-de-base-pour-les-choix"&gt;Template de Base pour les Choix&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;## 🎯 Votre Prochaine Étape
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;
@@ -2367,7 +2364,7 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;🎨&lt;/strong&gt; : Interface&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;🧪&lt;/strong&gt; : Tests&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;📊&lt;/strong&gt; : Analytics&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://gplanchat.github.io/ddd-adventure/templates/guide-redaction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://gplanchat.github.io/ddd-adventure/templates/guide-redaction/</guid><description>&lt;h1 id="guide-de-rédaction---chapitres-api-platform-ddd"&gt;Guide de Rédaction - Chapitres API Platform DDD&lt;/h1&gt;
+&lt;/ul&gt;</description></item><item><title/><link>/templates/guide-redaction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/templates/guide-redaction/</guid><description>&lt;h1 id="guide-de-rédaction---chapitres-api-platform-ddd"&gt;Guide de Rédaction - Chapitres API Platform DDD&lt;/h1&gt;
 &lt;h2 id="structure-standard-dun-chapitre"&gt;Structure Standard d&amp;rsquo;un Chapitre&lt;/h2&gt;
 &lt;h3 id="1-en-tête-hugo"&gt;1. En-tête Hugo&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;---
@@ -2430,6 +2427,6 @@ sommes-nous arrivés là ?&amp;rdquo;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="font-weight:bold"&gt;**Avec Gyroscops**&lt;/span&gt; : J&amp;#39;ai [action réalisée] :
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;```php
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;// ✅ [Description du code] (Projet Hive)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;// ✅ [Description du code] (Projet Gyroscops Cloud)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[Code d&amp;#39;exemple]
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Résultat&lt;/strong&gt; : [Résultat obtenu].&lt;/p&gt;</description></item></channel></rss>

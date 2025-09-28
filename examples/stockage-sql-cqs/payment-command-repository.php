@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
  * Exemple de Repository Command SQL CQS pour Payment
  * 
  * Ce fichier montre comment implémenter un repository Command
- * en suivant les patterns CQS du projet Hive.
+ * en suivant les patterns CQS du projet Gyroscops Cloud.
  * 
  * Références ADR :
  * - HIVE011 : In-Memory Repositories

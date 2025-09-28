@@ -12,33 +12,33 @@
 
     
 
-<html lang="fr-fr"><head><script src="/ddd-adventure/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=ddd-adventure/livereload" data-no-instant defer></script>
+<html lang="fr-fr"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=41733&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8" />
     <title>Chapitre 58 : Gestion des Données et Validation | DDD Adventure</title>
     <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gestion des données et validation dans le projet Hive avec des exemples concrets">
+    <meta name="description" content="Gestion des données et validation dans le Gyroscops Cloud avec des exemples concrets">
     <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
     <meta name="author" content="Colin Wilson - Lotus Labs" />
     <meta name="email" content="support@aigis.uk" />
     <meta name="website" content="https://lotusdocs.dev" />
     <meta name="Version" content="v0.1.0" />
     
-    <link rel="icon" href="http://localhost:1313/ddd-adventure/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="http://localhost:1313/ddd-adventure/favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/ddd-adventure/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/ddd-adventure/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/ddd-adventure/favicon-16x16.png">
-<link rel="manifest" crossorigin="use-credentials" href="http://localhost:1313/ddd-adventure/site.webmanifest">
+    <link rel="icon" href="//localhost:41733/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="//localhost:41733/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="//localhost:41733/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:41733/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:41733/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="//localhost:41733/site.webmanifest">
 <meta property="og:title" content="Chapitre 58 : Gestion des Données et Validation" />
-<meta property="og:description" content="Gestion des données et validation dans le projet Hive avec des exemples concrets" />
+<meta property="og:description" content="Gestion des données et validation dans le Gyroscops Cloud avec des exemples concrets" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/ddd-adventure/chapitres/techniques/chapitre-58-gestion-donnees-validation/" /><meta property="og:image" content="http://localhost:1313/ddd-adventure/opengraph/card-base-2_hu_b21cb8535cf1006e.png"/><meta property="article:section" content="chapitres" />
+<meta property="og:url" content="//localhost:41733/chapitres/techniques/chapitre-58-gestion-donnees-validation/" /><meta property="og:image" content="//localhost:41733/opengraph/card-base-2_hu_f4bcaf8b3518115b.png"/><meta property="article:section" content="chapitres" />
 <meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
 <meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="http://localhost:1313/ddd-adventure/opengraph/card-base-2_hu_b21cb8535cf1006e.png"/>
+<meta name="twitter:image" content="//localhost:41733/opengraph/card-base-2_hu_f4bcaf8b3518115b.png"/>
 <meta name="twitter:title" content="Chapitre 58 : Gestion des Données et Validation"/>
-<meta name="twitter:description" content="Gestion des données et validation dans le projet Hive avec des exemples concrets"/>
+<meta name="twitter:description" content="Gestion des données et validation dans le Gyroscops Cloud avec des exemples concrets"/>
 
     
         <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Adventure" href="/index.xml" />
@@ -46,13 +46,13 @@
     
     
             
-                <script type="text/javascript" src="http://localhost:1313/ddd-adventure/docs/js/flexsearch.bundle.js"></script>
+                <script type="text/javascript" src="//localhost:41733/docs/js/flexsearch.bundle.js"></script>
             
         
     
     
 
-    <link rel="stylesheet" href="/ddd-adventure/docs/scss/style.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/docs/scss/style.css" crossorigin="anonymous">
     
     
     </head>
@@ -61,7 +61,7 @@
             <div class="page-wrapper toggled">
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href='/ddd-adventure/' aria-label="HomePage" alt="HomePage">
+        <a href='/' aria-label="HomePage" alt="HomePage">
             
                 <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
             
@@ -83,52 +83,52 @@
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-02-impact-mapping/">Chapitre 2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-02-impact-mapping/">Chapitre 2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">Chapitre 3 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">Chapitre 3 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-04-example-mapping/">Chapitre 4 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-04-example-mapping/">Chapitre 4 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-05-complexite-accidentelle-essentielle/">Chapitre 5 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-05-complexite-accidentelle-essentielle/">Chapitre 5 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-06-granularite-choix-architecturaux/">Chapitre 6 : Granularité des Choix Architecturaux</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-06-granularite-choix-architecturaux/">Chapitre 6 : Granularité des Choix Architecturaux</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-07-modeles-riches-vs-anemiques/">Chapitre 7 : Modèles Riches vs Modèles Anémiques</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-07-modeles-riches-vs-anemiques/">Chapitre 7 : Modèles Riches vs Modèles Anémiques</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/">Chapitre 8 : Architecture Événementielle</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/">Chapitre 8 : Architecture Événementielle</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-09-repositories-persistance/">Chapitre 9 : Repositories et Persistance</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-09-repositories-persistance/">Chapitre 9 : Repositories et Persistance</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/fondamentaux/chapitre-10-choix-type-stockage/">Chapitre 15 : Choix du Type de Stockage</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-10-choix-type-stockage/">Chapitre 15 : Choix du Type de Stockage</a></li>
                                         
                                     
                                 </ul>
@@ -147,27 +147,27 @@
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/optionnels/chapitre-13-architecture-cqrs/">Chapitre 15 : Architecture CQRS avec API Platform</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-13-architecture-cqrs/">Chapitre 15 : Architecture CQRS avec API Platform</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/optionnels/chapitre-12-architecture-cqs/">Chapitre 15 : Architecture CQS - Command Query Separation</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-12-architecture-cqs/">Chapitre 15 : Architecture CQS - Command Query Separation</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/optionnels/chapitre-11-event-sourcing/">Chapitre 15 : Event Sourcing - La Source de Vérité</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-11-event-sourcing/">Chapitre 15 : Event Sourcing - La Source de Vérité</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/optionnels/chapitre-14-cqrs-event-sourcing-combines/">Chapitre 15 : CQRS &#43; Event Sourcing Combinés</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-14-cqrs-event-sourcing-combines/">Chapitre 15 : CQRS &#43; Event Sourcing Combinés</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/optionnels/chapitre-15-projections-event-sourcing/">Chapitre 15 : Projections Event Sourcing</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-15-projections-event-sourcing/">Chapitre 15 : Projections Event Sourcing</a></li>
                                         
                                     
                                 </ul>
@@ -195,32 +195,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/sql/chapitre-16-stockage-sql-classique/">Chapitre 16 : Stockage SQL - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-16-stockage-sql-classique/">Chapitre 16 : Stockage SQL - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/sql/chapitre-17-stockage-sql-cqs/">Chapitre 17 : Stockage SQL - Approche CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-17-stockage-sql-cqs/">Chapitre 17 : Stockage SQL - Approche CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/sql/chapitre-18-stockage-sql-cqrs/">Chapitre 18 : Stockage SQL - Approche CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-18-stockage-sql-cqrs/">Chapitre 18 : Stockage SQL - Approche CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/sql/chapitre-19-stockage-sql-event-sourcing/">Chapitre 19 : Stockage SQL - Event Sourcing Seul</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-19-stockage-sql-event-sourcing/">Chapitre 19 : Stockage SQL - Event Sourcing Seul</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/">Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/">Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/sql/chapitre-21-stockage-sql-event-sourcing-cqrs/">Chapitre 59 : Stockage SQL - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-21-stockage-sql-event-sourcing-cqrs/">Chapitre 59 : Stockage SQL - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -239,32 +239,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/api/chapitre-26-stockage-api-event-sourcing-cqs/">Chapitre 26 : Stockage API - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-26-stockage-api-event-sourcing-cqs/">Chapitre 26 : Stockage API - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/">Chapitre 27 : Stockage API - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/">Chapitre 27 : Stockage API - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/api/chapitre-22-stockage-api-classique/">Chapitre 60 : Stockage API - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-22-stockage-api-classique/">Chapitre 60 : Stockage API - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/api/chapitre-23-stockage-api-cqs/">Chapitre 61 : Stockage API - Approche CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-23-stockage-api-cqs/">Chapitre 61 : Stockage API - Approche CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/api/chapitre-24-stockage-api-cqrs/">Chapitre 62 : Stockage API - Approche CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-24-stockage-api-cqrs/">Chapitre 62 : Stockage API - Approche CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/api/chapitre-25-stockage-api-event-sourcing/">Chapitre 63 : Stockage API - Event Sourcing Seul</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-25-stockage-api-event-sourcing/">Chapitre 63 : Stockage API - Event Sourcing Seul</a></li>
                                                             
                                                         
                                                     </ul>
@@ -283,32 +283,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/mongodb/chapitre-28-stockage-mongodb-classique/">Chapitre 28 : Stockage MongoDB - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-28-stockage-mongodb-classique/">Chapitre 28 : Stockage MongoDB - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/mongodb/chapitre-29-stockage-mongodb-cqs/">Chapitre 29 : Stockage MongoDB - Approche CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-29-stockage-mongodb-cqs/">Chapitre 29 : Stockage MongoDB - Approche CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/mongodb/chapitre-30-stockage-mongodb-cqrs/">Chapitre 30 : Stockage MongoDB - Approche CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-30-stockage-mongodb-cqrs/">Chapitre 30 : Stockage MongoDB - Approche CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/mongodb/chapitre-31-stockage-mongodb-event-sourcing/">Chapitre 31 : Stockage MongoDB - Event Sourcing</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-31-stockage-mongodb-event-sourcing/">Chapitre 31 : Stockage MongoDB - Event Sourcing</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/mongodb/chapitre-32-stockage-mongodb-event-sourcing-cqs/">Stockage MongoDB - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-32-stockage-mongodb-event-sourcing-cqs/">Stockage MongoDB - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/">Stockage MongoDB - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/">Stockage MongoDB - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -327,32 +327,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/elasticsearch/chapitre-34-stockage-elasticsearch-classique/">Stockage ElasticSearch - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-34-stockage-elasticsearch-classique/">Stockage ElasticSearch - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/elasticsearch/chapitre-35-stockage-elasticsearch-cqs/">Stockage ElasticSearch - CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-35-stockage-elasticsearch-cqs/">Stockage ElasticSearch - CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/elasticsearch/chapitre-36-stockage-elasticsearch-cqrs/">Stockage ElasticSearch - CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-36-stockage-elasticsearch-cqrs/">Stockage ElasticSearch - CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/elasticsearch/chapitre-37-stockage-elasticsearch-event-sourcing/">Stockage ElasticSearch - Event Sourcing</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-37-stockage-elasticsearch-event-sourcing/">Stockage ElasticSearch - Event Sourcing</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/elasticsearch/chapitre-38-stockage-elasticsearch-event-sourcing-cqs/">Stockage ElasticSearch - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-38-stockage-elasticsearch-event-sourcing-cqs/">Stockage ElasticSearch - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/elasticsearch/chapitre-39-stockage-elasticsearch-event-sourcing-cqrs/">Stockage ElasticSearch - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-39-stockage-elasticsearch-event-sourcing-cqrs/">Stockage ElasticSearch - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -371,32 +371,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/in-memory/chapitre-40-stockage-in-memory-classique/">Stockage In-Memory - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-40-stockage-in-memory-classique/">Stockage In-Memory - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/in-memory/chapitre-41-stockage-in-memory-cqs/">Stockage In-Memory - CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-41-stockage-in-memory-cqs/">Stockage In-Memory - CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/in-memory/chapitre-42-stockage-in-memory-cqrs/">Stockage In-Memory - CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-42-stockage-in-memory-cqrs/">Stockage In-Memory - CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/in-memory/chapitre-43-stockage-in-memory-event-sourcing/">Stockage In-Memory - Event Sourcing</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-43-stockage-in-memory-event-sourcing/">Stockage In-Memory - Event Sourcing</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/in-memory/chapitre-44-stockage-in-memory-event-sourcing-cqs/">Stockage In-Memory - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-44-stockage-in-memory-event-sourcing-cqs/">Stockage In-Memory - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/in-memory/chapitre-45-stockage-in-memory-event-sourcing-cqrs/">Stockage In-Memory - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-45-stockage-in-memory-event-sourcing-cqrs/">Stockage In-Memory - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -415,32 +415,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/temporal/chapitre-46-stockage-temporal-classique/">Stockage Temporal - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-46-stockage-temporal-classique/">Stockage Temporal - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/temporal/chapitre-47-stockage-temporal-cqs/">Stockage Temporal - CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-47-stockage-temporal-cqs/">Stockage Temporal - CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/temporal/chapitre-48-stockage-temporal-cqrs/">Stockage Temporal - CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-48-stockage-temporal-cqrs/">Stockage Temporal - CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/temporal/chapitre-49-stockage-temporal-event-sourcing/">Stockage Temporal - Event Sourcing</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-49-stockage-temporal-event-sourcing/">Stockage Temporal - Event Sourcing</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/temporal/chapitre-50-stockage-temporal-event-sourcing-cqs/">Stockage Temporal - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-50-stockage-temporal-event-sourcing-cqs/">Stockage Temporal - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/temporal/chapitre-51-stockage-temporal-event-sourcing-cqrs/">Stockage Temporal - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-51-stockage-temporal-event-sourcing-cqrs/">Stockage Temporal - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -459,17 +459,17 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/multi-sources/chapitre-52-stockage-multi-sources-classique/">Stockage Multi-sources - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-52-stockage-multi-sources-classique/">Stockage Multi-sources - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/multi-sources/chapitre-53-stockage-multi-sources-cqs/">Stockage Multi-sources - CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-53-stockage-multi-sources-cqs/">Stockage Multi-sources - CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/stockage/multi-sources/chapitre-54-stockage-multi-sources-cqrs/">Stockage Multi-sources - CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-54-stockage-multi-sources-cqrs/">Stockage Multi-sources - CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -493,22 +493,22 @@
                                     
                                         
                                         
-                                            <li class="current no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/techniques/chapitre-58-gestion-donnees-validation/">Chapitre 58 : Gestion des Données et Validation</a></li>
+                                            <li class="current no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-58-gestion-donnees-validation/">Chapitre 58 : Gestion des Données et Validation</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/techniques/chapitre-59-pagination-performance/">Chapitre 59 : Pagination et Performance</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-59-pagination-performance/">Chapitre 59 : Pagination et Performance</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/techniques/chapitre-60-gestion-erreurs-observabilite/">Chapitre 60 : Gestion d&#39;Erreurs et Observabilité</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-60-gestion-erreurs-observabilite/">Chapitre 60 : Gestion d&#39;Erreurs et Observabilité</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/techniques/chapitre-61-tests-qualite/">Chapitre 61 : Tests et Qualité</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-61-tests-qualite/">Chapitre 61 : Tests et Qualité</a></li>
                                         
                                     
                                 </ul>
@@ -527,12 +527,12 @@
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/avances/chapitre-62-securite-autorisation/">Chapitre 62 : Sécurité et Autorisation - Protéger votre API Platform</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/avances/chapitre-62-securite-autorisation/">Chapitre 62 : Sécurité et Autorisation - Protéger votre API Platform</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="http://localhost:1313/ddd-adventure/chapitres/avances/chapitre-63-frontend-integration/">Chapitre 63 : Frontend et Intégration - Connecter votre Interface Utilisateur</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/avances/chapitre-63-frontend-integration/">Chapitre 63 : Frontend et Intégration - Connecter votre Interface Utilisateur</a></li>
                                         
                                     
                                 </ul>
@@ -556,7 +556,7 @@
 <div id="top-header" class="top-header d-print-none">
     <div class="header-bar d-flex justify-content-between">
         <div class="d-flex align-items-center">
-            <a href='/ddd-adventure/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
                 <div class="small">
                     
                             <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
@@ -642,7 +642,7 @@
         
             
                 <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="/ddd-adventure/chapitres/">
+                    <a itemprop="item" href="/chapitres/">
                         <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
                     </a>
                     <meta itemprop="position" content='1' />
@@ -650,7 +650,7 @@
             
             
                 <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" href="/ddd-adventure/chapitres/techniques/">
+                    <a itemprop="item" href="/chapitres/techniques/">
                         <span itemprop="name">Chapitres Techniques</span>
                     </a>
                     <meta itemprop="position" content='2' />
@@ -673,7 +673,7 @@
   <ul>
     <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a>
       <ul>
-        <li><a href="#références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive</a></li>
+        <li><a href="#références-aux-adr-du-projet-gyroscops-cloud">Références aux ADR du Projet Gyroscops Cloud</a></li>
       </ul>
     </li>
     <li><a href="#-architecture-de-la-validation">🏗️ Architecture de la Validation</a>
@@ -713,9 +713,9 @@
         <li><a href="#test-des-mappers">Test des Mappers</a></li>
       </ul>
     </li>
-    <li><a href="#-bonnes-pratiques-du-projet-hive">🏗️ Bonnes Pratiques du Projet Hive</a>
+    <li><a href="#-bonnes-pratiques-du-projet-gyroscops-cloud">🏗️ Bonnes Pratiques du Projet Gyroscops Cloud</a>
       <ul>
-        <li><a href="#architecture-de-validation-dans-hive">Architecture de Validation dans Hive</a></li>
+        <li><a href="#architecture-de-validation-dans-gyroscops-cloud">Architecture de Validation dans Gyroscops Cloud</a></li>
         <li><a href="#gestion-des-erreurs-selon-hive038">Gestion des Erreurs selon HIVE038</a></li>
         <li><a href="#validation-des-dates-selon-hive003">Validation des Dates selon HIVE003</a></li>
         <li><a href="#gestion-des-données-sensibles-selon-hive004">Gestion des Données Sensibles selon HIVE004</a></li>
@@ -735,7 +735,7 @@
   <ul class="dropdown-menu">
     <li><a href="#-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre</a>
       <ul>
-        <li><a href="#références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive</a></li>
+        <li><a href="#références-aux-adr-du-projet-gyroscops-cloud">Références aux ADR du Projet Gyroscops Cloud</a></li>
       </ul>
     </li>
     <li><a href="#-architecture-de-la-validation">🏗️ Architecture de la Validation</a>
@@ -775,9 +775,9 @@
         <li><a href="#test-des-mappers">Test des Mappers</a></li>
       </ul>
     </li>
-    <li><a href="#-bonnes-pratiques-du-projet-hive">🏗️ Bonnes Pratiques du Projet Hive</a>
+    <li><a href="#-bonnes-pratiques-du-projet-gyroscops-cloud">🏗️ Bonnes Pratiques du Projet Gyroscops Cloud</a>
       <ul>
-        <li><a href="#architecture-de-validation-dans-hive">Architecture de Validation dans Hive</a></li>
+        <li><a href="#architecture-de-validation-dans-gyroscops-cloud">Architecture de Validation dans Gyroscops Cloud</a></li>
         <li><a href="#gestion-des-erreurs-selon-hive038">Gestion des Erreurs selon HIVE038</a></li>
         <li><a href="#validation-des-dates-selon-hive003">Validation des Dates selon HIVE003</a></li>
         <li><a href="#gestion-des-données-sensibles-selon-hive004">Gestion des Données Sensibles selon HIVE004</a></li>
@@ -801,14 +801,14 @@
                                                 
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
-        <h2 id="-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre <a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ce chapitre vous montre comment gérer les données et la validation dans le projet Hive. Vous apprendrez :</p>
+        <h2 id="-objectif-de-ce-chapitre">🎯 Objectif de ce Chapitre <a href="#-objectif-de-ce-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ce chapitre vous montre comment gérer les données et la validation dans le Gyroscops Cloud. Vous apprendrez :</p>
 <ul>
 <li>Comment valider les données d&rsquo;entrée</li>
 <li>Comment gérer les erreurs de validation</li>
 <li>Comment transformer les données entre les couches</li>
 <li>Comment tester la validation</li>
 </ul>
-<h3 id="références-aux-adr-du-projet-hive">Références aux ADR du Projet Hive <a href="#r%c3%a9f%c3%a9rences-aux-adr-du-projet-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Ce chapitre s&rsquo;appuie sur les Architecture Decision Records (ADR) suivants du projet Hive :</p>
+<h3 id="références-aux-adr-du-projet-gyroscops-cloud">Références aux ADR du Projet Gyroscops Cloud <a href="#r%c3%a9f%c3%a9rences-aux-adr-du-projet-gyroscops-cloud" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Ce chapitre s&rsquo;appuie sur les Architecture Decision Records (ADR) suivants du Gyroscops Cloud :</p>
 <ul>
 <li><strong>HIVE003</strong> : Dates Management - Gestion des dates et timezones</li>
 <li><strong>HIVE004</strong> : Opaque and Secret Data Objects - Gestion des données sensibles</li>
@@ -840,7 +840,7 @@
 <h3 id="interface-de-validation">Interface de Validation <a href="#interface-de-validation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Interface de Validation (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Interface de Validation (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ValidatorInterface</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">validate</span>(<span style="color:#a6e22e">mixed</span> $data, <span style="color:#66d9ef">array</span> $constraints <span style="color:#f92672">=</span> [])<span style="color:#f92672">:</span> <span style="color:#a6e22e">ValidationResult</span>;
@@ -868,7 +868,7 @@
 <h2 id="-validation-des-données-dentrée">📝 Validation des Données d&rsquo;Entrée <a href="#-validation-des-donn%c3%a9es-dentr%c3%a9e" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="validation-des-value-objects">Validation des Value Objects <a href="#validation-des-value-objects" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Value Object Email avec Validation (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Value Object Email avec Validation (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#a6e22e">readonly</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Email</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(<span style="color:#66d9ef">private</span> <span style="color:#a6e22e">string</span> $value)
@@ -899,7 +899,7 @@
 <h3 id="validation-des-agrégats">Validation des Agrégats <a href="#validation-des-agr%c3%a9gats" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Agrégat Payment avec Validation (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Agrégat Payment avec Validation (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Payment</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -941,7 +941,7 @@
 <h3 id="validation-des-commandes">Validation des Commandes <a href="#validation-des-commandes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Commande avec Validation (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Commande avec Validation (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreatePaymentCommand</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1004,7 +1004,7 @@
 <h2 id="-validation-des-requêtes">🔍 Validation des Requêtes <a href="#-validation-des-requ%c3%aates" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="validation-des-paramètres-de-requête">Validation des Paramètres de Requête <a href="#validation-des-param%c3%a8tres-de-requ%c3%aate" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Validation des Paramètres de Requête (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Validation des Paramètres de Requête (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentQueryValidator</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1046,7 +1046,7 @@
 <h3 id="validation-des-filtres">Validation des Filtres <a href="#validation-des-filtres" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Validation des Filtres (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Validation des Filtres (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentFilterValidator</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1080,7 +1080,7 @@
 <h2 id="-gestion-des-erreurs-de-validation">🚨 Gestion des Erreurs de Validation <a href="#-gestion-des-erreurs-de-validation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="exceptions-de-validation">Exceptions de Validation <a href="#exceptions-de-validation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Exceptions de Validation (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Exceptions de Validation (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ValidationException</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">\DomainException</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1121,7 +1121,7 @@
 <h3 id="gestionnaire-derreurs-de-validation">Gestionnaire d&rsquo;Erreurs de Validation <a href="#gestionnaire-derreurs-de-validation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Gestionnaire d&#39;Erreurs de Validation (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Gestionnaire d&#39;Erreurs de Validation (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ValidationErrorHandler</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1157,7 +1157,7 @@
 <h2 id="-transformation-des-données">🔄 Transformation des Données <a href="#-transformation-des-donn%c3%a9es" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="mapper-de-données">Mapper de Données <a href="#mapper-de-donn%c3%a9es" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Mapper de Données (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Mapper de Données (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentDataMapper</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1255,7 +1255,7 @@
 <h2 id="-tests-de-validation">🧪 Tests de Validation <a href="#-tests-de-validation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="test-des-value-objects">Test des Value Objects <a href="#test-des-value-objects" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Test des Value Objects (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Test des Value Objects (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EmailTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">/** @test */</span>
@@ -1301,7 +1301,7 @@
 <h3 id="test-des-agrégats">Test des Agrégats <a href="#test-des-agr%c3%a9gats" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Test des Agrégats (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Test des Agrégats (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">/** @test */</span>
@@ -1384,7 +1384,7 @@
 <h3 id="test-des-mappers">Test des Mappers <a href="#test-des-mappers" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Test des Mappers (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Test des Mappers (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentDataMapperTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">PaymentDataMapper</span> $mapper;
@@ -1468,11 +1468,11 @@
 </span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">mapper</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">mapFromArray</span>($data);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<h2 id="-bonnes-pratiques-du-projet-hive">🏗️ Bonnes Pratiques du Projet Hive <a href="#-bonnes-pratiques-du-projet-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="architecture-de-validation-dans-hive">Architecture de Validation dans Hive <a href="#architecture-de-validation-dans-hive" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le projet Hive suit une architecture de validation en couches, respectant les principes DDD et les ADR du projet :</p>
+<h2 id="-bonnes-pratiques-du-projet-gyroscops-cloud">🏗️ Bonnes Pratiques du Projet Gyroscops Cloud <a href="#-bonnes-pratiques-du-projet-gyroscops-cloud" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="architecture-de-validation-dans-gyroscops-cloud">Architecture de Validation dans Gyroscops Cloud <a href="#architecture-de-validation-dans-gyroscops-cloud" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le Gyroscops Cloud suit une architecture de validation en couches, respectant les principes DDD et les ADR du projet :</p>
 
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Architecture de Validation Hive (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Architecture de Validation Gyroscops Cloud (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiveValidationService</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1531,11 +1531,11 @@
 </span></span><span style="display:flex;"><span>        ];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<h3 id="gestion-des-erreurs-selon-hive038">Gestion des Erreurs selon HIVE038 <a href="#gestion-des-erreurs-selon-hive038" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le projet Hive implémente une gestion d&rsquo;erreurs robuste selon l&rsquo;ADR HIVE038 :</p>
+<h3 id="gestion-des-erreurs-selon-hive038">Gestion des Erreurs selon HIVE038 <a href="#gestion-des-erreurs-selon-hive038" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le Gyroscops Cloud implémente une gestion d&rsquo;erreurs robuste selon l&rsquo;ADR HIVE038 :</p>
 
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Gestion d&#39;Erreurs Hive (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Gestion d&#39;Erreurs Gyroscops Cloud (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiveErrorHandler</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1581,11 +1581,11 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<h3 id="validation-des-dates-selon-hive003">Validation des Dates selon HIVE003 <a href="#validation-des-dates-selon-hive003" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le projet Hive gère les dates de manière cohérente selon l&rsquo;ADR HIVE003 :</p>
+<h3 id="validation-des-dates-selon-hive003">Validation des Dates selon HIVE003 <a href="#validation-des-dates-selon-hive003" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le Gyroscops Cloud gère les dates de manière cohérente selon l&rsquo;ADR HIVE003 :</p>
 
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Validation des Dates Hive (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Validation des Dates Gyroscops Cloud (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiveDateValidator</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1628,11 +1628,11 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> <span style="color:#a6e22e">\DateTimeImmutable</span><span style="color:#f92672">::</span><span style="color:#a6e22e">createFromInterface</span>($date)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setTimezone</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">\DateTimeZone</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">defaultTimezone</span>));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<h3 id="gestion-des-données-sensibles-selon-hive004">Gestion des Données Sensibles selon HIVE004 <a href="#gestion-des-donn%c3%a9es-sensibles-selon-hive004" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le projet Hive gère les données sensibles de manière sécurisée selon l&rsquo;ADR HIVE004 :</p>
+<h3 id="gestion-des-données-sensibles-selon-hive004">Gestion des Données Sensibles selon HIVE004 <a href="#gestion-des-donn%c3%a9es-sensibles-selon-hive004" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le Gyroscops Cloud gère les données sensibles de manière sécurisée selon l&rsquo;ADR HIVE004 :</p>
 
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Gestion des Données Sensibles Hive (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Gestion des Données Sensibles Gyroscops Cloud (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiveSecretDataHandler</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>(
@@ -1695,11 +1695,11 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">unserialize</span>($decrypted);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<h3 id="tests-de-validation-selon-hive027">Tests de Validation selon HIVE027 <a href="#tests-de-validation-selon-hive027" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le projet Hive suit les standards de test PHPUnit selon l&rsquo;ADR HIVE027 :</p>
+<h3 id="tests-de-validation-selon-hive027">Tests de Validation selon HIVE027 <a href="#tests-de-validation-selon-hive027" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Le Gyroscops Cloud suit les standards de test PHPUnit selon l&rsquo;ADR HIVE027 :</p>
 
 
     
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Tests de Validation Hive (Projet Hive)
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Tests de Validation Gyroscops Cloud (Projet Gyroscops Cloud)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiveValidationServiceTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">HiveValidationService</span> $service;
@@ -1814,6 +1814,13 @@
     
     
     
+    
+      
+      
+      
+      
+        
+      
     
     
     
@@ -1937,6 +1944,13 @@
     
     
     
+      
+      
+      
+      
+        
+      
+    
     
     
     
@@ -2059,6 +2073,13 @@
     
     
     
+      
+      
+      
+      
+        
+      
+    
     
     
     
@@ -2180,6 +2201,13 @@
     
     
     
+    
+      
+      
+      
+      
+        
+      
     
     
     
@@ -2607,7 +2635,7 @@
 
 	<div class="row flex-xl-nowrap ">
 	<div class="col-sm-6 pt-2 doc-next">
-		<a href="/ddd-adventure/chapitres/stockage/multi-sources/chapitre-54-stockage-multi-sources-cqrs/">
+		<a href="/chapitres/stockage/multi-sources/chapitre-54-stockage-multi-sources-cqrs/">
 			<div class="card h-100 my-1">
 				<div class="card-body py-2">
                     <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Stockage Multi-sources - CQRS</p>
@@ -2617,7 +2645,7 @@
 		</a>
         </div>
 	<div class="col-sm-6 pt-2 doc-prev">
-		<a class="ms-auto" href="/ddd-adventure/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/">
+		<a class="ms-auto" href="/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/">
 			<div class="card h-100 my-1 text-end">
 				<div class="card-body py-2">
                     <p class="card-title fs-5 fw-semibold lh-base mb-0">Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS <i class="material-icons align-middle">navigate_next</i></p>
@@ -2698,10 +2726,10 @@
 
 
 
-    <script src="/ddd-adventure/docs/js/bootstrap.js" defer></script>
+    <script src="/docs/js/bootstrap.js" defer></script>
 
 
-    <script type="text/javascript" src="http://localhost:1313/ddd-adventure/docs/js/bundle.js" defer></script>
+    <script type="text/javascript" src="//localhost:41733/docs/js/bundle.js" defer></script>
 
         
 

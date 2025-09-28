@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
- * Service de pagination selon les bonnes pratiques du projet Hive
+ * Service de pagination selon les bonnes pratiques du projet Gyroscops Cloud
  * 
  * Ce service implémente une pagination robuste et performante
  * en respectant les ADR HIVE037, HIVE039 et HIVE035.
