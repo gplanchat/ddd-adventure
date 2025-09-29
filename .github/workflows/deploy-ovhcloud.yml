@@ -36,7 +36,6 @@ jobs:
         password: ${{ secrets.OVH_SFTP_PASSWORD }}
         local_path: './public/*'
         remote_path: ${{ secrets.OVH_SFTP_PATH || '/' }}
-        delete_remote_files: true
 
     - name: Notify deployment success
       if: success()
