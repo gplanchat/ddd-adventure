@@ -1,24 +1,471 @@
-<!doctype html><html lang=fr-fr><head><meta charset=utf-8><title>Exemples et Implémentations | DDD Adventure</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Exemples concrets d'implémentation des patterns DDD avec API Platform"><meta name=keywords content="Documentation,Hugo,Hugo Theme,Bootstrap"><meta name=author content="Colin Wilson - Lotus Labs"><meta name=email content="support@aigis.uk"><meta name=website content="https://lotusdocs.dev"><meta name=Version content="v0.1.0"><link rel=icon href=/favicon.ico sizes=any><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest crossorigin=use-credentials href=/site.webmanifest><meta property="og:title" content="Exemples et Implémentations"><meta property="og:description" content="Exemples concrets d'implémentation des patterns DDD avec API Platform"><meta property="og:type" content="website"><meta property="og:url" content="/examples/"><meta property="og:image" content="/opengraph/card-base-2_hu_f03bff82371dce4b.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="/opengraph/card-base-2_hu_f03bff82371dce4b.png"><meta name=twitter:title content="Exemples et Implémentations"><meta name=twitter:description content="Exemples concrets d'implémentation des patterns DDD avec API Platform"><link rel=alternate type=application/atom+xml title="Atom feed for DDD Adventure" href=/index.xml><script type=text/javascript src=/docs/js/flexsearch.bundle.min.f5159d5a2151ffbb653996ec17eaff7da4e04c286bd879fc41839d36a5586f3f20eaead0b6089de48f9adc669cdee771.js integrity=sha384-9RWdWiFR/7tlOZbsF+r/faTgTChr2Hn8QYOdNqVYbz8g6urQtgid5I+a3Gac3udx crossorigin=anonymous></script><link rel=stylesheet href=/docs/scss/style.min.3377194a2707d3dadf7a16321e3f45dec030951decd2b724d6e046d8a72467cab3654273b75f2768a9a72140ee026ecf.css integrity=sha384-M3cZSicH09rfehYyHj9F3sAwlR3s0rck1uBG2KckZ8qzZUJzt18naKmnIUDuAm7P crossorigin=anonymous></head><body><div class=content><div class="page-wrapper toggled"><nav id=sidebar class=sidebar-wrapper><div class=sidebar-brand><a href=/ aria-label=HomePage alt=HomePage><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></a></div><div class=sidebar-content style="height:calc(100% - 131px)"><ul class=sidebar-menu><li><a class=sidebar-root-link href=/examples/stockage-sql-classique/>Stockage SQL Classique - Exemple Concret</a></li><li class="sidebar-dropdown no-icon"><button class=btn>
-Patterns de Stockage - Comparaison des Approches</button><div class=sidebar-submenu><ul><li class=no-icon><a class=sidebar-nested-link href=/examples/stockage-patterns/patterns-implementation/>Patterns d'Implémentation pour le Stockage</a></li></ul></div></li><li><a class=sidebar-root-link href=/examples/stockage-sql-cqs/>Stockage SQL CQS - Exemple Concret</a></li><li><a class=sidebar-root-link href=/examples/stockage-sql-cqrs/>Stockage SQL CQRS - Exemple Concret</a></li></ul></div><ul class="sidebar-footer list-unstyled mb-0"></ul></nav><main class="page-content bg-transparent"><div id=top-header class="top-header d-print-none"><div class="header-bar d-flex justify-content-between"><div class="d-flex align-items-center"><a href=/ class="logo-icon me-3" aria-label=HomePage alt=HomePage><div class=small><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></div><div class=big><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></div></a><button id=close-sidebar class="btn btn-icon btn-soft">
-<span class="material-icons size-20 menu-icon align-middle">menu</span>
-</button>
-<button id=flexsearch-button class="ms-3 btn btn-soft" data-bs-toggle=collapse data-bs-target=#FlexSearchCollapse aria-expanded=false aria-controls=FlexSearchCollapse>
-<span class="material-icons size-20 menu-icon align-middle">search</span>
-<span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span><div class="d-none d-sm-block"><span class=flexsearch-button-keys><kbd class=flexsearch-button-cmd-key><svg width="44" height="15"><path d="M2.118 11.5A1.519 1.519.0 011 11.042 1.583 1.583.0 011 8.815a1.519 1.519.0 011.113-.458h.715V6.643h-.71A1.519 1.519.0 011 6.185 1.519 1.519.0 01.547 5.071 1.519 1.519.0 011 3.958 1.519 1.519.0 012.118 3.5a1.519 1.519.0 011.114.458A1.519 1.519.0 013.69 5.071v.715H5.4V5.071A1.564 1.564.0 016.976 3.5 1.564 1.564.0 018.547 5.071 1.564 1.564.0 016.976 6.643H6.261V8.357h.715a1.575 1.575.0 011.113 2.685 1.583 1.583.0 01-2.227.0A1.519 1.519.0 015.4 9.929V9.214H3.69v.715a1.519 1.519.0 01-.458 1.113A1.519 1.519.0 012.118 11.5zm0-.857a.714.714.0 00.715-.714V9.214H2.118a.715.715.0 100 1.429zm4.858.0a.715.715.0 100-1.429H6.261v.715a.714.714.0 00.715.714zM3.69 8.357H5.4V6.643H3.69zM2.118 5.786h.715V5.071a.714.714.0 00-.715-.714.715.715.0 00-.5 1.22A.686.686.0 002.118 5.786zm4.143.0h.715a.715.715.0 00.5-1.22.715.715.0 00-1.22.5z" fill="currentColor"/><path d="M12.4 11.475H11.344l3.879-7.95h1.056z" fill="currentColor"/><path d="M25.073 5.384l-.864.576a2.121 2.121.0 00-1.786-.923 2.207 2.207.0 00-2.266 2.326 2.206 2.206.0 002.266 2.325 2.1 2.1.0 001.782-.918l.84.617a3.108 3.108.0 01-2.622 1.293 3.217 3.217.0 01-3.349-3.317 3.217 3.217.0 013.349-3.317A3.046 3.046.0 0125.073 5.384z" fill="currentColor"/><path d="M30.993 5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172z" fill="currentColor"/><path d="M34.67 4.164c1.471.0 2.266.658 2.266 1.851.0 1.087-.832 1.809-2.134 1.855l2.107 2.691h-1.28L33.591 7.87H33.07v2.691H32.038v-6.4zm-1.6.969v1.8h1.572c.832.0 1.22-.3 1.22-.918s-.411-.882-1.22-.882z" fill="currentColor"/><path d="M42.883 10.561H38.31v-6.4h1.033V9.583h3.54z" fill="currentColor"/></svg>
-</kbd><kbd class=flexsearch-button-key><svg width="15" height="15"><path d="M5.926 12.279H4.41L9.073 2.721H10.59z" fill="currentColor"/></svg></kbd></span></div></button></div><div class="d-flex align-items-center"><ul class="list-unstyled mb-0"></ul></div></div><div class=collapse id=FlexSearchCollapse><div class=flexsearch-container><div class=flexsearch-keymap><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8m3-3-3 3-3-3"/></g></svg></kbd>
-<kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8m3 3-3-3-3 3"/></g></svg></kbd>
-<span class=flexsearch-key-label>to navigate</span></li><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4m3 3-3-3 3-3"/></g></svg></kbd>
-<span class=flexsearch-key-label>to select</span></li><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993.0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016s1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5s-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864.0 1.6425 1.031 1.5443 2.2492h-2.956"/></g></svg></kbd>
-<span class=flexsearch-key-label>to close</span></li></div><form class="flexsearch position-relative flex-grow-1 ms-2 me-2"><div class="d-flex flex-row"><input id=flexsearch class=form-control type=search placeholder=Search aria-label=Search autocomplete=off>
-<button id=hideFlexsearch type=button class="ms-2 btn btn-soft">
-cancel</button></div><div id=suggestions class="shadow rounded-1 d-none"></div></form></div></div></div><div class=container-fluid><div class=layout-spacing><div class="d-md-flex justify-content-between align-items-center"><nav aria-label=breadcrumb class="d-inline-block pb-2 mt-1 mt-sm-0"><ul id=breadcrumbs class="breadcrumb bg-transparent mb-0" itemscope itemtype=https://schema.org/BreadcrumbList><li class="breadcrumb-item text-capitalize active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><i class="material-icons size-20 align-text-bottom" itemprop=name>Home</i>
-<meta itemprop=position content='1'></li></ul></nav></div><div class="row flex-xl-nowrap"><div class="docs-toc col-xl-3 visually-hidden d-xl-block"><toc><div class="fw-bold text-uppercase mb-2">On this page</div><nav id=TableOfContents><ul><li><a href=#-exemples-concrets-pour-chaque-pattern>🎯 <strong>Exemples Concrets pour Chaque Pattern</strong></a></li><li><a href=#-organisation-des-exemples>📁 <strong>Organisation des Exemples</strong></a><ul><li><a href=#patterns-de-stockage><strong>Patterns de Stockage</strong></a></li><li><a href=#techniques-avancées><strong>Techniques Avancées</strong></a></li><li><a href=#architectures-avancées><strong>Architectures Avancées</strong></a></li></ul></li><li><a href=#-comment-utiliser-ces-exemples>🚀 <strong>Comment Utiliser ces Exemples</strong></a><ul><li><a href=#1-comprendre-le-pattern><strong>1. Comprendre le Pattern</strong></a></li><li><a href=#2-analyser-le-code><strong>2. Analyser le Code</strong></a></li><li><a href=#3-adapter-à-votre-contexte><strong>3. Adapter à Votre Contexte</strong></a></li><li><a href=#4-tester-et-itérer><strong>4. Tester et Itérer</strong></a></li></ul></li><li><a href=#-conseils-d>💡 <strong>Conseils d’Utilisation</strong></a><ul><li><a href=#pour-les-débutants><strong>Pour les Débutants</strong></a></li><li><a href=#pour-les-expérimentés><strong>Pour les Expérimentés</strong></a></li><li><a href=#pour-les-équipes><strong>Pour les Équipes</strong></a></li></ul></li><li><a href=#-liens-avec-les-chapitres>🔗 <strong>Liens avec les Chapitres</strong></a></li><li><a href=#-votre-prochaine-étape>🎯 <strong>Votre Prochaine Étape</strong></a></li></ul></nav></toc></div><div class="docs-toc-mobile visually-hidden d-print-none d-xl-none"><button id=toc-dropdown-btn class="btn-secondary dropdown-toggle" type=button data-bs-toggle=dropdown data-bs-offset=0,0 aria-expanded=false>
-Table of Contents</button><nav id=toc-mobile><ul class=dropdown-menu><li><a href=#-exemples-concrets-pour-chaque-pattern>🎯 <strong>Exemples Concrets pour Chaque Pattern</strong></a></li><li><a href=#-organisation-des-exemples>📁 <strong>Organisation des Exemples</strong></a><ul><li><a href=#patterns-de-stockage><strong>Patterns de Stockage</strong></a></li><li><a href=#techniques-avancées><strong>Techniques Avancées</strong></a></li><li><a href=#architectures-avancées><strong>Architectures Avancées</strong></a></li></ul></li><li><a href=#-comment-utiliser-ces-exemples>🚀 <strong>Comment Utiliser ces Exemples</strong></a><ul><li><a href=#1-comprendre-le-pattern><strong>1. Comprendre le Pattern</strong></a></li><li><a href=#2-analyser-le-code><strong>2. Analyser le Code</strong></a></li><li><a href=#3-adapter-à-votre-contexte><strong>3. Adapter à Votre Contexte</strong></a></li><li><a href=#4-tester-et-itérer><strong>4. Tester et Itérer</strong></a></li></ul></li><li><a href=#-conseils-d>💡 <strong>Conseils d’Utilisation</strong></a><ul><li><a href=#pour-les-débutants><strong>Pour les Débutants</strong></a></li><li><a href=#pour-les-expérimentés><strong>Pour les Expérimentés</strong></a></li><li><a href=#pour-les-équipes><strong>Pour les Équipes</strong></a></li></ul></li><li><a href=#-liens-avec-les-chapitres>🔗 <strong>Liens avec les Chapitres</strong></a></li><li><a href=#-votre-prochaine-étape>🎯 <strong>Votre Prochaine Étape</strong></a></li></ul></nav></div><div class="docs-content col-12 mt-0"><div class="mb-0 d-flex"><h1 class="content-title mb-0">Exemples et Implémentations</h1></div><div id=content class=main-content><div class="row flex-xl-wrap"><div id=list-item class="col-md-4 col-12 mt-4 pt-2"><a class="text-decoration-none text-reset" href=/examples/stockage-sql-classique/><div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1"><span class="icon-color d-flex my-3"><i class="material-icons align-middle">article</i>
-<i class="material-icons icon-faint align-middle ms-auto" title=Directory>folder</i></span><div class="card-body p-0 content"><p class="fs-5 fw-semibold card-title mb-1">Stockage SQL Classique - Exemple Concret</p><p class="para card-text mb-0">Implémentation concrète du pattern de stockage SQL classique avec Doctrine</p></div></div></a></div><div id=list-item class="col-md-4 col-12 mt-4 pt-2"><a class="text-decoration-none text-reset" href=/examples/stockage-patterns/><div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1"><span class="icon-color d-flex my-3"><i class="material-icons align-middle">article</i>
-<i class="material-icons icon-faint align-middle ms-auto" title=Directory>folder</i></span><div class="card-body p-0 content"><p class="fs-5 fw-semibold card-title mb-1">Patterns de Stockage - Comparaison des Approches</p><p class="para card-text mb-0">Comparaison détaillée des différents patterns de stockage et leurs cas d'usage</p></div></div></a></div><div id=list-item class="col-md-4 col-12 mt-4 pt-2"><a class="text-decoration-none text-reset" href=/examples/stockage-sql-cqs/><div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1"><span class="icon-color d-flex my-3"><i class="material-icons align-middle">article</i>
-<i class="material-icons icon-faint align-middle ms-auto" title=Directory>folder</i></span><div class="card-body p-0 content"><p class="fs-5 fw-semibold card-title mb-1">Stockage SQL CQS - Exemple Concret</p><p class="para card-text mb-0">Implémentation concrète du pattern CQS (Command Query Separation) avec Doctrine</p></div></div></a></div><div id=list-item class="col-md-4 col-12 mt-4 pt-2"><a class="text-decoration-none text-reset" href=/examples/stockage-sql-cqrs/><div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1"><span class="icon-color d-flex my-3"><i class="material-icons align-middle">article</i>
-<i class="material-icons icon-faint align-middle ms-auto" title=Directory>folder</i></span><div class="card-body p-0 content"><p class="fs-5 fw-semibold card-title mb-1">Stockage SQL CQRS - Exemple Concret</p><p class="para card-text mb-0">Implémentation concrète du pattern CQRS (Command Query Responsibility Segregation) avec Doctrine</p></div></div></a></div></div></div><div><hr class=doc-hr><div id=doc-nav class=d-print-none></div></div></div></div></div></div><footer class="shadow py-3 d-print-none"><div class=container-fluid><div class="row align-items-center"><div class=col><div class="text-sm-start text-center mx-md-2"><p class=mb-0>© 2025 Grégory Planchat. Tous droits réservés.</p></div></div></div><div class="row mt-3 pt-3 border-top"><div class=col-12><div class=text-center><h6 class="text-muted mb-2">Nos Sponsors</h6><p class="text-muted small mb-2">Merci à nos partenaires qui soutiennent cette initiative</p><div class="d-flex justify-content-center align-items-center flex-wrap gap-2"><div class=sponsor-item><a href=https://kiboko.fr target=_blank rel="noopener noreferrer" class=text-decoration-none><span class="badge bg-light text-dark border px-2 py-1 small">Kiboko</span></a></div><div class=sponsor-item><a href=https://gyroscops.com target=_blank rel="noopener noreferrer" class=text-decoration-none><span class="badge bg-light text-dark border px-2 py-1 small">Gyroscops</span></a></div></div></div></div></div></div></footer></main></div></div><button onclick=topFunction() id=back-to-top aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12 10.224l-6.3 6.3-1.38-1.372L12 7.472l7.68 7.68-1.38 1.376z" style="fill:#fff"/></svg></button>
-<script src=/docs/js/bootstrap.c7927bdd82eceb076739257add3f4b0e11379da037c07d5c7110daeb6de0e3edcb2de867604550f88815157e4ec4ddb7.js integrity=sha384-x5J73YLs6wdnOSV63T9LDhE3naA3wH1ccRDa623g4+3LLehnYEVQ+IgVFX5OxN23 defer></script><script type=text/javascript src=/docs/js/bundle.min.a046e72674401a45bf99217648934a99ff03a7c46d105e47916156e66969388a0643f55a1e850acb495c9bd8be985171.js integrity=sha384-oEbnJnRAGkW/mSF2SJNKmf8Dp8RtEF5HkWFW5mlpOIoGQ/VaHoUKy0lcm9i+mFFx crossorigin=anonymous defer></script><script type=module>
+<!DOCTYPE html>
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+<html lang="fr-fr"><head>
+    <meta charset="utf-8" />
+    <title>Exemples et Implémentations | DDD Adventure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Exemples concrets d&#39;implémentation des patterns DDD avec API Platform">
+    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
+    <meta name="author" content="Colin Wilson - Lotus Labs" />
+    <meta name="email" content="support@aigis.uk" />
+    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="Version" content="v0.1.0" />
+    
+    <link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="/site.webmanifest">
+<meta property="og:title" content="Exemples et Implémentations" />
+<meta property="og:description" content="Exemples concrets d&#39;implémentation des patterns DDD avec API Platform" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/examples/" /><meta property="og:image" content="/opengraph/card-base-2_hu_f03bff82371dce4b.png"/><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/opengraph/card-base-2_hu_f03bff82371dce4b.png"/>
+<meta name="twitter:title" content="Exemples et Implémentations"/>
+<meta name="twitter:description" content="Exemples concrets d&#39;implémentation des patterns DDD avec API Platform"/>
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Adventure" href="/index.xml" />
+    
+    
+    
+            
+                
+                <script type="text/javascript" src="/docs/js/flexsearch.bundle.min.f5159d5a2151ffbb653996ec17eaff7da4e04c286bd879fc41839d36a5586f3f20eaead0b6089de48f9adc669cdee771.js" integrity="sha384-9RWdWiFR/7tlOZbsF&#43;r/faTgTChr2Hn8QYOdNqVYbz8g6urQtgid5I&#43;a3Gac3udx" crossorigin="anonymous"></script>
+                
+        
+    
+    
+
+    <link rel="stylesheet" href="/docs/scss/style.min.3377194a2707d3dadf7a16321e3f45dec030951decd2b724d6e046d8a72467cab3654273b75f2768a9a72140ee026ecf.css" integrity="sha384-M3cZSicH09rfehYyHj9F3sAwlR3s0rck1uBG2KckZ8qzZUJzt18naKmnIUDuAm7P"crossorigin="anonymous">
+    
+    
+    
+    </head>
+<body>
+        <div class="content">
+            <div class="page-wrapper toggled">
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href='/' aria-label="HomePage" alt="HomePage">
+            
+                <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+            
+        </a>
+    </div>
+    <div class="sidebar-content" style="height: calc(100% - 131px);">
+        <ul class="sidebar-menu">
+            
+                
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="/examples/stockage-sql-classique/">
+                                
+                                Stockage SQL Classique - Exemple Concret
+                            </a>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Patterns de Stockage - Comparaison des Approches
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="/examples/stockage-patterns/patterns-implementation/">Patterns d&#39;Implémentation pour le Stockage</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="/examples/stockage-sql-cqs/">
+                                
+                                Stockage SQL CQS - Exemple Concret
+                            </a>
+                        </li>
+                    
+                
+                    
+                        
+                        <li class="">
+                            <a class="sidebar-root-link" href="/examples/stockage-sql-cqrs/">
+                                
+                                Stockage SQL CQRS - Exemple Concret
+                            </a>
+                        </li>
+                    
+                
+            
+        </ul>
+        
+    </div>
+    
+        <ul class="sidebar-footer list-unstyled mb-0">
+            
+        </ul>
+    
+</nav>
+
+                    <main class="page-content bg-transparent">
+                        
+<div id="top-header" class="top-header d-print-none">
+    <div class="header-bar d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+                <div class="small">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+                <div class="big">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+            </a>
+            <button id="close-sidebar" class="btn btn-icon btn-soft">
+                <span class="material-icons size-20 menu-icon align-middle">menu</span>
+            </button>
+            
+            
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
+            </div>
+
+        <div class="d-flex align-items-center">
+            <ul class="list-unstyled mb-0">
+                
+            </ul>
+            
+        </div>
+    </div>
+    
+    
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
+    
+    
+</div>
+
+
+                            <div class="container-fluid">
+                                <div class="layout-spacing">
+                                    
+                                        <div class="d-md-flex justify-content-between align-items-center"><nav aria-label="breadcrumb" class="d-inline-block pb-2 mt-1 mt-sm-0">
+    <ul id="breadcrumbs" class="breadcrumb bg-transparent mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+        
+        
+            <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
+                <meta itemprop="position" content='1' />
+            </li>
+        
+    </ul>
+</nav></div>
+                                    
+                                    <div class="row flex-xl-nowrap">
+                                        
+                                        <div class="docs-toc col-xl-3 visually-hidden   d-xl-block"><toc>
+    <div class="fw-bold text-uppercase mb-2">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-exemples-concrets-pour-chaque-pattern">🎯 <strong>Exemples Concrets pour Chaque Pattern</strong></a></li>
+    <li><a href="#-organisation-des-exemples">📁 <strong>Organisation des Exemples</strong></a>
+      <ul>
+        <li><a href="#patterns-de-stockage"><strong>Patterns de Stockage</strong></a></li>
+        <li><a href="#techniques-avancées"><strong>Techniques Avancées</strong></a></li>
+        <li><a href="#architectures-avancées"><strong>Architectures Avancées</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-comment-utiliser-ces-exemples">🚀 <strong>Comment Utiliser ces Exemples</strong></a>
+      <ul>
+        <li><a href="#1-comprendre-le-pattern"><strong>1. Comprendre le Pattern</strong></a></li>
+        <li><a href="#2-analyser-le-code"><strong>2. Analyser le Code</strong></a></li>
+        <li><a href="#3-adapter-à-votre-contexte"><strong>3. Adapter à Votre Contexte</strong></a></li>
+        <li><a href="#4-tester-et-itérer"><strong>4. Tester et Itérer</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-conseils-d">💡 <strong>Conseils d’Utilisation</strong></a>
+      <ul>
+        <li><a href="#pour-les-débutants"><strong>Pour les Débutants</strong></a></li>
+        <li><a href="#pour-les-expérimentés"><strong>Pour les Expérimentés</strong></a></li>
+        <li><a href="#pour-les-équipes"><strong>Pour les Équipes</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-liens-avec-les-chapitres">🔗 <strong>Liens avec les Chapitres</strong></a></li>
+    <li><a href="#-votre-prochaine-étape">🎯 <strong>Votre Prochaine Étape</strong></a></li>
+  </ul>
+</nav>
+    </toc></div>
+                                        
+                                        
+                                        <div class="docs-toc-mobile visually-hidden   d-print-none d-xl-none">
+                                            <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
+                                                Table of Contents
+                                            </button>
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li><a href="#-exemples-concrets-pour-chaque-pattern">🎯 <strong>Exemples Concrets pour Chaque Pattern</strong></a></li>
+    <li><a href="#-organisation-des-exemples">📁 <strong>Organisation des Exemples</strong></a>
+      <ul>
+        <li><a href="#patterns-de-stockage"><strong>Patterns de Stockage</strong></a></li>
+        <li><a href="#techniques-avancées"><strong>Techniques Avancées</strong></a></li>
+        <li><a href="#architectures-avancées"><strong>Architectures Avancées</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-comment-utiliser-ces-exemples">🚀 <strong>Comment Utiliser ces Exemples</strong></a>
+      <ul>
+        <li><a href="#1-comprendre-le-pattern"><strong>1. Comprendre le Pattern</strong></a></li>
+        <li><a href="#2-analyser-le-code"><strong>2. Analyser le Code</strong></a></li>
+        <li><a href="#3-adapter-à-votre-contexte"><strong>3. Adapter à Votre Contexte</strong></a></li>
+        <li><a href="#4-tester-et-itérer"><strong>4. Tester et Itérer</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-conseils-d">💡 <strong>Conseils d’Utilisation</strong></a>
+      <ul>
+        <li><a href="#pour-les-débutants"><strong>Pour les Débutants</strong></a></li>
+        <li><a href="#pour-les-expérimentés"><strong>Pour les Expérimentés</strong></a></li>
+        <li><a href="#pour-les-équipes"><strong>Pour les Équipes</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-liens-avec-les-chapitres">🔗 <strong>Liens avec les Chapitres</strong></a></li>
+    <li><a href="#-votre-prochaine-étape">🎯 <strong>Votre Prochaine Étape</strong></a></li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12  mt-0">
+                                            <div class="mb-0 d-flex">
+                                                
+                                                <h1 class="content-title mb-0">
+                                                    Exemples et Implémentations
+                                                    
+                                                </h1>
+                                            </div>
+                                            
+                                            <div id="content" class="main-content" >
+                                                
+    <div class="row flex-xl-wrap">
+        
+        <div id="list-item" class="col-md-4 col-12 mt-4 pt-2">
+            <a class="text-decoration-none text-reset" href="/examples/stockage-sql-classique/">
+                <div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1">
+                    <span class="icon-color d-flex my-3">
+                        <i class="material-icons align-middle">article</i>
+                        
+                        <i class="material-icons icon-faint align-middle ms-auto" title="Directory">folder</i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <p class="fs-5 fw-semibold card-title mb-1">Stockage SQL Classique - Exemple Concret</p>
+                        <p class="para card-text mb-0">Implémentation concrète du pattern de stockage SQL classique avec Doctrine</p>
+                    </div>
+                    
+                </div>
+            </a>
+        </div>
+        
+        <div id="list-item" class="col-md-4 col-12 mt-4 pt-2">
+            <a class="text-decoration-none text-reset" href="/examples/stockage-patterns/">
+                <div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1">
+                    <span class="icon-color d-flex my-3">
+                        <i class="material-icons align-middle">article</i>
+                        
+                        <i class="material-icons icon-faint align-middle ms-auto" title="Directory">folder</i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <p class="fs-5 fw-semibold card-title mb-1">Patterns de Stockage - Comparaison des Approches</p>
+                        <p class="para card-text mb-0">Comparaison détaillée des différents patterns de stockage et leurs cas d'usage</p>
+                    </div>
+                    
+                </div>
+            </a>
+        </div>
+        
+        <div id="list-item" class="col-md-4 col-12 mt-4 pt-2">
+            <a class="text-decoration-none text-reset" href="/examples/stockage-sql-cqs/">
+                <div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1">
+                    <span class="icon-color d-flex my-3">
+                        <i class="material-icons align-middle">article</i>
+                        
+                        <i class="material-icons icon-faint align-middle ms-auto" title="Directory">folder</i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <p class="fs-5 fw-semibold card-title mb-1">Stockage SQL CQS - Exemple Concret</p>
+                        <p class="para card-text mb-0">Implémentation concrète du pattern CQS (Command Query Separation) avec Doctrine</p>
+                    </div>
+                    
+                </div>
+            </a>
+        </div>
+        
+        <div id="list-item" class="col-md-4 col-12 mt-4 pt-2">
+            <a class="text-decoration-none text-reset" href="/examples/stockage-sql-cqrs/">
+                <div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1">
+                    <span class="icon-color d-flex my-3">
+                        <i class="material-icons align-middle">article</i>
+                        
+                        <i class="material-icons icon-faint align-middle ms-auto" title="Directory">folder</i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <p class="fs-5 fw-semibold card-title mb-1">Stockage SQL CQRS - Exemple Concret</p>
+                        <p class="para card-text mb-0">Implémentation concrète du pattern CQRS (Command Query Responsibility Segregation) avec Doctrine</p>
+                    </div>
+                    
+                </div>
+            </a>
+        </div>
+        
+    </div>
+
+                                            </div>
+                                            <div><hr class="doc-hr">
+<div id="doc-nav" class="d-print-none">
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        
+                        © 2025 Grégory Planchat. Tous droits réservés.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="row mt-3 pt-3 border-top">
+            <div class="col-12">
+                <div class="text-center">
+                    <h6 class="text-muted mb-2">Nos Sponsors</h6>
+                    <p class="text-muted small mb-2">Merci à nos partenaires qui soutiennent cette initiative</p>
+                    <div class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                        
+                        <div class="sponsor-item">
+                            <a href="https://kiboko.fr" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <span class="badge bg-light text-dark border px-2 py-1 small">Kiboko</span>
+                            </a>
+                        </div>
+                        
+                        <div class="sponsor-item">
+                            <a href="https://gyroscops.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <span class="badge bg-light text-dark border px-2 py-1 small">Gyroscops</span>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+</main>
+            </div>
+        </div>
+
+        
+        
+        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        
+        
+
+        
+        
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+    
+
+    <script src="/docs/js/bootstrap.c7927bdd82eceb076739257add3f4b0e11379da037c07d5c7110daeb6de0e3edcb2de867604550f88815157e4ec4ddb7.js" integrity="sha384-x5J73YLs6wdnOSV63T9LDhE3naA3wH1ccRDa623g4&#43;3LLehnYEVQ&#43;IgVFX5OxN23"defer></script>
+
+
+    <script type="text/javascript" src="/docs/js/bundle.min.a046e72674401a45bf99217648934a99ff03a7c46d105e47916156e66969388a0643f55a1e850acb495c9bd8be985171.js" integrity="sha384-oEbnJnRAGkW/mSF2SJNKmf8Dp8RtEF5HkWFW5mlpOIoGQ/VaHoUKy0lcm9i&#43;mFFx" crossorigin="anonymous" defer></script>
+
+        
+
+        
+        <script type="module">
     var suggestions = document.getElementById('suggestions');
     var search = document.getElementById('flexsearch');
 
@@ -188,4 +635,7 @@ Table of Contents</button><nav id=toc-mobile><ul class=dropdown-menu><li><a href
         }
     }
     }());
-</script></body></html>
+</script>
+        
+    </body>
+</html>
