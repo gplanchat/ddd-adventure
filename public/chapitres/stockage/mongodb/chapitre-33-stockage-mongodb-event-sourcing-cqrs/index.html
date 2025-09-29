@@ -12,7 +12,7 @@
 
     
 
-<html lang="fr-fr"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=41733&amp;path=livereload" data-no-instant defer></script>
+<html lang="fr-fr"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8" />
     <title>Stockage MongoDB - Event Sourcing &#43; CQRS | DDD Adventure</title>
     <meta name="robots" content="noindex">
@@ -24,19 +24,19 @@
     <meta name="website" content="https://lotusdocs.dev" />
     <meta name="Version" content="v0.1.0" />
     
-    <link rel="icon" href="//localhost:41733/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="//localhost:41733/favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="//localhost:41733/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="//localhost:41733/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="//localhost:41733/favicon-16x16.png">
-<link rel="manifest" crossorigin="use-credentials" href="//localhost:41733/site.webmanifest">
+    <link rel="icon" href="//localhost:1313/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="//localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="//localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="//localhost:1313/site.webmanifest">
 <meta property="og:title" content="Stockage MongoDB - Event Sourcing &#43; CQRS" />
 <meta property="og:description" content="Implémentation complète Event Sourcing &#43; CQRS avec MongoDB pour une architecture hautement scalable" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="//localhost:41733/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/" /><meta property="og:image" content="//localhost:41733/opengraph/card-base-2_hu_e8e5b1d89926b832.png"/><meta property="article:section" content="chapitres" />
+<meta property="og:url" content="//localhost:1313/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/" /><meta property="og:image" content="//localhost:1313/opengraph/card-base-2_hu_e8e5b1d89926b832.png"/><meta property="article:section" content="chapitres" />
 <meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
 <meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="//localhost:41733/opengraph/card-base-2_hu_e8e5b1d89926b832.png"/>
+<meta name="twitter:image" content="//localhost:1313/opengraph/card-base-2_hu_e8e5b1d89926b832.png"/>
 <meta name="twitter:title" content="Stockage MongoDB - Event Sourcing &#43; CQRS"/>
 <meta name="twitter:description" content="Implémentation complète Event Sourcing &#43; CQRS avec MongoDB pour une architecture hautement scalable"/>
 
@@ -46,7 +46,7 @@
     
     
             
-                <script type="text/javascript" src="//localhost:41733/docs/js/flexsearch.bundle.js"></script>
+                <script type="text/javascript" src="//localhost:1313/docs/js/flexsearch.bundle.js"></script>
             
         
     
@@ -83,52 +83,52 @@
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-02-impact-mapping/">Chapitre 2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-02-impact-mapping/">Chapitre 2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">Chapitre 3 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">Chapitre 3 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-04-example-mapping/">Chapitre 4 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-04-example-mapping/">Chapitre 4 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-05-complexite-accidentelle-essentielle/">Chapitre 5 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-05-complexite-accidentelle-essentielle/">Chapitre 5 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-06-granularite-choix-architecturaux/">Chapitre 6 : Granularité des Choix Architecturaux</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-06-granularite-choix-architecturaux/">Chapitre 6 : Granularité des Choix Architecturaux</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-07-modeles-riches-vs-anemiques/">Chapitre 7 : Modèles Riches vs Modèles Anémiques</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-07-modeles-riches-vs-anemiques/">Chapitre 7 : Modèles Riches vs Modèles Anémiques</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/">Chapitre 8 : Architecture Événementielle</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/">Chapitre 8 : Architecture Événementielle</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-09-repositories-persistance/">Chapitre 9 : Repositories et Persistance</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-09-repositories-persistance/">Chapitre 9 : Repositories et Persistance</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-10-choix-type-stockage/">Chapitre 15 : Choix du Type de Stockage</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/fondamentaux/chapitre-10-choix-type-stockage/">Chapitre 15 : Choix du Type de Stockage</a></li>
                                         
                                     
                                 </ul>
@@ -147,27 +147,27 @@
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-13-architecture-cqrs/">Chapitre 15 : Architecture CQRS avec API Platform</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/optionnels/chapitre-13-architecture-cqrs/">Chapitre 15 : Architecture CQRS avec API Platform</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-12-architecture-cqs/">Chapitre 15 : Architecture CQS - Command Query Separation</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/optionnels/chapitre-12-architecture-cqs/">Chapitre 15 : Architecture CQS - Command Query Separation</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-11-event-sourcing/">Chapitre 15 : Event Sourcing - La Source de Vérité</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/optionnels/chapitre-11-event-sourcing/">Chapitre 15 : Event Sourcing - La Source de Vérité</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-14-cqrs-event-sourcing-combines/">Chapitre 15 : CQRS &#43; Event Sourcing Combinés</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/optionnels/chapitre-14-cqrs-event-sourcing-combines/">Chapitre 15 : CQRS &#43; Event Sourcing Combinés</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-15-projections-event-sourcing/">Chapitre 15 : Projections Event Sourcing</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/optionnels/chapitre-15-projections-event-sourcing/">Chapitre 15 : Projections Event Sourcing</a></li>
                                         
                                     
                                 </ul>
@@ -195,32 +195,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-16-stockage-sql-classique/">Chapitre 16 : Stockage SQL - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/sql/chapitre-16-stockage-sql-classique/">Chapitre 16 : Stockage SQL - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-17-stockage-sql-cqs/">Chapitre 17 : Stockage SQL - Approche CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/sql/chapitre-17-stockage-sql-cqs/">Chapitre 17 : Stockage SQL - Approche CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-18-stockage-sql-cqrs/">Chapitre 18 : Stockage SQL - Approche CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/sql/chapitre-18-stockage-sql-cqrs/">Chapitre 18 : Stockage SQL - Approche CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-19-stockage-sql-event-sourcing/">Chapitre 19 : Stockage SQL - Event Sourcing Seul</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/sql/chapitre-19-stockage-sql-event-sourcing/">Chapitre 19 : Stockage SQL - Event Sourcing Seul</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/">Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/">Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-21-stockage-sql-event-sourcing-cqrs/">Chapitre 59 : Stockage SQL - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/sql/chapitre-21-stockage-sql-event-sourcing-cqrs/">Chapitre 59 : Stockage SQL - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -239,32 +239,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-26-stockage-api-event-sourcing-cqs/">Chapitre 26 : Stockage API - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/api/chapitre-26-stockage-api-event-sourcing-cqs/">Chapitre 26 : Stockage API - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/">Chapitre 27 : Stockage API - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/">Chapitre 27 : Stockage API - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-22-stockage-api-classique/">Chapitre 60 : Stockage API - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/api/chapitre-22-stockage-api-classique/">Chapitre 60 : Stockage API - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-23-stockage-api-cqs/">Chapitre 61 : Stockage API - Approche CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/api/chapitre-23-stockage-api-cqs/">Chapitre 61 : Stockage API - Approche CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-24-stockage-api-cqrs/">Chapitre 62 : Stockage API - Approche CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/api/chapitre-24-stockage-api-cqrs/">Chapitre 62 : Stockage API - Approche CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-25-stockage-api-event-sourcing/">Chapitre 63 : Stockage API - Event Sourcing Seul</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/api/chapitre-25-stockage-api-event-sourcing/">Chapitre 63 : Stockage API - Event Sourcing Seul</a></li>
                                                             
                                                         
                                                     </ul>
@@ -283,32 +283,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-28-stockage-mongodb-classique/">Chapitre 28 : Stockage MongoDB - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/mongodb/chapitre-28-stockage-mongodb-classique/">Chapitre 28 : Stockage MongoDB - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-29-stockage-mongodb-cqs/">Chapitre 29 : Stockage MongoDB - Approche CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/mongodb/chapitre-29-stockage-mongodb-cqs/">Chapitre 29 : Stockage MongoDB - Approche CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-30-stockage-mongodb-cqrs/">Chapitre 30 : Stockage MongoDB - Approche CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/mongodb/chapitre-30-stockage-mongodb-cqrs/">Chapitre 30 : Stockage MongoDB - Approche CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-31-stockage-mongodb-event-sourcing/">Chapitre 31 : Stockage MongoDB - Event Sourcing</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/mongodb/chapitre-31-stockage-mongodb-event-sourcing/">Chapitre 31 : Stockage MongoDB - Event Sourcing</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-32-stockage-mongodb-event-sourcing-cqs/">Stockage MongoDB - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/mongodb/chapitre-32-stockage-mongodb-event-sourcing-cqs/">Stockage MongoDB - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class="current no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/">Stockage MongoDB - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class="current no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/">Stockage MongoDB - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -327,32 +327,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-34-stockage-elasticsearch-classique/">Stockage ElasticSearch - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/elasticsearch/chapitre-34-stockage-elasticsearch-classique/">Stockage ElasticSearch - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-35-stockage-elasticsearch-cqs/">Stockage ElasticSearch - CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/elasticsearch/chapitre-35-stockage-elasticsearch-cqs/">Stockage ElasticSearch - CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-36-stockage-elasticsearch-cqrs/">Stockage ElasticSearch - CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/elasticsearch/chapitre-36-stockage-elasticsearch-cqrs/">Stockage ElasticSearch - CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-37-stockage-elasticsearch-event-sourcing/">Stockage ElasticSearch - Event Sourcing</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/elasticsearch/chapitre-37-stockage-elasticsearch-event-sourcing/">Stockage ElasticSearch - Event Sourcing</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-38-stockage-elasticsearch-event-sourcing-cqs/">Stockage ElasticSearch - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/elasticsearch/chapitre-38-stockage-elasticsearch-event-sourcing-cqs/">Stockage ElasticSearch - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-39-stockage-elasticsearch-event-sourcing-cqrs/">Stockage ElasticSearch - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/elasticsearch/chapitre-39-stockage-elasticsearch-event-sourcing-cqrs/">Stockage ElasticSearch - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -371,32 +371,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-40-stockage-in-memory-classique/">Stockage In-Memory - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/in-memory/chapitre-40-stockage-in-memory-classique/">Stockage In-Memory - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-41-stockage-in-memory-cqs/">Stockage In-Memory - CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/in-memory/chapitre-41-stockage-in-memory-cqs/">Stockage In-Memory - CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-42-stockage-in-memory-cqrs/">Stockage In-Memory - CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/in-memory/chapitre-42-stockage-in-memory-cqrs/">Stockage In-Memory - CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-43-stockage-in-memory-event-sourcing/">Stockage In-Memory - Event Sourcing</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/in-memory/chapitre-43-stockage-in-memory-event-sourcing/">Stockage In-Memory - Event Sourcing</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-44-stockage-in-memory-event-sourcing-cqs/">Stockage In-Memory - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/in-memory/chapitre-44-stockage-in-memory-event-sourcing-cqs/">Stockage In-Memory - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-45-stockage-in-memory-event-sourcing-cqrs/">Stockage In-Memory - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/in-memory/chapitre-45-stockage-in-memory-event-sourcing-cqrs/">Stockage In-Memory - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -415,32 +415,32 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-46-stockage-temporal-classique/">Stockage Temporal - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/temporal/chapitre-46-stockage-temporal-classique/">Stockage Temporal - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-47-stockage-temporal-cqs/">Stockage Temporal - CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/temporal/chapitre-47-stockage-temporal-cqs/">Stockage Temporal - CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-48-stockage-temporal-cqrs/">Stockage Temporal - CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/temporal/chapitre-48-stockage-temporal-cqrs/">Stockage Temporal - CQRS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-49-stockage-temporal-event-sourcing/">Stockage Temporal - Event Sourcing</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/temporal/chapitre-49-stockage-temporal-event-sourcing/">Stockage Temporal - Event Sourcing</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-50-stockage-temporal-event-sourcing-cqs/">Stockage Temporal - Event Sourcing &#43; CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/temporal/chapitre-50-stockage-temporal-event-sourcing-cqs/">Stockage Temporal - Event Sourcing &#43; CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-51-stockage-temporal-event-sourcing-cqrs/">Stockage Temporal - Event Sourcing &#43; CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/temporal/chapitre-51-stockage-temporal-event-sourcing-cqrs/">Stockage Temporal - Event Sourcing &#43; CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -459,17 +459,17 @@
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-52-stockage-multi-sources-classique/">Stockage Multi-sources - Approche Classique</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/multi-sources/chapitre-52-stockage-multi-sources-classique/">Stockage Multi-sources - Approche Classique</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-53-stockage-multi-sources-cqs/">Stockage Multi-sources - CQS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/multi-sources/chapitre-53-stockage-multi-sources-cqs/">Stockage Multi-sources - CQS</a></li>
                                                             
                                                         
                                                             
                                                             
-                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-54-stockage-multi-sources-cqrs/">Stockage Multi-sources - CQRS</a></li>
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/stockage/multi-sources/chapitre-54-stockage-multi-sources-cqrs/">Stockage Multi-sources - CQRS</a></li>
                                                             
                                                         
                                                     </ul>
@@ -493,22 +493,22 @@
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-58-gestion-donnees-validation/">Chapitre 58 : Gestion des Données et Validation</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/techniques/chapitre-58-gestion-donnees-validation/">Chapitre 58 : Gestion des Données et Validation</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-59-pagination-performance/">Chapitre 59 : Pagination et Performance</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/techniques/chapitre-59-pagination-performance/">Chapitre 59 : Pagination et Performance</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-60-gestion-erreurs-observabilite/">Chapitre 60 : Gestion d&#39;Erreurs et Observabilité</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/techniques/chapitre-60-gestion-erreurs-observabilite/">Chapitre 60 : Gestion d&#39;Erreurs et Observabilité</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-61-tests-qualite/">Chapitre 61 : Tests et Qualité</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/techniques/chapitre-61-tests-qualite/">Chapitre 61 : Tests et Qualité</a></li>
                                         
                                     
                                 </ul>
@@ -527,12 +527,12 @@
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/avances/chapitre-62-securite-autorisation/">Chapitre 62 : Sécurité et Autorisation - Protéger votre API Platform</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/avances/chapitre-62-securite-autorisation/">Chapitre 62 : Sécurité et Autorisation - Protéger votre API Platform</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/avances/chapitre-63-frontend-integration/">Chapitre 63 : Frontend et Intégration - Connecter votre Interface Utilisateur</a></li>
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:1313/chapitres/avances/chapitre-63-frontend-integration/">Chapitre 63 : Frontend et Intégration - Connecter votre Interface Utilisateur</a></li>
                                         
                                     
                                 </ul>
@@ -713,7 +713,6 @@
         <li><a href="#quand-utiliser-event-sourcing--cqrs-avec-mongodb"><strong>Quand Utiliser Event Sourcing + CQRS avec MongoDB</strong></a></li>
       </ul>
     </li>
-    <li><a href="#-votre-prochaine-étape">🚀 <strong>Votre Prochaine Étape</strong></a></li>
   </ul>
 </nav>
     </toc></div>
@@ -759,7 +758,6 @@
         <li><a href="#quand-utiliser-event-sourcing--cqrs-avec-mongodb"><strong>Quand Utiliser Event Sourcing + CQRS avec MongoDB</strong></a></li>
       </ul>
     </li>
-    <li><a href="#-votre-prochaine-étape">🚀 <strong>Votre Prochaine Étape</strong></a></li>
   </ul>
 </nav></div>
                                         <div class="docs-content col-12 col-xl-9 mt-0">
@@ -1607,9 +1605,7 @@
 <li><strong>Budget important</strong> : Investissement en complexité justifié</li>
 <li><strong>Performance critique</strong> : Besoins de performance maximale</li>
 <li><strong>Analytics avancées</strong> : Besoins de rapports complexes</li>
-<li><strong>Audit trail complet</strong> : Traçabilité absolue requise</li>
-</ul>
-<h2 id="-votre-prochaine-étape">🚀 <strong>Votre Prochaine Étape</strong> <a href="#-votre-prochaine-%c3%a9tape" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2>
+<li><strong>Audit trail complet</strong> : T
 
 <div class="chapter-navigation">
   <h2 class="chapter-nav-title">🎯 Votre Prochaine Étape</h2>
@@ -2464,9 +2460,14 @@
   }
 }
 </style>
-
+re-01-introduction-event-storming-ddd/&quot;
+<blockquote>
+<p>}}
+{{&lt; /chapter-nav &gt;}}</p></blockquote>
+</li>
+</ul>
 <hr>
-<p><em>Cette approche Event Sourcing + CQRS avec MongoDB représente l&rsquo;état de l&rsquo;art en matière d&rsquo;architecture scalable et flexible, parfaitement adaptée aux besoins les plus exigeants de Gyroscops.</em></p>
+<p>*Cette approche Event Sourcing + CQRS avec MongoDB représente l&rsquo;état de l&rsquo;art en matière d&rsquo;architecture scalable et flexible, par</p>
 
     </div>
 
@@ -2586,7 +2587,7 @@
     <script src="/docs/js/bootstrap.js" defer></script>
 
 
-    <script type="text/javascript" src="//localhost:41733/docs/js/bundle.js" defer></script>
+    <script type="text/javascript" src="//localhost:1313/docs/js/bundle.js" defer></script>
 
         
 
