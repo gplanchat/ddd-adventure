@@ -2,7 +2,7 @@
 title: "Chapitre 4 : L'Example Mapping - Détailer les Règles Métier"
 description: "Maîtriser l'Example Mapping pour détailler les règles métier complexes découvertes lors de l'Event Storming"
 date: 2024-12-19
-draft: false
+draft: true
 type: "docs"
 weight: 4
 ---
