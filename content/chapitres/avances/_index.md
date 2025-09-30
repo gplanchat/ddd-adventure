@@ -7,8 +7,6 @@ type: "docs"
 weight: 5
 ---
 
-# 🚀 Chapitres Avancés
-
 Ces chapitres couvrent les aspects avancés nécessaires pour les systèmes de production. Ils s'appuient sur tous les chapitres précédents.
 
 ## 📚 Liste des Chapitres

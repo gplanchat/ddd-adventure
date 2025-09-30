@@ -7,8 +7,6 @@ type: "docs"
 weight: 2
 ---
 
-# Stockage API
-
 Cette section couvre toutes les approches de stockage via API et services externes, de l'approche classique aux architectures avancées.
 
 ## Chapitres Disponibles

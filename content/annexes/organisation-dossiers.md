@@ -5,8 +5,6 @@ weight: 1
 description: "Guide complet pour structurer votre projet DDD selon sa taille et sa complexité"
 ---
 
-# 📁 Organisation des dossiers
-
 Découvrez différentes approches pour structurer votre projet DDD selon sa taille et sa complexité.
       
 ## 🎯 Principes fondamentaux

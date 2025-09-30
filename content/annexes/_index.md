@@ -5,8 +5,6 @@ weight: 5
 description: "Ressources complémentaires et bonnes pratiques pour le DDD"
 ---
 
-# 📚 Annexes
-
 Ressources complémentaires, bonnes pratiques et guides avancés pour maîtriser le Domain-Driven Design.
 
 ## 🎯 Ressources complémentaires

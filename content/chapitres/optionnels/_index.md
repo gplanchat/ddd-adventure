@@ -7,8 +7,6 @@ type: "docs"
 weight: 2
 ---
 
-# 🚀 Chapitres Optionnels
-
 Ces chapitres présentent les patterns avancés pour les équipes expérimentées. Ils ne sont pas nécessaires pour tous les projets, mais offrent des solutions puissantes pour les systèmes complexes.
 
 ## Prérequis
