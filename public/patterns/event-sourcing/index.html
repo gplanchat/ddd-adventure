@@ -1,0 +1,400 @@
+<!doctype html><html lang=fr-fr><head><meta charset=utf-8><title>Event Sourcing - Stocker les Événements comme Source de Vérité | DDD Adventure</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Découvrez Event Sourcing, le pattern qui stocke les événements métier comme source de vérité pour une traçabilité complète"><meta name=keywords content="Documentation,Hugo,Hugo Theme,Bootstrap"><meta name=author content="Colin Wilson - Lotus Labs"><meta name=email content="support@aigis.uk"><meta name=website content="https://lotusdocs.dev"><meta name=Version content="v0.1.0"><link rel=icon href=/favicon.ico sizes=any><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest crossorigin=use-credentials href=/site.webmanifest><meta property="og:title" content="Event Sourcing - Stocker les Événements comme Source de Vérité"><meta property="og:description" content="Découvrez Event Sourcing, le pattern qui stocke les événements métier comme source de vérité pour une traçabilité complète"><meta property="og:type" content="article"><meta property="og:url" content="/patterns/event-sourcing/"><meta property="og:image" content="/opengraph/card-base-2_hu_fcb07a20e7579b4.png"><meta property="article:section" content="patterns"><meta property="article:published_time" content="2024-12-19T00:00:00+00:00"><meta property="article:modified_time" content="2024-12-19T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="/opengraph/card-base-2_hu_fcb07a20e7579b4.png"><meta name=twitter:title content="Event Sourcing - Stocker les Événements comme Source de Vérité"><meta name=twitter:description content="Découvrez Event Sourcing, le pattern qui stocke les événements métier comme source de vérité pour une traçabilité complète"><link rel=alternate type=application/atom+xml title="Atom feed for DDD Adventure" href=/index.xml><script type=text/javascript src=/docs/js/flexsearch.bundle.min.f5159d5a2151ffbb653996ec17eaff7da4e04c286bd879fc41839d36a5586f3f20eaead0b6089de48f9adc669cdee771.js integrity=sha384-9RWdWiFR/7tlOZbsF+r/faTgTChr2Hn8QYOdNqVYbz8g6urQtgid5I+a3Gac3udx crossorigin=anonymous></script><link rel=stylesheet href=/docs/scss/style.min.3377194a2707d3dadf7a16321e3f45dec030951decd2b724d6e046d8a72467cab3654273b75f2768a9a72140ee026ecf.css integrity=sha384-M3cZSicH09rfehYyHj9F3sAwlR3s0rck1uBG2KckZ8qzZUJzt18naKmnIUDuAm7P crossorigin=anonymous></head><body><div class=content><div class="page-wrapper toggled"><nav id=sidebar class=sidebar-wrapper><div class=sidebar-brand><a href=/ aria-label=HomePage alt=HomePage><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></a></div><div class=sidebar-content style="height:calc(100% - 131px)"><ul class=sidebar-menu><li><a class=sidebar-root-link href=/patterns/cqrs/>CQRS - Command Query Responsibility Segregation</a></li><li class=current><a class=sidebar-root-link href=/patterns/event-sourcing/>Event Sourcing - Stocker les Événements comme Source de Vérité</a></li><li><a class=sidebar-root-link href=/patterns/repositories/>Repositories - Patterns de Persistance</a></li></ul></div><ul class="sidebar-footer list-unstyled mb-0"></ul></nav><main class="page-content bg-transparent"><div id=top-header class="top-header d-print-none"><div class="header-bar d-flex justify-content-between"><div class="d-flex align-items-center"><a href=/ class="logo-icon me-3" aria-label=HomePage alt=HomePage><div class=small><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></div><div class=big><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></div></a><button id=close-sidebar class="btn btn-icon btn-soft">
+<span class="material-icons size-20 menu-icon align-middle">menu</span>
+</button>
+<button id=flexsearch-button class="ms-3 btn btn-soft" data-bs-toggle=collapse data-bs-target=#FlexSearchCollapse aria-expanded=false aria-controls=FlexSearchCollapse>
+<span class="material-icons size-20 menu-icon align-middle">search</span>
+<span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span><div class="d-none d-sm-block"><span class=flexsearch-button-keys><kbd class=flexsearch-button-cmd-key><svg width="44" height="15"><path d="M2.118 11.5A1.519 1.519.0 011 11.042 1.583 1.583.0 011 8.815a1.519 1.519.0 011.113-.458h.715V6.643h-.71A1.519 1.519.0 011 6.185 1.519 1.519.0 01.547 5.071 1.519 1.519.0 011 3.958 1.519 1.519.0 012.118 3.5a1.519 1.519.0 011.114.458A1.519 1.519.0 013.69 5.071v.715H5.4V5.071A1.564 1.564.0 016.976 3.5 1.564 1.564.0 018.547 5.071 1.564 1.564.0 016.976 6.643H6.261V8.357h.715a1.575 1.575.0 011.113 2.685 1.583 1.583.0 01-2.227.0A1.519 1.519.0 015.4 9.929V9.214H3.69v.715a1.519 1.519.0 01-.458 1.113A1.519 1.519.0 012.118 11.5zm0-.857a.714.714.0 00.715-.714V9.214H2.118a.715.715.0 100 1.429zm4.858.0a.715.715.0 100-1.429H6.261v.715a.714.714.0 00.715.714zM3.69 8.357H5.4V6.643H3.69zM2.118 5.786h.715V5.071a.714.714.0 00-.715-.714.715.715.0 00-.5 1.22A.686.686.0 002.118 5.786zm4.143.0h.715a.715.715.0 00.5-1.22.715.715.0 00-1.22.5z" fill="currentColor"/><path d="M12.4 11.475H11.344l3.879-7.95h1.056z" fill="currentColor"/><path d="M25.073 5.384l-.864.576a2.121 2.121.0 00-1.786-.923 2.207 2.207.0 00-2.266 2.326 2.206 2.206.0 002.266 2.325 2.1 2.1.0 001.782-.918l.84.617a3.108 3.108.0 01-2.622 1.293 3.217 3.217.0 01-3.349-3.317 3.217 3.217.0 013.349-3.317A3.046 3.046.0 0125.073 5.384z" fill="currentColor"/><path d="M30.993 5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172z" fill="currentColor"/><path d="M34.67 4.164c1.471.0 2.266.658 2.266 1.851.0 1.087-.832 1.809-2.134 1.855l2.107 2.691h-1.28L33.591 7.87H33.07v2.691H32.038v-6.4zm-1.6.969v1.8h1.572c.832.0 1.22-.3 1.22-.918s-.411-.882-1.22-.882z" fill="currentColor"/><path d="M42.883 10.561H38.31v-6.4h1.033V9.583h3.54z" fill="currentColor"/></svg>
+</kbd><kbd class=flexsearch-button-key><svg width="15" height="15"><path d="M5.926 12.279H4.41L9.073 2.721H10.59z" fill="currentColor"/></svg></kbd></span></div></button></div><div class="d-flex align-items-center"><ul class="list-unstyled mb-0"></ul></div></div><div class=collapse id=FlexSearchCollapse><div class=flexsearch-container><div class=flexsearch-keymap><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8m3-3-3 3-3-3"/></g></svg></kbd>
+<kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8m3 3-3-3-3 3"/></g></svg></kbd>
+<span class=flexsearch-key-label>to navigate</span></li><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4m3 3-3-3 3-3"/></g></svg></kbd>
+<span class=flexsearch-key-label>to select</span></li><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993.0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016s1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5s-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864.0 1.6425 1.031 1.5443 2.2492h-2.956"/></g></svg></kbd>
+<span class=flexsearch-key-label>to close</span></li></div><form class="flexsearch position-relative flex-grow-1 ms-2 me-2"><div class="d-flex flex-row"><input id=flexsearch class=form-control type=search placeholder=Search aria-label=Search autocomplete=off>
+<button id=hideFlexsearch type=button class="ms-2 btn btn-soft">
+cancel</button></div><div id=suggestions class="shadow rounded-1 d-none"></div></form></div></div></div><div class=container-fluid><div class=layout-spacing><div class="d-md-flex justify-content-between align-items-center"><nav aria-label=breadcrumb class="d-inline-block pb-2 mt-1 mt-sm-0"><ul id=breadcrumbs class="breadcrumb bg-transparent mb-0" itemscope itemtype=https://schema.org/BreadcrumbList><li class="breadcrumb-item text-capitalize active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=/patterns/><i class="material-icons size-20 align-text-bottom" itemprop=name>Home</i>
+</a><meta itemprop=position content='1'></li><li class="breadcrumb-item text-capitalize active" itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Event Sourcing - Stocker les Événements comme Source de Vérité</span>
+<meta itemprop=position content='2'></li></ul></nav></div><div class="row flex-xl-nowrap"><div class="docs-toc col-xl-3 d-xl-block"><toc><div class="fw-bold text-uppercase mb-2">On this page</div><nav id=TableOfContents><ul><li><a href=#-qu>🌟 <strong>Qu’est-ce que l’Event Sourcing ?</strong></a><ul><li><a href=#le-principe-fondamental><strong>Le Principe Fondamental</strong></a></li></ul></li><li><a href=#-event-sourcing-dans-gyroscops>🏗️ <strong>Event Sourcing dans Gyroscops</strong></a><ul><li><a href=#contexte-métier--gestion-des-abonnements><strong>Contexte Métier : Gestion des Abonnements</strong></a></li></ul></li><li><a href=#-avantages-de-l>🎯 <strong>Avantages de l’Event Sourcing</strong></a><ul><li><a href=#1-traçabilité-complète><strong>1. Traçabilité Complète</strong></a></li><li><a href=#2-flexibilité-temporelle><strong>2. Flexibilité Temporelle</strong></a></li><li><a href=#3-évolutivité><strong>3. Évolutivité</strong></a></li><li><a href=#4-cohérence-événementielle><strong>4. Cohérence Événementielle</strong></a></li></ul></li><li><a href=#-implémentation-dans-gyroscops>🔧 <strong>Implémentation dans Gyroscops</strong></a><ul><li><a href=#structure-des-dossiers><strong>Structure des Dossiers</strong></a></li><li><a href=#event-store><strong>Event Store</strong></a></li><li><a href=#projections><strong>Projections</strong></a></li></ul></li><li><a href=#-patterns-avancés-avec-event-sourcing>🚀 <strong>Patterns Avancés avec Event Sourcing</strong></a><ul><li><a href=#1-snapshots><strong>1. Snapshots</strong></a></li><li><a href=#2-event-sourcing--cqrs><strong>2. Event Sourcing + CQRS</strong></a></li><li><a href=#3-event-sourcing--api-platform><strong>3. Event Sourcing + API Platform</strong></a></li></ul></li><li><a href=#-performance-et-optimisation>⚡ <strong>Performance et Optimisation</strong></a><ul><li><a href=#optimisations-de-l><strong>Optimisations de l’Event Store</strong></a></li><li><a href=#optimisations-des-projections><strong>Optimisations des Projections</strong></a></li></ul></li><li><a href=#-quand-utiliser-l>🎯 <strong>Quand Utiliser l’Event Sourcing ?</strong></a><ul><li><a href=#-cas-d><strong>✅ Cas d’Usage Appropriés</strong></a></li><li><a href=#-cas-d-1><strong>❌ Cas d’Usage Inappropriés</strong></a></li></ul></li><li><a href=#-migration-vers-event-sourcing>🔄 <strong>Migration vers Event Sourcing</strong></a><ul><li><a href=#étape-1--identifier-les-événements-métier><strong>Étape 1 : Identifier les Événements Métier</strong></a></li><li><a href=#étape-2--créer-l><strong>Étape 2 : Créer l’Event Store</strong></a></li><li><a href=#étape-3--migrer-les-agrégats><strong>Étape 3 : Migrer les Agrégats</strong></a></li><li><a href=#étape-4--créer-les-projections><strong>Étape 4 : Créer les Projections</strong></a></li></ul></li><li><a href=#-métriques-et-monitoring>📊 <strong>Métriques et Monitoring</strong></a><ul><li><a href=#métriques-event-store><strong>Métriques Event Store</strong></a></li><li><a href=#métriques-projections><strong>Métriques Projections</strong></a></li></ul></li><li><a href=#-prochaines-étapes>🎯 <strong>Prochaines Étapes</strong></a></li></ul></nav></toc></div><div class="docs-toc-mobile d-print-none d-xl-none"><button id=toc-dropdown-btn class="btn-secondary dropdown-toggle" type=button data-bs-toggle=dropdown data-bs-offset=0,0 aria-expanded=false>
+Table of Contents</button><nav id=toc-mobile><ul class=dropdown-menu><li><a href=#-qu>🌟 <strong>Qu’est-ce que l’Event Sourcing ?</strong></a><ul><li><a href=#le-principe-fondamental><strong>Le Principe Fondamental</strong></a></li></ul></li><li><a href=#-event-sourcing-dans-gyroscops>🏗️ <strong>Event Sourcing dans Gyroscops</strong></a><ul><li><a href=#contexte-métier--gestion-des-abonnements><strong>Contexte Métier : Gestion des Abonnements</strong></a></li></ul></li><li><a href=#-avantages-de-l>🎯 <strong>Avantages de l’Event Sourcing</strong></a><ul><li><a href=#1-traçabilité-complète><strong>1. Traçabilité Complète</strong></a></li><li><a href=#2-flexibilité-temporelle><strong>2. Flexibilité Temporelle</strong></a></li><li><a href=#3-évolutivité><strong>3. Évolutivité</strong></a></li><li><a href=#4-cohérence-événementielle><strong>4. Cohérence Événementielle</strong></a></li></ul></li><li><a href=#-implémentation-dans-gyroscops>🔧 <strong>Implémentation dans Gyroscops</strong></a><ul><li><a href=#structure-des-dossiers><strong>Structure des Dossiers</strong></a></li><li><a href=#event-store><strong>Event Store</strong></a></li><li><a href=#projections><strong>Projections</strong></a></li></ul></li><li><a href=#-patterns-avancés-avec-event-sourcing>🚀 <strong>Patterns Avancés avec Event Sourcing</strong></a><ul><li><a href=#1-snapshots><strong>1. Snapshots</strong></a></li><li><a href=#2-event-sourcing--cqrs><strong>2. Event Sourcing + CQRS</strong></a></li><li><a href=#3-event-sourcing--api-platform><strong>3. Event Sourcing + API Platform</strong></a></li></ul></li><li><a href=#-performance-et-optimisation>⚡ <strong>Performance et Optimisation</strong></a><ul><li><a href=#optimisations-de-l><strong>Optimisations de l’Event Store</strong></a></li><li><a href=#optimisations-des-projections><strong>Optimisations des Projections</strong></a></li></ul></li><li><a href=#-quand-utiliser-l>🎯 <strong>Quand Utiliser l’Event Sourcing ?</strong></a><ul><li><a href=#-cas-d><strong>✅ Cas d’Usage Appropriés</strong></a></li><li><a href=#-cas-d-1><strong>❌ Cas d’Usage Inappropriés</strong></a></li></ul></li><li><a href=#-migration-vers-event-sourcing>🔄 <strong>Migration vers Event Sourcing</strong></a><ul><li><a href=#étape-1--identifier-les-événements-métier><strong>Étape 1 : Identifier les Événements Métier</strong></a></li><li><a href=#étape-2--créer-l><strong>Étape 2 : Créer l’Event Store</strong></a></li><li><a href=#étape-3--migrer-les-agrégats><strong>Étape 3 : Migrer les Agrégats</strong></a></li><li><a href=#étape-4--créer-les-projections><strong>Étape 4 : Créer les Projections</strong></a></li></ul></li><li><a href=#-métriques-et-monitoring>📊 <strong>Métriques et Monitoring</strong></a><ul><li><a href=#métriques-event-store><strong>Métriques Event Store</strong></a></li><li><a href=#métriques-projections><strong>Métriques Projections</strong></a></li></ul></li><li><a href=#-prochaines-étapes>🎯 <strong>Prochaines Étapes</strong></a></li></ul></nav></div><div class="docs-content col-12 col-xl-9 mt-0"><div class="mb-0 d-flex"><h1 class="content-title mb-0">Event Sourcing - Stocker les Événements comme Source de Vérité</h1></div><div id=content class=main-content><div data-prismjs-copy data-prismjs-copy-success data-prismjs-copy-error><h1 id=-event-sourcing---stocker-les-événements-comme-source-de-vérité>🎯 Event Sourcing - Stocker les Événements comme Source de Vérité <a href=#-event-sourcing---stocker-les-%c3%a9v%c3%a9nements-comme-source-de-v%c3%a9rit%c3%a9 class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h1><h2 id=-qu>🌟 <strong>Qu&rsquo;est-ce que l&rsquo;Event Sourcing ?</strong> <a href=#-qu class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p><strong>Event Sourcing</strong> est un pattern architectural qui stocke les <strong>événements métier</strong> comme source de vérité, plutôt que l&rsquo;état actuel des entités.</p><h3 id=le-principe-fondamental><strong>Le Principe Fondamental</strong> <a href=#le-principe-fondamental class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><blockquote><p><strong>&ldquo;L&rsquo;état d&rsquo;une entité est la conséquence de tous les événements qui lui sont arrivés&rdquo;</strong></p></blockquote><p>Au lieu de stocker l&rsquo;état actuel, on stocke :</p><ul><li><strong>Tous les événements</strong> qui ont modifié l&rsquo;entité</li><li><strong>L&rsquo;ordre chronologique</strong> de ces événements</li><li><strong>Les métadonnées</strong> associées à chaque événement</li></ul><h2 id=-event-sourcing-dans-gyroscops>🏗️ <strong>Event Sourcing dans Gyroscops</strong> <a href=#-event-sourcing-dans-gyroscops class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=contexte-métier--gestion-des-abonnements><strong>Contexte Métier : Gestion des Abonnements</strong> <a href=#contexte-m%c3%a9tier--gestion-des-abonnements class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>Dans Gyroscops, un abonnement passe par plusieurs états :</p><h4 id=événements-métier><strong>Événements Métier</strong> <a href=#%c3%a9v%c3%a9nements-m%c3%a9tier class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#75715e>// Événement : Abonnement créé
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SubscriptionCreated</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>DomainEvent</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>SubscriptionId</span> $subscriptionId,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>PlanId</span> $planId,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>CustomerId</span> $customerId,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>DateTime</span> $createdAt,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>BillingCycle</span> $billingCycle
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Événement : Abonnement activé
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SubscriptionActivated</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>DomainEvent</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>SubscriptionId</span> $subscriptionId,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>DateTime</span> $activatedAt,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>DateTime</span> $nextBillingDate
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Événement : Paiement traité
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PaymentProcessed</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>DomainEvent</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>SubscriptionId</span> $subscriptionId,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>PaymentId</span> $paymentId,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>Amount</span> $amount,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>DateTime</span> $processedAt
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Événement : Abonnement suspendu
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SubscriptionSuspended</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>DomainEvent</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>SubscriptionId</span> $subscriptionId,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>string</span> $reason,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>DateTime</span> $suspendedAt
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h4 id=reconstruction-de-l><strong>Reconstruction de l&rsquo;État</strong> <a href=#reconstruction-de-l class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Subscription</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SubscriptionId</span> $id;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SubscriptionStatus</span> $status;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>DateTime</span> $nextBillingDate;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>array</span> $payments <span style=color:#f92672>=</span> [];
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>fromEvents</span>(<span style=color:#66d9ef>array</span> $events)<span style=color:#f92672>:</span> <span style=color:#a6e22e>self</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $subscription <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>self</span>();
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>foreach</span> ($events <span style=color:#66d9ef>as</span> $event) {
+</span></span><span style=display:flex><span>            $subscription<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>apply</span>($event);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $subscription;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>apply</span>(<span style=color:#a6e22e>DomainEvent</span> $event)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>match</span> ($event<span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>SubscriptionCreated</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span> <span style=color:#f92672>=&gt;</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>applySubscriptionCreated</span>($event),
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>SubscriptionActivated</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span> <span style=color:#f92672>=&gt;</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>applySubscriptionActivated</span>($event),
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>PaymentProcessed</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span> <span style=color:#f92672>=&gt;</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>applyPaymentProcessed</span>($event),
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>SubscriptionSuspended</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span> <span style=color:#f92672>=&gt;</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>applySubscriptionSuspended</span>($event),
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>applySubscriptionCreated</span>(<span style=color:#a6e22e>SubscriptionCreated</span> $event)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span> <span style=color:#f92672>=</span> $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>subscriptionId</span>;
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>status</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>SubscriptionStatus</span><span style=color:#f92672>::</span><span style=color:#a6e22e>PENDING</span>;
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>nextBillingDate</span> <span style=color:#f92672>=</span> $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createdAt</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>add</span>($event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>billingCycle</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>interval</span>());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>applySubscriptionActivated</span>(<span style=color:#a6e22e>SubscriptionActivated</span> $event)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>status</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>SubscriptionStatus</span><span style=color:#f92672>::</span><span style=color:#a6e22e>ACTIVE</span>;
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>nextBillingDate</span> <span style=color:#f92672>=</span> $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>nextBillingDate</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>applyPaymentProcessed</span>(<span style=color:#a6e22e>PaymentProcessed</span> $event)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>payments</span>[] <span style=color:#f92672>=</span> $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>paymentId</span>;
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>nextBillingDate</span> <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>nextBillingDate</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>add</span>($this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>billingCycle</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>interval</span>());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>applySubscriptionSuspended</span>(<span style=color:#a6e22e>SubscriptionSuspended</span> $event)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>status</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>SubscriptionStatus</span><span style=color:#f92672>::</span><span style=color:#a6e22e>SUSPENDED</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=-avantages-de-l>🎯 <strong>Avantages de l&rsquo;Event Sourcing</strong> <a href=#-avantages-de-l class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=1-traçabilité-complète><strong>1. Traçabilité Complète</strong> <a href=#1-tra%c3%a7abilit%c3%a9-compl%c3%a8te class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Historique complet</strong> : Tous les changements sont enregistrés</li><li><strong>Audit trail</strong> : Qui a fait quoi et quand</li><li><strong>Debugging</strong> : Possibilité de rejouer l&rsquo;historique</li></ul><h3 id=2-flexibilité-temporelle><strong>2. Flexibilité Temporelle</strong> <a href=#2-flexibilit%c3%a9-temporelle class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Time travel</strong> : Voir l&rsquo;état à n&rsquo;importe quel moment</li><li><strong>Replay</strong> : Rejouer les événements pour tester</li><li><strong>Debugging</strong> : Comprendre comment on est arrivé à un état</li></ul><h3 id=3-évolutivité><strong>3. Évolutivité</strong> <a href=#3-%c3%a9volutivit%c3%a9 class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Nouvelles projections</strong> : Créer de nouvelles vues sans modifier le code existant</li><li><strong>Migration</strong> : Faciliter les migrations de données</li><li><strong>Analytics</strong> : Analyser l&rsquo;historique des événements</li></ul><h3 id=4-cohérence-événementielle><strong>4. Cohérence Événementielle</strong> <a href=#4-coh%c3%a9rence-%c3%a9v%c3%a9nementielle class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Source de vérité unique</strong> : Les événements sont la seule source de vérité</li><li><strong>Intégrité</strong> : Impossible de corrompre l&rsquo;historique</li><li><strong>Réconciliation</strong> : Possibilité de détecter les incohérences</li></ul><h2 id=-implémentation-dans-gyroscops>🔧 <strong>Implémentation dans Gyroscops</strong> <a href=#-impl%c3%a9mentation-dans-gyroscops class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=structure-des-dossiers><strong>Structure des Dossiers</strong> <a href=#structure-des-dossiers class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><pre tabindex=0><code>src/Accounting/
+├── Domain/
+│   ├── Events/
+│   │   ├── SubscriptionCreated.php
+│   │   ├── SubscriptionActivated.php
+│   │   ├── PaymentProcessed.php
+│   │   └── SubscriptionSuspended.php
+│   ├── Subscription.php
+│   └── EventStore.php
+├── Infrastructure/
+│   ├── EventStore/
+│   │   ├── DoctrineEventStore.php
+│   │   └── EventStoreRepository.php
+│   └── Projections/
+│       ├── SubscriptionProjection.php
+│       └── PaymentProjection.php
+└── Application/
+    ├── Command/
+    │   └── ActivateSubscription/
+    └── Query/
+        └── GetSubscriptionHistory/</code></pre><h3 id=event-store><strong>Event Store</strong> <a href=#event-store class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>EventStore</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>append</span>(<span style=color:#a6e22e>StreamId</span> $streamId, <span style=color:#66d9ef>array</span> $events, <span style=color:#a6e22e>int</span> $expectedVersion)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getEvents</span>(<span style=color:#a6e22e>StreamId</span> $streamId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getEventsFromVersion</span>(<span style=color:#a6e22e>StreamId</span> $streamId, <span style=color:#a6e22e>int</span> $fromVersion)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DoctrineEventStore</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>EventStore</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>append</span>(<span style=color:#a6e22e>StreamId</span> $streamId, <span style=color:#66d9ef>array</span> $events, <span style=color:#a6e22e>int</span> $expectedVersion)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>transactional</span>(<span style=color:#66d9ef>function</span> () <span style=color:#66d9ef>use</span> ($streamId, $events, $expectedVersion) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Vérifier la version attendue
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            $currentVersion <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getCurrentVersion</span>($streamId);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> ($currentVersion <span style=color:#f92672>!==</span> $expectedVersion) {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>ConcurrencyException</span>(<span style=color:#e6db74>&#39;Version mismatch&#39;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Enregistrer les événements
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>foreach</span> ($events <span style=color:#66d9ef>as</span> $event) {
+</span></span><span style=display:flex><span>                $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persistEvent</span>($streamId, $event);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getEvents</span>(<span style=color:#a6e22e>StreamId</span> $streamId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>eventRepository</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findByStreamId</span>($streamId);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=projections><strong>Projections</strong> <a href=#projections class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SubscriptionProjection</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SubscriptionQueryRepository</span> $queryRepository
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>handle</span>(<span style=color:#a6e22e>DomainEvent</span> $event)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>match</span> ($event<span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>SubscriptionCreated</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span> <span style=color:#f92672>=&gt;</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>handleSubscriptionCreated</span>($event),
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>SubscriptionActivated</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span> <span style=color:#f92672>=&gt;</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>handleSubscriptionActivated</span>($event),
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>PaymentProcessed</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span> <span style=color:#f92672>=&gt;</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>handlePaymentProcessed</span>($event),
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>handleSubscriptionCreated</span>(<span style=color:#a6e22e>SubscriptionCreated</span> $event)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>queryRepository</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createSubscriptionView</span>(
+</span></span><span style=display:flex><span>            $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>subscriptionId</span>,
+</span></span><span style=display:flex><span>            $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>planId</span>,
+</span></span><span style=display:flex><span>            $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>customerId</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>SubscriptionStatus</span><span style=color:#f92672>::</span><span style=color:#a6e22e>PENDING</span>,
+</span></span><span style=display:flex><span>            $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createdAt</span>
+</span></span><span style=display:flex><span>        );
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>handleSubscriptionActivated</span>(<span style=color:#a6e22e>SubscriptionActivated</span> $event)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>queryRepository</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>updateSubscriptionStatus</span>(
+</span></span><span style=display:flex><span>            $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>subscriptionId</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>SubscriptionStatus</span><span style=color:#f92672>::</span><span style=color:#a6e22e>ACTIVE</span>,
+</span></span><span style=display:flex><span>            $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>nextBillingDate</span>
+</span></span><span style=display:flex><span>        );
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=-patterns-avancés-avec-event-sourcing>🚀 <strong>Patterns Avancés avec Event Sourcing</strong> <a href=#-patterns-avanc%c3%a9s-avec-event-sourcing class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=1-snapshots><strong>1. Snapshots</strong> <a href=#1-snapshots class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SubscriptionSnapshot</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>SubscriptionId</span> $id,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>SubscriptionStatus</span> $status,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>DateTime</span> $nextBillingDate,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>readonly</span> <span style=color:#a6e22e>int</span> $version
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SnapshotService</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>createSnapshot</span>(<span style=color:#a6e22e>Subscription</span> $subscription)<span style=color:#f92672>:</span> <span style=color:#a6e22e>SubscriptionSnapshot</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>SubscriptionSnapshot</span>(
+</span></span><span style=display:flex><span>            $subscription<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span>(),
+</span></span><span style=display:flex><span>            $subscription<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>status</span>(),
+</span></span><span style=display:flex><span>            $subscription<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>nextBillingDate</span>(),
+</span></span><span style=display:flex><span>            $subscription<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>version</span>()
+</span></span><span style=display:flex><span>        );
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>restoreFromSnapshot</span>(<span style=color:#a6e22e>SubscriptionSnapshot</span> $snapshot, <span style=color:#66d9ef>array</span> $events)<span style=color:#f92672>:</span> <span style=color:#a6e22e>Subscription</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $subscription <span style=color:#f92672>=</span> <span style=color:#a6e22e>Subscription</span><span style=color:#f92672>::</span><span style=color:#a6e22e>fromSnapshot</span>($snapshot);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Appliquer seulement les événements après le snapshot
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $eventsAfterSnapshot <span style=color:#f92672>=</span> <span style=color:#a6e22e>array_filter</span>(
+</span></span><span style=display:flex><span>            $events,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>fn</span>($event) <span style=color:#f92672>=&gt;</span> $event<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>version</span>() <span style=color:#f92672>&gt;</span> $snapshot<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>version</span>
+</span></span><span style=display:flex><span>        );
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>foreach</span> ($eventsAfterSnapshot <span style=color:#66d9ef>as</span> $event) {
+</span></span><span style=display:flex><span>            $subscription<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>apply</span>($event);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $subscription;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=2-event-sourcing--cqrs><strong>2. Event Sourcing + CQRS</strong> <a href=#2-event-sourcing--cqrs class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Command Side</strong> : Gère les événements et l&rsquo;event store</li><li><strong>Query Side</strong> : Lit depuis les projections</li></ul><h3 id=3-event-sourcing--api-platform><strong>3. Event Sourcing + API Platform</strong> <a href=#3-event-sourcing--api-platform class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Ressources</strong> : Exposer les événements via l&rsquo;API</li><li><strong>Validation</strong> : Valider les événements avant stockage</li></ul><h2 id=-performance-et-optimisation>⚡ <strong>Performance et Optimisation</strong> <a href=#-performance-et-optimisation class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=optimisations-de-l><strong>Optimisations de l&rsquo;Event Store</strong> <a href=#optimisations-de-l class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Indexation</strong> : Index sur stream_id et version</li><li><strong>Partitioning</strong> : Partitionner par stream_id</li><li><strong>Compression</strong> : Compresser les anciens événements</li></ul><h3 id=optimisations-des-projections><strong>Optimisations des Projections</strong> <a href=#optimisations-des-projections class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Snapshots</strong> : Créer des snapshots réguliers</li><li><strong>Projections asynchrones</strong> : Traiter les projections en arrière-plan</li><li><strong>Cache</strong> : Mettre en cache les projections fréquentes</li></ul><h2 id=-quand-utiliser-l>🎯 <strong>Quand Utiliser l&rsquo;Event Sourcing ?</strong> <a href=#-quand-utiliser-l class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=-cas-d><strong>✅ Cas d&rsquo;Usage Appropriés</strong> <a href=#-cas-d class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Audit critique</strong> : Besoin de traçabilité complète</li><li><strong>Compliance</strong> : Réglementations strictes</li><li><strong>Analytics</strong> : Besoin d&rsquo;analyser l&rsquo;historique</li><li><strong>Debugging complexe</strong> : Systèmes complexes à déboguer</li></ul><h3 id=-cas-d-1><strong>❌ Cas d&rsquo;Usage Inappropriés</strong> <a href=#-cas-d-1 class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Applications simples</strong> : CRUD basique</li><li><strong>Performance critique</strong> : Besoins de performance extrême</li><li><strong>Équipe inexpérimentée</strong> : Complexité élevée</li><li><strong>Prototypage</strong> : Développement rapide</li></ul><h2 id=-migration-vers-event-sourcing>🔄 <strong>Migration vers Event Sourcing</strong> <a href=#-migration-vers-event-sourcing class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=étape-1--identifier-les-événements-métier><strong>Étape 1 : Identifier les Événements Métier</strong> <a href=#%c3%a9tape-1--identifier-les-%c3%a9v%c3%a9nements-m%c3%a9tier class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Lister tous les changements d&rsquo;état</li><li>Grouper par contexte métier</li></ul><h3 id=étape-2--créer-l><strong>Étape 2 : Créer l&rsquo;Event Store</strong> <a href=#%c3%a9tape-2--cr%c3%a9er-l class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Choisir la technologie de stockage</li><li>Implémenter les interfaces</li></ul><h3 id=étape-3--migrer-les-agrégats><strong>Étape 3 : Migrer les Agrégats</strong> <a href=#%c3%a9tape-3--migrer-les-agr%c3%a9gats class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Convertir les entités en événements</li><li>Implémenter la reconstruction</li></ul><h3 id=étape-4--créer-les-projections><strong>Étape 4 : Créer les Projections</strong> <a href=#%c3%a9tape-4--cr%c3%a9er-les-projections class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Créer les vues de lecture</li><li>Implémenter la synchronisation</li></ul><h2 id=-métriques-et-monitoring>📊 <strong>Métriques et Monitoring</strong> <a href=#-m%c3%a9triques-et-monitoring class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=métriques-event-store><strong>Métriques Event Store</strong> <a href=#m%c3%a9triques-event-store class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Nombre d&rsquo;événements par seconde</li><li>Taille des streams</li><li>Temps de reconstruction</li></ul><h3 id=métriques-projections><strong>Métriques Projections</strong> <a href=#m%c3%a9triques-projections class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Délai de traitement des événements</li><li>Taille des projections</li><li>Performance des requêtes</li></ul><h2 id=-prochaines-étapes>🎯 <strong>Prochaines Étapes</strong> <a href=#-prochaines-%c3%a9tapes class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>Maintenant que vous comprenez l&rsquo;Event Sourcing, explorez :</p><ol><li><strong><a href=/concept/cqrs/>CQRS</a></strong> : Séparer les commandes des requêtes</li><li><strong><a href=/concept/repositories/>Repositories</a></strong> : Patterns de persistance</li><li><strong><a href=/chapitres/optionnels/chapitre-11-event-sourcing/>Implémentation Event Sourcing</a></strong> : Guide d&rsquo;implémentation complet</li></ol><hr><p><em>Event Sourcing transforme la façon dont nous pensons la persistance. Dans Gyroscops, il nous a permis de gérer la complexité métier tout en gardant une traçabilité complète de tous les changements.</em></p></div></div><div><hr class=doc-hr><div id=doc-nav class=d-print-none><div class="row flex-xl-nowrap"><div class="col-sm-6 pt-2 doc-next"><a href=/patterns/cqrs/><div class="card h-100 my-1"><div class="card-body py-2"><p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> CQRS - Command Query Responsibility Segregation</p></div></div></a></div><div class="col-sm-6 pt-2 doc-prev"><a class=ms-auto href=/patterns/repositories/><div class="card h-100 my-1 text-end"><div class="card-body py-2"><p class="card-title fs-5 fw-semibold lh-base mb-0">Repositories - Patterns de Persistance <i class="material-icons align-middle">navigate_next</i></p></div></div></a></div></div></div></div></div></div></div></div><footer class="shadow py-3 d-print-none"><div class=container-fluid><div class="row align-items-center"><div class=col><div class="text-sm-start text-center mx-md-2"><p class=mb-0>© 2025 Grégory Planchat. Tous droits réservés.</p></div></div></div><div class="row mt-3 pt-3 border-top"><div class=col-12><div class=text-center><h6 class="text-muted mb-2">Nos Sponsors</h6><p class="text-muted small mb-2">Merci à nos partenaires qui soutiennent cette initiative</p><div class="d-flex justify-content-center align-items-center flex-wrap gap-2"><div class=sponsor-item><a href=https://kiboko.fr target=_blank rel="noopener noreferrer" class=text-decoration-none><span class="badge bg-light text-dark border px-2 py-1 small">Kiboko</span></a></div><div class=sponsor-item><a href=https://gyroscops.com target=_blank rel="noopener noreferrer" class=text-decoration-none><span class="badge bg-light text-dark border px-2 py-1 small">Gyroscops</span></a></div></div></div></div></div></div></footer></main></div></div><button onclick=topFunction() id=back-to-top aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12 10.224l-6.3 6.3-1.38-1.372L12 7.472l7.68 7.68-1.38 1.376z" style="fill:#fff"/></svg></button>
+<script src=/docs/js/bootstrap.c7927bdd82eceb076739257add3f4b0e11379da037c07d5c7110daeb6de0e3edcb2de867604550f88815157e4ec4ddb7.js integrity=sha384-x5J73YLs6wdnOSV63T9LDhE3naA3wH1ccRDa623g4+3LLehnYEVQ+IgVFX5OxN23 defer></script><script type=text/javascript src=/docs/js/bundle.min.a046e72674401a45bf99217648934a99ff03a7c46d105e47916156e66969388a0643f55a1e850acb495c9bd8be985171.js integrity=sha384-oEbnJnRAGkW/mSF2SJNKmf8Dp8RtEF5HkWFW5mlpOIoGQ/VaHoUKy0lcm9i+mFFx crossorigin=anonymous defer></script><script type=module>
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script></body></html>

@@ -1,0 +1,508 @@
+<!doctype html><html lang=fr-fr><head><meta charset=utf-8><title>Repositories - Patterns de Persistance | DDD Adventure</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Découvrez les patterns Repository, la couche d'abstraction qui sépare la logique métier de la persistance"><meta name=keywords content="Documentation,Hugo,Hugo Theme,Bootstrap"><meta name=author content="Colin Wilson - Lotus Labs"><meta name=email content="support@aigis.uk"><meta name=website content="https://lotusdocs.dev"><meta name=Version content="v0.1.0"><link rel=icon href=/favicon.ico sizes=any><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest crossorigin=use-credentials href=/site.webmanifest><meta property="og:title" content="Repositories - Patterns de Persistance"><meta property="og:description" content="Découvrez les patterns Repository, la couche d'abstraction qui sépare la logique métier de la persistance"><meta property="og:type" content="article"><meta property="og:url" content="/patterns/repositories/"><meta property="og:image" content="/opengraph/card-base-2_hu_5e45361855535645.png"><meta property="article:section" content="patterns"><meta property="article:published_time" content="2024-12-19T00:00:00+00:00"><meta property="article:modified_time" content="2024-12-19T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="/opengraph/card-base-2_hu_5e45361855535645.png"><meta name=twitter:title content="Repositories - Patterns de Persistance"><meta name=twitter:description content="Découvrez les patterns Repository, la couche d'abstraction qui sépare la logique métier de la persistance"><link rel=alternate type=application/atom+xml title="Atom feed for DDD Adventure" href=/index.xml><script type=text/javascript src=/docs/js/flexsearch.bundle.min.f5159d5a2151ffbb653996ec17eaff7da4e04c286bd879fc41839d36a5586f3f20eaead0b6089de48f9adc669cdee771.js integrity=sha384-9RWdWiFR/7tlOZbsF+r/faTgTChr2Hn8QYOdNqVYbz8g6urQtgid5I+a3Gac3udx crossorigin=anonymous></script><link rel=stylesheet href=/docs/scss/style.min.3377194a2707d3dadf7a16321e3f45dec030951decd2b724d6e046d8a72467cab3654273b75f2768a9a72140ee026ecf.css integrity=sha384-M3cZSicH09rfehYyHj9F3sAwlR3s0rck1uBG2KckZ8qzZUJzt18naKmnIUDuAm7P crossorigin=anonymous></head><body><div class=content><div class="page-wrapper toggled"><nav id=sidebar class=sidebar-wrapper><div class=sidebar-brand><a href=/ aria-label=HomePage alt=HomePage><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></a></div><div class=sidebar-content style="height:calc(100% - 131px)"><ul class=sidebar-menu><li><a class=sidebar-root-link href=/patterns/cqrs/>CQRS - Command Query Responsibility Segregation</a></li><li><a class=sidebar-root-link href=/patterns/event-sourcing/>Event Sourcing - Stocker les Événements comme Source de Vérité</a></li><li class=current><a class=sidebar-root-link href=/patterns/repositories/>Repositories - Patterns de Persistance</a></li></ul></div><ul class="sidebar-footer list-unstyled mb-0"></ul></nav><main class="page-content bg-transparent"><div id=top-header class="top-header d-print-none"><div class="header-bar d-flex justify-content-between"><div class="d-flex align-items-center"><a href=/ class="logo-icon me-3" aria-label=HomePage alt=HomePage><div class=small><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></div><div class=big><svg id="Layer_1" viewBox="0 0 250 250"><path d="m143 39.5c-18 0-18 18-18 18s0-18-18-18H22c-2.76.0-5 2.24-5 5v143c0 2.76 2.24 5 5 5h76c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h76c2.76.0 5-2.24 5-5V44.5c0-2.76-2.24-5-5-5h-85zM206 163c0 1.38-1.12 2.5-2.5 2.5H143c-18 0-18 18-18 18s0-18-18-18H46.5c-1.38.0-2.5-1.12-2.5-2.5V69c0-1.38 1.12-2.5 2.5-2.5H98c7.2.0 8.64 11.52 8.93 16.13.07 1.05.95 1.87 2 1.87h32.14c1.06.0 1.94-.82 2-1.87.29-4.61 1.73-16.13 8.93-16.13h51.5c1.38.0 2.5 1.12 2.5 2.5v94z" style="fill:#06f"/></svg></div></a><button id=close-sidebar class="btn btn-icon btn-soft">
+<span class="material-icons size-20 menu-icon align-middle">menu</span>
+</button>
+<button id=flexsearch-button class="ms-3 btn btn-soft" data-bs-toggle=collapse data-bs-target=#FlexSearchCollapse aria-expanded=false aria-controls=FlexSearchCollapse>
+<span class="material-icons size-20 menu-icon align-middle">search</span>
+<span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span><div class="d-none d-sm-block"><span class=flexsearch-button-keys><kbd class=flexsearch-button-cmd-key><svg width="44" height="15"><path d="M2.118 11.5A1.519 1.519.0 011 11.042 1.583 1.583.0 011 8.815a1.519 1.519.0 011.113-.458h.715V6.643h-.71A1.519 1.519.0 011 6.185 1.519 1.519.0 01.547 5.071 1.519 1.519.0 011 3.958 1.519 1.519.0 012.118 3.5a1.519 1.519.0 011.114.458A1.519 1.519.0 013.69 5.071v.715H5.4V5.071A1.564 1.564.0 016.976 3.5 1.564 1.564.0 018.547 5.071 1.564 1.564.0 016.976 6.643H6.261V8.357h.715a1.575 1.575.0 011.113 2.685 1.583 1.583.0 01-2.227.0A1.519 1.519.0 015.4 9.929V9.214H3.69v.715a1.519 1.519.0 01-.458 1.113A1.519 1.519.0 012.118 11.5zm0-.857a.714.714.0 00.715-.714V9.214H2.118a.715.715.0 100 1.429zm4.858.0a.715.715.0 100-1.429H6.261v.715a.714.714.0 00.715.714zM3.69 8.357H5.4V6.643H3.69zM2.118 5.786h.715V5.071a.714.714.0 00-.715-.714.715.715.0 00-.5 1.22A.686.686.0 002.118 5.786zm4.143.0h.715a.715.715.0 00.5-1.22.715.715.0 00-1.22.5z" fill="currentColor"/><path d="M12.4 11.475H11.344l3.879-7.95h1.056z" fill="currentColor"/><path d="M25.073 5.384l-.864.576a2.121 2.121.0 00-1.786-.923 2.207 2.207.0 00-2.266 2.326 2.206 2.206.0 002.266 2.325 2.1 2.1.0 001.782-.918l.84.617a3.108 3.108.0 01-2.622 1.293 3.217 3.217.0 01-3.349-3.317 3.217 3.217.0 013.349-3.317A3.046 3.046.0 0125.073 5.384z" fill="currentColor"/><path d="M30.993 5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172z" fill="currentColor"/><path d="M34.67 4.164c1.471.0 2.266.658 2.266 1.851.0 1.087-.832 1.809-2.134 1.855l2.107 2.691h-1.28L33.591 7.87H33.07v2.691H32.038v-6.4zm-1.6.969v1.8h1.572c.832.0 1.22-.3 1.22-.918s-.411-.882-1.22-.882z" fill="currentColor"/><path d="M42.883 10.561H38.31v-6.4h1.033V9.583h3.54z" fill="currentColor"/></svg>
+</kbd><kbd class=flexsearch-button-key><svg width="15" height="15"><path d="M5.926 12.279H4.41L9.073 2.721H10.59z" fill="currentColor"/></svg></kbd></span></div></button></div><div class="d-flex align-items-center"><ul class="list-unstyled mb-0"></ul></div></div><div class=collapse id=FlexSearchCollapse><div class=flexsearch-container><div class=flexsearch-keymap><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8m3-3-3 3-3-3"/></g></svg></kbd>
+<kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8m3 3-3-3-3 3"/></g></svg></kbd>
+<span class=flexsearch-key-label>to navigate</span></li><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4m3 3-3-3 3-3"/></g></svg></kbd>
+<span class=flexsearch-key-label>to select</span></li><li><kbd class=flexsearch-button-cmd-key><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993.0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016s1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5s-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864.0 1.6425 1.031 1.5443 2.2492h-2.956"/></g></svg></kbd>
+<span class=flexsearch-key-label>to close</span></li></div><form class="flexsearch position-relative flex-grow-1 ms-2 me-2"><div class="d-flex flex-row"><input id=flexsearch class=form-control type=search placeholder=Search aria-label=Search autocomplete=off>
+<button id=hideFlexsearch type=button class="ms-2 btn btn-soft">
+cancel</button></div><div id=suggestions class="shadow rounded-1 d-none"></div></form></div></div></div><div class=container-fluid><div class=layout-spacing><div class="d-md-flex justify-content-between align-items-center"><nav aria-label=breadcrumb class="d-inline-block pb-2 mt-1 mt-sm-0"><ul id=breadcrumbs class="breadcrumb bg-transparent mb-0" itemscope itemtype=https://schema.org/BreadcrumbList><li class="breadcrumb-item text-capitalize active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemprop=item href=/patterns/><i class="material-icons size-20 align-text-bottom" itemprop=name>Home</i>
+</a><meta itemprop=position content='1'></li><li class="breadcrumb-item text-capitalize active" itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Repositories - Patterns de Persistance</span>
+<meta itemprop=position content='2'></li></ul></nav></div><div class="row flex-xl-nowrap"><div class="docs-toc col-xl-3 d-xl-block"><toc><div class="fw-bold text-uppercase mb-2">On this page</div><nav id=TableOfContents><ul><li><a href=#-qu>🌟 <strong>Qu’est-ce qu’un Repository ?</strong></a><ul><li><a href=#le-principe-fondamental><strong>Le Principe Fondamental</strong></a></li></ul></li><li><a href=#-repositories-dans-gyroscops>🏗️ <strong>Repositories dans Gyroscops</strong></a><ul><li><a href=#contexte-métier--gestion-des-utilisateurs><strong>Contexte Métier : Gestion des Utilisateurs</strong></a></li></ul></li><li><a href=#-types-de-repositories>🎯 <strong>Types de Repositories</strong></a><ul><li><a href=#1-repository-de-commande-write><strong>1. Repository de Commande (Write)</strong></a></li><li><a href=#2-repository-de-requête-read><strong>2. Repository de Requête (Read)</strong></a></li><li><a href=#3-repository-spécialisé><strong>3. Repository Spécialisé</strong></a></li></ul></li><li><a href=#-patterns-avancés-de-repository>🔧 <strong>Patterns Avancés de Repository</strong></a><ul><li><a href=#1-repository-avec-spécifications><strong>1. Repository avec Spécifications</strong></a></li><li><a href=#2-repository-avec-cache><strong>2. Repository avec Cache</strong></a></li><li><a href=#3-repository-avec-event-sourcing><strong>3. Repository avec Event Sourcing</strong></a></li></ul></li><li><a href=#-repositories-multi-sources>🚀 <strong>Repositories Multi-Sources</strong></a><ul><li><a href=#repository-avec-fallback><strong>Repository avec Fallback</strong></a></li><li><a href=#repository-avec-routing><strong>Repository avec Routing</strong></a></li></ul></li><li><a href=#-performance-et-optimisation>⚡ <strong>Performance et Optimisation</strong></a><ul><li><a href=#optimisations-de-requête><strong>Optimisations de Requête</strong></a></li><li><a href=#optimisations-de-cache><strong>Optimisations de Cache</strong></a></li></ul></li><li><a href=#-quand-utiliser-les-repositories->🎯 <strong>Quand Utiliser les Repositories ?</strong></a><ul><li><a href=#-cas-d><strong>✅ Cas d’Usage Appropriés</strong></a></li><li><a href=#-cas-d-1><strong>❌ Cas d’Usage Inappropriés</strong></a></li></ul></li><li><a href=#-migration-vers-les-repositories>🔄 <strong>Migration vers les Repositories</strong></a><ul><li><a href=#étape-1--identifier-les-accès-aux-données><strong>Étape 1 : Identifier les Accès aux Données</strong></a></li><li><a href=#étape-2--créer-les-interfaces><strong>Étape 2 : Créer les Interfaces</strong></a></li><li><a href=#étape-3--implémenter-les-repositories><strong>Étape 3 : Implémenter les Repositories</strong></a></li><li><a href=#étape-4--optimiser><strong>Étape 4 : Optimiser</strong></a></li></ul></li><li><a href=#-métriques-et-monitoring>📊 <strong>Métriques et Monitoring</strong></a><ul><li><a href=#métriques-repository><strong>Métriques Repository</strong></a></li><li><a href=#métriques-de-performance><strong>Métriques de Performance</strong></a></li></ul></li><li><a href=#-prochaines-étapes>🎯 <strong>Prochaines Étapes</strong></a></li></ul></nav></toc></div><div class="docs-toc-mobile d-print-none d-xl-none"><button id=toc-dropdown-btn class="btn-secondary dropdown-toggle" type=button data-bs-toggle=dropdown data-bs-offset=0,0 aria-expanded=false>
+Table of Contents</button><nav id=toc-mobile><ul class=dropdown-menu><li><a href=#-qu>🌟 <strong>Qu’est-ce qu’un Repository ?</strong></a><ul><li><a href=#le-principe-fondamental><strong>Le Principe Fondamental</strong></a></li></ul></li><li><a href=#-repositories-dans-gyroscops>🏗️ <strong>Repositories dans Gyroscops</strong></a><ul><li><a href=#contexte-métier--gestion-des-utilisateurs><strong>Contexte Métier : Gestion des Utilisateurs</strong></a></li></ul></li><li><a href=#-types-de-repositories>🎯 <strong>Types de Repositories</strong></a><ul><li><a href=#1-repository-de-commande-write><strong>1. Repository de Commande (Write)</strong></a></li><li><a href=#2-repository-de-requête-read><strong>2. Repository de Requête (Read)</strong></a></li><li><a href=#3-repository-spécialisé><strong>3. Repository Spécialisé</strong></a></li></ul></li><li><a href=#-patterns-avancés-de-repository>🔧 <strong>Patterns Avancés de Repository</strong></a><ul><li><a href=#1-repository-avec-spécifications><strong>1. Repository avec Spécifications</strong></a></li><li><a href=#2-repository-avec-cache><strong>2. Repository avec Cache</strong></a></li><li><a href=#3-repository-avec-event-sourcing><strong>3. Repository avec Event Sourcing</strong></a></li></ul></li><li><a href=#-repositories-multi-sources>🚀 <strong>Repositories Multi-Sources</strong></a><ul><li><a href=#repository-avec-fallback><strong>Repository avec Fallback</strong></a></li><li><a href=#repository-avec-routing><strong>Repository avec Routing</strong></a></li></ul></li><li><a href=#-performance-et-optimisation>⚡ <strong>Performance et Optimisation</strong></a><ul><li><a href=#optimisations-de-requête><strong>Optimisations de Requête</strong></a></li><li><a href=#optimisations-de-cache><strong>Optimisations de Cache</strong></a></li></ul></li><li><a href=#-quand-utiliser-les-repositories->🎯 <strong>Quand Utiliser les Repositories ?</strong></a><ul><li><a href=#-cas-d><strong>✅ Cas d’Usage Appropriés</strong></a></li><li><a href=#-cas-d-1><strong>❌ Cas d’Usage Inappropriés</strong></a></li></ul></li><li><a href=#-migration-vers-les-repositories>🔄 <strong>Migration vers les Repositories</strong></a><ul><li><a href=#étape-1--identifier-les-accès-aux-données><strong>Étape 1 : Identifier les Accès aux Données</strong></a></li><li><a href=#étape-2--créer-les-interfaces><strong>Étape 2 : Créer les Interfaces</strong></a></li><li><a href=#étape-3--implémenter-les-repositories><strong>Étape 3 : Implémenter les Repositories</strong></a></li><li><a href=#étape-4--optimiser><strong>Étape 4 : Optimiser</strong></a></li></ul></li><li><a href=#-métriques-et-monitoring>📊 <strong>Métriques et Monitoring</strong></a><ul><li><a href=#métriques-repository><strong>Métriques Repository</strong></a></li><li><a href=#métriques-de-performance><strong>Métriques de Performance</strong></a></li></ul></li><li><a href=#-prochaines-étapes>🎯 <strong>Prochaines Étapes</strong></a></li></ul></nav></div><div class="docs-content col-12 col-xl-9 mt-0"><div class="mb-0 d-flex"><h1 class="content-title mb-0">Repositories - Patterns de Persistance</h1></div><div id=content class=main-content><div data-prismjs-copy data-prismjs-copy-success data-prismjs-copy-error><h1 id=-repositories---patterns-de-persistance>🎯 Repositories - Patterns de Persistance <a href=#-repositories---patterns-de-persistance class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h1><h2 id=-qu>🌟 <strong>Qu&rsquo;est-ce qu&rsquo;un Repository ?</strong> <a href=#-qu class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>Un <strong>Repository</strong> est un pattern qui encapsule la logique d&rsquo;accès aux données, fournissant une interface orientée objet pour accéder à la couche de persistance.</p><h3 id=le-principe-fondamental><strong>Le Principe Fondamental</strong> <a href=#le-principe-fondamental class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><blockquote><p><strong>&ldquo;Un Repository représente une collection d&rsquo;objets en mémoire&rdquo;</strong> - Eric Evans</p></blockquote><p>Le Repository :</p><ul><li><strong>Abstrait</strong> la persistance des données</li><li><strong>Encapsule</strong> la logique d&rsquo;accès aux données</li><li><strong>Fournit</strong> une interface métier claire</li><li><strong>Cache</strong> la complexité de la persistance</li></ul><h2 id=-repositories-dans-gyroscops>🏗️ <strong>Repositories dans Gyroscops</strong> <a href=#-repositories-dans-gyroscops class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=contexte-métier--gestion-des-utilisateurs><strong>Contexte Métier : Gestion des Utilisateurs</strong> <a href=#contexte-m%c3%a9tier--gestion-des-utilisateurs class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><p>Dans Gyroscops, nous gérons des utilisateurs avec différents besoins d&rsquo;accès :</p><h4 id=interface-repository><strong>Interface Repository</strong> <a href=#interface-repository class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>save</span>(<span style=color:#a6e22e>User</span> $user)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>User</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findByEmail</span>(<span style=color:#a6e22e>Email</span> $email)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>User</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findByOrganization</span>(<span style=color:#a6e22e>OrganizationId</span> $organizationId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>delete</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>exists</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>;
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h4 id=implémentation-doctrine><strong>Implémentation Doctrine</strong> <a href=#impl%c3%a9mentation-doctrine class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DoctrineUserRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>EntityManagerInterface</span> $entityManager
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>save</span>(<span style=color:#a6e22e>User</span> $user)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persist</span>($user);
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>User</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getRepository</span>(<span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>find</span>($id<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findByEmail</span>(<span style=color:#a6e22e>Email</span> $email)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>User</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getRepository</span>(<span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findOneBy</span>([<span style=color:#e6db74>&#39;email&#39;</span> <span style=color:#f92672>=&gt;</span> $email<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>()]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findByOrganization</span>(<span style=color:#a6e22e>OrganizationId</span> $organizationId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getRepository</span>(<span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findBy</span>([<span style=color:#e6db74>&#39;organizationId&#39;</span> <span style=color:#f92672>=&gt;</span> $organizationId<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>()]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>delete</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $user <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findById</span>($id);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> ($user) {
+</span></span><span style=display:flex><span>            $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>remove</span>($user);
+</span></span><span style=display:flex><span>            $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>exists</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getRepository</span>(<span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>count</span>([<span style=color:#e6db74>&#39;id&#39;</span> <span style=color:#f92672>=&gt;</span> $id<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>()]) <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=-types-de-repositories>🎯 <strong>Types de Repositories</strong> <a href=#-types-de-repositories class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=1-repository-de-commande-write><strong>1. Repository de Commande (Write)</strong> <a href=#1-repository-de-commande-write class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>PaymentCommandRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>save</span>(<span style=color:#a6e22e>Payment</span> $payment)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>PaymentId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>Payment</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>delete</span>(<span style=color:#a6e22e>PaymentId</span> $id)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DoctrinePaymentCommandRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>PaymentCommandRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>save</span>(<span style=color:#a6e22e>Payment</span> $payment)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persist</span>($payment);
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>PaymentId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>Payment</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getRepository</span>(<span style=color:#a6e22e>Payment</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>find</span>($id<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=2-repository-de-requête-read><strong>2. Repository de Requête (Read)</strong> <a href=#2-repository-de-requ%c3%aate-read class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>PaymentQueryRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findPaymentDetails</span>(<span style=color:#a6e22e>PaymentId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>PaymentDetailsView</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findPaymentsByCustomer</span>(<span style=color:#a6e22e>CustomerId</span> $customerId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findPaymentsByDateRange</span>(<span style=color:#a6e22e>DateRange</span> $dateRange)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findPendingPayments</span>()<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DoctrinePaymentQueryRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>PaymentQueryRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findPaymentDetails</span>(<span style=color:#a6e22e>PaymentId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>PaymentDetailsView</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $result <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createQuery</span>(<span style=color:#e6db74>&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                SELECT p.id, p.amount, p.status, p.createdAt,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                       c.name as customerName, s.name as subscriptionName
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                FROM Payment p
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                JOIN p.customer c
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                JOIN p.subscription s
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                WHERE p.id = :id
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            &#39;</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setParameter</span>(<span style=color:#e6db74>&#39;id&#39;</span>, $id<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>())
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getOneOrNullResult</span>();
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $result <span style=color:#f92672>?</span> <span style=color:#a6e22e>PaymentDetailsView</span><span style=color:#f92672>::</span><span style=color:#a6e22e>fromArray</span>($result) <span style=color:#f92672>:</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findPaymentsByCustomer</span>(<span style=color:#a6e22e>CustomerId</span> $customerId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createQuery</span>(<span style=color:#e6db74>&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                SELECT p.id, p.amount, p.status, p.createdAt
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                FROM Payment p
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                WHERE p.customerId = :customerId
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                ORDER BY p.createdAt DESC
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            &#39;</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setParameter</span>(<span style=color:#e6db74>&#39;customerId&#39;</span>, $customerId<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>())
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getResult</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=3-repository-spécialisé><strong>3. Repository Spécialisé</strong> <a href=#3-repository-sp%c3%a9cialis%c3%a9 class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>PaymentAnalyticsRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getMonthlyRevenue</span>(<span style=color:#a6e22e>int</span> $year, <span style=color:#a6e22e>int</span> $month)<span style=color:#f92672>:</span> <span style=color:#a6e22e>Amount</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getPaymentTrends</span>(<span style=color:#a6e22e>DateRange</span> $dateRange)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getTopCustomers</span>(<span style=color:#a6e22e>int</span> $limit)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ElasticsearchPaymentAnalyticsRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>PaymentAnalyticsRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getMonthlyRevenue</span>(<span style=color:#a6e22e>int</span> $year, <span style=color:#a6e22e>int</span> $month)<span style=color:#f92672>:</span> <span style=color:#a6e22e>Amount</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $query <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;query&#39;</span> <span style=color:#f92672>=&gt;</span> [
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;bool&#39;</span> <span style=color:#f92672>=&gt;</span> [
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#39;must&#39;</span> <span style=color:#f92672>=&gt;</span> [
+</span></span><span style=display:flex><span>                        [<span style=color:#e6db74>&#39;term&#39;</span> <span style=color:#f92672>=&gt;</span> [<span style=color:#e6db74>&#39;status&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;completed&#39;</span>]],
+</span></span><span style=display:flex><span>                        [<span style=color:#e6db74>&#39;range&#39;</span> <span style=color:#f92672>=&gt;</span> [<span style=color:#e6db74>&#39;createdAt&#39;</span> <span style=color:#f92672>=&gt;</span> [
+</span></span><span style=display:flex><span>                            <span style=color:#e6db74>&#39;gte&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>$year</span><span style=color:#e6db74>-</span><span style=color:#e6db74>$month</span><span style=color:#e6db74>-01&#34;</span>,
+</span></span><span style=display:flex><span>                            <span style=color:#e6db74>&#39;lt&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>$year</span><span style=color:#e6db74>-&#34;</span> <span style=color:#f92672>.</span> ($month <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>.</span> <span style=color:#e6db74>&#34;-01&#34;</span>
+</span></span><span style=display:flex><span>                        ]]]
+</span></span><span style=display:flex><span>                    ]
+</span></span><span style=display:flex><span>                ]
+</span></span><span style=display:flex><span>            ],
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;aggs&#39;</span> <span style=color:#f92672>=&gt;</span> [
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;total_revenue&#39;</span> <span style=color:#f92672>=&gt;</span> [
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#39;sum&#39;</span> <span style=color:#f92672>=&gt;</span> [<span style=color:#e6db74>&#39;field&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;amount&#39;</span>]
+</span></span><span style=display:flex><span>                ]
+</span></span><span style=display:flex><span>            ]
+</span></span><span style=display:flex><span>        ];
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        $result <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>elasticsearch</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>search</span>($query);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Amount</span>($result[<span style=color:#e6db74>&#39;aggregations&#39;</span>][<span style=color:#e6db74>&#39;total_revenue&#39;</span>][<span style=color:#e6db74>&#39;value&#39;</span>]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=-patterns-avancés-de-repository>🔧 <strong>Patterns Avancés de Repository</strong> <a href=#-patterns-avanc%c3%a9s-de-repository class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=1-repository-avec-spécifications><strong>1. Repository avec Spécifications</strong> <a href=#1-repository-avec-sp%c3%a9cifications class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Specification</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isSatisfiedBy</span>($entity)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>toQueryBuilder</span>(<span style=color:#a6e22e>QueryBuilder</span> $qb)<span style=color:#f92672>:</span> <span style=color:#a6e22e>QueryBuilder</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserByOrganizationSpecification</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>Specification</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>OrganizationId</span> $organizationId
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isSatisfiedBy</span>($entity)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $entity <span style=color:#a6e22e>instanceof</span> <span style=color:#a6e22e>User</span> <span style=color:#f92672>&amp;&amp;</span> 
+</span></span><span style=display:flex><span>               $entity<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>organizationId</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>equals</span>($this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>organizationId</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>toQueryBuilder</span>(<span style=color:#a6e22e>QueryBuilder</span> $qb)<span style=color:#f92672>:</span> <span style=color:#a6e22e>QueryBuilder</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $qb<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>andWhere</span>(<span style=color:#e6db74>&#39;u.organizationId = :organizationId&#39;</span>)
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setParameter</span>(<span style=color:#e6db74>&#39;organizationId&#39;</span>, $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>organizationId</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findBySpecification</span>(<span style=color:#a6e22e>Specification</span> $spec)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>countBySpecification</span>(<span style=color:#a6e22e>Specification</span> $spec)<span style=color:#f92672>:</span> <span style=color:#a6e22e>int</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DoctrineUserRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findBySpecification</span>(<span style=color:#a6e22e>Specification</span> $spec)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $qb <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createQueryBuilder</span>()
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>select</span>(<span style=color:#e6db74>&#39;u&#39;</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>from</span>(<span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>, <span style=color:#e6db74>&#39;u&#39;</span>);
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $spec<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>toQueryBuilder</span>($qb)<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getQuery</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getResult</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=2-repository-avec-cache><strong>2. Repository avec Cache</strong> <a href=#2-repository-avec-cache class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CachedUserRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>UserRepository</span> $decorated,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>CacheInterface</span> $cache
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>User</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $cacheKey <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;user_</span><span style=color:#e6db74>{</span>$id<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>()<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>cache</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>get</span>($cacheKey, <span style=color:#66d9ef>function</span> () <span style=color:#66d9ef>use</span> ($id) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>decorated</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findById</span>($id);
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>save</span>(<span style=color:#a6e22e>User</span> $user)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>decorated</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>save</span>($user);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Invalider le cache
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>cache</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>delete</span>(<span style=color:#e6db74>&#34;user_</span><span style=color:#e6db74>{</span>$user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>()<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=3-repository-avec-event-sourcing><strong>3. Repository avec Event Sourcing</strong> <a href=#3-repository-avec-event-sourcing class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>EventStore</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>append</span>(<span style=color:#a6e22e>StreamId</span> $streamId, <span style=color:#66d9ef>array</span> $events)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getEvents</span>(<span style=color:#a6e22e>StreamId</span> $streamId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EventSourcedUserRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>EventStore</span> $eventStore
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>save</span>(<span style=color:#a6e22e>User</span> $user)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $events <span style=color:#f92672>=</span> $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getUncommittedEvents</span>();
+</span></span><span style=display:flex><span>        $streamId <span style=color:#f92672>=</span> <span style=color:#a6e22e>StreamId</span><span style=color:#f92672>::</span><span style=color:#a6e22e>fromUserId</span>($user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span>());
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>eventStore</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>append</span>($streamId, $events);
+</span></span><span style=display:flex><span>        $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>markEventsAsCommitted</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>User</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $streamId <span style=color:#f92672>=</span> <span style=color:#a6e22e>StreamId</span><span style=color:#f92672>::</span><span style=color:#a6e22e>fromUserId</span>($id);
+</span></span><span style=display:flex><span>        $events <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>eventStore</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEvents</span>($streamId);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>empty</span>($events)) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>fromEvents</span>($events);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=-repositories-multi-sources>🚀 <strong>Repositories Multi-Sources</strong> <a href=#-repositories-multi-sources class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=repository-avec-fallback><strong>Repository avec Fallback</strong> <a href=#repository-avec-fallback class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FallbackUserRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>UserRepository</span> $primary,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>UserRepository</span> $fallback
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>User</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>primary</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findById</span>($id);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> (<span style=color:#a6e22e>Exception</span> $e) {
+</span></span><span style=display:flex><span>            $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>logger</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>warning</span>(<span style=color:#e6db74>&#39;Primary repository failed, using fallback&#39;</span>, [
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;error&#39;</span> <span style=color:#f92672>=&gt;</span> $e<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getMessage</span>(),
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;userId&#39;</span> <span style=color:#f92672>=&gt;</span> $id<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>()
+</span></span><span style=display:flex><span>            ]);
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fallback</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findById</span>($id);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=repository-avec-routing><strong>Repository avec Routing</strong> <a href=#repository-avec-routing class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RoutedUserRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>__construct</span>(
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>UserRepository</span> $sqlRepository,
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>UserRepository</span> $mongoRepository
+</span></span><span style=display:flex><span>    ) {}
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findById</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>User</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Route basée sur l&#39;ID
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> ($this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>shouldUseMongo</span>($id)) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>mongoRepository</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findById</span>($id);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>sqlRepository</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findById</span>($id);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>shouldUseMongo</span>(<span style=color:#a6e22e>UserId</span> $id)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Logique de routing (ex: utilisateurs récents en MongoDB)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> $id<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>() <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1000000</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=-performance-et-optimisation>⚡ <strong>Performance et Optimisation</strong> <a href=#-performance-et-optimisation class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=optimisations-de-requête><strong>Optimisations de Requête</strong> <a href=#optimisations-de-requ%c3%aate class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>OptimizedUserRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findByOrganization</span>(<span style=color:#a6e22e>OrganizationId</span> $organizationId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Utiliser des requêtes optimisées
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>entityManager</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createQuery</span>(<span style=color:#e6db74>&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                SELECT u.id, u.email, u.firstName, u.lastName
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                FROM User u
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                WHERE u.organizationId = :organizationId
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                AND u.status = :status
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            &#39;</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setParameter</span>(<span style=color:#e6db74>&#39;organizationId&#39;</span>, $organizationId<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>())
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setParameter</span>(<span style=color:#e6db74>&#39;status&#39;</span>, <span style=color:#a6e22e>UserStatus</span><span style=color:#f92672>::</span><span style=color:#a6e22e>ACTIVE</span>)
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setMaxResults</span>(<span style=color:#ae81ff>100</span>) <span style=color:#75715e>// Limiter les résultats
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getResult</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h3 id=optimisations-de-cache><strong>Optimisations de Cache</strong> <a href=#optimisations-de-cache class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SmartCachedUserRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>UserRepository</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findByOrganization</span>(<span style=color:#a6e22e>OrganizationId</span> $organizationId)<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $cacheKey <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;users_org_</span><span style=color:#e6db74>{</span>$organizationId<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>()<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>cache</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>get</span>($cacheKey, <span style=color:#66d9ef>function</span> () <span style=color:#66d9ef>use</span> ($organizationId) {
+</span></span><span style=display:flex><span>            $users <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>decorated</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findByOrganization</span>($organizationId);
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Cache individuel pour chaque utilisateur
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>foreach</span> ($users <span style=color:#66d9ef>as</span> $user) {
+</span></span><span style=display:flex><span>                $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>cache</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>set</span>(<span style=color:#e6db74>&#34;user_</span><span style=color:#e6db74>{</span>$user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>value</span>()<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>, $user, <span style=color:#ae81ff>3600</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> $users;
+</span></span><span style=display:flex><span>        }, <span style=color:#ae81ff>1800</span>); <span style=color:#75715e>// TTL de 30 minutes
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=-quand-utiliser-les-repositories->🎯 <strong>Quand Utiliser les Repositories ?</strong> <a href=#-quand-utiliser-les-repositories- class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=-cas-d><strong>✅ Cas d&rsquo;Usage Appropriés</strong> <a href=#-cas-d class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Abstraction de persistance</strong> : Changer de technologie de stockage</li><li><strong>Tests unitaires</strong> : Mocker facilement l&rsquo;accès aux données</li><li><strong>Logique métier complexe</strong> : Encapsuler la logique d&rsquo;accès</li><li><strong>Performance</strong> : Optimiser les requêtes</li></ul><h3 id=-cas-d-1><strong>❌ Cas d&rsquo;Usage Inappropriés</strong> <a href=#-cas-d-1 class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li><strong>Applications simples</strong> : CRUD basique</li><li><strong>Over-engineering</strong> : Complexité inutile</li><li><strong>Performance critique</strong> : Overhead des abstractions</li><li><strong>Prototypage</strong> : Développement rapide</li></ul><h2 id=-migration-vers-les-repositories>🔄 <strong>Migration vers les Repositories</strong> <a href=#-migration-vers-les-repositories class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=étape-1--identifier-les-accès-aux-données><strong>Étape 1 : Identifier les Accès aux Données</strong> <a href=#%c3%a9tape-1--identifier-les-acc%c3%a8s-aux-donn%c3%a9es class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Lister tous les accès aux données</li><li>Grouper par entité métier</li></ul><h3 id=étape-2--créer-les-interfaces><strong>Étape 2 : Créer les Interfaces</strong> <a href=#%c3%a9tape-2--cr%c3%a9er-les-interfaces class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Définir les contrats Repository</li><li>Spécifier les méthodes nécessaires</li></ul><h3 id=étape-3--implémenter-les-repositories><strong>Étape 3 : Implémenter les Repositories</strong> <a href=#%c3%a9tape-3--impl%c3%a9menter-les-repositories class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Créer les implémentations</li><li>Migrer progressivement</li></ul><h3 id=étape-4--optimiser><strong>Étape 4 : Optimiser</strong> <a href=#%c3%a9tape-4--optimiser class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Ajouter le cache si nécessaire</li><li>Optimiser les requêtes</li></ul><h2 id=-métriques-et-monitoring>📊 <strong>Métriques et Monitoring</strong> <a href=#-m%c3%a9triques-et-monitoring class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><h3 id=métriques-repository><strong>Métriques Repository</strong> <a href=#m%c3%a9triques-repository class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Temps de réponse des requêtes</li><li>Taux de cache hit</li><li>Nombre de requêtes par seconde</li></ul><h3 id=métriques-de-performance><strong>Métriques de Performance</strong> <a href=#m%c3%a9triques-de-performance class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h3><ul><li>Temps de traitement des requêtes complexes</li><li>Utilisation mémoire</li><li>Charge des bases de données</li></ul><h2 id=-prochaines-étapes>🎯 <strong>Prochaines Étapes</strong> <a href=#-prochaines-%c3%a9tapes class=anchor aria-hidden=true><i class="material-icons align-middle">link</i></a></h2><p>Maintenant que vous comprenez les Repositories, explorez :</p><ol><li><strong><a href=/concept/cqrs/>CQRS</a></strong> : Séparer les commandes des requêtes</li><li><strong><a href=/concept/event-sourcing/>Event Sourcing</a></strong> : Stocker les événements comme source de vérité</li><li><strong><a href=/chapitres/fondamentaux/chapitre-09-repositories-persistance/>Implémentation Repositories</a></strong> : Guide d&rsquo;implémentation complet</li></ol><hr><p><em>Les Repositories sont la pierre angulaire d&rsquo;une architecture propre. Dans Gyroscops, ils nous ont permis de séparer clairement la logique métier de la persistance, rendant le code plus testable et évolutif.</em></p></div></div><div><hr class=doc-hr><div id=doc-nav class=d-print-none><div class="row flex-xl-nowrap"><div class="col-sm-6 pt-2 doc-next"><a href=/patterns/event-sourcing/><div class="card h-100 my-1"><div class="card-body py-2"><p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Event Sourcing - Stocker les Événements comme Source de Vérité</p></div></div></a></div></div></div></div></div></div></div></div><footer class="shadow py-3 d-print-none"><div class=container-fluid><div class="row align-items-center"><div class=col><div class="text-sm-start text-center mx-md-2"><p class=mb-0>© 2025 Grégory Planchat. Tous droits réservés.</p></div></div></div><div class="row mt-3 pt-3 border-top"><div class=col-12><div class=text-center><h6 class="text-muted mb-2">Nos Sponsors</h6><p class="text-muted small mb-2">Merci à nos partenaires qui soutiennent cette initiative</p><div class="d-flex justify-content-center align-items-center flex-wrap gap-2"><div class=sponsor-item><a href=https://kiboko.fr target=_blank rel="noopener noreferrer" class=text-decoration-none><span class="badge bg-light text-dark border px-2 py-1 small">Kiboko</span></a></div><div class=sponsor-item><a href=https://gyroscops.com target=_blank rel="noopener noreferrer" class=text-decoration-none><span class="badge bg-light text-dark border px-2 py-1 small">Gyroscops</span></a></div></div></div></div></div></div></footer></main></div></div><button onclick=topFunction() id=back-to-top aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12 10.224l-6.3 6.3-1.38-1.372L12 7.472l7.68 7.68-1.38 1.376z" style="fill:#fff"/></svg></button>
+<script src=/docs/js/bootstrap.c7927bdd82eceb076739257add3f4b0e11379da037c07d5c7110daeb6de0e3edcb2de867604550f88815157e4ec4ddb7.js integrity=sha384-x5J73YLs6wdnOSV63T9LDhE3naA3wH1ccRDa623g4+3LLehnYEVQ+IgVFX5OxN23 defer></script><script type=text/javascript src=/docs/js/bundle.min.a046e72674401a45bf99217648934a99ff03a7c46d105e47916156e66969388a0643f55a1e850acb495c9bd8be985171.js integrity=sha384-oEbnJnRAGkW/mSF2SJNKmf8Dp8RtEF5HkWFW5mlpOIoGQ/VaHoUKy0lcm9i+mFFx crossorigin=anonymous defer></script><script type=module>
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script></body></html>
