@@ -6,6 +6,108 @@
    Version: 1.0.0
    File Description: Main CSS file with custom modifications
 */
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  line-height: 2.4 !important;
+  margin-bottom: 1.5rem !important;
+  margin-top: 2rem !important; }
+
+.content h1:first-child, .content .h1:first-child,
+.content h2:first-child,
+.content .h2:first-child,
+.content h3:first-child,
+.content .h3:first-child,
+.content h4:first-child,
+.content .h4:first-child,
+.content h5:first-child,
+.content .h5:first-child,
+.content h6:first-child,
+.content .h6:first-child {
+  margin-top: 1rem !important; }
+
+p {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important; }
+
+ul, ol {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important; }
+
+li {
+  line-height: 1.7 !important;
+  margin-bottom: 0.5rem !important; }
+
+blockquote {
+  line-height: 1.7 !important;
+  margin: 2rem 0 !important;
+  padding: 1rem 1.5rem !important; }
+
+pre {
+  line-height: 1.6 !important;
+  margin: 1.5rem 0 !important; }
+
+code {
+  line-height: 1.6 !important; }
+
+table {
+  line-height: 1.6 !important;
+  margin: 1.5rem 0 !important; }
+
+th, td {
+  line-height: 1.6 !important;
+  padding: 0.75rem !important; }
+
+hr {
+  margin: 2.5rem 0 !important; }
+
+.chapter-option {
+  margin-bottom: 2rem !important; }
+
+.chapter-option-title {
+  line-height: 1.4 !important;
+  margin-bottom: 0.5rem !important; }
+
+.chapter-option-subtitle {
+  line-height: 1.5 !important;
+  margin-bottom: 1rem !important; }
+
+.chapter-option-criteria-list li {
+  line-height: 1.6 !important;
+  margin-bottom: 0.25rem !important; }
+
+.content {
+  line-height: 1.7 !important; }
+
+.content > * + * {
+  margin-top: 1rem !important; }
+
+.markdown-content h1, .markdown-content .h1,
+.markdown-content h2,
+.markdown-content .h2,
+.markdown-content h3,
+.markdown-content .h3,
+.markdown-content h4,
+.markdown-content .h4,
+.markdown-content h5,
+.markdown-content .h5,
+.markdown-content h6,
+.markdown-content .h6 {
+  line-height: 1.4 !important;
+  margin-bottom: 1.5rem !important;
+  margin-top: 2rem !important; }
+
+.markdown-content p {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important; }
+
+.markdown-content ul,
+.markdown-content ol {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important; }
+
+.markdown-content li {
+  line-height: 1.7 !important;
+  margin-bottom: 0.5rem !important; }
+
 /*#4d80ff*/
 /*!
    * Bootstrap  v5.3.3 (https://getbootstrap.com/)

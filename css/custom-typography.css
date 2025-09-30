@@ -1,0 +1,190 @@
+/* Custom Typography - Enhanced Line Spacing */
+/* ========================================== */
+
+/* Ensure our styles override any existing ones */
+.content,
+.markdown-content,
+.docs-content,
+main {
+  line-height: 1.7 !important;
+}
+
+/* Headings with better spacing */
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6,
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  line-height: 1.4 !important;
+  margin-bottom: 1.5rem !important;
+  margin-top: 2rem !important;
+}
+
+/* First heading in content should have less top margin */
+.content h1:first-child,
+.content h2:first-child,
+.content h3:first-child,
+.markdown-content h1:first-child,
+.markdown-content h2:first-child,
+.markdown-content h3:first-child {
+  margin-top: 1rem !important;
+}
+
+/* Paragraphs with enhanced spacing */
+.content p,
+.markdown-content p {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Lists with better spacing */
+.content ul,
+.content ol,
+.markdown-content ul,
+.markdown-content ol {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.content li,
+.markdown-content li {
+  line-height: 1.7 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Blockquotes */
+.content blockquote,
+.markdown-content blockquote {
+  line-height: 1.7 !important;
+  margin: 2rem 0 !important;
+  padding: 1rem 1.5rem !important;
+}
+
+/* Code blocks */
+.content pre,
+.markdown-content pre {
+  line-height: 1.6 !important;
+  margin: 1.5rem 0 !important;
+}
+
+.content code,
+.markdown-content code {
+  line-height: 1.6 !important;
+}
+
+/* Tables */
+.content table,
+.markdown-content table {
+  line-height: 1.6 !important;
+  margin: 1.5rem 0 !important;
+}
+
+.content th,
+.content td,
+.markdown-content th,
+.markdown-content td {
+  line-height: 1.6 !important;
+  padding: 0.75rem !important;
+}
+
+/* Horizontal rules */
+.content hr,
+.markdown-content hr {
+  margin: 2.5rem 0 !important;
+}
+
+/* Chapter options with better spacing */
+.chapter-option {
+  margin-bottom: 2rem !important;
+}
+
+.chapter-option-title {
+  line-height: 1.4 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.chapter-option-subtitle {
+  line-height: 1.5 !important;
+  margin-bottom: 1rem !important;
+}
+
+.chapter-option-criteria-list li {
+  line-height: 1.6 !important;
+  margin-bottom: 0.25rem !important;
+}
+
+/* Ensure proper spacing between all content elements */
+.content > * + *,
+.markdown-content > * + * {
+  margin-top: 1rem !important;
+}
+
+/* Specific spacing for different content types */
+.content h2 + p,
+.content h3 + p,
+.content h4 + p,
+.markdown-content h2 + p,
+.markdown-content h3 + p,
+.markdown-content h4 + p {
+  margin-top: 0.5rem !important;
+}
+
+/* Better spacing for nested lists */
+.content ul ul,
+.content ol ol,
+.content ul ol,
+.content ol ul,
+.markdown-content ul ul,
+.markdown-content ol ol,
+.markdown-content ul ol,
+.markdown-content ol ul {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Book cover images - uniform height */
+.content figure img,
+.markdown-content figure img {
+  height: 150px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Book cover figures */
+.content figure,
+.markdown-content figure {
+  text-align: center !important;
+  margin: 1.5rem 0 !important;
+  padding: 1rem !important;
+  background: #f8f9fa !important;
+  border-radius: 8px !important;
+  border: 1px solid #e9ecef !important;
+}
+
+/* Book cover captions */
+.content figure figcaption,
+.markdown-content figure figcaption {
+  margin-top: 0.75rem !important;
+  font-size: 0.9rem !important;
+  color: #6c757d !important;
+  line-height: 1.4 !important;
+}
+
+.content figure figcaption h4,
+.markdown-content figure figcaption h4 {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  color: #495057 !important;
+}
