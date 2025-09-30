@@ -1,0 +1,2366 @@
+<!DOCTYPE html>
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+<html lang="fr-fr"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=41733&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Stratégies Avancées de Réplication Multi-sources | DDD Adventure</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Patterns sophistiqués de réplication et de synchronisation pour les systèmes multi-sources">
+    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
+    <meta name="author" content="Colin Wilson - Lotus Labs" />
+    <meta name="email" content="support@aigis.uk" />
+    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="Version" content="v0.1.0" />
+    
+    <link rel="icon" href="//localhost:41733/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="//localhost:41733/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="//localhost:41733/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:41733/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:41733/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="//localhost:41733/site.webmanifest">
+<meta property="og:title" content="Stratégies Avancées de Réplication Multi-sources" />
+<meta property="og:description" content="Patterns sophistiqués de réplication et de synchronisation pour les systèmes multi-sources" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//localhost:41733/chapitres/stockage/multi-sources/chapitre-56-stockage-multi-sources-strategies-avancees/" /><meta property="og:image" content="//localhost:41733/opengraph/card-base-2_hu_add9833b69630ba5.png"/><meta property="article:section" content="chapitres" />
+<meta property="article:published_time" content="2024-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-19T00:00:00+00:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="//localhost:41733/opengraph/card-base-2_hu_add9833b69630ba5.png"/>
+<meta name="twitter:title" content="Stratégies Avancées de Réplication Multi-sources"/>
+<meta name="twitter:description" content="Patterns sophistiqués de réplication et de synchronisation pour les systèmes multi-sources"/>
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Atom feed for DDD Adventure" href="/index.xml" />
+    
+    
+    
+            
+                <script type="text/javascript" src="//localhost:41733/docs/js/flexsearch.bundle.js"></script>
+            
+        
+    
+    
+
+    <link rel="stylesheet" href="/docs/scss/style.css" crossorigin="anonymous">
+    
+    
+    </head>
+<body>
+        <div class="content">
+            <div class="page-wrapper toggled">
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a href='/' aria-label="HomePage" alt="HomePage">
+            
+                <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+            
+        </a>
+    </div>
+    <div class="sidebar-content" style="height: calc(100% - 131px);">
+        <ul class="sidebar-menu">
+            
+                
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Fondamentaux
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/">Chapitre 1 : Introduction au Domain-Driven Design et Event Storming</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-02-impact-mapping/">Chapitre 2 : L&#39;Impact Mapping - Aligner le Produit sur les Objectifs Business</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-03-atelier-event-storming/">Chapitre 3 : L&#39;Atelier Event Storming - Guide Pratique</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-04-example-mapping/">Chapitre 4 : L&#39;Example Mapping - Détailer les Règles Métier</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-05-complexite-accidentelle-essentielle/">Chapitre 5 : Complexité Accidentelle vs Essentielle - Le Choix Architectural</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-06-granularite-choix-architecturaux/">Chapitre 6 : Granularité des Choix Architecturaux</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-07-modeles-riches-vs-anemiques/">Chapitre 7 : Modèles Riches vs Modèles Anémiques</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/">Chapitre 8 : Architecture Événementielle</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-09-repositories-persistance/">Chapitre 9 : Repositories et Persistance</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/fondamentaux/chapitre-10-choix-type-stockage/">Chapitre 15 : Choix du Type de Stockage</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Optionnels
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-13-architecture-cqrs/">Chapitre 15 : Architecture CQRS avec API Platform</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-12-architecture-cqs/">Chapitre 15 : Architecture CQS - Command Query Separation</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-11-event-sourcing/">Chapitre 15 : Event Sourcing - La Source de Vérité</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-14-cqrs-event-sourcing-combines/">Chapitre 15 : CQRS &#43; Event Sourcing Combinés</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/optionnels/chapitre-15-projections-event-sourcing/">Chapitre 15 : Projections Event Sourcing</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon current active">
+                            <button class="btn">
+                                Chapitres de Stockage
+                            </button>
+                            <div class="sidebar-submenu d-block">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage SQL
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-16-stockage-sql-classique/">Chapitre 16 : Stockage SQL - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-17-stockage-sql-cqs/">Chapitre 17 : Stockage SQL - Approche CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-18-stockage-sql-cqrs/">Chapitre 18 : Stockage SQL - Approche CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-19-stockage-sql-event-sourcing/">Chapitre 19 : Stockage SQL - Event Sourcing Seul</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-20-stockage-sql-event-sourcing-cqs/">Chapitre 58 : Stockage SQL - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/sql/chapitre-21-stockage-sql-event-sourcing-cqrs/">Chapitre 59 : Stockage SQL - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage API
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-26-stockage-api-event-sourcing-cqs/">Chapitre 26 : Stockage API - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-27-stockage-api-event-sourcing-cqrs/">Chapitre 27 : Stockage API - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-22-stockage-api-classique/">Chapitre 60 : Stockage API - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-23-stockage-api-cqs/">Chapitre 61 : Stockage API - Approche CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-24-stockage-api-cqrs/">Chapitre 62 : Stockage API - Approche CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/api/chapitre-25-stockage-api-event-sourcing/">Chapitre 63 : Stockage API - Event Sourcing Seul</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage MongoDB
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-28-stockage-mongodb-classique/">Chapitre 28 : Stockage MongoDB - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-29-stockage-mongodb-cqs/">Chapitre 29 : Stockage MongoDB - Approche CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-30-stockage-mongodb-cqrs/">Chapitre 30 : Stockage MongoDB - Approche CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-31-stockage-mongodb-event-sourcing/">Chapitre 31 : Stockage MongoDB - Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-32-stockage-mongodb-event-sourcing-cqs/">Stockage MongoDB - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/mongodb/chapitre-33-stockage-mongodb-event-sourcing-cqrs/">Stockage MongoDB - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage ElasticSearch
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-34-stockage-elasticsearch-classique/">Stockage ElasticSearch - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-35-stockage-elasticsearch-cqs/">Stockage ElasticSearch - CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-36-stockage-elasticsearch-cqrs/">Stockage ElasticSearch - CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-37-stockage-elasticsearch-event-sourcing/">Stockage ElasticSearch - Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-38-stockage-elasticsearch-event-sourcing-cqs/">Stockage ElasticSearch - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/elasticsearch/chapitre-39-stockage-elasticsearch-event-sourcing-cqrs/">Stockage ElasticSearch - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage In-Memory
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-40-stockage-in-memory-classique/">Stockage In-Memory - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-41-stockage-in-memory-cqs/">Stockage In-Memory - CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-42-stockage-in-memory-cqrs/">Stockage In-Memory - CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-43-stockage-in-memory-event-sourcing/">Stockage In-Memory - Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-44-stockage-in-memory-event-sourcing-cqs/">Stockage In-Memory - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/in-memory/chapitre-45-stockage-in-memory-event-sourcing-cqrs/">Stockage In-Memory - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon ">
+                                                <button class="btn">
+                                                    Stockage Composite piloté par Temporal
+                                                </button>
+                                                <div class="sidebar-submenu ">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-46-stockage-temporal-classique/">Stockage Temporal - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-47-stockage-temporal-cqs/">Stockage Temporal - CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-48-stockage-temporal-cqrs/">Stockage Temporal - CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-49-stockage-temporal-event-sourcing/">Stockage Temporal - Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-50-stockage-temporal-event-sourcing-cqs/">Stockage Temporal - Event Sourcing &#43; CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/temporal/chapitre-51-stockage-temporal-event-sourcing-cqrs/">Stockage Temporal - Event Sourcing &#43; CQRS</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="sidebar-dropdown nested no-icon current active">
+                                                <button class="btn">
+                                                    Stockage Multi-sources
+                                                </button>
+                                                <div class="sidebar-submenu d-block">
+                                                    <ul>
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-52-stockage-multi-sources-classique/">Stockage Multi-sources - Approche Classique</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-53-stockage-multi-sources-cqs/">Stockage Multi-sources - CQS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-54-stockage-multi-sources-cqrs/">Stockage Multi-sources - CQRS</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-55-stockage-multi-sources-event-sourcing/">Stockage Multi-sources avec Event Sourcing</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class="current no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-56-stockage-multi-sources-strategies-avancees/">Stratégies Avancées de Réplication Multi-sources</a></li>
+                                                            
+                                                        
+                                                            
+                                                            
+                                                                <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/stockage/multi-sources/chapitre-57-stockage-multi-sources-resolution-conflits/">Résolution de Conflits Multi-sources</a></li>
+                                                            
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Techniques
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-58-gestion-donnees-validation/">Chapitre 58 : Gestion des Données et Validation</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-59-pagination-performance/">Chapitre 59 : Pagination et Performance</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-60-gestion-erreurs-observabilite/">Chapitre 60 : Gestion d&#39;Erreurs et Observabilité</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/techniques/chapitre-61-tests-qualite/">Chapitre 61 : Tests et Qualité</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+                    
+                    
+                        <li class="sidebar-dropdown no-icon ">
+                            <button class="btn">
+                                Chapitres Avancés
+                            </button>
+                            <div class="sidebar-submenu ">
+                                <ul>
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/avances/chapitre-62-securite-autorisation/">Chapitre 62 : Sécurité et Autorisation - Protéger votre API Platform</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" no-icon"><a class="sidebar-nested-link" href="//localhost:41733/chapitres/avances/chapitre-63-frontend-integration/">Chapitre 63 : Frontend et Intégration - Connecter votre Interface Utilisateur</a></li>
+                                        
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    
+                
+            
+        </ul>
+        
+    </div>
+    
+        <ul class="sidebar-footer list-unstyled mb-0">
+            
+        </ul>
+    
+</nav>
+
+                    <main class="page-content bg-transparent">
+                        
+<div id="top-header" class="top-header d-print-none">
+    <div class="header-bar d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <a href='/' class="logo-icon me-3" aria-label="HomePage" alt="HomePage">
+                <div class="small">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+                <div class="big">
+                    
+                            <?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="m143,39.5c-18,0-18,18-18,18,0,0,0-18-18-18H22c-2.76,0-5,2.24-5,5v143c0,2.76,2.24,5,5,5h76c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h76c2.76,0,5-2.24,5-5V44.5c0-2.76-2.24-5-5-5h-85Zm63,123.5c0,1.38-1.12,2.5-2.5,2.5h-60.5c-18,0-18,18-18,18,0,0,0-18-18-18h-60.5c-1.38,0-2.5-1.12-2.5-2.5v-94c0-1.38,1.12-2.5,2.5-2.5h51.5c7.2,0,8.64,11.52,8.93,16.13.07,1.05.95,1.87,2,1.87h32.14c1.06,0,1.94-.82,2-1.87.29-4.61,1.73-16.13,8.93-16.13h51.5c1.38,0,2.5,1.12,2.5,2.5v94Z" style="fill:#06f;"/></svg>
+                    
+                </div>
+            </a>
+            <button id="close-sidebar" class="btn btn-icon btn-soft">
+                <span class="material-icons size-20 menu-icon align-middle">menu</span>
+            </button>
+            
+            
+                    
+                    <button id="flexsearch-button" class="ms-3 btn btn-soft" data-bs-toggle="collapse" data-bs-target="#FlexSearchCollapse" aria-expanded="false" aria-controls="FlexSearchCollapse">
+                        <span class="material-icons size-20 menu-icon align-middle">search</span>
+                        <span class="flexsearch-button-placeholder ms-1 me-2 d-none d-sm-block">Search</span>
+                        <div class="d-none d-sm-block">
+                            <span class="flexsearch-button-keys">
+                                <kbd class="flexsearch-button-cmd-key">
+                                    <svg width="44" height="15"><path d="M2.118,11.5A1.519,1.519,0,0,1,1,11.042,1.583,1.583,0,0,1,1,8.815a1.519,1.519,0,0,1,1.113-.458h.715V6.643H2.118A1.519,1.519,0,0,1,1,6.185,1.519,1.519,0,0,1,.547,5.071,1.519,1.519,0,0,1,1,3.958,1.519,1.519,0,0,1,2.118,3.5a1.519,1.519,0,0,1,1.114.458A1.519,1.519,0,0,1,3.69,5.071v.715H5.4V5.071A1.564,1.564,0,0,1,6.976,3.5,1.564,1.564,0,0,1,8.547,5.071,1.564,1.564,0,0,1,6.976,6.643H6.261V8.357h.715a1.575,1.575,0,0,1,1.113,2.685,1.583,1.583,0,0,1-2.227,0A1.519,1.519,0,0,1,5.4,9.929V9.214H3.69v.715a1.519,1.519,0,0,1-.458,1.113A1.519,1.519,0,0,1,2.118,11.5Zm0-.857a.714.714,0,0,0,.715-.714V9.214H2.118a.715.715,0,1,0,0,1.429Zm4.858,0a.715.715,0,1,0,0-1.429H6.261v.715a.714.714,0,0,0,.715.714ZM3.69,8.357H5.4V6.643H3.69ZM2.118,5.786h.715V5.071a.714.714,0,0,0-.715-.714.715.715,0,0,0-.5,1.22A.686.686,0,0,0,2.118,5.786Zm4.143,0h.715a.715.715,0,0,0,.5-1.22.715.715,0,0,0-1.22.5Z" fill="currentColor"></path><path d="M12.4,11.475H11.344l3.879-7.95h1.056Z" fill="currentColor"></path><path d="M25.073,5.384l-.864.576a2.121,2.121,0,0,0-1.786-.923,2.207,2.207,0,0,0-2.266,2.326,2.206,2.206,0,0,0,2.266,2.325,2.1,2.1,0,0,0,1.782-.918l.84.617a3.108,3.108,0,0,1-2.622,1.293,3.217,3.217,0,0,1-3.349-3.317,3.217,3.217,0,0,1,3.349-3.317A3.046,3.046,0,0,1,25.073,5.384Z" fill="currentColor"></path><path d="M30.993,5.142h-2.07v5.419H27.891V5.142h-2.07V4.164h5.172Z" fill="currentColor"></path><path d="M34.67,4.164c1.471,0,2.266.658,2.266,1.851,0,1.087-.832,1.809-2.134,1.855l2.107,2.691h-1.28L33.591,7.87H33.07v2.691H32.038v-6.4Zm-1.6.969v1.8h1.572c.832,0,1.22-.3,1.22-.918s-.411-.882-1.22-.882Z" fill="currentColor"></path><path d="M42.883,10.561H38.31v-6.4h1.033V9.583h3.54Z" fill="currentColor"></path></svg>
+                                </kbd>
+                                <kbd class="flexsearch-button-key">
+                                    <svg width="15" height="15"><path d="M5.926,12.279H4.41L9.073,2.721H10.59Z" fill="currentColor"/></svg>
+                                </kbd>
+                            </span>
+                        </div>
+                    </button>
+                
+            </div>
+
+        <div class="d-flex align-items-center">
+            <ul class="list-unstyled mb-0">
+                
+            </ul>
+            
+        </div>
+    </div>
+    
+    
+            <div class="collapse" id="FlexSearchCollapse">
+                <div class="flexsearch-container">
+                    <div class="flexsearch-keymap">
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow down" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path></g></svg></kbd>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Arrow up" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to navigate</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Enter key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to select</span>
+                        </li>
+                        <li>
+                            <kbd class="flexsearch-button-cmd-key"><svg width="15" height="15" aria-label="Escape key" role="img"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path></g></svg></kbd>
+                            <span class="flexsearch-key-label">to close</span>
+                        </li>
+                    </div>
+                    <form class="flexsearch position-relative flex-grow-1 ms-2 me-2">
+                        <div class="d-flex flex-row">
+                            <input id="flexsearch" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button id="hideFlexsearch" type="button" class="ms-2 btn btn-soft">
+                                cancel
+                            </button>
+                        </div>
+                        <div id="suggestions" class="shadow rounded-1 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        
+    
+    
+</div>
+
+
+                            <div class="container-fluid">
+                                <div class="layout-spacing">
+                                    
+                                        <div class="d-md-flex justify-content-between align-items-center"><nav aria-label="breadcrumb" class="d-inline-block pb-2 mt-1 mt-sm-0">
+    <ul id="breadcrumbs" class="breadcrumb bg-transparent mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+        
+            
+                <li class="breadcrumb-item text-capitalize active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/">
+                        <i class="material-icons size-20 align-text-bottom" itemprop="name">Home</i>
+                    </a>
+                    <meta itemprop="position" content='1' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/stockage/">
+                        <span itemprop="name">Chapitres de Stockage</span>
+                    </a>
+                    <meta itemprop="position" content='2' />
+                </li>
+            
+            
+                <li class="breadcrumb-item text-capitalize" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/chapitres/stockage/multi-sources/">
+                        <span itemprop="name">Stockage Multi-sources</span>
+                    </a>
+                    <meta itemprop="position" content='3' />
+                </li>
+            
+        
+            <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name">Stratégies Avancées de Réplication Multi-sources</span>
+                <meta itemprop="position" content='4' />
+            </li>
+        
+    </ul>
+</nav></div>
+                                    
+                                    <div class="row flex-xl-nowrap">
+                                        
+                                        <div class="docs-toc col-xl-3    d-xl-block"><toc>
+    <div class="fw-bold text-uppercase mb-2">On this page</div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-objectif-du-chapitre">🎯 <strong>Objectif du Chapitre</strong></a></li>
+    <li><a href="#-concepts-clés">🌟 <strong>Concepts Clés</strong></a>
+      <ul>
+        <li><a href="#réplication-avancée"><strong>Réplication Avancée</strong></a></li>
+        <li><a href="#architecture-de-réplication-avancée"><strong>Architecture de Réplication Avancée</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-patterns-de-réplication">🏗️ <strong>Patterns de Réplication</strong></a>
+      <ul>
+        <li><a href="#1-réplication-en-cascade"><strong>1. Réplication en Cascade</strong></a></li>
+        <li><a href="#2-réplication-en-étoile"><strong>2. Réplication en Étoile</strong></a></li>
+        <li><a href="#3-réplication-conditionnelle"><strong>3. Réplication Conditionnelle</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-stratégies-de-cohérence">🔄 <strong>Stratégies de Cohérence</strong></a>
+      <ul>
+        <li><a href="#1-cohérence-éventuelle-avec-compensation"><strong>1. Cohérence Éventuelle avec Compensation</strong></a></li>
+        <li><a href="#2-cohérence-forte-avec-quorum"><strong>2. Cohérence Forte avec Quorum</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-optimisations-de-performance">⚡ <strong>Optimisations de Performance</strong></a>
+      <ul>
+        <li><a href="#1-réplication-asynchrone-avec-queue"><strong>1. Réplication Asynchrone avec Queue</strong></a></li>
+        <li><a href="#2-réplication-par-batch"><strong>2. Réplication par Batch</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-monitoring-et-observabilité">🔍 <strong>Monitoring et Observabilité</strong></a>
+      <ul>
+        <li><a href="#1-métriques-de-réplication"><strong>1. Métriques de Réplication</strong></a></li>
+        <li><a href="#2-health-checks"><strong>2. Health Checks</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-patterns-avancés">🎯 <strong>Patterns Avancés</strong></a>
+      <ul>
+        <li><a href="#1-réplication-géographique"><strong>1. Réplication Géographique</strong></a></li>
+        <li><a href="#2-réplication-adaptative"><strong>2. Réplication Adaptative</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-cas-d">🚀 <strong>Cas d’Usage Avancés</strong></a>
+      <ul>
+        <li><a href="#systèmes-multi-région"><strong>Systèmes Multi-région</strong></a></li>
+        <li><a href="#systèmes-de-trading"><strong>Systèmes de Trading</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-métriques-et-kpis">📊 <strong>Métriques et KPIs</strong></a>
+      <ul>
+        <li><a href="#métriques-de-performance"><strong>Métriques de Performance</strong></a></li>
+        <li><a href="#métriques-de-qualité"><strong>Métriques de Qualité</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-prochaines-étapes">🎯 <strong>Prochaines Étapes</strong></a></li>
+  </ul>
+</nav>
+    </toc></div>
+                                        
+                                        
+                                        <div class="docs-toc-mobile    d-print-none d-xl-none">
+                                            <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
+                                                Table of Contents
+                                            </button>
+<nav id="toc-mobile">
+  <ul class="dropdown-menu">
+    <li><a href="#-objectif-du-chapitre">🎯 <strong>Objectif du Chapitre</strong></a></li>
+    <li><a href="#-concepts-clés">🌟 <strong>Concepts Clés</strong></a>
+      <ul>
+        <li><a href="#réplication-avancée"><strong>Réplication Avancée</strong></a></li>
+        <li><a href="#architecture-de-réplication-avancée"><strong>Architecture de Réplication Avancée</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-patterns-de-réplication">🏗️ <strong>Patterns de Réplication</strong></a>
+      <ul>
+        <li><a href="#1-réplication-en-cascade"><strong>1. Réplication en Cascade</strong></a></li>
+        <li><a href="#2-réplication-en-étoile"><strong>2. Réplication en Étoile</strong></a></li>
+        <li><a href="#3-réplication-conditionnelle"><strong>3. Réplication Conditionnelle</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-stratégies-de-cohérence">🔄 <strong>Stratégies de Cohérence</strong></a>
+      <ul>
+        <li><a href="#1-cohérence-éventuelle-avec-compensation"><strong>1. Cohérence Éventuelle avec Compensation</strong></a></li>
+        <li><a href="#2-cohérence-forte-avec-quorum"><strong>2. Cohérence Forte avec Quorum</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-optimisations-de-performance">⚡ <strong>Optimisations de Performance</strong></a>
+      <ul>
+        <li><a href="#1-réplication-asynchrone-avec-queue"><strong>1. Réplication Asynchrone avec Queue</strong></a></li>
+        <li><a href="#2-réplication-par-batch"><strong>2. Réplication par Batch</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-monitoring-et-observabilité">🔍 <strong>Monitoring et Observabilité</strong></a>
+      <ul>
+        <li><a href="#1-métriques-de-réplication"><strong>1. Métriques de Réplication</strong></a></li>
+        <li><a href="#2-health-checks"><strong>2. Health Checks</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-patterns-avancés">🎯 <strong>Patterns Avancés</strong></a>
+      <ul>
+        <li><a href="#1-réplication-géographique"><strong>1. Réplication Géographique</strong></a></li>
+        <li><a href="#2-réplication-adaptative"><strong>2. Réplication Adaptative</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-cas-d">🚀 <strong>Cas d’Usage Avancés</strong></a>
+      <ul>
+        <li><a href="#systèmes-multi-région"><strong>Systèmes Multi-région</strong></a></li>
+        <li><a href="#systèmes-de-trading"><strong>Systèmes de Trading</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-métriques-et-kpis">📊 <strong>Métriques et KPIs</strong></a>
+      <ul>
+        <li><a href="#métriques-de-performance"><strong>Métriques de Performance</strong></a></li>
+        <li><a href="#métriques-de-qualité"><strong>Métriques de Qualité</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#-prochaines-étapes">🎯 <strong>Prochaines Étapes</strong></a></li>
+  </ul>
+</nav></div>
+                                        <div class="docs-content col-12 col-xl-9 mt-0">
+                                            <div class="mb-0 d-flex">
+                                                
+                                                <h1 class="content-title mb-0">
+                                                    Stratégies Avancées de Réplication Multi-sources
+                                                    
+                                                        <span class="badge bg-default fs-6 mb-1 align-middle">DRAFT</span>
+                                                    
+                                                </h1>
+                                            </div>
+                                            
+                                            <div id="content" class="main-content" >
+                                                
+    
+    <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
+        <h1 id="-stratégies-avancées-de-réplication-multi-sources">🔄 Stratégies Avancées de Réplication Multi-sources <a href="#-strat%c3%a9gies-avanc%c3%a9es-de-r%c3%a9plication-multi-sources" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><h2 id="-objectif-du-chapitre">🎯 <strong>Objectif du Chapitre</strong> <a href="#-objectif-du-chapitre" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Ce chapitre explore les <strong>stratégies avancées de réplication</strong> pour les systèmes multi-sources, couvrant les patterns sophistiqués de synchronisation, de cohérence et d&rsquo;optimisation des performances.</p>
+<h2 id="-concepts-clés">🌟 <strong>Concepts Clés</strong> <a href="#-concepts-cl%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="réplication-avancée"><strong>Réplication Avancée</strong> <a href="#r%c3%a9plication-avanc%c3%a9e" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>La réplication avancée va au-delà de la simple duplication de données :</p>
+<ul>
+<li><strong>Réplication intelligente</strong> : Sélection dynamique des sources</li>
+<li><strong>Synchronisation bidirectionnelle</strong> : Mise à jour dans les deux sens</li>
+<li><strong>Réplication conditionnelle</strong> : Basée sur des critères métier</li>
+<li><strong>Optimisation des performances</strong> : Réplication asynchrone et parallèle</li>
+</ul>
+<h3 id="architecture-de-réplication-avancée"><strong>Architecture de Réplication Avancée</strong> <a href="#architecture-de-r%c3%a9plication-avanc%c3%a9e" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><pre class="mermaid">graph TB
+    A[Event Source] --&gt; B[Replication Manager]
+    B --&gt; C[Strategy Selector]
+    
+    C --&gt; D[Immediate Replication]
+    C --&gt; E[Batch Replication]
+    C --&gt; F[Conditional Replication]
+    
+    D --&gt; G[Primary Store]
+    D --&gt; H[Secondary Store]
+    
+    E --&gt; I[Batch Processor]
+    I --&gt; J[Multiple Stores]
+    
+    F --&gt; K[Rule Engine]
+    K --&gt; L[Target Stores]
+    
+    M[Conflict Resolver] --&gt; N[Consistency Checker]
+    N --&gt; O[Sync Status]
+</pre>
+<h2 id="-patterns-de-réplication">🏗️ <strong>Patterns de Réplication</strong> <a href="#-patterns-de-r%c3%a9plication" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-réplication-en-cascade"><strong>1. Réplication en Cascade</strong> <a href="#1-r%c3%a9plication-en-cascade" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Les données sont répliquées de manière séquentielle :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Replication</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CascadeReplicationStrategy</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ReplicationStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">array</span> $storeChain;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">int</span> $maxRetries;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">replicate</span>(<span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $currentStream <span style="color:#f92672">=</span> $stream;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">storeChain</span> <span style="color:#66d9ef">as</span> $store) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                $store<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">append</span>($currentStream);
+</span></span><span style="display:flex;"><span>                $currentStream <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">transformStream</span>($currentStream, $store);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">Exception</span> $e) {
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handleReplicationFailure</span>($store, $e);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>; <span style="color:#75715e">// Arrêter la cascade en cas d&#39;échec
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">transformStream</span>(<span style="color:#a6e22e">EventStream</span> $stream, <span style="color:#a6e22e">EventStoreInterface</span> $store)<span style="color:#f92672">:</span> <span style="color:#a6e22e">EventStream</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Transformation des événements selon le type de store
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $transformedEvents <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> ($stream<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEvents</span>() <span style="color:#66d9ef">as</span> $event) {
+</span></span><span style="display:flex;"><span>            $transformedEvents[] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">transformEvent</span>($event, $store);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">EventStream</span>($transformedEvents);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="2-réplication-en-étoile"><strong>2. Réplication en Étoile</strong> <a href="#2-r%c3%a9plication-en-%c3%a9toile" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>Toutes les sources sont mises à jour simultanément :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Replication</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StarReplicationStrategy</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ReplicationStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">array</span> $stores;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">ReplicationCoordinator</span> $coordinator;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">replicate</span>(<span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $replicationTasks <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">stores</span> <span style="color:#66d9ef">as</span> $storeId <span style="color:#f92672">=&gt;</span> $store) {
+</span></span><span style="display:flex;"><span>            $replicationTasks[] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createReplicationTask</span>($store, $stream);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">coordinator</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">executeParallel</span>($replicationTasks);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">createReplicationTask</span>(<span style="color:#a6e22e">EventStoreInterface</span> $store, <span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">ReplicationTask</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ReplicationTask</span>(<span style="color:#66d9ef">function</span>() <span style="color:#66d9ef">use</span> ($store, $stream) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                $store<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">append</span>($stream);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ReplicationResult</span><span style="color:#f92672">::</span><span style="color:#a6e22e">success</span>();
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">Exception</span> $e) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ReplicationResult</span><span style="color:#f92672">::</span><span style="color:#a6e22e">failure</span>($e);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="3-réplication-conditionnelle"><strong>3. Réplication Conditionnelle</strong> <a href="#3-r%c3%a9plication-conditionnelle" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>La réplication dépend de critères métier :</p>
+
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Replication</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConditionalReplicationStrategy</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ReplicationStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">array</span> $replicationRules;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">RuleEngine</span> $ruleEngine;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">replicate</span>(<span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> ($stream<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEvents</span>() <span style="color:#66d9ef">as</span> $event) {
+</span></span><span style="display:flex;"><span>            $targetStores <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">ruleEngine</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">evaluate</span>($event, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">replicationRules</span>);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> ($targetStores <span style="color:#66d9ef">as</span> $store) {
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">replicateToStore</span>($store, $event);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">replicateToStore</span>(<span style="color:#a6e22e">EventStoreInterface</span> $store, <span style="color:#a6e22e">DomainEvent</span> $event)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            $store<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">append</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">EventStream</span>([$event]));
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">Exception</span> $e) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handleReplicationError</span>($store, $event, $e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-stratégies-de-cohérence">🔄 <strong>Stratégies de Cohérence</strong> <a href="#-strat%c3%a9gies-de-coh%c3%a9rence" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-cohérence-éventuelle-avec-compensation"><strong>1. Cohérence Éventuelle avec Compensation</strong> <a href="#1-coh%c3%a9rence-%c3%a9ventuelle-avec-compensation" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Consistency</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EventualConsistencyWithCompensation</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ConsistencyStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">ConsistencyChecker</span> $checker;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">CompensationManager</span> $compensation;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ensureConsistency</span>(<span style="color:#66d9ef">array</span> $stores)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $inconsistencies <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">checker</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">detectInconsistencies</span>($stores);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> ($inconsistencies <span style="color:#66d9ef">as</span> $inconsistency) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">compensation</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">applyCompensation</span>($inconsistency);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="2-cohérence-forte-avec-quorum"><strong>2. Cohérence Forte avec Quorum</strong> <a href="#2-coh%c3%a9rence-forte-avec-quorum" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Consistency</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StrongConsistencyWithQuorum</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ConsistencyStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">int</span> $quorumSize;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">array</span> $stores;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $successCount <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        $errors <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">stores</span> <span style="color:#66d9ef">as</span> $store) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                $store<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">append</span>($stream);
+</span></span><span style="display:flex;"><span>                $successCount<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">Exception</span> $e) {
+</span></span><span style="display:flex;"><span>                $errors[] <span style="color:#f92672">=</span> $e;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($successCount <span style="color:#f92672">&lt;</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">quorumSize</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">QuorumNotReachedException</span>($errors);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-optimisations-de-performance">⚡ <strong>Optimisations de Performance</strong> <a href="#-optimisations-de-performance" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-réplication-asynchrone-avec-queue"><strong>1. Réplication Asynchrone avec Queue</strong> <a href="#1-r%c3%a9plication-asynchrone-avec-queue" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Replication</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncReplicationWithQueue</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ReplicationStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">MessageQueue</span> $queue;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">ReplicationWorker</span> $worker;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">replicate</span>(<span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Écriture immédiate dans la source principale
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">primaryStore</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">append</span>($stream);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Mise en queue pour réplication asynchrone
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">queue</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">publish</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ReplicationMessage</span>($stream));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processReplicationQueue</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> ($message <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">queue</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">consume</span>()) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">worker</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">process</span>($message);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="2-réplication-par-batch"><strong>2. Réplication par Batch</strong> <a href="#2-r%c3%a9plication-par-batch" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Replication</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BatchReplicationStrategy</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ReplicationStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">BatchProcessor</span> $batchProcessor;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">int</span> $batchSize;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">int</span> $batchTimeout;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">replicate</span>(<span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">batchProcessor</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addToBatch</span>($stream);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">shouldProcessBatch</span>()) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">processBatch</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">shouldProcessBatch</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">batchProcessor</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getBatchSize</span>() <span style="color:#f92672">&gt;=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">batchSize</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>               $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">batchProcessor</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getBatchAge</span>() <span style="color:#f92672">&gt;=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">batchTimeout</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-monitoring-et-observabilité">🔍 <strong>Monitoring et Observabilité</strong> <a href="#-monitoring-et-observabilit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-métriques-de-réplication"><strong>1. Métriques de Réplication</strong> <a href="#1-m%c3%a9triques-de-r%c3%a9plication" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Monitoring</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReplicationMetrics</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">MetricsCollector</span> $collector;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">recordReplicationLatency</span>(<span style="color:#a6e22e">string</span> $storeId, <span style="color:#a6e22e">float</span> $latency)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">collector</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">histogram</span>(<span style="color:#e6db74">&#39;replication.latency&#39;</span>, $latency, [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;store&#39;</span> <span style="color:#f92672">=&gt;</span> $storeId
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">recordReplicationSuccess</span>(<span style="color:#a6e22e">string</span> $storeId)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">collector</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">increment</span>(<span style="color:#e6db74">&#39;replication.success&#39;</span>, [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;store&#39;</span> <span style="color:#f92672">=&gt;</span> $storeId
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">recordReplicationFailure</span>(<span style="color:#a6e22e">string</span> $storeId, <span style="color:#a6e22e">string</span> $error)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">collector</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">increment</span>(<span style="color:#e6db74">&#39;replication.failure&#39;</span>, [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;store&#39;</span> <span style="color:#f92672">=&gt;</span> $storeId,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;error&#39;</span> <span style="color:#f92672">=&gt;</span> $error
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="2-health-checks"><strong>2. Health Checks</strong> <a href="#2-health-checks" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Health</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReplicationHealthCheck</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">HealthCheckInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">array</span> $stores;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">ConsistencyChecker</span> $checker;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">check</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">HealthStatus</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $status <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HealthStatus</span>();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">stores</span> <span style="color:#66d9ef">as</span> $storeId <span style="color:#f92672">=&gt;</span> $store) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">checkStoreHealth</span>($store);
+</span></span><span style="display:flex;"><span>                $status<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addStoreStatus</span>($storeId, <span style="color:#e6db74">&#39;healthy&#39;</span>);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">Exception</span> $e) {
+</span></span><span style="display:flex;"><span>                $status<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addStoreStatus</span>($storeId, <span style="color:#e6db74">&#39;unhealthy&#39;</span>, $e<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $status;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-patterns-avancés">🎯 <strong>Patterns Avancés</strong> <a href="#-patterns-avanc%c3%a9s" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="1-réplication-géographique"><strong>1. Réplication Géographique</strong> <a href="#1-r%c3%a9plication-g%c3%a9ographique" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Replication</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GeographicReplicationStrategy</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ReplicationStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">array</span> $regions;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">LatencyOptimizer</span> $optimizer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">replicate</span>(<span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $userRegion <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getUserRegion</span>();
+</span></span><span style="display:flex;"><span>        $targetRegions <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">optimizer</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">selectOptimalRegions</span>($userRegion);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> ($targetRegions <span style="color:#66d9ef">as</span> $region) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">replicateToRegion</span>($region, $stream);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="2-réplication-adaptative"><strong>2. Réplication Adaptative</strong> <a href="#2-r%c3%a9plication-adaptative" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+
+    
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Gyroscops\Cloud\Infrastructure\Replication</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AdaptiveReplicationStrategy</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ReplicationStrategyInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">PerformanceMonitor</span> $monitor;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">StrategySelector</span> $selector;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">replicate</span>(<span style="color:#a6e22e">EventStream</span> $stream)<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $currentPerformance <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">monitor</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getCurrentPerformance</span>();
+</span></span><span style="display:flex;"><span>        $strategy <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">selector</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">selectStrategy</span>($currentPerformance);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        $strategy<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">replicate</span>($stream);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="-cas-d">🚀 <strong>Cas d&rsquo;Usage Avancés</strong> <a href="#-cas-d" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="systèmes-multi-région"><strong>Systèmes Multi-région</strong> <a href="#syst%c3%a8mes-multi-r%c3%a9gion" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li><strong>Latence optimisée</strong> : Réplication basée sur la proximité géographique</li>
+<li><strong>Disaster recovery</strong> : Réplication cross-region pour la continuité</li>
+<li><strong>Compliance</strong> : Respect des réglementations par région</li>
+</ul>
+<h3 id="systèmes-de-trading"><strong>Systèmes de Trading</strong> <a href="#syst%c3%a8mes-de-trading" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li><strong>Latence ultra-faible</strong> : Réplication immédiate pour les données critiques</li>
+<li><strong>Cohérence forte</strong> : Garantie de cohérence pour les transactions financières</li>
+<li><strong>Audit trail</strong> : Traçabilité complète des modifications</li>
+</ul>
+<h2 id="-métriques-et-kpis">📊 <strong>Métriques et KPIs</strong> <a href="#-m%c3%a9triques-et-kpis" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><h3 id="métriques-de-performance"><strong>Métriques de Performance</strong> <a href="#m%c3%a9triques-de-performance" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li><strong>Latence de réplication</strong> : Temps moyen de réplication</li>
+<li><strong>Throughput</strong> : Nombre d&rsquo;événements répliqués par seconde</li>
+<li><strong>Taux de succès</strong> : Pourcentage de réplications réussies</li>
+<li><strong>Délai de synchronisation</strong> : Temps de convergence entre stores</li>
+</ul>
+<h3 id="métriques-de-qualité"><strong>Métriques de Qualité</strong> <a href="#m%c3%a9triques-de-qualit%c3%a9" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><ul>
+<li><strong>Cohérence</strong> : Pourcentage de données cohérentes</li>
+<li><strong>Intégrité</strong> : Absence de corruption des données</li>
+<li><strong>Disponibilité</strong> : Temps de fonctionnement des stores</li>
+<li><strong>Récupération</strong> : Temps de récupération après panne</li>
+</ul>
+<h2 id="-prochaines-étapes">🎯 <strong>Prochaines Étapes</strong> <a href="#-prochaines-%c3%a9tapes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>Après avoir maîtrisé les stratégies avancées de réplication, vous pouvez :</p>
+<ul>
+<li><strong>Explorer la résolution de conflits</strong> dans les environnements multi-sources</li>
+<li><strong>Découvrir les techniques de monitoring</strong> et d&rsquo;observabilité avancées</li>
+<li><strong>Apprendre les patterns de migration</strong> et de maintenance</li>
+<li><strong>Implémenter des solutions de disaster recovery</strong> sophistiquées</li>
+</ul>
+<hr>
+
+
+<div class="chapter-navigation">
+  <h2 class="chapter-nav-title">🎯 Votre Prochaine Étape</h2>
+  <p class="chapter-nav-subtitle">Maintenant que vous comprenez les concepts de base et que j'ai partagé mon expérience avec Gyroscops, quel est votre contexte ?</p>
+  
+  <div class="chapter-options">
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+      
+      
+        
+      
+    
+    
+    
+    
+      
+      
+      
+      
+      
+        
+      
+    
+  
+  
+  <div class="chapter-option" data-color="green" data-draft="true">
+    <div class="chapter-option-header">
+      <div class="chapter-option-letter">A</div>
+      <div>
+        <h3 class="chapter-option-title">Je veux comprendre la résolution de conflits</h3>
+        <p class="chapter-option-subtitle">Vous voulez maîtriser les techniques de résolution de conflits dans un environnement multi-sources</p>
+      </div>
+    </div>
+    
+    <div class="chapter-option-content">
+      
+      <div class="chapter-option-criteria">
+        <h4 class="chapter-option-criteria-title">Critères d'adoption :</h4>
+        <ul class="chapter-option-criteria-list">
+          
+          <li>Résolution de conflits</li>
+          
+          <li>Cohérence des données</li>
+          
+          <li>Architecture distribuée</li>
+          
+          <li>Intégrité des données</li>
+          
+        </ul>
+      </div>
+      
+      
+      <div class="chapter-option-footer">
+        <span class="chapter-option-time">⏱️ 30-45 minutes</span>
+        
+        
+          
+          <span class="chapter-option-link chapter-option-link-disabled">
+            Résolution de Conflits Multi-sources
+            <span class="draft-indicator">📝</span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+  
+  <style>
+   
+  .chapter-option-link-disabled {
+    background: #9ca3af !important;
+    color: #6b7280 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+  }
+  
+  .chapter-option-link-disabled:hover {
+    background: #9ca3af !important;
+    color: #6b7280 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .chapter-option-link-disabled::after {
+    display: none !important;
+  }
+  
+   
+  .chapter-option[data-draft="true"] {
+    opacity: 0.8;
+    border-style: dashed;
+    border-color: #d1d5db;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-letter {
+    background: #9ca3af;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-title {
+    color: #6b7280;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-subtitle {
+    color: #9ca3af;
+  }
+  
+   
+  .draft-indicator,
+  .coming-soon-indicator {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+   
+  .chapter-option[data-draft="true"] {
+    animation: draft-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes draft-pulse {
+    0%, 100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+      
+      
+        
+      
+    
+    
+    
+    
+      
+      
+      
+      
+      
+        
+      
+    
+  
+  
+  <div class="chapter-option" data-color="blue" data-draft="true">
+    <div class="chapter-option-header">
+      <div class="chapter-option-letter">B</div>
+      <div>
+        <h3 class="chapter-option-title">Je veux explorer le monitoring avancé</h3>
+        <p class="chapter-option-subtitle">Vous voulez comprendre comment surveiller et maintenir un système multi-sources</p>
+      </div>
+    </div>
+    
+    <div class="chapter-option-content">
+      
+      <div class="chapter-option-criteria">
+        <h4 class="chapter-option-criteria-title">Critères d'adoption :</h4>
+        <ul class="chapter-option-criteria-list">
+          
+          <li>Monitoring</li>
+          
+          <li>Observabilité</li>
+          
+          <li>Maintenance</li>
+          
+          <li>Performance</li>
+          
+          <li>Debugging</li>
+          
+        </ul>
+      </div>
+      
+      
+      <div class="chapter-option-footer">
+        <span class="chapter-option-time">⏱️ 40-50 minutes</span>
+        
+        
+          
+          <span class="chapter-option-link chapter-option-link-disabled">
+            Monitoring et Observabilité Multi-sources
+            <span class="draft-indicator">📝</span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+  
+  <style>
+   
+  .chapter-option-link-disabled {
+    background: #9ca3af !important;
+    color: #6b7280 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+  }
+  
+  .chapter-option-link-disabled:hover {
+    background: #9ca3af !important;
+    color: #6b7280 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .chapter-option-link-disabled::after {
+    display: none !important;
+  }
+  
+   
+  .chapter-option[data-draft="true"] {
+    opacity: 0.8;
+    border-style: dashed;
+    border-color: #d1d5db;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-letter {
+    background: #9ca3af;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-title {
+    color: #6b7280;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-subtitle {
+    color: #9ca3af;
+  }
+  
+   
+  .draft-indicator,
+  .coming-soon-indicator {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+   
+  .chapter-option[data-draft="true"] {
+    animation: draft-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes draft-pulse {
+    0%, 100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+      
+      
+        
+      
+    
+    
+    
+    
+      
+      
+      
+      
+      
+        
+      
+    
+  
+  
+  <div class="chapter-option" data-color="purple" data-draft="true">
+    <div class="chapter-option-header">
+      <div class="chapter-option-letter">C</div>
+      <div>
+        <h3 class="chapter-option-title">Je veux revenir aux bases du stockage</h3>
+        <p class="chapter-option-subtitle">Vous voulez consolider vos connaissances sur les patterns de stockage</p>
+      </div>
+    </div>
+    
+    <div class="chapter-option-content">
+      
+      <div class="chapter-option-criteria">
+        <h4 class="chapter-option-criteria-title">Critères d'adoption :</h4>
+        <ul class="chapter-option-criteria-list">
+          
+          <li>Consolidation</li>
+          
+          <li>Compréhension</li>
+          
+          <li>Base solide</li>
+          
+          <li>Patterns fondamentaux</li>
+          
+        </ul>
+      </div>
+      
+      
+      <div class="chapter-option-footer">
+        <span class="chapter-option-time">⏱️ Variable</span>
+        
+        
+          
+          <span class="chapter-option-link chapter-option-link-disabled">
+            Choix du Type de Stockage
+            <span class="draft-indicator">📝</span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+  
+  <style>
+   
+  .chapter-option-link-disabled {
+    background: #9ca3af !important;
+    color: #6b7280 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+  }
+  
+  .chapter-option-link-disabled:hover {
+    background: #9ca3af !important;
+    color: #6b7280 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .chapter-option-link-disabled::after {
+    display: none !important;
+  }
+  
+   
+  .chapter-option[data-draft="true"] {
+    opacity: 0.8;
+    border-style: dashed;
+    border-color: #d1d5db;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-letter {
+    background: #9ca3af;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-title {
+    color: #6b7280;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-subtitle {
+    color: #9ca3af;
+  }
+  
+   
+  .draft-indicator,
+  .coming-soon-indicator {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+   
+  .chapter-option[data-draft="true"] {
+    animation: draft-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes draft-pulse {
+    0%, 100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+      
+      
+        
+      
+    
+    
+    
+    
+      
+      
+      
+      
+      
+        
+      
+    
+  
+  
+  <div class="chapter-option" data-color="orange" data-draft="true">
+    <div class="chapter-option-header">
+      <div class="chapter-option-letter">D</div>
+      <div>
+        <h3 class="chapter-option-title">Je veux explorer d&#39;autres patterns avancés</h3>
+        <p class="chapter-option-subtitle">Vous voulez découvrir d&#39;autres patterns sophistiqués d&#39;architecture</p>
+      </div>
+    </div>
+    
+    <div class="chapter-option-content">
+      
+      <div class="chapter-option-criteria">
+        <h4 class="chapter-option-criteria-title">Critères d'adoption :</h4>
+        <ul class="chapter-option-criteria-list">
+          
+          <li>Patterns avancés</li>
+          
+          <li>Architecture complexe</li>
+          
+          <li>Innovation</li>
+          
+          <li>Excellence technique</li>
+          
+        </ul>
+      </div>
+      
+      
+      <div class="chapter-option-footer">
+        <span class="chapter-option-time">⏱️ Variable</span>
+        
+        
+          
+          <span class="chapter-option-link chapter-option-link-disabled">
+            Sécurité et Autorisation
+            <span class="draft-indicator">📝</span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+  
+  <style>
+   
+  .chapter-option-link-disabled {
+    background: #9ca3af !important;
+    color: #6b7280 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+  }
+  
+  .chapter-option-link-disabled:hover {
+    background: #9ca3af !important;
+    color: #6b7280 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .chapter-option-link-disabled::after {
+    display: none !important;
+  }
+  
+   
+  .chapter-option[data-draft="true"] {
+    opacity: 0.8;
+    border-style: dashed;
+    border-color: #d1d5db;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-letter {
+    background: #9ca3af;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-title {
+    color: #6b7280;
+  }
+  
+  .chapter-option[data-draft="true"] .chapter-option-subtitle {
+    color: #9ca3af;
+  }
+  
+   
+  .draft-indicator,
+  .coming-soon-indicator {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+   
+  .chapter-option[data-draft="true"] {
+    animation: draft-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes draft-pulse {
+    0%, 100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+  </style>
+
+  </div>
+</div>
+
+<style>
+.chapter-navigation {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  border-left: 4px solid #3b82f6;
+}
+
+.chapter-nav-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.chapter-nav-subtitle {
+  margin: 0 0 1.5rem 0;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.chapter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+ 
+.chapter-option {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+}
+
+.chapter-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--option-color, #6b7280);
+  border-radius: 0 2px 2px 0;
+}
+
+.chapter-option-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.chapter-option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--option-color, #6b7280);
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.chapter-option-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.chapter-option-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-style: italic;
+  margin: 0.25rem 0 0 0;
+  line-height: 1.4;
+}
+
+.chapter-option-content {
+  margin-left: 2.75rem;
+}
+
+.chapter-option-criteria {
+  margin-bottom: 0.75rem;
+}
+
+.chapter-option-criteria-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+}
+
+.chapter-option-criteria-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chapter-option-criteria-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.chapter-option-criteria-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.chapter-option-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.chapter-option-time {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.chapter-option-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--option-color, #6b7280);
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.chapter-option-link:hover {
+  background: var(--option-color-dark, #4b5563);
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.chapter-option-link:visited {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.chapter-option-link:focus {
+  color: white !important;
+  text-decoration: none !important;
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.chapter-option-link:active {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.chapter-option-link::after {
+  content: '→';
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+  color: white !important;
+}
+
+.chapter-option-link:hover::after {
+  transform: translateX(2px);
+  color: white !important;
+}
+
+ 
+.chapter-navigation a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chapter-navigation a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+ 
+.chapter-option[data-color="green"] {
+  --option-color: #10b981;
+  --option-color-dark: #059669;
+}
+
+.chapter-option[data-color="yellow"] {
+  --option-color: #f59e0b;
+  --option-color-dark: #d97706;
+}
+
+.chapter-option[data-color="red"] {
+  --option-color: #ef4444;
+  --option-color-dark: #dc2626;
+}
+
+.chapter-option[data-color="blue"] {
+  --option-color: #3b82f6;
+  --option-color-dark: #2563eb;
+}
+
+.chapter-option[data-color="purple"] {
+  --option-color: #8b5cf6;
+  --option-color-dark: #7c3aed;
+}
+
+.chapter-option[data-color="orange"] {
+  --option-color: #f97316;
+  --option-color-dark: #ea580c;
+}
+
+.chapter-option[data-color="teal"] {
+  --option-color: #14b8a6;
+  --option-color-dark: #0d9488;
+}
+
+.chapter-option[data-color="indigo"] {
+  --option-color: #6366f1;
+  --option-color-dark: #4f46e5;
+}
+
+.chapter-option[data-color="pink"] {
+  --option-color: #ec4899;
+  --option-color-dark: #db2777;
+}
+
+.chapter-option[data-color="cyan"] {
+  --option-color: #06b6d4;
+  --option-color-dark: #0891b2;
+}
+
+ 
+@media (max-width: 768px) {
+  .chapter-navigation {
+    padding: 1rem;
+  }
+  
+  .chapter-option {
+    padding: 1rem;
+  }
+  
+  .chapter-option-content {
+    margin-left: 2.5rem;
+  }
+  
+  .chapter-option-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .chapter-option-link {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+</style>
+
+
+    </div>
+
+    
+    
+    
+    <script src="/docs/js/mermaid.min.js" ></script>
+    <script>
+        const config = {
+            startOnLoad:true,
+            logLevel: "error",
+            align: "center",
+            theme:"null"
+        };
+        mermaid.initialize(config);
+    </script>
+    
+
+    
+                                            </div>
+                                            <div><hr class="doc-hr">
+<div id="doc-nav" class="d-print-none">
+
+	<div class="row flex-xl-nowrap ">
+	<div class="col-sm-6 pt-2 doc-next">
+		<a href="/chapitres/stockage/multi-sources/chapitre-55-stockage-multi-sources-event-sourcing/">
+			<div class="card h-100 my-1">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> Stockage Multi-sources avec Event Sourcing</p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	<div class="col-sm-6 pt-2 doc-prev">
+		<a class="ms-auto" href="/chapitres/stockage/multi-sources/chapitre-57-stockage-multi-sources-resolution-conflits/">
+			<div class="card h-100 my-1 text-end">
+				<div class="card-body py-2">
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Résolution de Conflits Multi-sources <i class="material-icons align-middle">navigate_next</i></p>
+					
+				</div>
+			</div>
+		</a>
+        </div>
+	</div>
+</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<footer class="shadow py-3 d-print-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-sm-start text-center mx-md-2">
+                    <p class="mb-0">
+                        
+                        © 2025 Grégory Planchat. Tous droits réservés.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="row mt-3 pt-3 border-top">
+            <div class="col-12">
+                <div class="text-center">
+                    <h6 class="text-muted mb-2">Nos Sponsors</h6>
+                    <p class="text-muted small mb-2">Merci à nos partenaires qui soutiennent cette initiative</p>
+                    <div class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                        
+                        <div class="sponsor-item">
+                            <a href="https://kiboko.fr" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <span class="badge bg-light text-dark border px-2 py-1 small">Kiboko</span>
+                            </a>
+                        </div>
+                        
+                        <div class="sponsor-item">
+                            <a href="https://gyroscops.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <span class="badge bg-light text-dark border px-2 py-1 small">Gyroscops</span>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+</main>
+            </div>
+        </div>
+
+        
+        
+        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        
+        
+
+        
+        
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+    <script src="/docs/js/bootstrap.js" defer></script>
+
+
+    <script type="text/javascript" src="//localhost:41733/docs/js/bundle.js" defer></script>
+
+        
+
+        
+        <script type="module">
+    var suggestions = document.getElementById('suggestions');
+    var search = document.getElementById('flexsearch');
+
+    const flexsearchContainer = document.getElementById('FlexSearchCollapse');
+
+    const hideFlexsearchBtn = document.getElementById('hideFlexsearch');
+
+    const configObject = { toggle: false }
+    const flexsearchContainerCollapse = new Collapse(flexsearchContainer, configObject) 
+
+    if (search !== null) {
+        document.addEventListener('keydown', inputFocus);
+        flexsearchContainer.addEventListener('shown.bs.collapse', function () {
+            search.focus();
+        });
+        
+        var topHeader = document.getElementById("top-header");
+        document.addEventListener('click', function(elem) {
+            if (!flexsearchContainer.contains(elem.target) && !topHeader.contains(elem.target))
+                flexsearchContainerCollapse.hide();
+        });
+    }
+
+    hideFlexsearchBtn.addEventListener('click', () =>{
+        flexsearchContainerCollapse.hide()
+    })
+
+    function inputFocus(e) {
+        if (e.ctrlKey && e.key === '/') {
+            e.preventDefault();
+            flexsearchContainerCollapse.toggle();
+        }
+        if (e.key === 'Escape' ) {
+            search.blur();
+            
+            flexsearchContainerCollapse.hide();
+        }
+    };
+
+    document.addEventListener('click', function(event) {
+
+    var isClickInsideElement = suggestions.contains(event.target);
+
+    if (!isClickInsideElement) {
+        suggestions.classList.add('d-none');
+    }
+
+    });
+
+    
+
+
+    document.addEventListener('keydown',suggestionFocus);
+
+    function suggestionFocus(e) {
+    const suggestionsHidden = suggestions.classList.contains('d-none');
+    if (suggestionsHidden) return;
+
+    const focusableSuggestions= [...suggestions.querySelectorAll('a')];
+    if (focusableSuggestions.length === 0) return;
+
+    const index = focusableSuggestions.indexOf(document.activeElement);
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const nextIndex = index > 0 ? index - 1 : 0;
+        focusableSuggestions[nextIndex].focus();
+    }
+    else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const nextIndex= index + 1 < focusableSuggestions.length ? index + 1 : index;
+        focusableSuggestions[nextIndex].focus();
+    }
+
+    }
+
+    
+
+
+    (function(){
+
+    var index = new FlexSearch.Document({
+        
+        tokenize: "forward",
+        minlength:  0 ,
+        cache:  100 ,
+        optimize:  true ,
+        document: {
+        id: 'id',
+        store: [
+            "href", "title", "description"
+        ],
+        index: ["title", "description", "content"]
+        }
+    });
+
+
+    
+
+
+    
+    
+
+
+    
+
+    
+
+    search.addEventListener('input', show_results, true);
+
+    function show_results(){
+        const maxResult =  5 ;
+        const minlength =  0 ;
+        var searchQuery = sanitizeHTML(this.value);
+        var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+
+        
+        const flatResults = new Map(); 
+        for (const result of results.flatMap(r => r.result)) {
+        if (flatResults.has(result.doc.href)) continue;
+        flatResults.set(result.doc.href, result.doc);
+        }
+
+        suggestions.innerHTML = "";
+        suggestions.classList.remove('d-none');
+
+        
+        if (searchQuery.length < minlength) {
+            const minCharMessage = document.createElement('div')
+            minCharMessage.innerHTML = `Please type at least <strong>${minlength}</strong> characters`
+            minCharMessage.classList.add("suggestion__no-results");
+            suggestions.appendChild(minCharMessage);
+            return;
+        } else {
+            
+            if (flatResults.size === 0 && searchQuery) {
+                const noResultsMessage = document.createElement('div')
+                noResultsMessage.innerHTML = "No results for" + ` "<strong>${searchQuery}</strong>"`
+                noResultsMessage.classList.add("suggestion__no-results");
+                suggestions.appendChild(noResultsMessage);
+                return;
+            }
+        }
+
+        
+        for(const [href, doc] of flatResults) {
+            const entry = document.createElement('div');
+            suggestions.appendChild(entry);
+
+            const a = document.createElement('a');
+            a.href = href;
+            entry.appendChild(a);
+
+            const title = document.createElement('span');
+            title.textContent = doc.title;
+            title.classList.add("suggestion__title");
+            a.appendChild(title);
+
+            const description = document.createElement('span');
+            description.textContent = doc.description;
+            description.classList.add("suggestion__description");
+            a.appendChild(description);
+
+            suggestions.appendChild(entry);
+
+            if(suggestions.childElementCount == maxResult) break;
+        }
+    }
+    }());
+</script>
+        
+    </body>
+</html>
