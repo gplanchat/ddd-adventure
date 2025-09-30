@@ -54,21 +54,21 @@ featureGrid:
       description: "Séparez les commandes des requêtes pour optimiser les performances et la scalabilité de votre application."
       ctaLink:
         text: "Découvrir"
-        url: "/concept/cqrs/"
+        url: "/patterns/cqrs/"
     
     - title: "Event Sourcing"
       icon: "history"
       description: "Stockez les événements comme source de vérité pour une traçabilité complète et une reconstruction de l'état."
       ctaLink:
         text: "Explorer"
-        url: "/concept/event-sourcing/"
+        url: "/patterns/event-sourcing/"
     
     - title: "Repositories"
       icon: "storage"
       description: "Implémentez des patterns de persistance robustes avec Doctrine, ElasticSearch et MongoDB."
       ctaLink:
         text: "Implémenter"
-        url: "/concept/repositories/"
+        url: "/patterns/repositories/"
     
     - title: "Architecture Événementielle"
       icon: "api"
