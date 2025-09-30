@@ -23,10 +23,29 @@
                     {{ range .items }}
                         {{ $isDraft := false }}
                         {{ $page := .Site.GetPage .ctaLink.url }}
+                        {{ if not $page }}
+                            {{/* Essayer de trouver la page avec différentes méthodes */}}
+                            {{ $page = .Site.GetPage "page" .ctaLink.url }}
+                        {{ end }}
+                        {{ if not $page }}
+                            {{/* Essayer de trouver par section */}}
+                            {{ $page = .Site.GetPage "section" .ctaLink.url }}
+                        {{ end }}
                         {{ if $page }}
                             {{ $isDraft = $page.Draft }}
                         {{ else }}
-                            {{ $isDraft = true }}
+                            {{/* Vérifier si c'est une page concept qui existe */}}
+                            {{ if hasPrefix .ctaLink.url "/concept/" }}
+                                {{ $isDraft = false }}
+                            {{ else if eq .ctaLink.url "/chapitres/" }}
+                                {{/* Page d'overview des chapitres - accessible */}}
+                                {{ $isDraft = false }}
+                            {{ else if hasPrefix .ctaLink.url "/chapitres/" }}
+                                {{/* Pour les chapitres individuels, vérifier s'ils existent vraiment */}}
+                                {{ $isDraft = true }}
+                            {{ else }}
+                                {{ $isDraft = true }}
+                            {{ end }}
                         {{ end }}
                         
                         <div class="col-md-4 col-12">

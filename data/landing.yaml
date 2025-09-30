@@ -40,60 +40,60 @@ featureGrid:
       description: "Apprenez à organiser des sessions de découverte du domaine avec les experts métier pour identifier les événements, commandes et agrégats."
       ctaLink:
         text: "Commencer"
-        url: "/getting-started/event-storming/"
+        url: "/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"
     
     - title: "Modèles Riches"
       icon: "architecture"
       description: "Créez des modèles expressifs qui encapsulent la logique métier et respectent les principes du DDD."
       ctaLink:
         text: "Apprendre"
-        url: "/getting-started/modeles-riches/"
+        url: "/chapitres/fondamentaux/chapitre-07-modeles-riches-vs-anemiques/"
     
     - title: "CQRS"
       icon: "sync"
       description: "Séparez les commandes des requêtes pour optimiser les performances et la scalabilité de votre application."
       ctaLink:
         text: "Découvrir"
-        url: "/concepts/cqrs/"
+        url: "/concept/cqrs/"
     
     - title: "Event Sourcing"
       icon: "history"
       description: "Stockez les événements comme source de vérité pour une traçabilité complète et une reconstruction de l'état."
       ctaLink:
         text: "Explorer"
-        url: "/concepts/event-sourcing/"
+        url: "/concept/event-sourcing/"
     
     - title: "Repositories"
       icon: "storage"
       description: "Implémentez des patterns de persistance robustes avec Doctrine, ElasticSearch et MongoDB."
       ctaLink:
         text: "Implémenter"
-        url: "/concepts/repositories/"
+        url: "/concept/repositories/"
     
-    - title: "API Platform"
+    - title: "Architecture Événementielle"
       icon: "api"
-      description: "Leveragez la puissance d'API Platform pour créer des APIs REST et GraphQL automatiquement."
+      description: "Découvrez comment structurer votre application autour des événements métier pour une meilleure découplage."
       ctaLink:
-        text: "Utiliser"
-        url: "/implementation/api-platform/"
+        text: "Architecturer"
+        url: "/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/"
     
-    - title: "Tests Unitaires"
+    - title: "Repositories et Persistance"
       icon: "science"
-      description: "Écrivez des tests robustes pour valider vos modèles et garantir la qualité de votre code."
+      description: "Maîtrisez les patterns de persistance et l'abstraction des données dans vos applications DDD."
       ctaLink:
-        text: "Tester"
-        url: "/getting-started/tests/"
+        text: "Persister"
+        url: "/chapitres/fondamentaux/chapitre-09-repositories-persistance/"
     
-    - title: "Temporal Workflows"
+    - title: "Choix du Type de Stockage"
       icon: "workflow"
-      description: "Orchestrez des processus métier complexes avec des workflows distribués et résilients."
+      description: "Apprenez à choisir le bon type de stockage selon vos besoins : SQL, NoSQL, In-Memory, ou Multi-sources."
       ctaLink:
-        text: "Orchestrer"
-        url: "/implementation/temporal-workflows/"
+        text: "Choisir"
+        url: "/chapitres/stockage/chapitre-10-choix-type-stockage/"
     
-    - title: "Projections"
+    - title: "Vue d'ensemble des Chapitres"
       icon: "analytics"
-      description: "Construisez des vues optimisées pour la lecture à partir de vos événements stockés."
+      description: "Explorez tous les chapitres disponibles et planifiez votre parcours d'apprentissage personnalisé."
       ctaLink:
-        text: "Projeter"
-        url: "/implementation/projections/"
+        text: "Explorer"
+        url: "/chapitres/"

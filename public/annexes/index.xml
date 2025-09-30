@@ -1,18 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Annexes on DDD Adventure</title>
-    <link>/annexes/</link>
-    <description>Recent content in Annexes on DDD Adventure</description>
-    <generator>Hugo</generator>
-    <language>fr-fr</language>
-    <atom:link href="/annexes/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Organisation des dossiers en DDD</title>
-      <link>/annexes/organisation-dossiers/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/annexes/organisation-dossiers/</guid>
-      <description>&lt;h1 id=&#34;-organisation-des-dossiers&#34;&gt;📁 Organisation des dossiers&lt;/h1&gt;&#xA;&lt;p&gt;Découvrez différentes approches pour structurer votre projet DDD selon sa taille et sa complexité.&lt;/p&gt;&#xA;&lt;h2 id=&#34;-principes-fondamentaux&#34;&gt;🎯 Principes fondamentaux&lt;/h2&gt;&#xA;&lt;p&gt;L&amp;rsquo;organisation des dossiers en DDD doit respecter plusieurs principes clés :&lt;/p&gt;&#xA;&lt;h3 id=&#34;-séparation-par-bounded-context&#34;&gt;🏗️ Séparation par Bounded Context&lt;/h3&gt;&#xA;&lt;p&gt;Chaque contexte métier doit avoir sa propre structure indépendante.&lt;/p&gt;&#xA;&lt;h3 id=&#34;-couches-architecturales&#34;&gt;📦 Couches architecturales&lt;/h3&gt;&#xA;&lt;p&gt;Domain, Application, Infrastructure et Interface clairement séparées.&lt;/p&gt;&#xA;&lt;h3 id=&#34;-cqrs-et-event-sourcing&#34;&gt;🔄 CQRS et Event Sourcing&lt;/h3&gt;&#xA;&lt;p&gt;Séparation claire entre Command et Query, avec gestion des événements.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Annexes on DDD Adventure</title><link>/annexes/</link><description>Recent content in Annexes on DDD Adventure</description><generator>Hugo</generator><language>fr-fr</language><atom:link href="/annexes/index.xml" rel="self" type="application/rss+xml"/><item><title>Organisation des dossiers en DDD</title><link>/annexes/organisation-dossiers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/annexes/organisation-dossiers/</guid><description>&lt;h1 id="-organisation-des-dossiers"&gt;📁 Organisation des dossiers&lt;/h1&gt;
+&lt;p&gt;Découvrez différentes approches pour structurer votre projet DDD selon sa taille et sa complexité.&lt;/p&gt;
+&lt;h2 id="-principes-fondamentaux"&gt;🎯 Principes fondamentaux&lt;/h2&gt;
+&lt;p&gt;L&amp;rsquo;organisation des dossiers en DDD doit respecter plusieurs principes clés :&lt;/p&gt;
+&lt;h3 id="-séparation-par-bounded-context"&gt;🏗️ Séparation par Bounded Context&lt;/h3&gt;
+&lt;p&gt;Chaque contexte métier doit avoir sa propre structure indépendante.&lt;/p&gt;
+&lt;h3 id="-couches-architecturales"&gt;📦 Couches architecturales&lt;/h3&gt;
+&lt;p&gt;Domain, Application, Infrastructure et Interface clairement séparées.&lt;/p&gt;
+&lt;h3 id="-cqrs-et-event-sourcing"&gt;🔄 CQRS et Event Sourcing&lt;/h3&gt;
+&lt;p&gt;Séparation claire entre Command et Query, avec gestion des événements.&lt;/p&gt;</description></item></channel></rss>

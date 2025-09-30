@@ -1,0 +1,475 @@
+---
+title: "Repositories - Patterns de Persistance"
+description: "Découvrez les patterns Repository, la couche d'abstraction qui sépare la logique métier de la persistance"
+date: 2024-12-19
+draft: false
+weight: 3
+type: "docs"
+---
+
+# 🎯 Repositories - Patterns de Persistance
+
+## 🌟 **Qu'est-ce qu'un Repository ?**
+
+Un **Repository** est un pattern qui encapsule la logique d'accès aux données, fournissant une interface orientée objet pour accéder à la couche de persistance.
+
+### **Le Principe Fondamental**
+
+> **"Un Repository représente une collection d'objets en mémoire"** - Eric Evans
+
+Le Repository :
+- **Abstrait** la persistance des données
+- **Encapsule** la logique d'accès aux données
+- **Fournit** une interface métier claire
+- **Cache** la complexité de la persistance
+
+## 🏗️ **Repositories dans Gyroscops**
+
+### **Contexte Métier : Gestion des Utilisateurs**
+
+Dans Gyroscops, nous gérons des utilisateurs avec différents besoins d'accès :
+
+#### **Interface Repository**
+```php
+interface UserRepository
+{
+    public function save(User $user): void;
+    public function findById(UserId $id): ?User;
+    public function findByEmail(Email $email): ?User;
+    public function findByOrganization(OrganizationId $organizationId): array;
+    public function delete(UserId $id): void;
+    public function exists(UserId $id): bool;
+}
+```
+
+#### **Implémentation Doctrine**
+```php
+class DoctrineUserRepository implements UserRepository
+{
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {}
+    
+    public function save(User $user): void
+    {
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
+    
+    public function findById(UserId $id): ?User
+    {
+        return $this->entityManager
+            ->getRepository(User::class)
+            ->find($id->value());
+    }
+    
+    public function findByEmail(Email $email): ?User
+    {
+        return $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(['email' => $email->value()]);
+    }
+    
+    public function findByOrganization(OrganizationId $organizationId): array
+    {
+        return $this->entityManager
+            ->getRepository(User::class)
+            ->findBy(['organizationId' => $organizationId->value()]);
+    }
+    
+    public function delete(UserId $id): void
+    {
+        $user = $this->findById($id);
+        if ($user) {
+            $this->entityManager->remove($user);
+            $this->entityManager->flush();
+        }
+    }
+    
+    public function exists(UserId $id): bool
+    {
+        return $this->entityManager
+            ->getRepository(User::class)
+            ->count(['id' => $id->value()]) > 0;
+    }
+}
+```
+
+## 🎯 **Types de Repositories**
+
+### **1. Repository de Commande (Write)**
+```php
+interface PaymentCommandRepository
+{
+    public function save(Payment $payment): void;
+    public function findById(PaymentId $id): ?Payment;
+    public function delete(PaymentId $id): void;
+}
+
+class DoctrinePaymentCommandRepository implements PaymentCommandRepository
+{
+    public function save(Payment $payment): void
+    {
+        $this->entityManager->persist($payment);
+        $this->entityManager->flush();
+    }
+    
+    public function findById(PaymentId $id): ?Payment
+    {
+        return $this->entityManager
+            ->getRepository(Payment::class)
+            ->find($id->value());
+    }
+}
+```
+
+### **2. Repository de Requête (Read)**
+```php
+interface PaymentQueryRepository
+{
+    public function findPaymentDetails(PaymentId $id): ?PaymentDetailsView;
+    public function findPaymentsByCustomer(CustomerId $customerId): array;
+    public function findPaymentsByDateRange(DateRange $dateRange): array;
+    public function findPendingPayments(): array;
+}
+
+class DoctrinePaymentQueryRepository implements PaymentQueryRepository
+{
+    public function findPaymentDetails(PaymentId $id): ?PaymentDetailsView
+    {
+        $result = $this->entityManager
+            ->createQuery('
+                SELECT p.id, p.amount, p.status, p.createdAt,
+                       c.name as customerName, s.name as subscriptionName
+                FROM Payment p
+                JOIN p.customer c
+                JOIN p.subscription s
+                WHERE p.id = :id
+            ')
+            ->setParameter('id', $id->value())
+            ->getOneOrNullResult();
+            
+        return $result ? PaymentDetailsView::fromArray($result) : null;
+    }
+    
+    public function findPaymentsByCustomer(CustomerId $customerId): array
+    {
+        return $this->entityManager
+            ->createQuery('
+                SELECT p.id, p.amount, p.status, p.createdAt
+                FROM Payment p
+                WHERE p.customerId = :customerId
+                ORDER BY p.createdAt DESC
+            ')
+            ->setParameter('customerId', $customerId->value())
+            ->getResult();
+    }
+}
+```
+
+### **3. Repository Spécialisé**
+```php
+interface PaymentAnalyticsRepository
+{
+    public function getMonthlyRevenue(int $year, int $month): Amount;
+    public function getPaymentTrends(DateRange $dateRange): array;
+    public function getTopCustomers(int $limit): array;
+}
+
+class ElasticsearchPaymentAnalyticsRepository implements PaymentAnalyticsRepository
+{
+    public function getMonthlyRevenue(int $year, int $month): Amount
+    {
+        $query = [
+            'query' => [
+                'bool' => [
+                    'must' => [
+                        ['term' => ['status' => 'completed']],
+                        ['range' => ['createdAt' => [
+                            'gte' => "$year-$month-01",
+                            'lt' => "$year-" . ($month + 1) . "-01"
+                        ]]]
+                    ]
+                ]
+            ],
+            'aggs' => [
+                'total_revenue' => [
+                    'sum' => ['field' => 'amount']
+                ]
+            ]
+        ];
+        
+        $result = $this->elasticsearch->search($query);
+        return new Amount($result['aggregations']['total_revenue']['value']);
+    }
+}
+```
+
+## 🔧 **Patterns Avancés de Repository**
+
+### **1. Repository avec Spécifications**
+```php
+interface Specification
+{
+    public function isSatisfiedBy($entity): bool;
+    public function toQueryBuilder(QueryBuilder $qb): QueryBuilder;
+}
+
+class UserByOrganizationSpecification implements Specification
+{
+    public function __construct(
+        private OrganizationId $organizationId
+    ) {}
+    
+    public function isSatisfiedBy($entity): bool
+    {
+        return $entity instanceof User && 
+               $entity->organizationId()->equals($this->organizationId);
+    }
+    
+    public function toQueryBuilder(QueryBuilder $qb): QueryBuilder
+    {
+        return $qb->andWhere('u.organizationId = :organizationId')
+                  ->setParameter('organizationId', $this->organizationId->value());
+    }
+}
+
+interface UserRepository
+{
+    public function findBySpecification(Specification $spec): array;
+    public function countBySpecification(Specification $spec): int;
+}
+
+class DoctrineUserRepository implements UserRepository
+{
+    public function findBySpecification(Specification $spec): array
+    {
+        $qb = $this->entityManager->createQueryBuilder()
+            ->select('u')
+            ->from(User::class, 'u');
+            
+        return $spec->toQueryBuilder($qb)->getQuery()->getResult();
+    }
+}
+```
+
+### **2. Repository avec Cache**
+```php
+class CachedUserRepository implements UserRepository
+{
+    public function __construct(
+        private UserRepository $decorated,
+        private CacheInterface $cache
+    ) {}
+    
+    public function findById(UserId $id): ?User
+    {
+        $cacheKey = "user_{$id->value()}";
+        
+        return $this->cache->get($cacheKey, function () use ($id) {
+            return $this->decorated->findById($id);
+        });
+    }
+    
+    public function save(User $user): void
+    {
+        $this->decorated->save($user);
+        
+        // Invalider le cache
+        $this->cache->delete("user_{$user->id()->value()}");
+    }
+}
+```
+
+### **3. Repository avec Event Sourcing**
+```php
+interface EventStore
+{
+    public function append(StreamId $streamId, array $events): void;
+    public function getEvents(StreamId $streamId): array;
+}
+
+class EventSourcedUserRepository implements UserRepository
+{
+    public function __construct(
+        private EventStore $eventStore
+    ) {}
+    
+    public function save(User $user): void
+    {
+        $events = $user->getUncommittedEvents();
+        $streamId = StreamId::fromUserId($user->id());
+        
+        $this->eventStore->append($streamId, $events);
+        $user->markEventsAsCommitted();
+    }
+    
+    public function findById(UserId $id): ?User
+    {
+        $streamId = StreamId::fromUserId($id);
+        $events = $this->eventStore->getEvents($streamId);
+        
+        if (empty($events)) {
+            return null;
+        }
+        
+        return User::fromEvents($events);
+    }
+}
+```
+
+## 🚀 **Repositories Multi-Sources**
+
+### **Repository avec Fallback**
+```php
+class FallbackUserRepository implements UserRepository
+{
+    public function __construct(
+        private UserRepository $primary,
+        private UserRepository $fallback
+    ) {}
+    
+    public function findById(UserId $id): ?User
+    {
+        try {
+            return $this->primary->findById($id);
+        } catch (Exception $e) {
+            $this->logger->warning('Primary repository failed, using fallback', [
+                'error' => $e->getMessage(),
+                'userId' => $id->value()
+            ]);
+            
+            return $this->fallback->findById($id);
+        }
+    }
+}
+```
+
+### **Repository avec Routing**
+```php
+class RoutedUserRepository implements UserRepository
+{
+    public function __construct(
+        private UserRepository $sqlRepository,
+        private UserRepository $mongoRepository
+    ) {}
+    
+    public function findById(UserId $id): ?User
+    {
+        // Route basée sur l'ID
+        if ($this->shouldUseMongo($id)) {
+            return $this->mongoRepository->findById($id);
+        }
+        
+        return $this->sqlRepository->findById($id);
+    }
+    
+    private function shouldUseMongo(UserId $id): bool
+    {
+        // Logique de routing (ex: utilisateurs récents en MongoDB)
+        return $id->value() > 1000000;
+    }
+}
+```
+
+## ⚡ **Performance et Optimisation**
+
+### **Optimisations de Requête**
+```php
+class OptimizedUserRepository implements UserRepository
+{
+    public function findByOrganization(OrganizationId $organizationId): array
+    {
+        // Utiliser des requêtes optimisées
+        return $this->entityManager
+            ->createQuery('
+                SELECT u.id, u.email, u.firstName, u.lastName
+                FROM User u
+                WHERE u.organizationId = :organizationId
+                AND u.status = :status
+            ')
+            ->setParameter('organizationId', $organizationId->value())
+            ->setParameter('status', UserStatus::ACTIVE)
+            ->setMaxResults(100) // Limiter les résultats
+            ->getResult();
+    }
+}
+```
+
+### **Optimisations de Cache**
+```php
+class SmartCachedUserRepository implements UserRepository
+{
+    public function findByOrganization(OrganizationId $organizationId): array
+    {
+        $cacheKey = "users_org_{$organizationId->value()}";
+        
+        return $this->cache->get($cacheKey, function () use ($organizationId) {
+            $users = $this->decorated->findByOrganization($organizationId);
+            
+            // Cache individuel pour chaque utilisateur
+            foreach ($users as $user) {
+                $this->cache->set("user_{$user->id()->value()}", $user, 3600);
+            }
+            
+            return $users;
+        }, 1800); // TTL de 30 minutes
+    }
+}
+```
+
+## 🎯 **Quand Utiliser les Repositories ?**
+
+### **✅ Cas d'Usage Appropriés**
+- **Abstraction de persistance** : Changer de technologie de stockage
+- **Tests unitaires** : Mocker facilement l'accès aux données
+- **Logique métier complexe** : Encapsuler la logique d'accès
+- **Performance** : Optimiser les requêtes
+
+### **❌ Cas d'Usage Inappropriés**
+- **Applications simples** : CRUD basique
+- **Over-engineering** : Complexité inutile
+- **Performance critique** : Overhead des abstractions
+- **Prototypage** : Développement rapide
+
+## 🔄 **Migration vers les Repositories**
+
+### **Étape 1 : Identifier les Accès aux Données**
+- Lister tous les accès aux données
+- Grouper par entité métier
+
+### **Étape 2 : Créer les Interfaces**
+- Définir les contrats Repository
+- Spécifier les méthodes nécessaires
+
+### **Étape 3 : Implémenter les Repositories**
+- Créer les implémentations
+- Migrer progressivement
+
+### **Étape 4 : Optimiser**
+- Ajouter le cache si nécessaire
+- Optimiser les requêtes
+
+## 📊 **Métriques et Monitoring**
+
+### **Métriques Repository**
+- Temps de réponse des requêtes
+- Taux de cache hit
+- Nombre de requêtes par seconde
+
+### **Métriques de Performance**
+- Temps de traitement des requêtes complexes
+- Utilisation mémoire
+- Charge des bases de données
+
+## 🎯 **Prochaines Étapes**
+
+Maintenant que vous comprenez les Repositories, explorez :
+
+1. **[CQRS](/concept/cqrs/)** : Séparer les commandes des requêtes
+2. **[Event Sourcing](/concept/event-sourcing/)** : Stocker les événements comme source de vérité
+3. **[Implémentation Repositories](/chapitres/fondamentaux/chapitre-09-repositories-persistance/)** : Guide d'implémentation complet
+
+---
+
+*Les Repositories sont la pierre angulaire d'une architecture propre. Dans Gyroscops, ils nous ont permis de séparer clairement la logique métier de la persistance, rendant le code plus testable et évolutif.*
