@@ -1,0 +1,127 @@
+// Typography improvements - Increased line spacing
+// ================================================
+
+// Headings line height
+h1, h2, h3, h4, h5, h6 {
+  line-height: 2.4 !important;
+  margin-bottom: 1.5rem !important;
+  margin-top: 2rem !important;
+}
+
+// First heading in a section should have less top margin
+.content h1:first-child,
+.content h2:first-child,
+.content h3:first-child,
+.content h4:first-child,
+.content h5:first-child,
+.content h6:first-child {
+  margin-top: 1rem !important;
+}
+
+// Paragraphs line height and spacing
+p {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+// Lists line height
+ul, ol {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+li {
+  line-height: 1.7 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+// Blockquotes
+blockquote {
+  line-height: 1.7 !important;
+  margin: 2rem 0 !important;
+  padding: 1rem 1.5rem !important;
+}
+
+// Code blocks
+pre {
+  line-height: 1.6 !important;
+  margin: 1.5rem 0 !important;
+}
+
+code {
+  line-height: 1.6 !important;
+}
+
+// Tables
+table {
+  line-height: 1.6 !important;
+  margin: 1.5rem 0 !important;
+}
+
+th, td {
+  line-height: 1.6 !important;
+  padding: 0.75rem !important;
+}
+
+// Horizontal rules
+hr {
+  margin: 2.5rem 0 !important;
+}
+
+// Chapter options spacing
+.chapter-option {
+  margin-bottom: 2rem !important;
+}
+
+.chapter-option-title {
+  line-height: 1.4 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.chapter-option-subtitle {
+  line-height: 1.5 !important;
+  margin-bottom: 1rem !important;
+}
+
+.chapter-option-criteria-list li {
+  line-height: 1.6 !important;
+  margin-bottom: 0.25rem !important;
+}
+
+// Content spacing
+.content {
+  line-height: 1.7 !important;
+}
+
+// Ensure proper spacing between sections
+.content > * + * {
+  margin-top: 1rem !important;
+}
+
+// Special spacing for markdown content
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  line-height: 1.4 !important;
+  margin-bottom: 1.5rem !important;
+  margin-top: 2rem !important;
+}
+
+.markdown-content p {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  line-height: 1.7 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.markdown-content li {
+  line-height: 1.7 !important;
+  margin-bottom: 0.5rem !important;
+}

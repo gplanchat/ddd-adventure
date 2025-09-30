@@ -1,0 +1,108 @@
+<svg width="900" height="600" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond -->
+  <rect width="900" height="600" fill="#F5F5F5"/>
+  
+  <!-- Titre -->
+  <text x="450" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2F4F4F" text-anchor="middle">Example Mapping : Traitement d'un Paiement</text>
+  
+  <!-- Post-it bleu (Scénario) - Première ligne, centré -->
+  <g transform="translate(375, 60)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#ADD8E6" stroke="#4169E1" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000080">SCÉNARIO</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">Processus complet</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">de paiement</text>
+  </g>
+  
+  <!-- Post-it jaunes (Règles) - Deuxième ligne -->
+  <g transform="translate(50, 200)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#FFD700" stroke="#DAA520" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#8B4513">RÈGLE</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">Paiement en statut</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">"pending" uniquement</text>
+  </g>
+  
+  <g transform="translate(220, 200)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#FFD700" stroke="#DAA520" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#8B4513">RÈGLE</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">Montant positif</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">obligatoire</text>
+  </g>
+  
+  <g transform="translate(390, 200)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#FFD700" stroke="#DAA520" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#8B4513">RÈGLE</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">Ne pas dépasser</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">la limite du compte</text>
+  </g>
+  
+  <g transform="translate(560, 200)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#FFD700" stroke="#DAA520" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#8B4513">RÈGLE</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">Paiement traité</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">non modifiable</text>
+  </g>
+  
+  <!-- Post-it verts (Exemples) - Troisième ligne -->
+  <g transform="translate(50, 340)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#90EE90" stroke="#32CD32" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#006400">EXEMPLE</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">100€ avec limite 500€</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#006400">→ Traité ✅</text>
+  </g>
+  
+  <g transform="translate(220, 340)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#90EE90" stroke="#32CD32" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#006400">EXEMPLE</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">-50€</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#DC143C">→ Erreur ❌</text>
+  </g>
+  
+  <g transform="translate(390, 340)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#90EE90" stroke="#32CD32" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#006400">EXEMPLE</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">600€ avec limite 500€</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#DC143C">→ Erreur ❌</text>
+  </g>
+  
+  <g transform="translate(560, 340)">
+    <rect x="0" y="0" width="150" height="100" rx="5" fill="#90EE90" stroke="#32CD32" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#006400">EXEMPLE</text>
+    <text x="10" y="40" font-family="Arial, sans-serif" font-size="10" fill="#2F4F4F">Paiement déjà traité</text>
+    <text x="10" y="55" font-family="Arial, sans-serif" font-size="10" fill="#DC143C">→ Erreur ❌</text>
+  </g>
+  
+  <!-- Post-it rouges (Questions) - Colonne de droite -->
+  <g transform="translate(750, 200)">
+    <rect x="0" y="0" width="130" height="80" rx="5" fill="#FFB6C1" stroke="#DC143C" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#8B0000">QUESTION</text>
+    <text x="10" y="35" font-family="Arial, sans-serif" font-size="9" fill="#2F4F4F">Compte suspendu ?</text>
+  </g>
+  
+  <g transform="translate(750, 300)">
+    <rect x="0" y="0" width="130" height="80" rx="5" fill="#FFB6C1" stroke="#DC143C" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#8B0000">QUESTION</text>
+    <text x="10" y="35" font-family="Arial, sans-serif" font-size="9" fill="#2F4F4F">Limite de temps ?</text>
+  </g>
+  
+  <g transform="translate(750, 400)">
+    <rect x="0" y="0" width="130" height="80" rx="5" fill="#FFB6C1" stroke="#DC143C" stroke-width="1"/>
+    <text x="10" y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#8B0000">QUESTION</text>
+    <text x="10" y="35" font-family="Arial, sans-serif" font-size="9" fill="#2F4F4F">Paiement partiel ?</text>
+  </g>
+  
+  <!-- Légende -->
+  <g transform="translate(50, 480)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2F4F4F">Légende :</text>
+    <rect x="0" y="10" width="20" height="15" fill="#FFD700" stroke="#DAA520"/>
+    <text x="30" y="22" font-family="Arial, sans-serif" font-size="12" fill="#2F4F4F">Règles métier</text>
+    
+    <rect x="150" y="10" width="20" height="15" fill="#90EE90" stroke="#32CD32"/>
+    <text x="180" y="22" font-family="Arial, sans-serif" font-size="12" fill="#2F4F4F">Exemples concrets</text>
+    
+    <rect x="300" y="10" width="20" height="15" fill="#FFB6C1" stroke="#DC143C"/>
+    <text x="330" y="22" font-family="Arial, sans-serif" font-size="12" fill="#2F4F4F">Questions à explorer</text>
+    
+    <rect x="450" y="10" width="20" height="15" fill="#ADD8E6" stroke="#4169E1"/>
+    <text x="480" y="22" font-family="Arial, sans-serif" font-size="12" fill="#2F4F4F">Scénarios d'usage</text>
+  </g>
+</svg>

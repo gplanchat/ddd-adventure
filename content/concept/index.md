@@ -11,7 +11,7 @@ type: "docs"
 
 ### Transformer l'Apprentissage de l'Architecture Logicielle
 
-Ce guide est né d'un constat simple : l'architecture logicielle est un domaine où les compromis sont permanents et où chaque choix mérite d'être remis en question. Plutôt qu'un énième tutoriel, nous proposons une approche interactive qui s'adapte à votre contexte et votre niveau.
+Ce guide est né d'un constat simple : l'architecture logicielle est difficile à appréhender. C'est un domaine où les compromis sont permanents et où chaque choix mérite d'être remis en question. Plutôt qu'un énième tutoriel ou des principes dogmatiques, je vous proposons une approche interactive qui s'adapte à votre contexte et votre niveau.
 
 ### Le Problème que Nous Résolvons
 
@@ -226,9 +226,124 @@ Encapsuler les concepts métier
 #### [Domain Events](/chapitres/fondamentaux/chapitre-08-architecture-evenementielle/)
 Communiquer entre contextes
 
-## Prêt à explorer ?
+## Sources d'Inspiration
 
-[Commencer avec CQRS →](/chapitres/optionnels/chapitre-13-architecture-cqrs/)
+Ce guide s'appuie sur les travaux de référence en Domain-Driven Design et architecture logicielle. Voici les livres qui ont inspiré cette approche :
+
+### 📚 **Livres Fondamentaux**
+
+#### **Domain-Driven Design: Tackling Complexity in the Heart of Software**
+**Auteur :** Eric Evans  
+**ISBN :** 978-0321125217  
+**Année :** 2003  
+**Éditeur :** Addison-Wesley Professional
+
+{{< figure src="/images/books/ddd-eric-evans.jpg" title="Domain-Driven Design: Tackling Complexity in the Heart of Software par Eric Evans" >}}
+
+Le livre fondateur du DDD. Eric Evans y pose les bases conceptuelles et les patterns essentiels qui structurent notre approche architecturale.
+
+#### **Implementing Domain-Driven Design**
+**Auteur :** Vaughn Vernon  
+**ISBN :** 978-0321834577  
+**Année :** 2013  
+**Éditeur :** Addison-Wesley Professional
+
+{{< figure src="/images/books/implementing-ddd-vernon.jpg" title="Implementing Domain-Driven Design par Vaughn Vernon" >}}
+
+Une approche pratique et moderne du DDD. Vaughn Vernon montre comment implémenter concrètement les concepts d'Evans dans des architectures contemporaines.
+
+#### **Domain-Driven Design Distilled**
+**Auteur :** Vaughn Vernon  
+**ISBN :** 978-0134434421  
+**Année :** 2016  
+**Éditeur :** Addison-Wesley Professional
+
+{{< figure src="/images/books/ddd-distilled-vernon.jpg" title="Domain-Driven Design Distilled par Vaughn Vernon" >}}
+
+Une synthèse accessible des concepts DDD essentiels, parfait pour comprendre rapidement les enjeux et les solutions.
+
+#### **Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy**
+**Auteur :** Vlad Khononov  
+**ISBN :** 978-1098100131  
+**Année :** 2021  
+**Éditeur :** O'Reilly Media
+
+{{< figure src="/images/books/learning-ddd-khononov.jpg" title="Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy par Vlad Khononov" >}}
+
+Une approche moderne et pragmatique du DDD, avec un focus sur l'alignement entre architecture technique et stratégie métier.
+
+#### **Patterns, Principles, and Practices of Domain-Driven Design**
+**Auteurs :** Scott Millett et Nick Tune  
+**ISBN :** 978-1118714706  
+**Année :** 2015  
+**Éditeur :** Wrox
+
+{{< figure src="/images/books/ddd-patterns-millett-tune.jpg" title="Patterns, Principles, and Practices of Domain-Driven Design par Scott Millett et Nick Tune" >}}
+
+Un guide complet des patterns DDD avec des exemples concrets d'implémentation et des bonnes pratiques.
+
+### 🎯 **Notre Contribution**
+
+Ce guide interactif s'inspire de ces ouvrages de référence tout en apportant :
+
+- **Une approche interactive** : Navigation adaptée à votre contexte
+- **Des exemples concrets** : Implémentations réelles tirées de Gyroscops
+- **Une progression guidée** : Parcours personnalisé selon vos besoins
+- **Des choix architecturaux** : Décisions éclairées basées sur l'expérience
+
+## Votre Prochaine Étape
+
+Maintenant que vous comprenez le concept, vous pouvez :
+
+{{< chapter-nav >}}
+  {{< chapter-option 
+    letter="A" 
+    color="green" 
+    title="Je veux commencer par les fondamentaux" 
+    subtitle="Vous voulez comprendre les concepts de base du DDD et de l'Event Storming"
+    criteria="Développeur de tous niveaux,Besoin de comprendre les concepts de base,Projet à structurer,Équipe à former"
+    time="45-60 minutes"
+    chapter="1"
+    chapter-title="Introduction au Domain-Driven Design et Event Storming"
+    chapter-url="/chapitres/fondamentaux/chapitre-01-introduction-event-storming-ddd/"
+  >}}
+  
+  {{< chapter-option 
+    letter="B" 
+    color="yellow" 
+    title="Je veux voir la vue d'ensemble des chapitres" 
+    subtitle="Vous voulez comprendre l'organisation complète du guide"
+    criteria="Besoin de vue d'ensemble,Équipe en réflexion,Planification de formation,Architecture à définir"
+    time="10-15 minutes"
+    chapter="0"
+    chapter-title="Vue d'ensemble des chapitres"
+    chapter-url="/chapitres/"
+  >}}
+  
+  {{< chapter-option 
+    letter="C" 
+    color="blue" 
+    title="Je veux explorer les patterns avancés" 
+    subtitle="Vous voulez découvrir CQRS, Event Sourcing et les patterns sophistiqués"
+    criteria="Développeur expérimenté,Architecture complexe,Patterns avancés,Performance critique"
+    time="30-45 minutes"
+    chapter="13"
+    chapter-title="Architecture CQRS"
+    chapter-url="/chapitres/optionnels/chapitre-13-architecture-cqrs/"
+  >}}
+  
+  {{< chapter-option 
+    letter="D" 
+    color="purple" 
+    title="Je veux voir des exemples concrets" 
+    subtitle="Vous voulez comprendre les implémentations pratiques"
+    criteria="Développeur expérimenté,Besoin d'exemples pratiques,Implémentation à faire,Code à écrire"
+    time="Variable"
+    chapter="0"
+    chapter-title="Exemples et Implémentations"
+    chapter-url="/examples/"
+  >}}
+{{< /chapter-nav >}}
 
 ---
 

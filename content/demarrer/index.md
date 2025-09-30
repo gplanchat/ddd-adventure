@@ -7,8 +7,6 @@ type: "docs"
 weight: 2
 ---
 
-# Commencer l'Aventure DDD
-
 ## Bienvenue dans votre Voyage Architectural
 
 Vous voici au début d'une aventure unique : **construire une architecture robuste et évolutive** en utilisant le Domain-Driven Design (DDD) avec API Platform. Ce guide interactif vous accompagnera pas à pas, en s'adaptant à votre niveau et à vos besoins spécifiques.
@@ -76,6 +74,31 @@ Après avoir lu le chapitre sur l'Event Storming, vous pourrez choisir :
 ### Contexte Gyroscops
 Chaque concept est illustré par des exemples concrets tirés de l'expérience Gyroscops, dans l'écosystème **User → Organization → Workflow → Cloud Resources → Billing**.
 
+## Conseils pour Bien Démarrer
+
+### Si Vous Êtes Débutant
+1. **Commencez par le Chapitre 1** : Les concepts de base sont essentiels
+2. **Suivez l'ordre** : Les chapitres s'appuient les uns sur les autres
+3. **Pratiquez** : Chaque concept doit être testé dans votre contexte
+
+### Si Vous Êtes Expérimenté
+1. **Choisissez votre parcours** : Les choix interactifs vous guideront
+2. **Plongez dans les implémentations** : Les chapitres 22+ sont pour vous
+3. **Adaptez** : Chaque pattern doit être adapté à votre contexte
+
+### Si Vous Êtes en Équipe
+1. **Formez-vous ensemble** : L'Event Storming est collaboratif
+2. **Partagez les concepts** : Chaque membre doit comprendre l'architecture
+3. **Implémentez progressivement** : Commencez simple, évoluez
+
+## Votre Prochaine Étape
+
+**Prêt à commencer ?** Choisissez l'option A pour plonger dans les fondamentaux, ou explorez les autres options selon vos besoins.
+
+**Besoin d'aide ?** Chaque chapitre contient des exemples concrets et des conseils pratiques tirés de l'expérience Gyroscops.
+
+**Envie d'approfondir ?** Le guide couvre tous les aspects, des concepts de base aux implémentations avancées.
+
 ## Commencez Votre Aventure
 
 {{< chapter-nav >}}
@@ -109,6 +132,7 @@ Chaque concept est illustré par des exemples concrets tirés de l'expérience G
     subtitle="Vous voulez comprendre l'ambition et la philosophie de ce guide"
     criteria="Besoin de contexte,Équipe en réflexion,Compréhension du projet,Philosophie architecturale"
     time="15-20 minutes"
+    chapter="0"
     chapter-title="Le Concept du Guide"
     chapter-url="/concept/"
   >}}
@@ -124,32 +148,6 @@ Chaque concept est illustré par des exemples concrets tirés de l'expérience G
     chapter-url="/examples/"
   >}}
 {{< /chapter-nav >}}
-
-## Conseils pour Bien Démarrer
-
-### Si Vous Êtes Débutant
-1. **Commencez par le Chapitre 1** : Les concepts de base sont essentiels
-2. **Suivez l'ordre** : Les chapitres s'appuient les uns sur les autres
-3. **Pratiquez** : Chaque concept doit être testé dans votre contexte
-
-### Si Vous Êtes Expérimenté
-1. **Choisissez votre parcours** : Les choix interactifs vous guideront
-2. **Plongez dans les implémentations** : Les chapitres 22+ sont pour vous
-3. **Adaptez** : Chaque pattern doit être adapté à votre contexte
-
-### Si Vous Êtes en Équipe
-1. **Formez-vous ensemble** : L'Event Storming est collaboratif
-2. **Partagez les concepts** : Chaque membre doit comprendre l'architecture
-3. **Implémentez progressivement** : Commencez simple, évoluez
-
-## Votre Prochaine Étape
-
-**Prêt à commencer ?** Choisissez l'option A pour plonger dans les fondamentaux, ou explorez les autres options selon vos besoins.
-
-**Besoin d'aide ?** Chaque chapitre contient des exemples concrets et des conseils pratiques tirés de l'expérience Gyroscops.
-
-**Envie d'approfondir ?** Le guide couvre tous les aspects, des concepts de base aux implémentations avancées.
-
 ---
 
 *Ce guide est le fruit de l'expérience acquise avec Gyroscops, transformée en parcours interactif pour vous accompagner dans votre propre aventure architecturale.*

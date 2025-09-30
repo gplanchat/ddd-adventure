@@ -7,8 +7,6 @@ type: "docs"
 weight: 1
 ---
 
-# Patterns d'Implémentation pour le Stockage
-
 Ce document explique les patterns d'implémentation spécifiques pour chaque type de stockage dans le projet Gyroscops Cloud.
 
 ## 🏗️ Architecture des Patterns

@@ -42,7 +42,16 @@ Usage: {{< chapter-option
     {{ if eq $chapterPath "" }}
       {{ $chapterPath = "content/_index.md" }}
     {{ else }}
-      {{ $chapterPath = printf "content/%s/_index.md" $chapterPath }}
+      {{/* Essayer d'abord avec _index.md, puis avec index.md */}}
+      {{ $chapterPathWithUnderscore := printf "content/%s/_index.md" $chapterPath }}
+      {{ $chapterPathWithIndex := printf "content/%s/index.md" $chapterPath }}
+      {{ if fileExists $chapterPathWithUnderscore }}
+        {{ $chapterPath = $chapterPathWithUnderscore }}
+      {{ else if fileExists $chapterPathWithIndex }}
+        {{ $chapterPath = $chapterPathWithIndex }}
+      {{ else }}
+        {{ $chapterPath = $chapterPathWithUnderscore }}
+      {{ end }}
     {{ end }}
   {{ end }}
   

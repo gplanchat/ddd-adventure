@@ -6,11 +6,4 @@ draft: true
 type: "docs"
 weight: 6
 ---
-
-# Stockage Composite piloté par Temporal
-
-Cette section couvre toutes les approches de stockage composite orchestré par Temporal Workflows pour l'orchestration de processus complexes.
-
-## Chapitres Disponibles
-
-- **Chapitres 46-51** : Approches Stockage Composite piloté par Temporal (à venir)
+Cette section couvre toutes les approches de stockage composite orchestré par Temporal Workflows pour l'orchestration de processus complexes.## Chapitres Disponibles- **Chapitres 46-51** : Approches Stockage Composite piloté par Temporal (à venir)

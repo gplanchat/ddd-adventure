@@ -14,6 +14,9 @@ $font-family-monospace:  {{ .Site.Params.mono_font | default "SFMono-Regular, Me
 //Fonts
 // @import "custom/fonts/fonts";
 
+// Typography improvements
+@import "custom/typography";
+
 //Core files
 @import "bootstrap/functions";
 @import "bootstrap/variables";
