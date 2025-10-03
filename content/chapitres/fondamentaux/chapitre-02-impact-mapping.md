@@ -11,11 +11,11 @@ weight: 2
 
 ### Mon Problème : L'Écart entre Business et Technique
 
-**Voici ce qui s'est passé avec Gyroscops** : J'avais une vision technique claire de ce que je voulais construire. Un système d'intégration robuste, avec des APIs bien conçues, une architecture évolutive. **Parfait !**
+N'avez-vous pas déjà eu le sentiment que vous construisez un produit pour vous, pas pour vos utilisateurs ? Vous avez une vision technique claire de ce que vous voulez construire. Un système robuste, avec des APIs bien conçues, une architecture évolutive. **Parfait !**
 
-**Mais attendez...** Mes utilisateurs ne comprenaient pas pourquoi je passais 3 mois à refactoriser l'architecture alors qu'ils avaient besoin d'une intégration simple avec Salesforce. Le business me demandait des fonctionnalités que je ne comprenais pas. Les priorités changeaient constamment.
+**Mais attendez...** Vos utilisateurs ne comprennent pas pourquoi vous passez 3 mois à refactoriser l'architecture alors qu'ils ont besoin d'une fonctionnalité simple. Le business vous demande des fonctionnalités que vous ne comprenez pas. Les priorités changent constamment.
 
-**Soudain, je réalisais que je construisais un produit pour moi, pas pour mes utilisateurs !** J'avais perdu de vue l'objectif business.
+**Soudain, vous réalisez que vous avez perdu de vue l'objectif business !** Vous développez des fonctionnalités "cool" techniquement, mais qui ne génèrent pas de valeur pour vos clients.
 
 ### L'Impact Mapping : l'aide à la décision
 
