@@ -1,0 +1,27 @@
+{{/*
+  Shortcode pour créer des liens vers des pages en draft
+  Usage: {{< draft-link url="/path/to/page" title="Titre du lien" >}}
+*/}}
+
+{{ $url := .Get "url" }}
+{{ $title := .Get "title" }}
+{{ $page := .Site.GetPage $url }}
+
+{{ if $page }}
+  {{ if $page.Draft }}
+    <span class="draft-link disabled">
+      <i class="fas fa-clock"></i>
+      {{ $title }} <span class="draft-badge">(En cours de rédaction)</span>
+    </span>
+  {{ else }}
+    <a href="{{ $url }}" class="draft-link active">
+      <i class="fas fa-arrow-right"></i>
+      {{ $title }}
+    </a>
+  {{ end }}
+{{ else }}
+  <span class="draft-link disabled">
+    <i class="fas fa-clock"></i>
+    {{ $title }} <span class="draft-badge">(Page non trouvée)</span>
+  </span>
+{{ end }}

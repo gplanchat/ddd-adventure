@@ -5,16 +5,40 @@
     <meta name="robots" content="noindex">
     {{- end }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A Lightweight, Modern Documentation Theme for Hugo" />
-    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
-    <meta name="author" content="Colin Wilson - Lotus Labs" />
-    <meta name="email" content="support@aigis.uk" />
-    <meta name="website" content="https://lotusdocs.dev" />
-    <meta name="Version" content="v0.1.0" />
+    
+    <!-- SEO Meta Tags -->
+    {{- $description := .Description | default .Site.Params.description | default "Une aventure dont vous êtes le héros pour maîtriser le Domain-Driven Design avec API Platform" }}
+    <meta name="description" content="{{ $description }}" />
+    <meta name="keywords" content="Domain-Driven Design, DDD, Event Storming, CQRS, Event Sourcing, API Platform, PHP, Architecture Logicielle, Symfony" />
+    <meta name="author" content="Grégory Planchat" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{{ .Site.Params.opengraph.type | default "website" }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:title" content="{{ .Title | default .Site.Params.opengraph.title | default .Site.Title }}" />
+    <meta property="og:description" content="{{ $description }}" />
+    <meta property="og:locale" content="{{ .Site.Params.opengraph.locale | default "fr_FR" }}" />
+    {{- with .Site.Params.opengraph.image }}
+    <meta property="og:image" content="{{ . | absURL }}" />
+    {{- end }}
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="{{ .Permalink }}" />
+    <meta name="twitter:title" content="{{ .Title | default .Site.Params.opengraph.title | default .Site.Title }}" />
+    <meta name="twitter:description" content="{{ $description }}" />
+    {{- with .Site.Params.social.twitter }}
+    <meta name="twitter:creator" content="@{{ . }}" />
+    {{- end }}
+    {{- with .Site.Params.opengraph.image }}
+    <meta name="twitter:image" content="{{ . | absURL }}" />
+    {{- end }}
     <!-- favicon -->
     {{ block "head/favicon" . }}{{ partialCached "head/favicon.html" . }}{{ end }}
     <!-- Google Fonts -->
     {{- partial "google-fonts" . }}
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
     {{- $options := dict "enableSourceMap" true }}
     {{- if hugo.IsProduction}}

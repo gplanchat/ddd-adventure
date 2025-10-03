@@ -13,7 +13,7 @@ type: "docs"
 
 Ce guide est né d'un constat simple : l'architecture logicielle est difficile à appréhender. C'est un domaine où les compromis sont permanents et où chaque choix mérite d'être remis en question. Plutôt qu'un énième tutoriel ou des principes dogmatiques, je vous proposons une approche interactive qui s'adapte à votre contexte et votre niveau.
 
-### Le Problème que Nous Résolvons
+### Le Problème que ce guide tente de résoudre
 
 L'architecture logicielle est complexe, et les guides traditionnels aggravent cette complexité :
 - **Trop de théorie** : Les concepts sont expliqués sans contexte pratique
@@ -21,9 +21,9 @@ L'architecture logicielle est complexe, et les guides traditionnels aggravent ce
 - **Manque de personnalisation** : Pas d'adaptation aux besoins spécifiques
 - **Exemples déconnectés** : Le code ne correspond pas à la réalité métier
 
-### Notre Solution : Le "Livre dont Vous Êtes le Héros"
+### Ma Solution : Le "Livre dont Vous Êtes le Héros"
 
-Nous avons créé un guide interactif qui s'adapte à votre contexte :
+J'ai créé un guide interactif qui s'adapte à votre contexte :
 
 ### Principe Fondamental : Navigation Interactive
 
@@ -39,7 +39,7 @@ Après avoir lu le chapitre sur l'Event Storming, vous pourrez choisir :
 - **Option B** : Comprendre la complexité architecturale (si vous voulez choisir une architecture)
 - **Option C** : Voir des exemples de modèles (si vous voulez passer à l'implémentation)
 
-## L'Expérience Gyroscops : Notre Laboratoire
+## L'Expérience Gyroscops : Mon Laboratoire
 
 ### Contexte Réel et Authentique
 
@@ -146,7 +146,7 @@ Pas de théorie pure, mais des solutions pratiques :
 
 L'architecture logicielle et le Domain-Driven Design sont des domaines où la documentation de qualité en français est rare. La plupart des ressources sont en anglais, ce qui crée une barrière pour de nombreux développeurs francophones.
 
-### Notre Contribution
+### Ma Contribution
 
 Ce guide vise à combler ce manque en proposant :
 - **Contenu en français** : Accessible à tous les développeurs francophones
@@ -240,7 +240,7 @@ Ce guide s'appuie sur les travaux de référence en Domain-Driven Design et arch
 
 {{< figure src="/images/books/ddd-eric-evans.jpg" title="Domain-Driven Design: Tackling Complexity in the Heart of Software par Eric Evans" >}}
 
-Le livre fondateur du DDD. Eric Evans y pose les bases conceptuelles et les patterns essentiels qui structurent notre approche architecturale.
+Le livre fondateur du DDD. Eric Evans y pose les bases conceptuelles et les patterns essentiels qui structurent mon approche architecturale.
 
 #### **Implementing Domain-Driven Design**
 **Auteur :** Vaughn Vernon  
@@ -282,7 +282,7 @@ Une approche moderne et pragmatique du DDD, avec un focus sur l'alignement entre
 
 Un guide complet des patterns DDD avec des exemples concrets d'implémentation et des bonnes pratiques.
 
-### 🎯 **Notre Contribution**
+### 🎯 **Ma Contribution**
 
 Ce guide interactif s'inspire de ces ouvrages de référence tout en apportant :
 
@@ -290,6 +290,21 @@ Ce guide interactif s'inspire de ces ouvrages de référence tout en apportant :
 - **Des exemples concrets** : Implémentations réelles tirées de Gyroscops
 - **Une progression guidée** : Parcours personnalisé selon vos besoins
 - **Des choix architecturaux** : Décisions éclairées basées sur l'expérience
+
+## Pourquoi cette Démarche ? Le Contexte de la Mutation du Métier
+
+### 🚀 **L'Évolution avec la GenAI**
+
+L'arrivée de la GenAI et de la programmation agentique transforme progressivement le métier de développeur. Cette évolution change la façon dont nous concevons et développons des logiciels.
+
+**La nouvelle réalité :** Ceux qui maîtrisent l'architecture métier et savent **orchestrer les outils IA** sont plus efficaces.
+
+**Pourquoi l'Impact Mapping, l'Event Storming et l'Example Mapping deviennent-ils importants ?**
+- **Les IA peuvent coder**, mais elles ne savent pas **quoi** coder
+- **Les IA peuvent implémenter**, mais elles ne comprennent pas **comment** structurer
+- **Les IA peuvent générer du code**, mais elles ne savent pas **quand** appliquer les règles
+
+**→ [Découvrir pourquoi ces méthodes sont importantes dans l'ère de la GenAI](/concept/mutation-metier-developpeur/)**
 
 ## Votre Prochaine Étape
 
@@ -299,6 +314,18 @@ Maintenant que vous comprenez le concept, vous pouvez :
   {{< chapter-option 
     letter="A" 
     color="green" 
+    title="Je veux comprendre pourquoi cette démarche" 
+    subtitle="Vous voulez découvrir le contexte de la mutation du métier de développeur avec la GenAI"
+    criteria="Besoin de comprendre le contexte,Équipe en réflexion,Formation à organiser,Architecture à définir"
+    time="15-20 minutes"
+    chapter="0"
+    chapter-title="La Mutation du Métier de Développeur"
+    chapter-url="/concept/mutation-metier-developpeur/"
+  >}}
+  
+  {{< chapter-option 
+    letter="B" 
+    color="yellow" 
     title="Je veux commencer par les fondamentaux" 
     subtitle="Vous voulez comprendre les concepts de base du DDD et de l'Event Storming"
     criteria="Développeur de tous niveaux,Besoin de comprendre les concepts de base,Projet à structurer,Équipe à former"
@@ -309,8 +336,8 @@ Maintenant que vous comprenez le concept, vous pouvez :
   >}}
   
   {{< chapter-option 
-    letter="B" 
-    color="yellow" 
+    letter="C" 
+    color="blue" 
     title="Je veux voir la vue d'ensemble des chapitres" 
     subtitle="Vous voulez comprendre l'organisation complète du guide"
     criteria="Besoin de vue d'ensemble,Équipe en réflexion,Planification de formation,Architecture à définir"
@@ -321,8 +348,8 @@ Maintenant que vous comprenez le concept, vous pouvez :
   >}}
   
   {{< chapter-option 
-    letter="C" 
-    color="blue" 
+    letter="D" 
+    color="purple" 
     title="Je veux explorer les patterns avancés" 
     subtitle="Vous voulez découvrir CQRS, Event Sourcing et les patterns sophistiqués"
     criteria="Développeur expérimenté,Architecture complexe,Patterns avancés,Performance critique"
@@ -330,18 +357,6 @@ Maintenant que vous comprenez le concept, vous pouvez :
     chapter="13"
     chapter-title="Architecture CQRS"
     chapter-url="/chapitres/optionnels/chapitre-13-architecture-cqrs/"
-  >}}
-  
-  {{< chapter-option 
-    letter="D" 
-    color="purple" 
-    title="Je veux voir des exemples concrets" 
-    subtitle="Vous voulez comprendre les implémentations pratiques"
-    criteria="Développeur expérimenté,Besoin d'exemples pratiques,Implémentation à faire,Code à écrire"
-    time="Variable"
-    chapter="0"
-    chapter-title="Exemples et Implémentations"
-    chapter-url="/examples/"
   >}}
 {{< /chapter-nav >}}
 

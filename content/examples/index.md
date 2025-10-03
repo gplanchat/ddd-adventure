@@ -14,19 +14,19 @@ Cette section contient des exemples de code concrets pour chaque pattern et tech
 ## 📁 **Organisation des Exemples**
 
 ### **Patterns de Stockage**
-- **[Stockage SQL Classique](/examples/stockage-sql-classique/)** : Implémentation simple avec Doctrine
-- **[Stockage SQL CQS](/examples/stockage-sql-cqs/)** : Séparation des commandes et requêtes
-- **[Stockage SQL CQRS](/examples/stockage-sql-cqrs/)** : Architecture CQRS complète
-- **[Patterns de Stockage](/examples/stockage-patterns/)** : Comparaison des approches
+- {{< draft-link url="/examples/stockage-sql-classique/" title="Stockage SQL Classique" >}} : Implémentation simple avec Doctrine
+- {{< draft-link url="/examples/stockage-sql-cqs/" title="Stockage SQL CQS" >}} : Séparation des commandes et requêtes
+- {{< draft-link url="/examples/stockage-sql-cqrs/" title="Stockage SQL CQRS" >}} : Architecture CQRS complète
+- {{< draft-link url="/examples/stockage-patterns/" title="Patterns de Stockage" >}} : Comparaison des approches
 
 ### **Techniques Avancées**
-- **[Gestion des Données et Validation](/examples/techniques/gestion-donnees-validation/)** : Validation robuste
-- **[Gestion des Erreurs et Observabilité](/examples/techniques/gestion-erreurs-observabilite/)** : Monitoring et debugging
-- **[Pagination et Performance](/examples/techniques/pagination-performance/)** : Optimisation des performances
+- {{< draft-link url="/examples/techniques/gestion-donnees-validation/" title="Gestion des Données et Validation" >}} : Validation robuste
+- {{< draft-link url="/examples/techniques/gestion-erreurs-observabilite/" title="Gestion des Erreurs et Observabilité" >}} : Monitoring et debugging
+- {{< draft-link url="/examples/techniques/pagination-performance/" title="Pagination et Performance" >}} : Optimisation des performances
 
 ### **Architectures Avancées**
-- **[Sécurité et Autorisation](/examples/avances/securite-autorisation/)** : Patterns de sécurité
-- **[Intégration Frontend](/examples/avances/frontend-integration/)** : Architecture frontend
+- {{< draft-link url="/examples/avances/securite-autorisation/" title="Sécurité et Autorisation" >}} : Patterns de sécurité
+- {{< draft-link url="/examples/avances/frontend-integration/" title="Intégration Frontend" >}} : Architecture frontend
 
 ## 🚀 **Comment Utiliser ces Exemples**
 
@@ -62,11 +62,11 @@ Chaque exemple inclut des tests pour valider l'implémentation.
 ## 🔗 **Liens avec les Chapitres**
 
 Chaque exemple correspond à un ou plusieurs chapitres :
-- **Chapitres 16-21** → Exemples SQL
-- **Chapitres 22-27** → Exemples API
-- **Chapitres 28-31** → Exemples MongoDB
-- **Chapitres 58-61** → Exemples Techniques
-- **Chapitres 62-63** → Exemples Avancés
+- **Chapitres 16-21** → {{< draft-link url="/chapitres/stockage/sql/" title="Exemples SQL" >}}
+- **Chapitres 22-27** → {{< draft-link url="/chapitres/stockage/api/" title="Exemples API" >}}
+- **Chapitres 28-31** → {{< draft-link url="/chapitres/stockage/mongodb/" title="Exemples MongoDB" >}}
+- **Chapitres 58-61** → {{< draft-link url="/chapitres/techniques/" title="Exemples Techniques" >}}
+- **Chapitres 62-63** → {{< draft-link url="/chapitres/avances/" title="Exemples Avancés" >}}
 
 ## 🎯 **Votre Prochaine Étape**
 

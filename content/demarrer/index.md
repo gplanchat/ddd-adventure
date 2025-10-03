@@ -20,6 +20,19 @@ Avec **Gyroscops**, j'ai vécu les défis de l'architecture logicielle moderne :
 
 L'architecture logicielle est un domaine où les compromis sont permanents et où chaque choix mérite d'être remis en question. Ce guide est le fruit de cette expérience, transformée en **parcours interactif** qui s'adapte à votre contexte.
 
+### 🚀 **Le Contexte de l'Évolution du Métier**
+
+**L'arrivée de la GenAI et de la programmation agentique transforme progressivement le métier de développeur.** Cette évolution change la façon dont nous concevons et développons des logiciels.
+
+**La nouvelle réalité :** Ceux qui maîtrisent l'architecture métier et savent **orchestrer les outils IA** sont plus efficaces.
+
+**Pourquoi l'Impact Mapping, l'Event Storming et l'Example Mapping deviennent-ils importants ?**
+- **Les IA peuvent coder**, mais elles ne savent pas **quoi** coder
+- **Les IA peuvent implémenter**, mais elles ne comprennent pas **comment** structurer
+- **Les IA peuvent générer du code**, mais elles ne savent pas **quand** appliquer les règles
+
+**→ [Découvrir pourquoi ces méthodes sont importantes dans l'ère de la GenAI](/concept/mutation-metier-developpeur/)**
+
 ## Votre Parcours Personnalisé
 
 ### Chapitre 1 : Les Fondamentaux

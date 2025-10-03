@@ -1,7 +1,21 @@
+baseURL = 'https://votre-domaine.fr'  # Remplacez par votre domaine réel
 languageCode = 'fr-fr'
 title = 'DDD Adventure'
 
 [params]
+  # SEO and Social Media
+  description = "Maîtrisez l'aide à la décision stratégique avec l'Impact Mapping, l'Event Storming et l'Example Mapping. Les trois piliers du pilotage de projet dans l'édition logicielle et les services de développement."
+  
+  [params.social]
+    twitter = "gplanchat"  # Remplacez par votre handle Twitter
+  
+  [params.opengraph]
+    title = "DDD Adventure - Aide à la Décision Stratégique"
+    description = "Maîtrisez l'aide à la décision stratégique avec l'Impact Mapping, l'Event Storming et l'Example Mapping. Les trois piliers du pilotage de projet dans l'édition logicielle et les services de développement."
+    type = "website"
+    locale = "fr_FR"
+    image = "/images/og-image-ddd-adventure.svg"
+  
   # Footer configuration
   [params.footer]
     copyright = "© :YEAR: Grégory Planchat. Tous droits réservés."
@@ -12,8 +26,8 @@ title = 'DDD Adventure'
     title = "Nos Sponsors"
     subtitle = "Merci à nos partenaires qui soutiennent cette initiative"
     sponsors = [
-      { name = "Kiboko", url = "https://kiboko.fr", logo = "logo-kiboko-fr.svg" },
-      { name = "Gyroscops", url = "https://gyroscops.com", logo = "logo-gyroscops.svg" }
+      { name = "Kiboko", url = "https://kiboko.fr", logo = "/logo-kiboko-fr.svg" },
+      { name = "Gyroscops", url = "https://gyroscops.com", logo = "/logo-gyroscops.svg" }
     ]
 
   # Assets configuration

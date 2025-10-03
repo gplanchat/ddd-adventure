@@ -34,7 +34,7 @@ cachées.
 **Le problème fondamental ?** J'ai construit mon logiciel comme si le métier était simple. Lorsque l'on démarre un 
 projet, on a une vision partielle de ce qui sera nécessaire. De fait, j'ai essayé de forcer la réalité métier dans des 
 structures techniques rigides, et cela a fini par rendre la maintenance insoutenable. Pour ajouter à cette complexité
-existante, nous avons voulu fournir notre service sous la forme de SaaS, ce qui a ajouté un niveau de complexité
+existante, j'ai voulu fournir le service sous la forme de SaaS, ce qui a ajouté un niveau de complexité
 technique supplémentaire.
 
 **Le résultat ?** J'ai dû bloquer toutes les évolutions du produit pendant 2 mois pour remettre l'application dans un
@@ -49,6 +49,40 @@ Ce chapitre pose les fondations de l'approche que l'on a développée pour évit
 - **Comment l'Impact Mapping** aligne le produit sur les objectifs business
 - **Comment l'Event Storming** révèle la complexité métier cachée
 - **Comment l'Example Mapping** détaille les règles métier complexes
+
+### Les Trois Piliers du Pilotage de Projet
+
+**L'Impact Mapping, l'Event Storming et l'Example Mapping ne sont pas seulement des techniques de développement.** Ce sont les **piliers fondamentaux de l'aide à la décision stratégique** dans le monde de l'édition logicielle et des services de développement.
+
+Ces trois méthodes vous permettent d'aller **au-delà du code, au-delà de la technique** pour vous concentrer sur ce qui compte vraiment :
+
+#### 🎯 **L'Impact Mapping** : La Boussole Stratégique
+- **Décide QUOI** développer en fonction des objectifs business
+- **Priorise** les fonctionnalités selon leur impact réel
+- **Aligne** l'équipe technique sur les enjeux métier
+- **Évite** de construire des fonctionnalités inutiles
+
+#### 🏗️ **L'Event Storming** : Le Plan Architectural
+- **Décide COMMENT** structurer le système métier
+- **Révèle** la complexité cachée du domaine
+- **Conçoit** l'architecture en collaboration avec les experts métier
+- **Évite** les architectures techniques déconnectées du métier
+
+#### 📋 **L'Example Mapping** : Le Guide d'Implémentation
+- **Décide QUAND** et **POURQUOI** appliquer les règles métier
+- **Détaille** les cas limites et exceptions
+- **Transforme** les règles abstraites en exemples concrets
+- **Évite** les malentendus entre business et technique
+
+**Ensemble, ces trois méthodes constituent un système complet d'aide à la décision** qui vous guide de la stratégie business jusqu'à l'implémentation technique, en passant par la conception architecturale.
+
+### Pourquoi cette Démarche ?
+
+**L'arrivée de la GenAI et de la programmation agentique transforme progressivement le métier de développeur.** Cette évolution change la façon dont nous concevons et développons des logiciels.
+
+**La nouvelle réalité :** Ceux qui maîtrisent l'architecture métier et savent **orchestrer les outils IA** sont plus efficaces.
+
+**→ [Découvrir pourquoi ces méthodes sont importantes dans l'ère de la GenAI](/concept/mutation-metier-developpeur/)**
 
 ### Savoir bien structurer son monolithe modulaire 
 
@@ -114,38 +148,32 @@ use Brick\Math\BigDecimal;
 // ✅ Value Object - Price
 final readonly class Price
 {
-    public function __construct(
+    private function __construct(
         public BigDecimal $amount,
         public Currencies $currency,
     ) {
         Assertion::true($this->amount->isGreaterThan(0));
     }
 
-    public function substract(self $price): self
+    public static function inEuros(BigDecimal $amount): self
     {
-        if ($price->currency !== $this->currency) {
-            throw new CurrencyMismatchException('Currency conversion is not supported');
-        }
-
-        return new self($this->amount->minus($price->amount), $this->currency);
+        return new self($amount, Currencies::Euro);
     }
 
-    public function add(self $price): self
+    public function plus(BigNumber|string $number): self
     {
-        if ($price->currency !== $this->currency) {
-            throw new CurrencyMismatchException('Currency conversion is not supported');
-        }
-
-        return new self($this->amount->plus($price->amount), $this->currency);
+        return new self(
+            $this->amount->plus($number),
+            $this->currency,
+        );
     }
 
-    public function isGreaterThan(self $price): bool
+    public function multipliedBy(BigNumber|string $number): self
     {
-        if ($price->currency !== $this->currency) {
-            throw new CurrencyMismatchException('Currency conversion is not supported');
-        }
-
-        return $this->amount->isGreaterThan($price->amount);
+        return new self(
+            $this->amount->multipliedBy($number),
+            $this->currency,
+        );
     }
 
     public function isGreaterThanOrEqualTo(self $price): bool
@@ -157,24 +185,6 @@ final readonly class Price
         return $this->amount->isGreaterThanOrEqualTo($price->amount);
     }
 
-    public function isLessThan(self $price): bool
-    {
-        if ($price->currency !== $this->currency) {
-            throw new CurrencyMismatchException('Currency conversion is not supported');
-        }
-
-        return $this->amount->isLessThan($price->amount);
-    }
-
-    public function isLessThanOrEqualTo(self $price): bool
-    {
-        if ($price->currency !== $this->currency) {
-            throw new CurrencyMismatchException('Currency conversion is not supported');
-        }
-
-        return $this->amount->isLessThanOrEqualTo($price->amount);
-    }
-
     public function isEqualTo(self $price): bool
     {
         if ($price->currency !== $this->currency) {
@@ -184,23 +194,12 @@ final readonly class Price
         return $this->amount->isEqualTo($price->amount);
     }
 
-    public function isZero(): bool
-    {
-        return $this->amount->isZero();
-    }
-
-    public function multipliedBy(BigNumber|string $number): self
-    {
-        return new self(
-            $this->amount->multipliedBy($number),
-            $this->currency,
-        );
-    }
+    // etc.
 }
 ```
 
 **Ce que cet exemple montre** :
-- **Immutabilité** : `readonly` et constructeur privé empêchent la modification
+- **Immutabilité** : `readonly` et constructeur privé empêchent la modification, chaque opération de modification produit la création d'une nouvelle instance d'objet modifié
 - **Validation** : Le constructeur valide que le montant n'est pas négatif
 - **Logique métier** : Les opérations arithmétiques respectent les règles métier
 - **Comparaison par valeur** : Deux `Price` avec le même montant et la même devise sont égaux
@@ -251,6 +250,7 @@ final class Payment
     ): self {
         $instance = new self($uuid, $realmId, $organizationId, $subscriptionId);
         
+        // Logique métier
         Assertion::true($this->canTransitionTo(Statuses::Pending));
 
         $instance->recordThat(new RegisteredPaymentEvent(
@@ -273,11 +273,17 @@ final class Payment
         return $instance;
     }
 
+    private function applyRegisteredPaymentEvent(RegisteredPaymentEvent $event): void
+    {
+        // Changement de l'état
+    }
+
     public function authorize(Gateways $gateway, Price $amount, \DateTimeInterface $authorizationDate): void
     {
+        // Logique métier
         Assertion::true($this->canTransitionTo(Statuses::Authorized));
         
-        $this->recordThat(new CapturedEvent(
+        $this->recordThat(new AuthorizedEvent(
             uuid: $this->uuid,
             version: $this->version + 1,
             realmId: $this->realmId,
@@ -290,8 +296,14 @@ final class Payment
         ));
     }
 
+    private function applyAuthorizedEvent(AuthorizedEvent $event): void
+    {
+        // Changement de l'état
+    }
+
     public function capture(Gateways $gateway, Price $amount, \DateTimeInterface $completionDate): void
     {
+        // Logique métier
         Assertion::true($this->canTransitionTo(Statuses::Completed));
         
         $this->recordThat(new CapturedEvent(
@@ -307,8 +319,14 @@ final class Payment
         ));
     }
 
+    private function applyCapturedEvent(CapturedEvent $event): void
+    {
+        // Changement de l'état
+    }
+
     public function fail(Gateways $gateway, Price $amount, \DateTimeInterface $failureDate, string $reason): void
     {
+        // Logique métier
         Assertion::true($this->canTransitionTo(Statuses::Failed));
 
         $this->recordThat(new FailedEvent(
@@ -323,6 +341,11 @@ final class Payment
             failureDate: $failureDate,
             reason: $reason,
         ));
+    }
+
+    private function applyFailedEvent(FailedEvent $event): void
+    {
+        // Changement de l'état
     }
 
     private function canTransitionTo(Statuses $status): bool
@@ -355,7 +378,7 @@ final class Payment
 **Ce que cet exemple montre** :
 - **Intention métier claire** : `registerOnlinePayment()`, `capture()`, `authorize()`, `fail()` expriment clairement l'intention
 - **Protection des invariants** : `canTransitionTo()` protège les transitions d'état valides
-- **Event Sourcing** : Chaque changement d'état est enregistré comme un événement
+- **Event Sourcing** : Chaque changement d'état est enregistré comme un événement, le changement détat est organisé dans des méthodes privées `apply...()`.
 - **Value Objects** : `PaymentId`, `Price`, `Statuses` encapsulent les concepts métier
 - **Séparation des responsabilités** : L'agrégat se concentre sur la logique métier, pas sur la persistance
 
@@ -446,30 +469,33 @@ class PaymentController
 
 ```php
 // ✅ DDD - L'intention est préservée et explicite
-class ProcessPayment
+final class Payment
 {
-    public function __construct(
-        public readonly PaymentId $id,
-        public readonly Money $amount,
-        public readonly PaymentMethod $method
-    ) {}
-}
-
-class Payment
-{
-    public function process(ProcessPayment $command): void
+    public function capture(Gateways $gateway, Price $amount, \DateTimeInterface $completionDate): void
     {
-        // L'intention "process" est claire et préservée
-        if (!$this->canBeProcessed()) {
-            throw new PaymentCannotBeProcessedException();
-        }
+        // Logique métier
+        Assertion::true($this->canTransitionTo(Statuses::Completed));
         
-        $this->status = PaymentStatuses::Processing;
-        $this->processedAt = new DateTimeImmutable();
-        $this->amount = $command->amount;
-        
-        // L'intention est conservée dans l'événement
-        $this->recordEvent(new PaymentProcessed($this->id, $command->amount));
+        $this->recordThat(new CapturedEvent(
+            uuid: $this->uuid,
+            version: $this->version + 1,
+            realmId: $this->realmId,
+            organizationId: $this->organizationId,
+            subscriptionId: $this->subscriptionId,
+            status: Statuses::Completed,
+            gateway: $gateway,
+            amount: $amount,
+            completionDate: $completionDate,
+        ));
+    }
+
+    private function applyCapturedEvent(CapturedEvent $event): void
+    {
+        // Changement de l'état
+        $this->status = $event->status;
+        $this->capured = $this->captured->plus($event->amount);
+        $this->gateway = $event->gateway;
+        $this->completionDate = $event->completionDate;
     }
 }
 ```
@@ -480,22 +506,28 @@ class Payment
 
 ```php
 // ✅ Approche DDD - Le métier guide l'évolution
-class ProcessPayment
+final readonly class ProcessPayment
 {
     public function __construct(
         public readonly PaymentId $id,
-        public readonly Money $amount,
-        public readonly PaymentMethod $method
+        public readonly Price $amount,
+        public readonly Gateway $gateway,
     ) {}
 }
 
 #[AsMessageHandler('command.bus')]
-class ProcessPaymentHandler
+final readonly class ProcessPaymentHandler
 {
+    public function __construct(
+        private ClockInterface $clock,
+    ) {}
+
     public function __invoke(ProcessPayment $command): void
     {
         $payment = $this->paymentRepository->find($command->id);
-        $payment->process($command->amount);
+
+        $payment->capture($command->gateway, $command->amount, $this->clock->now());
+
         $this->paymentRepository->save($payment);
     }
 }
@@ -511,15 +543,15 @@ class ProcessPaymentHandler
 
 ### Mon Illusion : La Séparation des Responsabilités
 
-Les modèles anémiques semblaient respecter le principe de séparation des responsabilités : "Les entités stockent les données, les services contiennent la logique". C'est logique, non ? **Non, c'est trompeur !**
+Les modèles anémiques semblaient respecter le principe de séparation des responsabilités : "Les entités stockent les données, les services contiennent la logique". C'est logique, non ? **Non, c'est trompeur !**. C'est même en contradiction avec l'intention initiale de la Programmation Orientée Objet.
 
-**Le problème** : Je séparais les données de leur logique. C'est comme séparer le l'autopilote de l'avion : techniquement possible, mais pas très optimal.
+**Le problème** : Je séparais les données de leur logique. C'est comme séparer le l'autopilote des commandes de l'avion. C'est techniquement possible, et c'est justifié en disant "au cas où un jour on veuille changer les commandes de l'avion". **Ça n'arrivera jamais**.
 
 **Voici ce qui s'est passé avec Gyroscops** : j'avais un système de gestion d'utilisateurs. Au début, c'était simple : des entités avec des getters/setters, des services qui faisaient la logique. Puis est arrivée la demande : "On veut pouvoir suspendre un utilisateur". Facile, j'ai ajouté un champ `isSuspended` et une méthode dans le service. Puis : "Un utilisateur suspendu ne peut pas se connecter". OK, j'ai ajouté une vérification dans le service. Puis : "Un utilisateur suspendu ne peut pas changer son email". Encore une vérification dans le service. Puis : "Il faut notifier l'utilisateur quand il est suspendu". Une autre vérification dans le service...
 
-Je n'ai pas encore évoqué les inter-dépendances entre les entités lors de l'inscription.
+Je n'ai pas encore évoqué les inter-dépendances entre les entités lors de l'inscription : une organisation et un Workspace doivent être créés automatiquement pour que le compte soit fonctionnel.
 
-**Résultat** : Ma logique métier était éparpillée dans de multiples services différents. Chaque modification nécessitait de toucher à au moins 5 fichiers. Je ne savais plus où était quoi, mes collègues non plus.
+**Résultat** : Ma logique métier était éparpillée dans de multiples services différents. Chaque modification nécessitait de toucher à au moins 5 fichiers. si on prenait chaque service individuellement, le code était propre. Mais je ne savais plus où était quoi, quel service interagissait avec quel autre, et mes collègues non plus.
 
 ### Mon Piège : Les Modèles Anémiques
 
@@ -556,7 +588,7 @@ class User
 
 **Services liés à l'utilisateur** :
 - Modifier le service `UserService` pour la logique de suspension
-- Modifier le service `AuthService` pour vérifier le statut
+- Modifier le service `AuthenticationService` pour vérifier le statut
 - Modifier le service `EmailService` pour les notifications
 
 **Services liés à l'organisation** :
@@ -574,7 +606,7 @@ class User
 - Modifier le service `ReportService` pour les statistiques
 - Modifier le service `CacheService` pour l'invalidation
 
-**Résultat** : 12 fichiers à modifier pour une seule fonctionnalité ! Et si j'oubliais un service ? Et si les règles étaient incohérentes entre les services ? Et comment gérer les dépendances entre User → Organization → Workflow → Cloud Resources ?
+**Résultat** : 12 fichiers à modifier pour une seule fonctionnalité ! Et si j'oubliais un service ? Et si les règles étaient incohérentes entre les services ? Et comment gérer les dépendances entre User → Organization → Workflow → Resources Cloud ? Et si j'oublie de décommissionner les ressources Cloud, je serai toujours facturé par le fournisseur d'infra.
 
 La logique métier se retrouve éparpillée dans les services, mélangeant souvent **règles métier** et **contraintes techniques** :
 
@@ -659,7 +691,7 @@ class UserService
 - **Difficile à tester** : Comment tester uniquement les règles métier sans les contraintes techniques ?
 - **Difficile à maintenir** : Où modifier une règle métier spécifique sans impacter les contraintes ?
 - **Difficile à comprendre** : Quelle est l'intention réelle de cette validation ?
-- **Couplage fort** : L'entité est couplée à la base de données ET aux règles métier
+- **Couplage fort** : L'entité est couplée à la base de données ET aux règles métier, que se passe-t-il si je souhaite panacher mon stockage d'entités entre PostgreSQL et ElasticSearch ?
 
 #### 2. **Évoluer Sans Casser**
 Avec des modèles anémiques, changer une règle métier nécessite de :
@@ -675,7 +707,7 @@ La logique métier est éparpillée dans les services, rendant les tests complex
 
 ```php
 // ✅ Modèle Riche - L'intention métier est claire
-class User
+final class User
 {
     private function __construct(
         private UserId $id,
@@ -687,6 +719,11 @@ class User
     public static function register(UserId $id, Email $email, FullName $name): self
     {
         return new self($id, $email, $name, UserStatuses::Pending);
+    }
+
+    public static function restoreFromState(UserId $id, Email $email, FullName $name, Statuses $status): self
+    {
+        return new self($id, $email, $name, $status);
     }
 
     public function activate(): void
@@ -715,7 +752,7 @@ class User
 ```
 
 **Avantages** :
-- **Séparation claire** : Règles métier dans le modèle, contraintes techniques dans les Value Objects
+- **Séparation claire** : Règles métier dans le modèle et les Value Objects, contraintes techniques dans les services de stockage
 - **Intention métier explicite** : `register`, `canLogin()`, `activate()`, `changeEmail()` expriment clairement l'intention
 - **Évolution guidée par le métier** : Les changements suivent la logique métier
 - **Tests plus simples** : Chaque règle métier peut être testée indépendamment
@@ -796,88 +833,53 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: 'users')]
 class UserEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Email(message: 'Email invalide')]
-    #[Assert\Length(max: 255, maxMessage: 'Email trop long')]
-    #[Assert\NotBlank(message: 'Email obligatoire')]
-    private string $email;
-
-    #[ORM\Column(type: 'string', length: 50)]
-    #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
-    #[Assert\Length(min: 2, max: 50, minMessage: 'Prénom trop court')]
-    private string $firstName;
-
-    #[ORM\Column(type: 'string', length: 50)]
-    #[Assert\NotBlank(message: 'Le nom est obligatoire')]
-    #[Assert\Length(min: 2, max: 50, minMessage: 'Nom trop court')]
-    private string $lastName;
-
-    #[ORM\Column(type: 'string', length: 20)]
-    private string $status = 'pending';
-
-    // Getters et setters pour Doctrine
-    public function getId(): ?int
-    {
-        return $this->id;
+    public ?FullName $fullName {
+        get => ($this-firstName !== null && $this->lastName !== null)
+            ? new FullName(
+                $this->firstName,
+                $this->lastName,
+            )
+            : null;
     }
 
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
+    public function __construct(
+        #[Assert\Uuid]
+        #[ORM\Id]
+        #[ORM\Column(type: 'user_id', unique: true)]
+        public UserId $id = UserId::generateRandom();
 
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-        return $this;
-    }
+        #[ORM\Column(type: 'string', length: 255)]
+        #[Assert\Email(message: 'Email invalide')]
+        #[Assert\Length(max: 255, maxMessage: 'Email trop long')]
+        #[Assert\NotBlank(message: 'Email obligatoire')]
+        public ?string $email;
 
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
+        #[ORM\Column(length: 50)]
+        #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
+        #[Assert\Length(min: 2, max: 50, minMessage: 'Prénom trop court')]
+        public ?string $firstName;
 
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
-        return $this;
-    }
+        #[ORM\Column(length: 50)]
+        #[Assert\NotBlank(message: 'Le nom est obligatoire')]
+        #[Assert\Length(min: 2, max: 50, minMessage: 'Nom trop court')]
+        public ?string $lastName;
 
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
-        return $this;
-    }
-
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-        return $this;
-    }
+        #[ORM\Column()]
+        public Statuses $status = Statuses::Pending;
+    ) {}
 }
 
 // ✅ Value Objects pour les contraintes techniques
+use Assert\Assertion;
+use Assert\AssertionFailedException;
 final readonly class UserId
 {
     public function __construct(private string $value)
     {
-        if (empty($value)) {
-            throw new InvalidUserIdException('ID utilisateur obligatoire');
+        try {
+            Assertion::uuid($value);
+        } catch(AssertionFailedException $exception) {
+            throw new InvalidUserIdException('ID utilisateur obligatoire', previous: $exception);
         }
     }
 
@@ -896,12 +898,10 @@ final readonly class Email
 {
     public function __construct(private string $value)
     {
-        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidEmailException('Email invalide');
-        }
-        
-        if (strlen($value) > 255) {
-            throw new InvalidEmailException('Email trop long');
+        try {
+            Assertion::email($value);
+        } catch(AssertionFailedException $exception) {
+            throw new InvalidEmailException('Email invalide', previous: $exception);
         }
     }
     
@@ -917,8 +917,11 @@ final readonly class FullName
         public string $firstName,
         public string $lastName
     ) {
-        if (empty($firstName) || empty($lastName)) {
-            throw new InvalidNameException('Nom complet obligatoire');
+        try {
+            Assertion::notEmpty($firstName);
+            Assertion::notEmpty($lastName);
+        } catch(AssertionFailedException $exception) {
+            throw new InvalidNameException('Nom complet obligatoire', previous: $exception);
         }
     }
 }
@@ -932,25 +935,22 @@ class UserMapper
 {
     public function toEntity(User $user): UserEntity
     {
-        $entity = new UserEntity();
-        $entity->setEmail($user->getEmail()->__toString());
-        $entity->setFirstName($user->getFirstName());
-        $entity->setLastName($user->getLastName());
-        $entity->setStatus($user->getStatus()->value);
-        
-        return $entity;
+        return new UserEntity(
+            $user->email,
+            $user->firstName,
+            $user->lastName,
+            $user->status,
+        );
     }
 
     public function toAggregate(UserEntity $entity): User
     {
-        $user = new User();
-        $user->id = new UserId($entity->getId());
-        $user->email = new Email($entity->getEmail());
-        $user->firstName = $entity->getFirstName();
-        $user->lastName = $entity->getLastName();
-        $user->status = UserStatuses::from($entity->getStatus());
-        
-        return $user;
+        return User::restoreFromState(
+            $entity->id,
+            new Email($entity->email),
+            $entity->fullName,
+            $entity->status,
+        );
     }
 }
 ```
@@ -964,6 +964,8 @@ class UserMapper
 - **Flexibilité** : Possibilité de changer de stratégie de persistance
 
 ## L'Event Storming : Révéler la Complexité Métier
+
+> **📖 Note** : Ce chapitre présente une introduction à l'Event Storming. Pour un guide pratique complet avec des ateliers pas-à-pas, consultez le [Chapitre 3 : L'Atelier Event Storming - Guide Pratique](/chapitres/fondamentaux/chapitre-03-atelier-event-storming/).
 
 ### Mon Problème : Je Ne Voyais Que la Pointe de l'Iceberg
 
@@ -1003,7 +1005,7 @@ L'Event Storming m'a montré que mon domaine était plus complexe que je ne le p
 
 #### 2. **Alignement de l'Équipe** - La Fin des Malentendus
 
-Toute l'équipe (développeurs, product owners, experts métier) partage la même compréhension du domaine. **Fini les "Ah, je pensais que..." et les "Non, mais moi je croyais que..."**
+Toute l'équipe (développeurs, product owners, experts métier) partage la même compréhension du domaine. **Fini les "Ah, je pensais que..." et les "Non, mais je te dis que c'est ça qui..."**
 
 **Exemple concret avec Gyroscops** : Pendant un Event Storming sur la gestion des utilisateurs. Voici ce qui est ressorti :
 
@@ -1015,7 +1017,7 @@ Toute l'équipe (développeurs, product owners, experts métier) partage la mêm
 - **Le responsable cloud** : "Il ne peut pas accéder aux workflows déployés"
 - **Le responsable facturation** : "L'organisation doit continuer à être facturée même si l'utilisateur est suspendu"
 
-**Résultat de l'Event Storming** : Nous avons découvert que "suspendre un utilisateur" n'était pas un seul événement, mais plusieurs, avec des implications sur toute la chaîne :
+**Résultat de l'Event Storming** : J'ai découvert que "suspendre un utilisateur" n'était pas un seul événement, mais plusieurs, avec des implications sur toute la chaîne :
 
 **Événements liés à l'utilisateur** :
 - `UserSuspended` (accès restreint)
@@ -1032,7 +1034,7 @@ Toute l'équipe (développeurs, product owners, experts métier) partage la mêm
 - `WorkflowResourcesMaintained` (les ressources restent actives)
 - `WorkflowBillingMaintained` (la facturation du workflow continue)
 
-**Qui avait raison ?** Tout le monde ! Chacun avait une vision partielle de la réalité métier, et nous avons découvert que suspendre un utilisateur avait des implications sur l'organisation, le workflow, et même les ressources cloud.
+**Qui avait raison ?** Tout le monde ! Chacun avait une vision partielle de la réalité métier, et j'ai découvert que suspendre un utilisateur avait des implications sur l'organisation, le workflow, et même les ressources cloud.
 
 #### 3. **Conception Collaborative** - Briser les Silos
 
@@ -1050,28 +1052,18 @@ L'Event Storming brise les silos et permet une conception vraiment collaborative
 
 ### Exemple d'Event Storming : Système de Paiement
 
-```
-Événements (Post-its Orange) :
-- PaymentRequested
-- PaymentProcessed
-- PaymentFailed
-- PaymentRefunded
+Voici comment se présente un tableau d'Event Storming pour un système de paiement, avec les différents types de post-its organisés de gauche à droite selon le flux temporel :
 
-Acteurs (Post-its Jaunes) :
-- Customer
-- PaymentGateway
-- Admin
+{{< figure src="/images/event-storming/payment-system-flow.svg" title="Tableau Event Storming - Système de Paiement" >}}
 
-Commandes (Post-its Bleus) :
-- ProcessPayment
-- RefundPayment
-- CancelPayment
+**Ce que cette organisation révèle** :
+- **Le flux temporel** : De gauche à droite, on voit l'ordre chronologique des événements
+- **Les responsabilités** : Chaque acteur (Customer, Admin) déclenche des commandes spécifiques
+- **Les dépendances** : On voit clairement que Payment dépend de PaymentGateway (système externe)
+- **Les agrégats** : Payment est l'agrégat central, mais Order est aussi concerné
+- **Les chemins alternatifs** : PaymentProcessed ou PaymentFailed selon la réponse de la gateway
 
-Agrégats (Post-its Jaunes avec bordure) :
-- Payment
-- Customer
-- Order
-```
+> **💡 Pour aller plus loin** : Cette présentation simplifiée montre les concepts de base. Dans le [Chapitre 3](/chapitres/fondamentaux/chapitre-03-atelier-event-storming/), vous découvrirez comment animer un atelier complet avec votre équipe, avec des exemples détaillés et des templates à télécharger.
 
 
 ## Architecture Résultante
@@ -1108,15 +1100,16 @@ api/src/
 
 **Voici ce que j'ai appris avec Gyroscops** : Dans 80% des cas, les microservices sont une réponse hors sujet. La vraie dette technique, ce n'est pas le monolithe. C'est un monolithe mal structuré.
 
-J'ai vu trop d'équipes exploser leur codebase en 15 services "indépendants" qui finissent par dépendre les uns des autres, se synchroniser à coups de webhooks bancals, et mettre 40 minutes à déboguer un simple flux métier.
+J'ai vu trop d'équipes exploser leur codebase en 15 services "indépendants" qui finissent par dépendre les uns des autres, en justifiant qu'un jour peut être on supprimmera le module. Quand un problème basique survient il faut mettre 40 minutes à déboguer un simple flux métier. Quand le jour de la suppression d'un module arrive, on se rend compte que tous les modules ont des dépendances circulaires et qu'il n'y a, de fait, qu'un seul module.
 
 **Avec les Bounded Contexts, j'ai créé un monolithe modulaire** :
 - **Bien découpé en domaines fonctionnels clairs** : Chaque Bounded Context correspond à un domaine métier
 - **Avec des interfaces internes bien définies** : Les UseCases exposent des interfaces claires
 - **Testable, maintenable, lisible** : Chaque contexte peut être testé et maintenu indépendamment
 - **Déployable en un clic** : Un seul déploiement pour toute l'application
+- **Des dépendances marisées** : Seuls les objets d'ID d'un autre Bounded Context sont tolérés, sinon tout toit être isolé au Bounded context actuel
 
-**Le résultat** : J'ai évité le piège des microservices prématurés. J'ai un système cohérent, maintenable, et évolutif. Et quand un module devient vraiment trop gros ou trop critique, là je peux l'extraire en microservice. Mais je pars du besoin, pas du dogme.
+**Le résultat** : J'ai évité le piège des microservices prématurés. J'ai un système cohérent, maintenable, et évolutif. Et quand un module devient vraiment trop gros ou trop critique et que toutes les pistes d'optimisation ont été parcourues, là je peux réfléchir à l'extraire en microservice. Mais je pars du besoin, pas du dogme.
 
 **Comme le dit [Jean-Vincent Quilichini](https://www.linkedin.com/posts/jeanvincentquilichini_je-ne-fais-presque-plus-de-microservices-activity-7375767071550423040-Kivq) : "Le microservice doit être un outil. Pas une posture."**
 
@@ -1136,14 +1129,18 @@ Cette architecture suit les principes définis dans les Architecture Decision Re
 ```php
 // Exemple d'intégration API Platform
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
 
 #[Get]
 #[GetCollection]
 #[Post]
+#[Put]
 #[Patch]
+#[Delete]
 class Payment
 {
     public function __construct(

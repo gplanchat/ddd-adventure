@@ -18,27 +18,27 @@ Devenez expert en architecture DDD avec des cas d'usage réels et des optimisati
 
 ## 🛠️ Sujets avancés
 
-### [Temporal Workflows](/implementation/temporal/)
+### {{< draft-link url="/implementation/temporal/" title="Temporal Workflows" >}}
 Orchestrer des processus complexes
 
-### [Projections Event Sourcing](/implementation/projections/)
+### {{< draft-link url="/implementation/projections/" title="Projections Event Sourcing" >}}
 Reconstruire les vues de lecture
 
-### [Performance](/implementation/performance/)
+### {{< draft-link url="/implementation/performance/" title="Performance" >}}
 Optimiser vos applications DDD
 
-### [Sécurité](/implementation/securite/)
+### {{< draft-link url="/implementation/securite/" title="Sécurité" >}}
 Autorisation et authentification
 
-### [Monitoring](/implementation/monitoring/)
+### {{< draft-link url="/implementation/monitoring/" title="Monitoring" >}}
 Observer et déboguer
 
-### [Déploiement](/implementation/deploiement/)
+### {{< draft-link url="/implementation/deploiement/" title="Déploiement" >}}
 Mettre en production
 
 ## 🚀 Prêt à maîtriser ?
 
-[Commencer avec Temporal →](/implementation/temporal/)
+{{< draft-link url="/implementation/temporal/" title="Commencer avec Temporal →" >}}
 
 ---
 

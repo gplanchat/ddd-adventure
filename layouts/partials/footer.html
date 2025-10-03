@@ -27,10 +27,8 @@
                         <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
                             {{ range .Site.Params.sponsors.sponsors }}
                             <div class="sponsor-item">
-                                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                                    <span class="badge bg-light text-dark border px-3 py-2">
-                                      <img src="{{ .logo }}" alt="{{ .name }}" class="img-fluid" width="150" height="75" />
-                                    </span>
+                                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-inline-block">
+                                    <img src="{{ .logo }}" alt="{{ .name }}" width="150" height="75" style="display: block; max-width: 150px; height: auto;" />
                                 </a>
                             </div>
                             {{ end }}

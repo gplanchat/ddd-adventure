@@ -31,6 +31,36 @@ L'Example Mapping, créé par Matt Wynne, m'a permis de :
 
 L'Example Mapping est une technique complémentaire à l'Event Storming qui utilise des cartes colorées pour détailler les règles métier. **L'idée** : Au lieu de partir des événements, on part des règles métier et on les illustre avec des exemples concrets.
 
+**Mais l'Example Mapping va bien au-delà du détail des règles.** C'est un **outil d'aide à la décision d'implémentation** qui transforme la façon dont vous prenez des décisions techniques, que vous soyez dans l'édition logicielle ou les services de développement.
+
+### L'Example Mapping : Un Pilier du Pilotage de Projet
+
+#### 📋 **Au-Delà du Code et de la Technique**
+
+L'Example Mapping vous permet d'aller **au-delà du code, au-delà de la technique** pour vous concentrer sur ce qui compte vraiment : **la qualité des décisions d'implémentation**.
+
+**Dans l'édition logicielle** : Au lieu de vous demander "Comment coder cette règle ?", vous vous demandez "Cette règle est-elle bien comprise et testable ?"
+
+**Dans les services de développement** : Au lieu de vous demander "Quelle technologie utiliser ?", vous vous demandez "Cette solution répond-elle exactement aux attentes du client ?"
+
+#### 🎯 **Le Guide d'Implémentation**
+
+L'Example Mapping agit comme un **guide d'implémentation** qui vous aide à prendre les bonnes décisions :
+
+- **Décision de validation** : Comment valider cette règle métier ?
+- **Décision de test** : Quels cas de test couvrir ?
+- **Décision d'interface** : Comment exposer cette fonctionnalité ?
+- **Décision d'erreur** : Comment gérer les cas d'échec ?
+
+#### 🔍 **Clarté des Spécifications**
+
+Contrairement aux méthodes traditionnelles qui se concentrent sur les fonctionnalités, l'Example Mapping vous aide à **clarifier les spécifications** :
+
+- **Règles métier** : Quelles sont les règles exactes ?
+- **Cas limites** : Quels sont les cas d'erreur à gérer ?
+- **Exemples concrets** : Comment illustrer ces règles ?
+- **Scénarios complets** : Comment ces règles s'appliquent-elles ?
+
 **Avec Gyroscops, voici comment j'ai appliqué l'Example Mapping** :
 
 ### Les 4 Types de Cartes
@@ -109,9 +139,9 @@ L'Event Storming révèle les événements, mais l'Example Mapping révèle les 
 
 Les exemples concrets rendent les règles métier tangibles et compréhensibles. **Fini les "On devrait peut-être..." et les "Il faudrait que...".**
 
-**Exemple concret avec Gyroscops** : Au lieu de dire "Un paiement peut être traité", nous disions "Un paiement de 100€ avec une carte Visa valide depuis la France peut être traité". **C'est beaucoup plus clair !**
+**Exemple concret avec Gyroscops** : Au lieu de dire "Un paiement peut être traité", je disais "Un paiement de 100€ avec une carte Visa valide depuis la France peut être traité". **C'est beaucoup plus clair !**
 
-**Voici comment l'Example Mapping a transformé nos discussions** :
+**Voici comment l'Example Mapping a transformé mes discussions** :
 
 **Avant** (discussions abstraites) :
 - "Il faut valider les paiements"
@@ -129,13 +159,13 @@ Les exemples concrets rendent les règles métier tangibles et compréhensibles.
 - "Un paiement de 50€ pour un workflow dans une région cloud indisponible est rejeté avec le message 'Région cloud indisponible'"
 - "Un paiement de 50€ pour un workflow avec des ressources insuffisantes est rejeté avec le message 'Ressources insuffisantes'"
 
-**Résultat** : Plus de malentendus, plus de discussions interminables, plus de "Ah, je pensais que...". Tout le monde comprenait exactement ce qui devait être fait, et nous avons découvert que chaque paiement impliquait une chaîne complète : User → Organization → Workflow → Cloud Resources → Billing.
+**Résultat** : Plus de malentendus, plus de discussions interminables, plus de "Ah, je pensais que...". Tout le monde comprenait exactement ce qui devait être fait, et j'ai découvert que chaque paiement impliquait une chaîne complète : User → Organization → Workflow → Cloud Resources → Billing.
 
 ### 3. **Faciliter les Tests** - De l'Exemple au Code
 
 Les exemples deviennent naturellement des tests d'acceptation. **C'est la magie de l'Example Mapping !**
 
-**Avec Gyroscops, voici ce qui s'est passé** : Après notre session d'Example Mapping sur les paiements, j'ai directement transformé les exemples en tests. Voici un exemple réel du projet Gyroscops Cloud :
+**Avec Gyroscops, voici ce qui s'est passé** : Après ma session d'Example Mapping sur les paiements, j'ai directement transformé les exemples en tests. Voici un exemple réel du projet Gyroscops Cloud :
 
 ```php
 /** @test */
@@ -514,6 +544,37 @@ class PaymentTest extends TestCase
 3. **Développement** : Implémenter les fonctionnalités
 
 **Résultat** : Développement guidé par le domaine métier.
+
+### Les Trois Méthodes : Un Système Complet d'Aide à la Décision
+
+#### 🎯 **Impact Mapping** : La Décision Stratégique
+- **Décide** quoi développer en fonction des objectifs business
+- **Priorise** les fonctionnalités selon leur impact réel
+- **Aligne** l'équipe sur les enjeux métier
+- **Évite** de construire des fonctionnalités inutiles
+
+#### 🏗️ **Event Storming** : La Décision Architecturale
+- **Décide** comment structurer le système métier
+- **Révèle** la complexité cachée du domaine
+- **Conçoit** l'architecture en collaboration avec les experts métier
+- **Évite** les architectures techniques déconnectées du métier
+
+#### 📋 **Example Mapping** : La Décision d'Implémentation
+- **Décide** quand et pourquoi appliquer les règles métier
+- **Détaille** les cas limites et exceptions
+- **Transforme** les règles abstraites en exemples concrets
+- **Évite** les malentendus entre business et technique
+
+#### 🔄 **Le Cycle de Décision Complet**
+
+Ces trois méthodes forment un **cycle de décision complet** qui vous guide de la stratégie business jusqu'à l'implémentation technique :
+
+1. **Impact Mapping** → **Décision stratégique** : "Quel est notre objectif business ?"
+2. **Event Storming** → **Décision architecturale** : "Comment structurer le système ?"
+3. **Example Mapping** → **Décision d'implémentation** : "Comment implémenter les règles ?"
+4. **Retour à l'Impact Mapping** → **Mesure de l'impact** : "Avons-nous atteint notre objectif ?"
+
+**Résultat** : Un système de pilotage de projet qui vous guide de la stratégie business jusqu'à la livraison technique, en passant par la conception architecturale.
 
 ## 🏗️ Implémentation Concrète dans le projet Gyroscops Cloud
 
