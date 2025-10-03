@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dégradé de fond -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Fond avec dégradé -->
+  <rect width="1200" height="630" fill="url(#bg-gradient)"/>
+  
+  <!-- Motif de grille subtil -->
+  <g opacity="0.1">
+    <line x1="0" y1="157.5" x2="1200" y2="157.5" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="315" x2="1200" y2="315" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="472.5" x2="1200" y2="472.5" stroke="white" stroke-width="1"/>
+    <line x1="300" y1="0" x2="300" y2="630" stroke="white" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="630" stroke="white" stroke-width="1"/>
+    <line x1="900" y1="0" x2="900" y2="630" stroke="white" stroke-width="1"/>
+  </g>
+  
+  <!-- Badge "v0.1.0" en haut à gauche -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="90" height="35" rx="17.5" fill="rgba(255,255,255,0.2)" filter="url(#shadow)"/>
+    <text x="45" y="23" font-family="Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="white">v0.1.0</text>
+  </g>
+  
+  <!-- Contenu principal -->
+  <g transform="translate(100, 200)">
+    <!-- Titre principal -->
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" filter="url(#glow)">
+      DDD Adventure
+    </text>
+    
+    <!-- Sous-titre -->
+    <text x="0" y="60" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="rgba(255,255,255,0.95)">
+      Le voyage du Domain-Driven Design
+    </text>
+    
+    <!-- Description -->
+    <text x="0" y="120" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.85)">
+      Une aventure dont vous êtes le héros pour maîtriser
+    </text>
+    <text x="0" y="150" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.85)">
+      le Domain-Driven Design avec API Platform
+    </text>
+  </g>
+  
+  <!-- Tags/Badges des concepts clés -->
+  <g transform="translate(100, 470)">
+    <!-- Event Storming -->
+    <g>
+      <rect x="0" y="0" width="150" height="40" rx="20" fill="rgba(255,140,66,0.9)" filter="url(#shadow)"/>
+      <text x="75" y="26" font-family="Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="white">Event Storming</text>
+    </g>
+    
+    <!-- CQRS -->
+    <g transform="translate(170, 0)">
+      <rect x="0" y="0" width="90" height="40" rx="20" fill="rgba(74,144,226,0.9)" filter="url(#shadow)"/>
+      <text x="45" y="26" font-family="Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="white">CQRS</text>
+    </g>
+    
+    <!-- Event Sourcing -->
+    <g transform="translate(280, 0)">
+      <rect x="0" y="0" width="160" height="40" rx="20" fill="rgba(144,238,144,0.9)" filter="url(#shadow)"/>
+      <text x="80" y="26" font-family="Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="white">Event Sourcing</text>
+    </g>
+    
+    <!-- DDD -->
+    <g transform="translate(460, 0)">
+      <rect x="0" y="0" width="70" height="40" rx="20" fill="rgba(255,209,102,0.9)" filter="url(#shadow)"/>
+      <text x="35" y="26" font-family="Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="white">DDD</text>
+    </g>
+    
+    <!-- API Platform -->
+    <g transform="translate(550, 0)">
+      <rect x="0" y="0" width="140" height="40" rx="20" fill="rgba(221,160,221,0.9)" filter="url(#shadow)"/>
+      <text x="70" y="26" font-family="Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="white">API Platform</text>
+    </g>
+  </g>
+  
+  <!-- Auteur en bas -->
+  <text x="100" y="580" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="rgba(255,255,255,0.8)">
+    Par Grégory Planchat
+  </text>
+  
+  <!-- Icônes décoratives (post-its stylisés en haut à droite) -->
+  <g transform="translate(950, 120)" opacity="0.4">
+    <!-- Post-it orange (Event) -->
+    <rect x="0" y="0" width="60" height="60" rx="3" fill="#FF8C42" transform="rotate(-5 30 30)"/>
+    
+    <!-- Post-it bleu (Command) -->
+    <rect x="70" y="10" width="60" height="60" rx="3" fill="#4A90E2" transform="rotate(8 100 40)"/>
+    
+    <!-- Post-it jaune (Aggregate) -->
+    <rect x="35" y="70" width="60" height="60" rx="3" fill="#FFD166" transform="rotate(-12 65 100)"/>
+    
+    <!-- Post-it violet (Rule) -->
+    <rect x="105" y="80" width="60" height="60" rx="3" fill="#DDA0DD" transform="rotate(5 135 110)"/>
+  </g>
+  
+  <!-- Flèche décorative -->
+  <g transform="translate(920, 200)" opacity="0.3">
+    <path d="M 0 0 Q 40 30, 80 0" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 80 0 L 70 -5 L 70 5 Z" fill="white"/>
+  </g>
+</svg>
+

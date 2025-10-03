@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1100 2100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Définitions -->
+  <defs>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    
+    <filter id="emphasis-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.4"/>
+    </filter>
+    
+    <!-- Marqueur standard -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#95a5a6"/>
+    </marker>
+    
+    <!-- Marqueur en emphase (violet) -->
+    <marker id="arrowhead-emphasis" markerWidth="12" markerHeight="12" refX="11" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L11,4 z" fill="#8E44AD" stroke="#6C3483" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <!-- Titre -->
+  <text x="550" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Impact Mapping - Gyroscops
+  </text>
+
+  <!-- Labels des colonnes -->
+  <g font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#7f8c8d">
+    <text x="100" y="80" text-anchor="middle">POURQUOI ?</text>
+    <text x="280" y="80" text-anchor="middle">QUI ?</text>
+    <text x="530" y="80" text-anchor="middle">COMMENT ?</text>
+    <text x="900" y="80" text-anchor="middle">QUOI ?</text>
+  </g>
+
+  <!-- COLONNE 1 : Objectif (Jaune) -->
+  <g transform="translate(30, 300)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#FFD166" stroke="#F0C14B" stroke-width="3" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      <tspan x="70" dy="0">🎯 Augmenter</tspan>
+      <tspan x="70" dy="15">le CA de 30%</tspan>
+      <tspan x="70" dy="15">en 6 mois</tspan>
+    </text>
+  </g>
+
+  <!-- COLONNE 2 : Segments (Vert) - 4 segments -->
+  
+  <!-- Segment 1 : Clients existants -->
+  <g transform="translate(210, 150)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#2ECC71" stroke="#27AE60" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">👥 Clients</tspan>
+      <tspan x="70" dy="15">existants</tspan>
+    </text>
+  </g>
+
+  <!-- Segment 2 : Prospects -->
+  <g transform="translate(210, 280)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#2ECC71" stroke="#27AE60" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">🎯 Prospects</tspan>
+      <tspan x="70" dy="15">qualifiés</tspan>
+    </text>
+  </g>
+
+  <!-- Segment 3 : Partenaires -->
+  <g transform="translate(210, 410)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#2ECC71" stroke="#27AE60" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">🤝 Partenaires</tspan>
+      <tspan x="70" dy="15">techniques</tspan>
+    </text>
+  </g>
+
+  <!-- Segment 4 : Équipe interne -->
+  <g transform="translate(210, 540)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#2ECC71" stroke="#27AE60" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">👨‍💻 Équipe</tspan>
+      <tspan x="70" dy="15">interne</tspan>
+    </text>
+  </g>
+
+  <!-- COLONNE 3 : Impacts (Cyan) - 8 impacts -->
+  
+  <!-- Impact 1 : Renouveler abonnement (Clients) -->
+  <g transform="translate(460, 130)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#17A2B8" stroke="#138496" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">💎 Renouveler</tspan>
+      <tspan x="70" dy="14">abonnement</tspan>
+    </text>
+  </g>
+
+  <!-- Impact 2 : Upgrader (Clients) -->
+  <g transform="translate(460, 210)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#17A2B8" stroke="#138496" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">💎 Upgrader</tspan>
+      <tspan x="70" dy="14">vers plan +</tspan>
+    </text>
+  </g>
+
+  <!-- Impact 3 : Essayer (Prospects) -->
+  <g transform="translate(460, 290)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#17A2B8" stroke="#138496" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">💎 Essayer</tspan>
+      <tspan x="70" dy="14">Gyroscops</tspan>
+    </text>
+  </g>
+
+  <!-- Impact 4 : Convertir (Prospects) -->
+  <g transform="translate(460, 370)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#17A2B8" stroke="#138496" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">💎 Convertir</tspan>
+      <tspan x="70" dy="14">en client</tspan>
+    </text>
+  </g>
+
+  <!-- Impact 5 : Intégrer facilement (Partenaires) -->
+  <g transform="translate(460, 450)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#17A2B8" stroke="#138496" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">💎 Intégrer</tspan>
+      <tspan x="70" dy="14">facilement</tspan>
+    </text>
+  </g>
+
+  <!-- Impact 6 : Recommander (Partenaires) -->
+  <g transform="translate(460, 530)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#17A2B8" stroke="#138496" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">💎 Recommander</tspan>
+      <tspan x="70" dy="14">Gyroscops</tspan>
+    </text>
+  </g>
+
+  <!-- Impact 7 : Développer rapidement (Équipe) -->
+  <g transform="translate(460, 610)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#17A2B8" stroke="#138496" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">💎 Développer</tspan>
+      <tspan x="70" dy="14">rapidement</tspan>
+    </text>
+  </g>
+
+  <!-- Impact 8 : Résoudre problèmes (Équipe) -->
+  <g transform="translate(460, 690)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#17A2B8" stroke="#138496" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">💎 Résoudre</tspan>
+      <tspan x="70" dy="14">problèmes</tspan>
+    </text>
+  </g>
+
+  <!-- COLONNE 4 : Livrables (Rouge) - 8 livrables principaux -->
+  
+  <!-- Livrable 1 : Supervision détaillée -->
+  <g transform="translate(830, 120)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#E74C3C" stroke="#C0392B" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">📦 Supervision</tspan>
+      <tspan x="70" dy="14">détaillée</tspan>
+    </text>
+  </g>
+
+  <!-- Livrable 2 : Alertes proactives -->
+  <g transform="translate(830, 200)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#E74C3C" stroke="#C0392B" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">📦 Alertes</tspan>
+      <tspan x="70" dy="14">proactives</tspan>
+    </text>
+  </g>
+
+  <!-- Livrable 3 : Essai gratuit -->
+  <g transform="translate(830, 280)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#E74C3C" stroke="#C0392B" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">📦 Essai gratuit</tspan>
+      <tspan x="70" dy="14">sans CB</tspan>
+    </text>
+  </g>
+
+  <!-- Livrable 4 : Documentation interactive -->
+  <g transform="translate(830, 360)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#E74C3C" stroke="#C0392B" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">📦 Doc</tspan>
+      <tspan x="70" dy="14">interactive</tspan>
+    </text>
+  </g>
+
+  <!-- Livrable 5 : Contexte GenAI -->
+  <g transform="translate(830, 440)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#E74C3C" stroke="#C0392B" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">📦 Contexte</tspan>
+      <tspan x="70" dy="14">GenAI</tspan>
+    </text>
+  </g>
+
+  <!-- Livrable 6 : SDK JavaScript -->
+  <g transform="translate(830, 520)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#E74C3C" stroke="#C0392B" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">📦 SDK</tspan>
+      <tspan x="70" dy="14">JavaScript</tspan>
+    </text>
+  </g>
+
+  <!-- Livrable 7 : Tests automatisés -->
+  <g transform="translate(830, 600)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#E74C3C" stroke="#C0392B" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">📦 Tests</tspan>
+      <tspan x="70" dy="14">automatisés</tspan>
+    </text>
+  </g>
+
+  <!-- Livrable 8 : Logs centralisés -->
+  <g transform="translate(830, 680)">
+    <rect x="0" y="0" width="140" height="70" rx="4" fill="#E74C3C" stroke="#C0392B" stroke-width="2" filter="url(#shadow)"/>
+    <text x="70" y="30" font-family="Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="white">
+      <tspan x="70" dy="0">📦 Logs</tspan>
+      <tspan x="70" dy="14">centralisés</tspan>
+    </text>
+  </g>
+
+  <!-- FLÈCHES NIVEAU 1 : Objectif → Segments (Total 100%) -->
+  <!-- Vers Clients existants (40%) - PLUS GROS POURCENTAGE, EMPHASE -->
+  <path d="M 170 335 Q 190 260, 210 185" stroke="#8E44AD" stroke-width="4" fill="none" marker-end="url(#arrowhead-emphasis)" filter="url(#emphasis-shadow)"/>
+  <text x="185" y="260" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#2C3E50">40%</text>
+  
+  <!-- Vers Prospects (25%) -->
+  <path d="M 170 335 Q 190 315, 210 315" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="185" y="325" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2C3E50">25%</text>
+  
+  <!-- Vers Partenaires (20%) -->
+  <path d="M 170 335 Q 190 380, 210 445" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="185" y="390" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2C3E50">20%</text>
+  
+  <!-- Vers Équipe interne (15%) -->
+  <path d="M 170 335 Q 190 450, 210 575" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="185" y="460" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2C3E50">15%</text>
+
+  <!-- FLÈCHES NIVEAU 2 : Segments → Impacts -->
+  <!-- Clients (reçoit 40%) → Renouveler (60% de 40% = 24% absolu) - CHAÎNE D'EMPHASE -->
+  <path d="M 350 185 L 460 165" stroke="#8E44AD" stroke-width="4" fill="none" marker-end="url(#arrowhead-emphasis)" filter="url(#emphasis-shadow)"/>
+  <text x="395" y="175" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2C3E50">24%</text>
+  
+  <!-- Clients (reçoit 40%) → Upgrader (40% de 40% = 16% absolu) -->
+  <path d="M 350 185 Q 400 200, 460 245" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="395" y="215" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">16%</text>
+  
+  <!-- Prospects (reçoit 25%) → Essayer (70% de 25% = 17.5% absolu) -->
+  <path d="M 350 315 L 460 325" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="395" y="320" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">17.5%</text>
+  
+  <!-- Prospects (reçoit 25%) → Convertir (30% de 25% = 7.5% absolu) -->
+  <path d="M 350 315 Q 400 340, 460 405" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="395" y="360" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">7.5%</text>
+  
+  <!-- Partenaires (reçoit 20%) → Intégrer (55% de 20% = 11% absolu) -->
+  <path d="M 350 445 L 460 485" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="395" y="465" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">11%</text>
+  
+  <!-- Partenaires (reçoit 20%) → Recommander (45% de 20% = 9% absolu) -->
+  <path d="M 350 445 Q 400 490, 460 565" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="395" y="505" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">9%</text>
+  
+  <!-- Équipe (reçoit 15%) → Développer (60% de 15% = 9% absolu) -->
+  <path d="M 350 575 L 460 645" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="395" y="610" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">9%</text>
+  
+  <!-- Équipe (reçoit 15%) → Résoudre (40% de 15% = 6% absolu) -->
+  <path d="M 350 575 Q 400 640, 460 725" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="395" y="650" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">6%</text>
+
+  <!-- FLÈCHES NIVEAU 3 : Impacts → Livrables -->
+  <!-- Renouveler (reçoit 24%) → Supervision (70% de 24% = 16.8% absolu) - CHAÎNE D'EMPHASE -->
+  <path d="M 600 165 Q 710 145, 830 155" stroke="#8E44AD" stroke-width="4" fill="none" marker-end="url(#arrowhead-emphasis)" filter="url(#emphasis-shadow)"/>
+  <text x="705" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2C3E50">16.8%</text>
+  
+  <!-- Renouveler (reçoit 24%) → Alertes (30% de 24% = 7.2% absolu) -->
+  <path d="M 600 165 Q 710 190, 830 235" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="200" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">7.2%</text>
+  
+  <!-- Upgrader (reçoit 16%) → Alertes (100% de 16% = 16% absolu) -->
+  <path d="M 600 245 Q 710 240, 830 235" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="240" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">16%</text>
+  
+  <!-- Essayer (reçoit 17.5%) → Essai gratuit (100% de 17.5% = 17.5% absolu) -->
+  <path d="M 600 325 Q 710 310, 830 315" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="315" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">17.5%</text>
+  
+  <!-- Convertir (reçoit 7.5%) → Doc interactive (100% de 7.5% = 7.5% absolu) -->
+  <path d="M 600 405 Q 710 390, 830 395" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="395" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">7.5%</text>
+  
+  <!-- Intégrer (reçoit 11%) → Contexte GenAI (50% de 11% = 5.5% absolu) -->
+  <path d="M 600 485 Q 710 465, 830 475" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="470" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">5.5%</text>
+  
+  <!-- Intégrer (reçoit 11%) → SDK (50% de 11% = 5.5% absolu) -->
+  <path d="M 600 485 Q 710 505, 830 555" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="520" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">5.5%</text>
+  
+  <!-- Recommander (reçoit 9%) → SDK (100% de 9% = 9% absolu) -->
+  <path d="M 600 565 Q 710 560, 830 555" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="560" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">9%</text>
+  
+  <!-- Développer (reçoit 9%) → Tests (100% de 9% = 9% absolu) -->
+  <path d="M 600 645 Q 710 625, 830 635" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="635" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">9%</text>
+  
+  <!-- Résoudre (reçoit 6%) → Logs (100% de 6% = 6% absolu) -->
+  <path d="M 600 725 Q 710 705, 830 715" stroke="#95a5a6" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="705" y="715" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2C3E50">6%</text>
+
+  <!-- Légende -->
+  <g transform="translate(50, 820)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">
+      Légende :
+    </text>
+    
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="80" height="40" rx="3" fill="#FFD166" stroke="#F0C14B" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50">
+        🎯 Objectif : Le but business (POURQUOI ?)
+      </text>
+    </g>
+    
+    <g transform="translate(0, 70)">
+      <rect x="0" y="0" width="80" height="40" rx="3" fill="#2ECC71" stroke="#27AE60" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50">
+        👥 Segments : Les acteurs concernés (QUI ?)
+      </text>
+    </g>
+    
+    <g transform="translate(0, 120)">
+      <rect x="0" y="0" width="80" height="40" rx="3" fill="#17A2B8" stroke="#138496" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50">
+        💎 Impacts : Les comportements (COMMENT ?)
+      </text>
+    </g>
+    
+    <g transform="translate(0, 170)">
+      <rect x="0" y="0" width="80" height="40" rx="3" fill="#E74C3C" stroke="#C0392B" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="13" fill="#2c3e50">
+        📦 Livrables : Les fonctionnalités (QUOI ?)
+      </text>
+    </g>
+  </g>
+
+  <!-- Note explicative -->
+  <g transform="translate(50, 1050)">
+    <rect x="0" y="0" width="1000" height="480" rx="6" fill="#ECF0F1" stroke="#BDC3C7" stroke-width="2" filter="url(#shadow)"/>
+    
+    <text x="20" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">
+      💡 Comment lire cet Impact Map ?
+    </text>
+    
+    <text x="20" y="60" font-family="Arial, sans-serif" font-size="13" fill="#34495e">
+      <tspan x="20" dy="0"><tspan font-weight="bold">Structure en colonnes</tspan> : Chaque couleur occupe UNE colonne verticale.</tspan>
+      <tspan x="20" dy="25">• Colonne 1 (Jaune) : L'objectif business unique</tspan>
+      <tspan x="20" dy="20">• Colonne 2 (Vert) : Les 4 segments d'acteurs</tspan>
+      <tspan x="20" dy="20">• Colonne 3 (Cyan) : Les 8 impacts comportementaux</tspan>
+      <tspan x="20" dy="20">• Colonne 4 (Rouge) : Les 8 livrables à développer</tspan>
+      
+      <tspan x="20" dy="35"><tspan font-weight="bold">Flèches séquentielles</tspan> : Les flèches vont de colonne en colonne, jamais en sautant.</tspan>
+      <tspan x="20" dy="25">• De l'objectif vers les segments</tspan>
+      <tspan x="20" dy="20">• De chaque segment vers ses impacts</tspan>
+      <tspan x="20" dy="20">• De chaque impact vers ses livrables</tspan>
+      
+      <tspan x="20" dy="35"><tspan font-weight="bold">Pourcentages et Emphase</tspan> : Chaque flèche porte un % absolu représentant la proportion de l'effort total.</tspan>
+      <tspan x="20" dy="25">• <tspan font-weight="bold">Règle 1</tspan> : La somme des % sortant d'un post-it ≤ 100%</tspan>
+      <tspan x="20" dy="20">• <tspan font-weight="bold">Règle 2 (Conservation des flux)</tspan> : Un post-it ne peut distribuer que ce qu'il reçoit</tspan>
+      <tspan x="20" dy="20">• <tspan font-weight="bold">Chaîne d'emphase</tspan> : Une seule flèche violette par transition, suivant le flux principal</tspan>
+      <tspan x="20" dy="20">• <tspan font-weight="bold">Lisibilité optimale</tspan> : Les % sont en noir (#2C3E50) sans bordure pour clarté maximale</tspan>
+      <tspan x="20" dy="20">• Exemple : Objectif (100%) → 40% Clients (violet, emphase) qui peuvent redistribuer max 40%</tspan>
+      <tspan x="20" dy="20">• Clients (reçoit 40%) → 24% Renouveler (violet) + 16% Upgrader = 24% + 16% = 40% absolu ✅</tspan>
+      <tspan x="20" dy="20">• Renouveler (reçoit 24%) → 16.8% Supervision (violet) + 7.2% Alertes = 16.8% + 7.2% = 24% absolu ✅</tspan>
+      
+      <tspan x="20" dy="35"><tspan font-weight="bold">Lecture de gauche à droite</tspan> : Du stratégique (POURQUOI) au tactique (QUOI).</tspan>
+      <tspan x="20" dy="25">Chaque livrable doit remonter à l'objectif business via une chaîne de valeur claire.</tspan>
+    </text>
+  </g>
+</svg>
