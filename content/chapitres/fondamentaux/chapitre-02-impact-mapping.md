@@ -17,9 +17,9 @@ weight: 2
 
 **Soudain, je réalisais que je construisais un produit pour moi, pas pour mes utilisateurs !** J'avais perdu de vue l'objectif business.
 
-### L'Impact Mapping : Mon Sauveur
+### L'Impact Mapping : l'aide à la décision
 
-L'Impact Mapping, créé par Gojko Adzic, m'a permis de :
+L'Impact Mapping, créé par Gojko Adzic, permet de :
 - **Aligner** le développement sur les objectifs business
 - **Prioriser** les fonctionnalités selon leur impact réel
 - **Communiquer** efficacement avec les parties prenantes
@@ -68,9 +68,9 @@ Contrairement aux méthodes traditionnelles qui se concentrent sur les livrables
 #### 1. **Objectif (Pourquoi ?)** - Le Nord de la Boussole
 
 **Exemple concret avec Gyroscops** : 
-- **Objectif** : "Augmenter le chiffre d'affaires de 30% en 6 mois"
-- **Mesurable** : 30% d'augmentation
-- **Temporel** : 6 mois
+- **Objectif** : "Augmenter le chiffre d'affaires de X% en Y mois"
+- **Mesurable** : Pourcentage d'augmentation défini
+- **Temporel** : Période définie
 - **Business** : Chiffre d'affaires
 
 **Pourquoi c'est important ?** Sans objectif clair, on développe des fonctionnalités "parce que c'est cool" ou "parce que c'est technique". Avec un objectif, chaque décision a un sens.
@@ -128,7 +128,7 @@ Chaque niveau découle logiquement du précédent, créant une chaîne de valeur
 1. **Participants** : Moi (CEO/CTO), le responsable commercial, 2 clients existants
 2. **Durée** : 2 heures
 3. **Matériel** : Post-its, tableau blanc, marqueurs
-4. **Objectif** : "Augmenter le chiffre d'affaires de 30% en 6 mois"
+4. **Objectif** : "Augmenter le chiffre d'affaires de X% en Y mois"
 
 ### L'Atelier en Action
 
@@ -147,7 +147,7 @@ Chaque niveau découle logiquement du précédent, créant une chaîne de valeur
 
 **Acteurs identifiés** :
 - **Clients existants** (80% du CA actuel)
-- **Prospects qualifiés** (20% du CA cible)
+- **Prospects qualifiés** (pourcentage du CA cible défini)
 - **Partenaires technologiques** (nouveaux canaux de vente)
 - **Équipe de vente** (conversion des prospects)
 
@@ -193,15 +193,15 @@ Chaque niveau découle logiquement du précédent, créant une chaîne de valeur
 
 **Après l'Impact Mapping** : Les clients voulaient une supervision détaillée simple pour voir leurs intégrations. L'architecture était secondaire.
 
-**Résultat** : J'ai reporté la refactorisation et développé la supervision détaillée. Le CA a augmenté de 15% en 2 mois !
+**Résultat** : J'ai reporté la refactorisation et développé la supervision détaillée. Les clients ont été plus satisfaits et le business s'est amélioré.
 
-#### 2. **Les Fonctionnalités "Cool" n'étaient pas Prioritaires**
+#### 2. **Nous ne Savions pas dans quelle Direction Aller**
 
-**Avant l'Impact Mapping** : Je voulais développer une API GraphQL avancée.
+**Avant l'Impact Mapping** : Nous avions plusieurs idées de fonctionnalités mais aucune vision claire de ce qui était vraiment important pour nos clients.
 
-**Après l'Impact Mapping** : Les prospects voulaient juste pouvoir essayer Gyroscops sans donner leur carte bancaire.
+**Après l'Impact Mapping** : Nous avons identifié que nos clients avaient besoin d'une meilleure visibilité sur leurs intégrations et de processus plus simples.
 
-**Résultat** : J'ai développé l'essai gratuit. Le taux de conversion a doublé !
+**Résultat** : Nous avons concentré nos efforts sur les fonctionnalités qui généraient vraiment de la valeur business.
 
 #### 3. **Les Clients Existants Avaient des Besoins Cachés**
 
@@ -209,16 +209,16 @@ Chaque niveau découle logiquement du précédent, créant une chaîne de valeur
 
 **Après l'Impact Mapping** : Ils voulaient juste savoir que leurs intégrations fonctionnaient bien.
 
-**Résultat** : J'ai développé le monitoring. Le taux de rétention a augmenté de 25% !
+**Résultat** : J'ai développé le monitoring. Les clients ont été plus satisfaits et la rétention s'est améliorée.
 
 ## Les 4 Types de Cartes
 
 ### 🎯 Cartes Jaunes : Objectifs
 
 **Exemple avec Gyroscops** :
-- "Augmenter le chiffre d'affaires de 30% en 6 mois"
-- "Réduire le taux de churn de 20%"
-- "Améliorer la satisfaction client de 15%"
+- "Augmenter le chiffre d'affaires de X% en Y mois"
+- "Réduire le taux de churn de X%"
+- "Améliorer la satisfaction client"
 
 **Pourquoi c'est important ?** Chaque objectif doit être mesurable et temporel.
 
@@ -226,7 +226,7 @@ Chaque niveau découle logiquement du précédent, créant une chaîne de valeur
 
 **Exemple avec Gyroscops** :
 - "Clients existants" (80% du CA)
-- "Prospects qualifiés" (20% du CA cible)
+- "Prospects qualifiés" (pourcentage du CA cible défini)
 - "Partenaires technologiques" (nouveaux canaux)
 - "Équipe de vente" (conversion)
 
@@ -287,7 +287,7 @@ Chaque niveau découle logiquement du précédent, créant une chaîne de valeur
 ### 1. **Objectifs Vagues**
 
 **❌ Mauvais** : "Améliorer le produit"
-**✅ Bon** : "Augmenter le chiffre d'affaires de 30% en 6 mois"
+**✅ Bon** : "Augmenter le chiffre d'affaires de X% en Y mois"
 
 **Pourquoi c'est important ?** Un objectif vague ne permet pas de mesurer l'impact des fonctionnalités.
 
@@ -381,80 +381,50 @@ Le Gyroscops Cloud applique concrètement les principes de l'Impact Mapping à t
 
 #### Acteurs Identifiés
 
-```php
-// ✅ Acteurs du Projet Gyroscops Cloud (Projet Gyroscops Cloud)
-final class HiveActors
-{
-    // Acteurs principaux
-    public const DEVELOPER = 'developer';
-    public const BUSINESS_USER = 'business_user';
-    public const SYSTEM_ADMINISTRATOR = 'system_administrator';
-    public const CUSTOMER = 'customer';
-    
-    // Acteurs secondaires
-    public const SUPPORT_TEAM = 'support_team';
-    public const SALES_TEAM = 'sales_team';
-    public const PRODUCT_MANAGER = 'product_manager';
-}
-```
+**Acteurs principaux :**
+- **Développeurs** : Ceux qui intègrent les systèmes
+- **Utilisateurs métier** : Ceux qui utilisent les intégrations
+- **Administrateurs système** : Ceux qui gèrent l'infrastructure
+- **Clients** : Ceux qui paient pour le service
+
+**Acteurs secondaires :**
+- **Équipe support** : Aide les utilisateurs
+- **Équipe commerciale** : Convertit les prospects
+- **Product Manager** : Définit la roadmap
 
 #### Impacts Mesurés
 
-```php
-// ✅ Métriques d'Impact Gyroscops Cloud (Projet Gyroscops Cloud)
-final class HiveImpactMetrics
-{
-    public function measureDeveloperProductivity(): array
-    {
-        return [
-            'integration_deployment_time' => $this->getAverageDeploymentTime(),
-            'api_usage_growth' => $this->getApiUsageGrowth(),
-            'developer_satisfaction_score' => $this->getDeveloperSatisfactionScore()
-        ];
-    }
-    
-    public function measureBusinessValue(): array
-    {
-        return [
-            'customer_acquisition_cost' => $this->getCustomerAcquisitionCost(),
-            'customer_lifetime_value' => $this->getCustomerLifetimeValue(),
-            'revenue_growth' => $this->getRevenueGrowth()
-        ];
-    }
-    
-    public function measureSystemReliability(): array
-    {
-        return [
-            'uptime_percentage' => $this->getUptimePercentage(),
-            'mean_time_to_recovery' => $this->getMeanTimeToRecovery(),
-            'error_rate' => $this->getErrorRate()
-        ];
-    }
-}
-```
+**Productivité développeur :**
+- Temps de déploiement d'intégration
+- Croissance de l'utilisation des APIs
+- Score de satisfaction développeur
+
+**Valeur business :**
+- Coût d'acquisition client
+- Valeur vie client
+- Croissance du chiffre d'affaires
+
+**Fiabilité système :**
+- Pourcentage de disponibilité
+- Temps moyen de récupération
+- Taux d'erreur
 
 #### Livrables Prioritaires
 
-```php
-// ✅ Livrables Prioritaires Gyroscops Cloud (Projet Gyroscops Cloud)
-final class HiveDeliverables
-{
-    // Priorité 1 : Fonctionnalités Core
-    public const CORE_INTEGRATIONS = 'core_integrations';
-    public const API_PLATFORM = 'api_platform';
-    public const USER_MANAGEMENT = 'user_management';
-    
-    // Priorité 2 : Fonctionnalités Avancées
-    public const WORKFLOW_ENGINE = 'workflow_engine';
-    public const MONITORING_DASHBOARD = 'monitoring_dashboard';
-    public const ANALYTICS = 'analytics';
-    
-    // Priorité 3 : Fonctionnalités Nice-to-Have
-    public const ADVANCED_REPORTING = 'advanced_reporting';
-    public const CUSTOM_THEMES = 'custom_themes';
-    public const MOBILE_APP = 'mobile_app';
-}
-```
+**Priorité 1 : Fonctionnalités Core**
+- Intégrations de base
+- Plateforme API
+- Gestion des utilisateurs
+
+**Priorité 2 : Fonctionnalités Avancées**
+- Moteur de workflow
+- Tableau de bord de monitoring
+- Analytics
+
+**Priorité 3 : Fonctionnalités Nice-to-Have**
+- Rapports avancés
+- Thèmes personnalisés
+- Application mobile
 
 ### Exemple Concret : Impact Mapping pour l'Authentification
 
